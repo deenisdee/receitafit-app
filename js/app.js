@@ -1437,3 +1437,23 @@ document
       message.textContent = "Erro ao validar código.";
     }
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+if (localStorage.getItem("premiumToken")) {
+  if (typeof unlockPremium === "function") {
+    unlockPremium();
+  }
+}
+
