@@ -891,21 +891,44 @@ function closeWeekPlanner() {
 // PREMIUM
 // ============================================
 async function activatePremium() {
-    const code = premiumCodeInput.value.trim().toUpperCase();
-    
-    if (code === VALID_PREMIUM_CODE) {
-        isPremium = true;
-        await storage.set('fit_premium', 'true');
-        updateUI();
-        renderRecipes();
-        premiumModal.classList.add('hidden');
-        premiumCodeInput.value = '';
-        document.body.classList.remove('modal-open');
-        alert('Premium ativado com sucesso! 🎉');
-    } else {
-        alert('Código inválido. Tente novamente.');
+  const code = premiumCodeInput.value.trim().toUpperCase();
+
+  if (!code) {
+    alert('Digite um código.');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/redeem', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code })
+    });
+
+    const data = await res.json();
+
+    if (!data.ok) {
+      alert(data.error || 'Código inválido. Tente novamente.');
+      return;
     }
+
+    // ✅ A PARTIR DAQUI É O SEU CÓDIGO ORIGINAL (INALTERADO)
+    isPremium = true;
+    await storage.set('fit_premium', 'true');
+    updateUI();
+    renderRecipes();
+
+    premiumModal.classList.add('hidden');
+    premiumCodeInput.value = '';
+    document.body.classList.remove('modal-open');
+
+    alert('Premium ativado com sucesso! 🎉');
+
+  } catch (err) {
+    alert('Erro ao validar o código. Tente novamente.');
+  }
 }
+
 
 // ============================================
 // EVENT LISTENERS
