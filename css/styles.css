@@ -1,96 +1,204 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+:root {
+  --green: #16a34a;
+  --dark: #111827;
+  --gray: #6b7280;
+  --bg: #f9fafb;
+}
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-    background: #f9fafb;
-    min-height: 100vh;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--dark);
 }
 
-/* ===== ÍCONES UNIFICADOS ===== */
-svg {
-    stroke-width: 2;
-    stroke: #111827;
+/* HEADER */
+.header {
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-.icon,
-.meta-icon,
-.tool-btn svg {
-    width: 20px;
-    height: 20px;
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-/* ===== CONTAINER ===== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.logo svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  fill: none;
+}
+
+.search {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.credits {
+  background: #eef2ff;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.btn-premium {
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* HERO */
+.hero {
+  height: 320px;
+  background: url("https://images.unsplash.com/photo-1546069901-ba9599a7e63c") center/cover no-repeat;
+  position: relative;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,.6), rgba(0,0,0,.2));
+  color: white;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* MAIN */
 .container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.filters button {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: white;
+  cursor: pointer;
+}
+
+.filters .active {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+/* GRID RESPONSIVO */
+.recipes {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1279px) {
+  .recipes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .recipes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* CARD */
+.recipe-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0,0,0,.05);
+}
+
+.recipe-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.recipe-card h3 {
+  padding: 12px;
+  margin: 0;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hidden {
-    display: none !important;
+  display: none;
 }
 
-/* ===== GRID DE RECEITAS ===== */
-.recipe-grid {
-    display: grid;
-    gap: 1.5rem;
-    padding: 2rem 0;
+.modal-box {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
 }
 
-/* Desktop grande ≥ 1280px */
-@media (min-width: 1280px) {
-    .recipe-grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
 }
 
-/* Desktop / notebook */
-@media (min-width: 1024px) and (max-width: 1279px) {
-    .recipe-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.btn-primary {
+  flex: 1;
+  background: var(--green);
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
 }
 
-/* Tablet */
-@media (min-width: 768px) and (max-width: 1023px) {
-    .recipe-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.btn-secondary {
+  flex: 1;
+  background: #e5e7eb;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
 }
-
-/* Mobile */
-@media (max-width: 767px) {
-    .recipe-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* ===== HEADER (inalterado visualmente) ===== */
-#header {
-    background: white;
-    box-shadow: 0 1px 3px rgba(0,0,0,.1);
-    position: sticky;
-    top: 0;
-    z-index: 50;
-}
-
-/* ===== HERO SLIDER FIX (iPhone zoom) ===== */
-.hero-slider-fullwidth {
-    height: clamp(220px, 34vh, 360px);
-    overflow: hidden;
-}
-
-.slide-new img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-
-/* (restante do seu CSS permanece igual ao que você já tinha) */
