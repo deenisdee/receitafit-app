@@ -1504,8 +1504,6 @@ body.modal-open {
 
 
 
-
-
 /* ===== Fix banner iPhone (zoom/crop) ===== */
 .hero-slider-fullwidth {
   height: clamp(220px, 34vh, 360px);
@@ -1554,8 +1552,6 @@ body.modal-open {
     transform: scale(1.5); /* 50% mais zoom */
   }
 }
-
-
 
 
 
