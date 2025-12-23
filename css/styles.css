@@ -1741,10 +1741,7 @@ body.modal-open {
 
 @media (max-width: 480px) {
   .slide-new img {
-    object-fit: cover;
-    object-position: center 90%; /* Ajusta o foco vertical */
-    /* center = horizontal / 30% = vertical */
+    object-fit: cover; /* Volta para cover = mais zoom */
   }
 }
-
 
