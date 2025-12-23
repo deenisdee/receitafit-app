@@ -1690,6 +1690,7 @@ body.modal-open {
 
 
 /* ===== Fix banner iPhone (zoom/crop) ===== */
+/* ===== Fix banner iPhone (zoom/crop) ===== */
 .hero-slider-fullwidth {
   height: clamp(220px, 34vh, 360px);
   overflow: hidden;
@@ -1729,5 +1730,10 @@ body.modal-open {
   
   .slide-new {
     min-width: 100vw; /* FORÇA LARGURA TOTAL DA TELA */
+  }
+  
+  .slide-new img {
+    object-fit: contain; /* Mostra mais da imagem, menos zoom */
+    background: #1f2937; /* Fundo escuro caso sobre espaço */
   }
 }
