@@ -1691,6 +1691,7 @@ body.modal-open {
 
 /* ===== Fix banner iPhone (zoom/crop) ===== */
 /* ===== Fix banner iPhone (zoom/crop) ===== */
+/* ===== Fix banner iPhone (zoom/crop) ===== */
 .hero-slider-fullwidth {
   height: clamp(220px, 34vh, 360px);
   overflow: hidden;
@@ -1711,6 +1712,7 @@ body.modal-open {
   height: 100%;
   flex-shrink: 0; /* IMPEDE QUE ENCOLHA */
   position: relative;
+  overflow: hidden; /* ESCONDE O QUE VAZAR */
 }
 
 .slide-new img,
@@ -1725,7 +1727,7 @@ body.modal-open {
 /* iPhone: ajustes específicos */
 @media (max-width: 480px) {
   .hero-slider-fullwidth {
-    height: 230px;
+    height: 260px;
   }
   
   .slide-new {
@@ -1733,15 +1735,7 @@ body.modal-open {
   }
   
   .slide-new img {
-    object-fit: contain; /* Mostra mais da imagem, menos zoom */
-    background: #1f2937; /* Fundo escuro caso sobre espaço */
+    object-fit: cover;
+    transform: scale(1.5); /* 50% mais zoom */
   }
 }
-
-
-@media (max-width: 480px) {
-  .slide-new img {
-    object-fit: cover; /* Volta para cover = mais zoom */
-  }
-}
-
