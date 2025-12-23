@@ -1685,3 +1685,28 @@ body.modal-open {
     }
 }
 
+
+
+
+/* ===== Fix banner iPhone (zoom/crop) ===== */
+.hero-slider-fullwidth {
+  height: clamp(220px, 34vh, 360px); /* controla altura no mobile */
+  overflow: hidden;
+}
+
+.slide-new img,
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        /* mantém preenchido */
+  object-position: center;  /* centraliza o corte */
+  display: block;
+}
+
+/* iPhone: reduzir ainda mais a altura para evitar "zoom" */
+
+@media (max-width: 480px) {
+  .hero-slider-fullwidth {
+    height: 240px;
+  }
+}
