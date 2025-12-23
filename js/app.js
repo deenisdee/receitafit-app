@@ -1030,7 +1030,9 @@ loadUserData();
         // Criar slides
         track.innerHTML = featuredRecipes.map(recipe => `
             <div class="slide-new">
-                <img src="${recipe.image}" alt="${recipe.name}" onerror="this.src='https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1600&q=80'">
+			
+                <img src="${recipe.image}" alt="${recipe.name}" style="width:100%;height:100%;object-fit:cover;object-position:center;" onerror="this.src='https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80'">
+				
                 <div class="slide-overlay-new">
                     <h2 class="slide-title-new">${recipe.name}</h2>
                     <p class="slide-description-new">${recipe.ingredients[0] || 'Receita deliciosa e saudável'}</p>
