@@ -65,6 +65,33 @@ const calculatorModal = document.getElementById('calculator-modal');
 const shoppingModal = document.getElementById('shopping-modal');
 const plannerModal = document.getElementById('planner-modal');
 
+// ✅ STATUS BAR (UX) - INÍCIO
+// Barra de status (Créditos / Desbloqueadas / Premium)
+// Observação: isso só aparece se você adicionar o HTML com esses IDs.
+function updateStatusBar() {
+    const elCredits = document.getElementById('statusCredits');
+    const elUnlocked = document.getElementById('statusUnlocked');
+    const elPremium = document.getElementById('statusPremium');
+    const elHint = document.getElementById('statusHint');
+
+    // Se não existe a barra no HTML, sai sem fazer nada (não quebra).
+    if (!elCredits || !elUnlocked || !elPremium || !elHint) return;
+
+    const creditsValue = isPremium ? '∞' : Math.max(0, Number(credits || 0));
+    elCredits.textContent = 🎟️ Créditos: ${creditsValue};
+    elUnlocked.textContent = 🔓 Desbloqueadas: ${Array.isArray(unlockedRecipes) ? unlockedRecipes.length : 0};
+    elPremium.textContent = ⭐ Premium: ${isPremium ? 'ativo' : 'inativo'};
+
+    if (isPremium) {
+        elHint.textContent = 'Premium ativo: todas as receitas e ferramentas estão liberadas.';
+    } else if (credits <= 0) {
+        elHint.textContent = 'Créditos esgotados: você ainda mantém acesso às receitas desbloqueadas. Premium libera tudo.';
+    } else {
+        elHint.textContent = 'Você tem créditos grátis. Cada clique desbloqueia 1 receita (e fica salva).';
+    }
+}
+// ✅ STATUS BAR (UX) - FIM
+
 // ============================================
 // INICIALIZAÇÃO
 // ============================================
@@ -107,6 +134,7 @@ async function loadUserData() {
     updateShoppingCounter();
     renderCarousel();
     renderRecipes();
+    updateStatusBar(); // ✅ STATUS BAR
 }
 
 async function saveUserData() {
@@ -149,9 +177,11 @@ function updateUI() {
         premiumBtn.style.display = 'none';
     } else {
         creditsBadge.classList.remove('premium');
-        creditsText.textContent = `${credits} créditos`;
+        creditsText.textContent = ${credits} créditos;
         premiumBtn.style.display = 'block';
     }
+
+    updateStatusBar(); // ✅ STATUS BAR
 }
 
 function updateShoppingCounter() {
@@ -166,7 +196,6 @@ function updateShoppingCounter() {
 // ============================================
 // CARROSSEL
 // ============================================
-
 
 function renderCarousel() {
     // Se não existe carousel antigo, não faz nada
@@ -192,11 +221,9 @@ function renderCarousel() {
     updateCarousel();
 }
 
-
-
 function updateCarousel() {
     const offset = -currentSlide * 100;
-    carouselTrack.style.transform = `translateX(${offset}%)`;
+    carouselTrack.style.transform = translateX(${offset}%);
 
     document.querySelectorAll('.carousel-indicator').forEach((btn, idx) => {
         btn.classList.toggle('active', idx === currentSlide);
@@ -309,6 +336,8 @@ function renderRecipes() {
             </div>
         `;
     }).join('');
+
+    updateStatusBar(); // ✅ STATUS BAR
 }
 
 function viewRecipe(recipeId) {
@@ -322,6 +351,7 @@ function viewRecipe(recipeId) {
             saveUserData();
             updateUI();
             renderRecipes();
+            updateStatusBar(); // ✅ STATUS BAR
         } else {
             modalMessage.textContent = 'Seus créditos acabaram! Ative o Premium para acesso ilimitado.';
             
@@ -333,6 +363,7 @@ function viewRecipe(recipeId) {
             
             premiumModal.classList.remove('hidden');
             document.body.classList.add('modal-open');
+            updateStatusBar(); // ✅ STATUS BAR
             return;
         }
     }
@@ -465,6 +496,7 @@ function closeRecipeDetail() {
     recipeGrid.classList.remove('hidden');
     currentRecipe = null;
     renderRecipes();
+    updateStatusBar(); // ✅ STATUS BAR
 }
 
 // ============================================
@@ -500,7 +532,7 @@ function addToShoppingList(recipeId) {
     });
 
     saveShoppingList();
-    alert(`Ingredientes de "${recipe.name}" adicionados à lista! 🛒`);
+    alert(Ingredientes de "${recipe.name}" adicionados à lista! 🛒);
 }
 
 function renderShoppingList() {
@@ -664,10 +696,10 @@ function closeMealSelector() {
 }
 
 function addToWeekPlan(recipe, day, meal) {
-    const key = `${day}-${meal}`;
+    const key = ${day}-${meal};
     weekPlan[key] = recipe;
     saveWeekPlan();
-    alert(`"${recipe.name}" adicionado ao ${day} - ${meal}! 📅`);
+    alert("${recipe.name}" adicionado ao ${day} - ${meal}! 📅);
 }
 
 function renderWeekPlanner() {
@@ -680,7 +712,7 @@ function renderWeekPlanner() {
     days.forEach(day => {
         let total = 0;
         meals.forEach(meal => {
-            const key = `${day}-${meal}`;
+            const key = ${day}-${meal};
             if (weekPlan[key]) {
                 total += weekPlan[key].calories;
             }
@@ -694,7 +726,7 @@ function renderWeekPlanner() {
                 <thead>
                     <tr>
                         <th>Refeição</th>
-                        ${days.map(day => `<th>${day}</th>`).join('')}
+                        ${days.map(day => <th>${day}</th>).join('')}
                     </tr>
                 </thead>
                 <tbody>
@@ -702,7 +734,7 @@ function renderWeekPlanner() {
                         <tr>
                             <td style="background: #f9fafb; font-weight: 600;">${meal}</td>
                             ${days.map(day => {
-                                const key = `${day}-${meal}`;
+                                const key = ${day}-${meal};
                                 const planned = weekPlan[key];
                                 
                                 return `
@@ -752,7 +784,7 @@ function saveWeekPlanConfirm() {
 }
 
 function removeFromWeekPlan(day, meal) {
-    const key = `${day}-${meal}`;
+    const key = ${day}-${meal};
     delete weekPlan[key];
     saveWeekPlan();
     renderWeekPlanner();
@@ -917,6 +949,7 @@ async function activatePremium() {
     await storage.set('fit_premium', 'true');
     updateUI();
     renderRecipes();
+    updateStatusBar(); // ✅ STATUS BAR
 
     premiumModal.classList.add('hidden');
     premiumCodeInput.value = '';
@@ -1031,7 +1064,7 @@ loadUserData();
         
         // Criar dots
         dots.innerHTML = featuredRecipes.map((_, index) => 
-            `<button class="slider-dot-new ${index === 0 ? 'active' : ''}" onclick="goToSlideNew(${index})"></button>`
+            <button class="slider-dot-new ${index === 0 ? 'active' : ''}" onclick="goToSlideNew(${index})"></button>
         ).join('');
         
         // Autoplay
@@ -1060,7 +1093,7 @@ loadUserData();
         const track = document.getElementById('sliderTrack');
         if (!track) return;
         
-        track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+        track.style.transform = translateX(-${currentSlideIndex * 100}%);
         
         // Atualizar dots
         document.querySelectorAll('.slider-dot-new').forEach((dot, index) => {
@@ -1133,6 +1166,7 @@ loadUserData();
     // Chamar renderRecipes que agora está completa
     if (typeof renderRecipes === 'function') {
         renderRecipes();
+        updateStatusBar(); // ✅ STATUS BAR
         console.log('✅ Filtro aplicado!');
     } else {
         console.error('❌ renderRecipes não encontrada');
@@ -1205,6 +1239,7 @@ loadUserData();
 			setTimeout(() => {
 				window.renderRecipes();
 				console.log('✅ Receitas iniciais renderizadas');
+                updateStatusBar(); // ✅ STATUS BAR
 			}, 500);
 		}
 		
@@ -1385,8 +1420,8 @@ function renderFAQ() {
 }
 
 function toggleFAQSection(idx) {
-    const section = document.getElementById(`faq-section-${idx}`);
-    const arrow = document.getElementById(`faq-arrow-${idx}`);
+    const section = document.getElementById(faq-section-${idx});
+    const arrow = document.getElementById(faq-arrow-${idx});
     if (section.style.display === 'none') {
         section.style.display = 'block';
         arrow.textContent = '▼';
@@ -1480,3 +1515,7 @@ if (localStorage.getItem("premiumToken")) {
   }
 }
 
+// ✅ garantir que a barra atualize ao carregar o DOM (se existir)
+document.addEventListener('DOMContentLoaded', () => {
+    updateStatusBar();
+});
