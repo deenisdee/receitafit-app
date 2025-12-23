@@ -1,72 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyNutriFlow - Receitas Fit Premium</title>
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mynutriflow – Receitas Fit</title>
+
+  <!-- Fonte Inter (fácil de trocar depois) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
-<div id="app">
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 13.87A4 4 0 0 1 7.41 6a5 5 0 0 1 9.18 0A4 4 0 0 1 18 13.87V21H6z"/>
+          <line x1="6" y1="17" x2="18" y2="17"/>
+        </svg>
+        <span>Mynutriflow</span>
+      </div>
 
-<header id="header">
-    <div class="container">
-        <div class="header-content">
+      <input class="search" placeholder="Buscar receitas…" />
 
-            <a href="index.html" class="logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none">
-                        <path d="M6 13.87A4 4 0 0 1 7.41 6a5 5 0 0 1 7.08 0A4 4 0 0 1 18 13.87V21H6Z"/>
-                    </svg>
-                </div>
-                <h1>
-                    <span class="logo-my">My</span>
-                    <span class="logo-nutri">nutri</span>
-                    <span class="logo-flow">flow</span>
-                </h1>
-            </a>
-
-            <div class="search-container">
-                <input id="search-input" placeholder="Buscar receitas..." class="search-input">
-            </div>
-
-            <div class="header-actions">
-                <div id="credits-badge" class="badge">
-                    <span id="credits-text">3 créditos</span>
-                </div>
-                <button id="premium-btn" class="btn-premium">Ativar Premium</button>
-            </div>
-
-        </div>
+      <div class="header-actions">
+        <span class="credits">3 créditos</span>
+        <button class="btn-premium">Ativar Premium</button>
+      </div>
     </div>
-</header>
+  </header>
 
-<div class="hero-slider-fullwidth" id="heroSlider">
-    <div class="slider-track-new" id="sliderTrack"></div>
-</div>
-
-<main class="container">
-    <div id="recipe-detail" class="hidden"></div>
-    <div id="recipe-grid" class="recipe-grid"></div>
-</main>
-
-<!-- MODAL PREMIUM ÚNICO -->
-<div id="premium-modal" class="modal hidden">
-    <div class="modal-content">
-        <h2>Ativar Premium</h2>
-        <p id="modal-message">Acesso ilimitado às receitas</p>
-        <input id="premium-code-input" placeholder="Código Premium">
-        <div class="modal-actions">
-            <button id="modal-cancel">Cancelar</button>
-            <button id="modal-activate">Ativar</button>
-        </div>
+  <section class="hero">
+    <div class="hero-overlay">
+      <h1>Bowl de Açaí Proteico</h1>
+      <p>200g de polpa de açaí puro (sem xarope)</p>
     </div>
-</div>
+  </section>
 
-</div>
+  <main class="container">
+    <div class="filters">
+      <button class="active">Todas</button>
+      <button>Café da Manhã</button>
+      <button>Almoço</button>
+      <button>Jantar</button>
+      <button>Lanches</button>
+    </div>
 
-<script src="js/data.js"></script>
-<script src="js/app.js"></script>
+    <section class="recipes" id="recipes">
+      <!-- Cards via JS -->
+    </section>
+  </main>
+
+  <div class="modal hidden" id="premiumModal">
+    <div class="modal-box">
+      <h2>Desbloqueie seu potencial</h2>
+      <p>Acesso ilimitado a todas as receitas.</p>
+      <input placeholder="Digite seu código Premium" />
+      <div class="modal-actions">
+        <button class="btn-secondary">Agora não</button>
+        <button class="btn-primary">Ativar Premium</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
 </body>
 </html>
