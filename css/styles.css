@@ -973,3 +973,24 @@ body.modal-open{ overflow:hidden; height:100vh; }
   }
 
 }
+
+
+/* ============================
+   FIX FLASH HEADER (Premium)
+   ============================ */
+
+/* enquanto carrega, esconde badge + botão para não piscar */
+html.app-loading #credits-badge,
+html.app-loading #premium-btn {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* se já sabemos que é premium (boot), mantém layout coerente no carregamento */
+html.app-loading.boot-premium #premium-btn {
+  display: none !important;
+}
+
+html.app-loading.boot-premium #credits-badge {
+  opacity: 1 !important; /* mostra o badge enquanto carrega */
+}
