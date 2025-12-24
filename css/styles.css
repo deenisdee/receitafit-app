@@ -1026,23 +1026,23 @@ body.modal-open { overflow: hidden; height: 100vh; }
    ============================================================ */
 
 #premium-modal {
-  font-weight: 400;
+ font-weight: 0;
 }
 
 /* Título principal */
 #premium-modal h2 {
-  font-weight: 600; /* ainda forte, mas elegante */
+  font-weight: 0; /* ainda forte, mas elegante */
 }
 
 /* Subtítulo / descrição */
 #premium-modal p,
 #premium-modal label {
-  font-weight: 400;
+  font-weight: 0;
 }
 
 /* Input de código */
 #premium-modal input {
-  font-weight: 400;
+  font-weight: 0;
 }
 
 /* Botões */
@@ -1053,5 +1053,5 @@ body.modal-open { overflow: hidden; height: 100vh; }
 /* Texto auxiliar (ex: "Ainda não tem um código?") */
 #premium-modal small,
 #premium-modal .helper-text {
-  font-weight: 400;
+  font-weight: 0;
 }
