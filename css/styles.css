@@ -874,3 +874,150 @@ body.modal-open{ overflow:hidden; height:100vh; }
   .slide-title-new{ font-size:1.5rem; }
   .category-card-new{ padding:.75rem 1.25rem; font-size:.875rem; }
 }
+
+
+
+
+
+/* ================================
+   PATCH — alinhamento Premium Modal
+   (coloque no FINAL do styles.css)
+   ================================ */
+
+#premium-modal .modal-content{
+  /* anula o “empurra pro lado” usado pra scrollbar invisível */
+  padding-right: 1.5rem !important;
+  margin-right: 0 !important;
+}
+
+/* estrutura mais “reta” (central e limpa) */
+#premium-modal .modal-content{
+  display: grid;
+  gap: 14px;
+}
+
+/* título/sub alinhados */
+#premium-modal .premium-hero{
+  margin-bottom: 0 !important;
+  text-align: center;
+}
+
+#premium-modal .premium-title{
+  line-height: 1.15;
+  font-weight: 650; /* levemente mais “cheio” */
+}
+
+#premium-modal .premium-subtitle{
+  margin-top: 2px;
+  font-weight: 450;
+}
+
+/* label + input alinhados e com largura certinha */
+#premium-modal .input-group{
+  display: grid;
+  gap: 8px;
+  margin-bottom: 0 !important;
+}
+
+#premium-modal .input-group label{
+  font-weight: 600; /* aqui fica melhor mais “firme” */
+}
+
+/* input com radius leve (8–10px) e sem ficar “esquisito” */
+#premium-modal #premium-code-input{
+  width: 100% !important;
+  border-radius: 9px !important;
+}
+
+/* botões sempre alinhados e com mesma altura */
+#premium-modal .modal-actions{
+  display: grid !important;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+#premium-modal .btn-secondary,
+#premium-modal .btn-primary{
+  height: 46px;
+  border-radius: 12px;
+}
+
+/* links (Whats/Instagram) um pouco mais visíveis */
+#premium-modal .premium-link svg{
+  width: 20px;
+  height: 20px;
+}
+
+
+
+/* ================================
+   PATCH — alinhamento Premium Modal
+   (coloque no FINAL do styles.css)
+   ================================ */
+
+#premium-modal .modal-content{
+  /* anula o “empurra pro lado” usado pra scrollbar invisível */
+  padding-right: 1.5rem !important;
+  margin-right: 0 !important;
+}
+
+/* estrutura mais “reta” (central e limpa) */
+#premium-modal .modal-content{
+  display: grid;
+  gap: 14px;
+}
+
+/* título/sub alinhados */
+#premium-modal .premium-hero{
+  margin-bottom: 0 !important;
+  text-align: center;
+}
+
+#premium-modal .premium-title{
+  line-height: 1.15;
+  font-weight: 650; /* levemente mais “cheio” */
+}
+
+#premium-modal .premium-subtitle{
+  margin-top: 2px;
+  font-weight: 450;
+}
+
+/* label + input alinhados e com largura certinha */
+#premium-modal .input-group{
+  display: grid;
+  gap: 8px;
+  margin-bottom: 0 !important;
+}
+
+#premium-modal .input-group label{
+  font-weight: 600; /* aqui fica melhor mais “firme” */
+}
+
+/* input com radius leve (8–10px) e sem ficar “esquisito” */
+#premium-modal #premium-code-input{
+  width: 100% !important;
+  border-radius: 9px !important;
+}
+
+/* botões sempre alinhados e com mesma altura */
+#premium-modal .modal-actions{
+  display: grid !important;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+#premium-modal .btn-secondary,
+#premium-modal .btn-primary{
+  height: 46px;
+  border-radius: 12px;
+}
+
+/* links (Whats/Instagram) um pouco mais visíveis */
+#premium-modal .premium-link svg{
+  width: 20px;
+  height: 20px;
+}
+
