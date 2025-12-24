@@ -6,9 +6,21 @@
 // - Mantém funcionalidades atuais
 // ============================================
 
+/* ===============================
+   BOOTSTRAP PREMIUM (B)
+   =============================== */
+let isPremium = false;
+
+// leitura síncrona imediata (sem “flash” no header)
+try {
+  isPremium = localStorage.getItem('fit_premium') === 'true';
+} catch (e) {
+  isPremium = false;
+}
+
 let credits = 3;
 let unlockedRecipes = [];
-let isPremium = false;
+
 let currentRecipe = null;
 let currentSlideIndex = 0;
 let featuredRecipes = [];
@@ -82,17 +94,14 @@ window.closePremiumModal = function () {
   closeModal(premiumModal);
 };
 
+
+
 // INIT
 async function loadUserData() {
   try {
     const premiumResult = await storage.get('fit_premium');
     if (premiumResult && premiumResult.value === 'true') {
       isPremium = true;
-    } else {
-      const creditsResult = await storage.get('fit_credits');
-      const unlockedResult = await storage.get('fit_unlocked');
-      if (creditsResult) credits = parseInt(creditsResult.value || '3', 10);
-      if (unlockedResult) unlockedRecipes = JSON.parse(unlockedResult.value || '[]');
     }
 
     const shoppingResult = await storage.get('fit_shopping');
@@ -105,6 +114,8 @@ async function loadUserData() {
   updateShoppingCounter();
   initSliderAndCategories();
   renderRecipes();
+
+
 }
 
 async function saveUserData() {
