@@ -963,3 +963,57 @@ body.modal-open { overflow: hidden; height: 100vh; }
   border-color: #16a34a;
   box-shadow: 0 0 0 3px rgba(22,163,74,0.15);
 }
+
+/* ============================================================
+   PATCH FINAL — FIX LAYOUT DO MODAL PREMIUM (label + input + botões)
+   Cole no FINAL do css/styles.css
+   ============================================================ */
+
+#premium-modal .modal-content{
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+/* garante que o bloco do campo NÃO vire linha */
+#premium-modal .input-group{
+  display: block !important;
+  width: 100% !important;
+  margin: 0 0 1rem 0 !important;
+}
+
+/* label sempre em cima */
+#premium-modal .input-group label{
+  display: block !important;
+  width: 100% !important;
+  margin: 0 0 .5rem 0 !important;
+  white-space: normal !important;
+}
+
+/* input pill certinho */
+#premium-modal .input-group input{
+  display: block !important;
+  width: 100% !important;
+  height: 44px !important;
+  border-radius: 9999px !important;
+  padding: 0 1rem !important;
+  box-sizing: border-box !important;
+}
+
+/* botões SEMPRE abaixo do input */
+#premium-modal .modal-actions{
+  display: flex !important;
+  width: 100% !important;
+  gap: .75rem !important;
+  margin-top: .25rem !important;
+}
+
+#premium-modal .modal-actions > button{
+  height: 44px !important;
+  border-radius: 9999px !important;
+}
+
+/* área Whats/Instagram consistente */
+#premium-modal a{
+  border-radius: 9999px !important;
+}
