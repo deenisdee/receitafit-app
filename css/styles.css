@@ -991,6 +991,13 @@ html.app-loading.boot-premium #premium-btn {
   display: none !important;
 }
 
+/* Evita a página "balançar" quando a scrollbar aparece/some */
+html { scrollbar-gutter: stable; }
+
+/* fallback para navegadores que não suportam scrollbar-gutter */
+@supports not (scrollbar-gutter: stable) {
+  html { overflow-y: scroll; } /* sempre reserva o espaço do scroll */
+}
 html.app-loading.boot-premium #credits-badge {
   opacity: 1 !important; /* mostra o badge enquanto carrega */
 }
