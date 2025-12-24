@@ -106,16 +106,19 @@ async function loadUserData() {
 
     const shoppingResult = await storage.get('fit_shopping');
     const weekPlanResult = await storage.get('fit_weekplan');
-    if (shoppingResult && shoppingResult.value) shoppingList = JSON.parse(shoppingResult.value);
-    if (weekPlanResult && weekPlanResult.value) weekPlan = JSON.parse(weekPlanResult.value);
+    if (shoppingResult && shoppingResult.value)
+      shoppingList = JSON.parse(shoppingResult.value);
+    if (weekPlanResult && weekPlanResult.value)
+      weekPlan = JSON.parse(weekPlanResult.value);
+
   } catch (e) {}
 
-updateUI();
-updateShoppingCounter();
-initSliderAndCategories();
-renderRecipes();
+  updateUI();
+  updateShoppingCounter();
+  initSliderAndCategories();
+  renderRecipes();
 
-document.documentElement.classList.remove('app-loading');
+  document.documentElement.classList.remove('app-loading');
 }
 
 async function saveUserData() {
