@@ -945,3 +945,31 @@ body.modal-open{ overflow:hidden; height:100vh; }
   width: 20px;
   height: 20px;
 }
+
+
+/* =========================================================
+   FIX MOBILE — Centralização REAL dos modais
+   (iOS Safari / Android Chrome)
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .modal {
+    align-items: center !important;
+    justify-content: center !important;
+
+    /* força viewport real no mobile */
+    min-height: 100dvh;
+    padding: 1rem;
+  }
+
+  /* garante que o conteúdo não "puxe" pra cima */
+  .modal-content,
+  .modal-content-medium,
+  .modal-content-large,
+  .modal-content-xlarge {
+    margin: auto !important;
+    max-height: calc(100dvh - 2rem);
+  }
+
+}
