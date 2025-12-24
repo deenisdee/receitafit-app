@@ -110,12 +110,12 @@ async function loadUserData() {
     if (weekPlanResult && weekPlanResult.value) weekPlan = JSON.parse(weekPlanResult.value);
   } catch (e) {}
 
-  updateUI();
-  updateShoppingCounter();
-  initSliderAndCategories();
-  renderRecipes();
+updateUI();
+updateShoppingCounter();
+initSliderAndCategories();
+renderRecipes();
 
-
+document.documentElement.classList.remove('app-loading');
 }
 
 async function saveUserData() {
