@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  
-  <style>
-  #premium-btn { visibility: hidden; }
-  </style>
-  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mynutriflow - Receitas Fit Premium</title>
   <link rel="stylesheet" href="css/styles.css" />
+  
+  <!-- ADICIONE ISTO AQUI -->
+  <style>
+    #premium-btn { 
+      display: none !important; 
+    }
+    body.free-user #premium-btn { 
+      display: block !important; 
+    }
+  </style>
 </head>
 
 <body>
