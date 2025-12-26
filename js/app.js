@@ -128,6 +128,14 @@ async function saveWeekPlan() {
   } catch (e) {}
 }
 
+
+
+
+
+
+
+
+
 function updateUI() {
   if (!creditsBadge) return;
 
@@ -162,6 +170,14 @@ function updateUI() {
     premiumBtn.classList.add('ready');
   }
 }
+
+
+
+
+
+
+
+
 
 // SLIDER + CATEGORIAS
 let sliderAutoplay = null;
