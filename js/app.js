@@ -139,10 +139,8 @@ function updateUI() {
       </svg>
       <span>PREMIUM</span>
     `;
-    // CRÍTICO: esconde o botão premium imediatamente
     if (premiumBtn) {
       premiumBtn.style.display = 'none';
-      premiumBtn.style.visibility = 'hidden';
     }
   } else {
     creditsBadge.classList.remove('premium');
@@ -153,12 +151,11 @@ function updateUI() {
       </svg>
       <span id="credits-text">${credits} créditos</span>
     `;
-    // CRÍTICO: mostra o botão premium imediatamente
     if (premiumBtn) {
       premiumBtn.style.display = 'block';
-      premiumBtn.style.visibility = 'visible';
     }
   }
+}
   
   // Adiciona classe 'ready' para transição suave
   if (premiumBtn) {
