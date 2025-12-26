@@ -102,7 +102,7 @@ async function loadUserData() {
   } catch (e) {}
 
   updateUI();
-  updateShoppingCounter();
+  if (shoppingCounter) updateShoppingCounter();
   initSliderAndCategories();
   renderRecipes();
 }
@@ -118,7 +118,7 @@ async function saveUserData() {
 async function saveShoppingList() {
   try {
     await storage.set('fit_shopping', JSON.stringify(shoppingList));
-    updateShoppingCounter();
+    if (shoppingCounter) updateShoppingCounter();
   } catch (e) {}
 }
 
@@ -173,7 +173,16 @@ function updateUI() {
 }
 
 
-
+function updateShoppingCounter() {
+  if (!shoppingCounter) return; // <-- ADICIONE ESTA LINHA
+  
+  if (shoppingList.length > 0) {
+    shoppingCounter.textContent = shoppingList.length;
+    shoppingCounter.classList.remove('hidden');
+  } else {
+    shoppingCounter.classList.add('hidden');
+  }
+}
 
 
 
