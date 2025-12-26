@@ -139,7 +139,11 @@ function updateUI() {
       </svg>
       <span>PREMIUM</span>
     `;
-    if (premiumBtn) premiumBtn.style.display = 'none';
+    // CRÍTICO: esconde o botão premium imediatamente
+    if (premiumBtn) {
+      premiumBtn.style.display = 'none';
+      premiumBtn.style.visibility = 'hidden';
+    }
   } else {
     creditsBadge.classList.remove('premium');
     creditsBadge.innerHTML = `
@@ -149,17 +153,16 @@ function updateUI() {
       </svg>
       <span id="credits-text">${credits} créditos</span>
     `;
-    if (premiumBtn) premiumBtn.style.display = 'block';
+    // CRÍTICO: mostra o botão premium imediatamente
+    if (premiumBtn) {
+      premiumBtn.style.display = 'block';
+      premiumBtn.style.visibility = 'visible';
+    }
   }
-}
-
-function updateShoppingCounter() {
-  if (!shoppingCounter) return;
-  if (shoppingList.length > 0) {
-    shoppingCounter.textContent = shoppingList.length;
-    shoppingCounter.classList.remove('hidden');
-  } else {
-    shoppingCounter.classList.add('hidden');
+  
+  // Adiciona classe 'ready' para transição suave
+  if (premiumBtn) {
+    premiumBtn.classList.add('ready');
   }
 }
 
