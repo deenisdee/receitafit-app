@@ -8,11 +8,6 @@
 
 
 
-// DOM elements
-const creditsText = document.getElementById('credits-text');
-
-
-
 let credits = 3;
 let unlockedRecipes = [];
 let isPremium = false;
