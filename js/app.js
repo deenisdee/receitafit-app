@@ -180,6 +180,10 @@ function updateUI() {
     
     // 👇 ADICIONE ESTA LINHA AQUI (última linha antes do catch)
     document.body.classList.add('ui-loaded');
+
+
+    console.log('✅ UI carregada!');
+    console.log('Classes do body:', document.body.className);
     
   } catch (error) {
     console.error('Erro em updateUI:', error);
