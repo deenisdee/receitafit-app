@@ -6,6 +6,18 @@
 // - Mantém funcionalidades atuais
 // ============================================
 
+
+
+// DOM elements
+const creditsText = document.getElementById('credits-text');
+const creditsBadge = document.getElementById('credits-badge');
+const premiumBtn = document.getElementById('premium-btn'); // 👈 Certifique-se que está aqui
+
+console.log('🔍 premiumBtn encontrado?', premiumBtn); // 👈 ADICIONE ESTE LOG
+
+
+
+
 let credits = 3;
 let unlockedRecipes = [];
 let isPremium = false;
@@ -944,9 +956,12 @@ async function activatePremium() {
       }, 50);
     }
     
-    if (premiumBtn) {
-      premiumBtn.style.display = 'none';
-    }
+   if (premiumBtn) {
+  console.log('✅ Escondendo botão premium...'); // 👈 ADICIONE
+  premiumBtn.style.display = 'none';
+} else {
+  console.log('❌ premiumBtn não encontrado!'); // 👈 ADICIONE
+}
     
     renderRecipes();
     window.closePremiumModal();
