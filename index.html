@@ -6,17 +6,22 @@
   <title>Mynutriflow - Receitas Fit Premium</title>
   <link rel="stylesheet" href="css/styles.css" />
   
-  <!-- ADICIONE ISTO AQUI
-  <style>
-    #premium-btn { 
-      display: none !important; 
-    }
-    body.free-user #premium-btn { 
-      display: block !important; 
-    }
-  </style>
+<style>
+  /* Esconde elementos até o JS carregar */
+  #credits-badge,
+  #premium-btn {
+    opacity: 0;
+    transition: opacity 0.15s ease-in;
+  }
+  
+  /* Mostra quando JS marcar como "carregado" */
+  body.ui-loaded #credits-badge,
+  body.ui-loaded #premium-btn {
+    opacity: 1;
+  }
+</style>
+  
 
-   -->
 </head>
 
 <body>
