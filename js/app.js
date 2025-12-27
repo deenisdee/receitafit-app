@@ -902,6 +902,10 @@ window.closeWeekPlanner = function() { closeModal(plannerModal); };
 
 
 
+
+
+
+
 // PREMIUM
 async function activatePremium() {
   const code = (premiumCodeInput?.value || '').trim().toUpperCase();
@@ -917,20 +921,45 @@ async function activatePremium() {
     const data = await res.json();
     if (!data.ok) { alert(data.error || 'Código inválido.'); return; }
 
+    console.log('🔵 Antes:', isPremium); // DEBUG
+
     isPremium = true;
     await storage.set('fit_premium', 'true');
     
-    // 👇 ATUALIZA UI IMEDIATAMENTE
-    updateUI();
+    console.log('🟢 Depois:', isPremium); // DEBUG
+    
+    // FORÇA atualização MANUAL do badge e botão
+    if (creditsBadge) {
+      creditsBadge.classList.remove('ready');
+      creditsBadge.classList.add('premium');
+      creditsBadge.innerHTML = `
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        <span>PREMIUM</span>
+      `;
+      
+      setTimeout(() => {
+        creditsBadge.classList.add('ready');
+      }, 50);
+    }
+    
+    if (premiumBtn) {
+      premiumBtn.style.display = 'none';
+    }
+    
     renderRecipes();
-
     window.closePremiumModal();
     alert('Premium ativado com sucesso.');
     
   } catch (err) {
+    console.error('❌ Erro:', err);
     alert('Erro ao validar o código.');
   }
 }
+
+
+
 
 
 
