@@ -1069,7 +1069,9 @@ html { scrollbar-gutter: stable; }
 }
 
 
-
+body.premium-active #premium-btn {
+  display: none !important;
+}
 
 
 
