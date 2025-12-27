@@ -1029,11 +1029,6 @@ html { scrollbar-gutter: stable; }
 }
 
 
-/* ================================
-   Badge Premium - Estilo
-   ================================ */
-
-
 /* Transição suave no badge */
 #credits-badge {
   transition: background 0.2s ease-in-out;
