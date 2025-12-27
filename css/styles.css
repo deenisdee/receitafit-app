@@ -1076,3 +1076,41 @@ body.premium-active #premium-btn {
 
 
 
+
+/* ================================
+   FIX: Centralização Mobile/iPhone
+   ================================ */
+
+/* Garante centralização em mobile */
+@media (max-width:768px){
+  .modal{
+    align-items:center !important;
+    justify-content:center !important;
+    padding:1rem !important;
+  }
+  
+  .modal-content,
+  .modal-content-medium,
+  .modal-content-large,
+  .modal-content-xlarge{
+    max-height:90vh !important;
+    margin:auto !important;
+  }
+}
+
+/* iPhone Safari: fix específico */
+@supports (-webkit-touch-callout: none) {
+  .modal{
+    align-items:center !important;
+    justify-content:center !important;
+  }
+  
+  .modal-surface,
+  .modal-content,
+  .modal-content-medium,
+  .modal-content-large,
+  .modal-content-xlarge{
+    margin:auto !important;
+  }
+}
+
