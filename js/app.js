@@ -138,15 +138,13 @@ async function saveWeekPlan() {
 
 function updateUI() {
   try {
-    if (!creditsBadge) {
-      console.error('creditsBadge não encontrado');
-      return;
-    }
+    if (!creditsBadge) return;
 
     if (isPremium) {
-      // Remove classe free-user
+      // Usuário PREMIUM
       document.body.classList.remove('free-user');
       
+      // Badge vira amarelo PREMIUM
       creditsBadge.classList.add('premium');
       creditsBadge.innerHTML = `
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -154,10 +152,17 @@ function updateUI() {
         </svg>
         <span>PREMIUM</span>
       `;
+      
+      // ESCONDE o botão verde "Ativar Premium"
+      if (premiumBtn) {
+        premiumBtn.style.display = 'none';
+      }
+      
     } else {
-      // Adiciona classe free-user
+      // Usuário FREE
       document.body.classList.add('free-user');
       
+      // Badge volta a ser azul com créditos
       creditsBadge.classList.remove('premium');
       creditsBadge.innerHTML = `
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -166,6 +171,11 @@ function updateUI() {
         </svg>
         <span id="credits-text">${credits} créditos</span>
       `;
+      
+      // MOSTRA o botão verde "Ativar Premium"
+      if (premiumBtn) {
+        premiumBtn.style.display = 'block';
+      }
     }
   } catch (error) {
     console.error('Erro em updateUI:', error);
@@ -174,7 +184,7 @@ function updateUI() {
 
 
 function updateShoppingCounter() {
-  if (!shoppingCounter) return; // <-- ADICIONE ESTA LINHA
+  if (!shoppingCounter) return; 
   
   if (shoppingList.length > 0) {
     shoppingCounter.textContent = shoppingList.length;
