@@ -920,19 +920,13 @@ async function activatePremium() {
     isPremium = true;
     await storage.set('fit_premium', 'true');
     
-    // 👇 REMOVE A CLASSE .ready ANTES DE ATUALIZAR
-    if (creditsBadge) {
-      creditsBadge.classList.remove('ready');
-    }
-    
-    // Pequeno delay para garantir que a classe foi removida
-    setTimeout(() => {
-      updateUI();
-      renderRecipes();
-    }, 50);
+    // 👇 ATUALIZA UI IMEDIATAMENTE
+    updateUI();
+    renderRecipes();
 
     window.closePremiumModal();
     alert('Premium ativado com sucesso.');
+    
   } catch (err) {
     alert('Erro ao validar o código.');
   }
