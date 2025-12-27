@@ -141,10 +141,10 @@ function updateUI() {
     if (!creditsBadge) return;
 
     if (isPremium) {
-      // Usuário PREMIUM
       document.body.classList.remove('free-user');
+      document.documentElement.classList.add('is-premium'); // 👈 ADICIONA
+      document.documentElement.classList.remove('is-free'); // 👈 ADICIONA
       
-      // Badge vira amarelo PREMIUM
       creditsBadge.classList.add('premium');
       creditsBadge.innerHTML = `
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -153,16 +153,15 @@ function updateUI() {
         <span>PREMIUM</span>
       `;
       
-      // ESCONDE o botão verde "Ativar Premium"
       if (premiumBtn) {
         premiumBtn.style.display = 'none';
       }
       
     } else {
-      // Usuário FREE
       document.body.classList.add('free-user');
+      document.documentElement.classList.add('is-free'); // 👈 ADICIONA
+      document.documentElement.classList.remove('is-premium'); // 👈 ADICIONA
       
-      // Badge volta a ser azul com créditos
       creditsBadge.classList.remove('premium');
       creditsBadge.innerHTML = `
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
@@ -172,18 +171,10 @@ function updateUI() {
         <span id="credits-text">${credits} créditos</span>
       `;
       
-      // MOSTRA o botão verde "Ativar Premium"
       if (premiumBtn) {
         premiumBtn.style.display = 'block';
       }
     }
-    
-    // 👇 ADICIONE ESTA LINHA AQUI (última linha antes do catch)
-    document.body.classList.add('ui-loaded');
-
-
-    console.log('✅ UI carregada!');
-    console.log('Classes do body:', document.body.className);
     
   } catch (error) {
     console.error('Erro em updateUI:', error);
