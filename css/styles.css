@@ -1043,8 +1043,11 @@ html { scrollbar-gutter: stable; }
 .badge {
   min-width: 160px; /* Largura fixa para evitar "pulo" */
   opacity: 0; /* Começa invisível */
-  transition: opacity 0.2s ease-in-out;
+  transition: opacity 0.3s ease-in-out; /* 👈 0.3s ao invés de 0.2s */
 }
+
+
+
 
 #premium-btn {
   display: var(--show-premium-btn) !important;
