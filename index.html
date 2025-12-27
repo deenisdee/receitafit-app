@@ -5,28 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mynutriflow - Receitas Fit Premium</title>
   <link rel="stylesheet" href="css/styles.css" />
+
+
   
   <!-- 👇 SCRIPT QUE RODA ANTES DE TUDO -->
-  <script>
-    (function() {
-      const isPremium = localStorage.getItem('fit_premium') === 'true';
-      const credits = parseInt(localStorage.getItem('fit_credits') || '3', 10);
+<script>
+  (function() {
+    const isPremium = localStorage.getItem('fit_premium') === 'true';
+    const credits = parseInt(localStorage.getItem('fit_credits') || '3', 10);
+    
+    if (isPremium) {
+      // JÁ ESTÁ CORRETO NO HTML
+      document.documentElement.style.setProperty('--badge-bg', 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)');
+      document.documentElement.style.setProperty('--show-premium-btn', 'none');
+    } else {
+      // CORRIGE PARA FREE
+      document.documentElement.style.setProperty('--badge-bg', '#3b82f6');
+      document.documentElement.style.setProperty('--show-premium-btn', 'block');
       
-      if (isPremium) {
-        document.documentElement.style.setProperty('--badge-bg', 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)');
-        document.documentElement.style.setProperty('--badge-content', '"⭐ PREMIUM"');
-        document.documentElement.style.setProperty('--badge-icon', 'none');
-        document.documentElement.style.setProperty('--show-premium-btn', 'none');
-      } else {
-        document.documentElement.style.setProperty('--badge-bg', '#3b82f6');
-        document.documentElement.style.setProperty('--badge-content', '"👁 " attr(data-credits) " créditos"');
-        document.documentElement.style.setProperty('--badge-icon', 'inline');
-        document.documentElement.style.setProperty('--show-premium-btn', 'block');
+      // Atualiza conteúdo do badge
+      const badge = document.getElementById('credits-badge');
+      if (badge) {
+        badge.className = 'badge';
+        badge.innerHTML = `
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          <span>${credits} créditos</span>
+        `;
       }
-      
-      document.documentElement.setAttribute('data-credits', credits);
-    })();
-  </script>
+    }
+  })();
+</script>
+
+
+  
 </head>
 
 <body>
@@ -95,8 +109,11 @@
 
 
             
-<div id="credits-badge" class="badge" data-credits="3">
-  <!-- JavaScript vai preencher -->
+<div id="credits-badge" class="badge premium" data-credits="3">
+  <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+  </svg>
+  <span>PREMIUM</span>
 </div>
 
             <button id="premium-btn" class="btn-premium">Ativar Premium</button>
