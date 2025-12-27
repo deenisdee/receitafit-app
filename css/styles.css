@@ -1035,3 +1035,10 @@ html { scrollbar-gutter: stable; }
 @supports not (scrollbar-gutter: stable) {
   html { overflow-y: scroll; } /* sempre reserva o espaço do scroll */
 }
+
+
+/* DEBUG: Força mostrar os elementos */
+#credits-badge,
+#premium-btn {
+  opacity: 1 !important;
+}
