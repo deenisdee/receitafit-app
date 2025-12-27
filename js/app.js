@@ -93,7 +93,6 @@ window.closePremiumModal = function () {
 
 // INIT
 async function loadUserData() {
-  // Carrega PRIMEIRO (antes de qualquer renderização)
   try {
     const premiumResult = await storage.get('fit_premium');
     if (premiumResult && premiumResult.value === 'true') {
@@ -111,15 +110,10 @@ async function loadUserData() {
     if (weekPlanResult && weekPlanResult.value) weekPlan = JSON.parse(weekPlanResult.value);
   } catch (e) {}
 
-  // Atualiza UI IMEDIATAMENTE (sem esperar)
   updateUI();
   if (shoppingCounter) updateShoppingCounter();
-  
-  // Depois inicializa o resto (assíncrono)
-  requestAnimationFrame(() => {
-    initSliderAndCategories();
-    renderRecipes();
-  });
+  initSliderAndCategories();
+  renderRecipes();
 }
 
 
