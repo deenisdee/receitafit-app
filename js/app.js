@@ -128,30 +128,64 @@ async function saveWeekPlan() {
   } catch (e) {}
 }
 
-function updateUI() {
-  if (!creditsBadge) return;
 
-  if (isPremium) {
-    creditsBadge.classList.add('premium');
-    creditsBadge.innerHTML = `
-      <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-      </svg>
-      <span>PREMIUM</span>
-    `;
-    if (premiumBtn) premiumBtn.style.display = 'none';
-  } else {
-    creditsBadge.classList.remove('premium');
-    creditsBadge.innerHTML = `
-      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-        <circle cx="12" cy="12" r="3"></circle>
-      </svg>
-      <span id="credits-text">${credits} créditos</span>
-    `;
-    if (premiumBtn) premiumBtn.style.display = 'block';
+
+
+
+
+function updateUI() {
+  try {
+    if (!creditsBadge) return;
+
+    if (isPremium) {
+      document.body.classList.remove('free-user');
+      
+      // Atualiza CSS variables
+      document.documentElement.style.setProperty('--badge-bg', 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)');
+      document.documentElement.style.setProperty('--show-premium-btn', 'none');
+      
+      creditsBadge.classList.add('premium');
+      creditsBadge.innerHTML = `
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        <span>PREMIUM</span>
+      `;
+      
+      if (premiumBtn) {
+        premiumBtn.style.display = 'none';
+      }
+      
+    } else {
+      document.body.classList.add('free-user');
+      
+      // Atualiza CSS variables
+      document.documentElement.style.setProperty('--badge-bg', '#3b82f6');
+      document.documentElement.style.setProperty('--show-premium-btn', 'block');
+      
+      creditsBadge.classList.remove('premium');
+      creditsBadge.innerHTML = `
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        <span id="credits-text">${credits} créditos</span>
+      `;
+      
+      if (premiumBtn) {
+        premiumBtn.style.display = 'block';
+      }
+    }
+    
+  } catch (error) {
+    console.error('Erro em updateUI:', error);
   }
 }
+
+
+
+
+
 
 function updateShoppingCounter() {
   if (!shoppingCounter) return;
