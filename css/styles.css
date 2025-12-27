@@ -1119,20 +1119,30 @@ body.premium-active #premium-btn {
 
 
 /* ================================
-   FIX: Botões dias da semana arredondados
+   FIX: Botões dias da semana - Grid responsivo
    ================================ */
 
-/* Estiliza botões de seleção de dia (no detalhe da receita) */
+/* Container dos botões de dia */
+.detail-section div[style*="display:flex"] {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)) !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+}
+
+/* Estiliza botões de seleção de dia */
 .detail-section button.btn-secondary {
   background: #e5e7eb !important;
   color: #374151 !important;
   border: none !important;
-  border-radius: 50px !important; /* arredondado */
-  padding: 0.75rem 1.5rem !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 1rem !important;
   font-weight: 600 !important;
   font-size: 0.95rem !important;
   transition: all 0.2s ease !important;
   white-space: nowrap !important;
+  width: 100% !important; /* ocupa toda a célula do grid */
+  text-align: center !important;
 }
 
 .detail-section button.btn-secondary:hover {
@@ -1143,4 +1153,11 @@ body.premium-active #premium-btn {
 
 .detail-section button.btn-secondary:active {
   transform: translateY(0) !important;
+}
+
+/* Mobile: 2 colunas */
+@media (max-width: 640px) {
+  .detail-section div[style*="display:flex"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
 }
