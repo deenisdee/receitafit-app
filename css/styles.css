@@ -1027,3 +1027,21 @@ html { scrollbar-gutter: stable; }
 @supports not (scrollbar-gutter: stable) {
   html { overflow-y: scroll; } /* sempre reserva o espaço do scroll */
 }
+
+
+/* ================================
+   ANTI-FLASH com CSS Variables
+   ================================ */
+
+:root {
+  --badge-bg: #3b82f6;
+  --show-premium-btn: block;
+}
+
+#credits-badge {
+  background: var(--badge-bg) !important;
+}
+
+#premium-btn {
+  display: var(--show-premium-btn) !important;
+}
