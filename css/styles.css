@@ -1033,6 +1033,7 @@ html { scrollbar-gutter: stable; }
    Badge Premium - Estilo
    ================================ */
 
+/* Badge premium amarelo */
 .badge.premium {
   background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
 }
