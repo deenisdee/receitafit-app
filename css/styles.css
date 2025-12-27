@@ -1030,33 +1030,14 @@ html { scrollbar-gutter: stable; }
 
 
 /* ================================
-   ANTI-FLASH com CSS Variables
+   Badge Premium - Estilo
    ================================ */
 
-:root {
-  --badge-bg: #3b82f6;
-  --show-premium-btn: block;
+.badge.premium {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%) !important;
 }
 
-/* Esconde badge e botão até JS carregar */
-#credits-badge,
-#premium-btn {
-  opacity: 0;
-  transition: opacity 0.15s ease-in;
-}
-
-/* Mostra quando JS adicionar classe "ready" */
-#credits-badge.ready,
-#premium-btn.ready {
-  opacity: 1;
-}
-
-/* Aplica cor do badge via CSS variable */
-#credits-badge {
-  background: var(--badge-bg) !important;
-}
-
-/* Controla exibição do botão premium */
-#premium-btn {
-  display: var(--show-premium-btn) !important;
+.badge.premium svg {
+  fill: currentColor;
+  stroke: none;
 }
