@@ -5,6 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mynutriflow - Receitas Fit Premium</title>
   <link rel="stylesheet" href="css/styles.css" />
+  
+  <!-- 👇 ADICIONE APENAS ISTO AQUI -->
+  <script>
+    // Roda ANTES de carregar a página
+    (function() {
+      try {
+        const premium = localStorage.getItem('fit_premium') === 'true';
+        if (premium) {
+          document.documentElement.style.setProperty('--badge-bg', 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)');
+          document.documentElement.style.setProperty('--show-premium-btn', 'none');
+        } else {
+          document.documentElement.style.setProperty('--badge-bg', '#3b82f6');
+          document.documentElement.style.setProperty('--show-premium-btn', 'block');
+        }
+      } catch(e) {}
+    })();
+  </script>
 </head>
 
 <body>
