@@ -477,15 +477,7 @@ function showRecipeDetail(recipeId) {
   const heroImage = recipe.images?.hero || recipe.image;
 
   recipeDetail.innerHTML = `
-    <button class="back-btn" onclick="closeRecipeDetail(
-    
-setTimeout(() => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}, 100);
-
-
-    
-    )">
+    <button class="back-btn" onclick="closeRecipeDetail()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M19 12H5M12 19l-7-7 7-7"/>
       </svg>
@@ -718,6 +710,11 @@ window.closeRecipeDetail = function() {
   if (categories) categories.style.display = 'block';
 
   renderRecipes();
+
+setTimeout(() => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}, 100);
+  
 };
 
 // LISTA DE COMPRAS
