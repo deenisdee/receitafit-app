@@ -1224,11 +1224,13 @@ async function activatePremium() {
     
     renderRecipes();
     window.closePremiumModal();
-    alert('Premium ativado com sucesso.');
+    
+    showNotification('Acesso Liberado', 'Premium ativado com sucesso');
+    
     
   } catch (err) {
     console.error('Erro ao ativar premium:', err);
-    alert('Erro ao validar o código.');
+    showNotification('Erro', 'Erro ao validar o código');
   }
 }
 
