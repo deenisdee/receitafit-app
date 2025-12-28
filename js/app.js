@@ -864,14 +864,19 @@ window.removeShoppingItem = function(id) {
 
 
 window.clearShoppingList = function() {
-  if (confirm('Tem certeza que deseja limpar toda a lista?')) {
-    shoppingList = [];
-    saveShoppingList();
-    updateShoppingCounter();  // mantém o contador certo
-    closeShoppingList();      // fecha o modal automaticamente
-    // (opcional) showNotification('Tudo certo', 'Lista de compras limpa.');
-  }
+  showConfirm(
+    'Limpar lista',
+    'Tem certeza que deseja limpar toda a lista de compras?',
+    () => {
+      shoppingList = [];
+      saveShoppingList();
+      updateShoppingCounter();
+      closeShoppingList();
+      showNotification('Tudo certo', 'Lista de compras limpa.');
+    }
+  );
 };
+
 
 
 
@@ -1182,7 +1187,7 @@ window.closeWeekPlanner = function() { closeModal(plannerModal); };
 // PREMIUM
 async function activatePremium() {
   const code = (premiumCodeInput?.value || '').trim().toUpperCase();
-  if (!code) { alert('Digite um código.'); return; }
+  if (!code) { showNotification('Aviso', 'Digite um código') ; return; }
 
   try {
     const res = await fetch('/api/redeem', {
@@ -1192,7 +1197,7 @@ async function activatePremium() {
     });
 
     const data = await res.json();
-    if (!data.ok) { alert(data.error || 'Código inválido.'); return; }
+    if (!data.ok) { showNotification(data.error || 'Código inválido.'); return; }
 
     isPremium = true;
     await storage.set('fit_premium', 'true');
@@ -1413,6 +1418,39 @@ function showNotification(title, message) {
     document.body.classList.add('modal-open');
   }
 }
+
+
+function showConfirm(title, message, onConfirm) {
+  const modal = document.getElementById('confirm-modal');
+  const titleEl = modal.querySelector('.confirm-title');
+  const messageEl = modal.querySelector('.confirm-message');
+  const yesBtn = modal.querySelector('.confirm-yes');
+  const noBtn = modal.querySelector('.confirm-no');
+
+  titleEl.textContent = title;
+  messageEl.textContent = message;
+
+  const cleanup = () => {
+    yesBtn.onclick = null;
+    noBtn.onclick = null;
+    modal.classList.add('hidden');
+  };
+
+  yesBtn.onclick = () => {
+    cleanup();
+    onConfirm();
+  };
+
+  noBtn.onclick = cleanup;
+
+  modal.classList.remove('hidden');
+}
+
+
+
+
+
+
 
 window.closeNotification = function() {
   const modal = document.getElementById('notification-modal');
