@@ -7,7 +7,7 @@
 // ============================================
 
 // Carregar todas as receitas
-let allRecipes = recipes;
+let allRecipes = RECIPES || [];  // ✅ CORRETO (MAIÚSCULO)
 
 let credits = 3;
 let unlockedRecipes = [];
