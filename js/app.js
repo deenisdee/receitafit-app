@@ -734,7 +734,9 @@ window.addToShoppingList = function(recipeId) {
   });
 
   saveShoppingList();
-  alert(`Ingredientes de "${recipe.name}" adicionados à lista.`);
+  
+  showNotification('Sucesso!', `Ingredientes de "${recipe.name}" adicionados à lista.`);
+  
 };
 
 function renderShoppingList() {
@@ -893,8 +895,9 @@ window.addToWeekPlanWithMeal = function(meal) {
 function addToWeekPlan(recipe, day, meal) {
   const key = `${day}-${meal}`;
   weekPlan[key] = recipe;
+  
   saveWeekPlan();
-  alert(`Receita adicionada ao ${day} - ${meal}.`);
+  showNotification('Receita Adicionada!', `${recipe.name} adicionada ao ${day} - ${meal}.`);
 }
 
 function renderWeekPlanner() {
@@ -1307,3 +1310,19 @@ if (faqBtn) faqBtn.addEventListener('click', window.openFAQ);
 
 // START
 loadUserData();
+
+
+
+// Notificação customizada
+function showNotification(title, message) {
+  const modal = document.getElementById('modal-message');
+  const modalTitle = modal?.querySelector('h3');
+  const modalText = modal?.querySelector('p');
+  
+  if (modalTitle) modalTitle.textContent = title;
+  if (modalText) modalText.textContent = message;
+  if (modal) {
+    modal.style.display = 'flex';
+    document.body.classList.add('modal-open');
+  }
+}
