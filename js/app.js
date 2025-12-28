@@ -764,7 +764,16 @@ function renderShoppingList() {
           <div class="shopping-item">
             <input type="checkbox" ${item.checked ? 'checked' : ''} onchange="toggleShoppingItem('${item.id}')">
             <div class="shopping-item-content">
-              <div class="shopping-item-content"> ${typeof item.text === 'string' ? item.text : `${item.quantity || ''} ${item.text || item}`}</div>
+
+
+<div class="shopping-item-content">
+  ${item.text 
+    ? (typeof item.text === 'string' ? item.text : `${item.quantity || ''} ${item.text}`)
+    : (item.quantity && item.text ? `${item.quantity} ${item.text}` : (item.ingredient || item))
+  }
+</div>
+
+           
               <div class="shopping-item-recipe">${item.recipes ? item.recipes.join(', ') : ''}</div>
             </div>
             <button class="btn-delete" onclick="removeShoppingItem('${item.id}')" aria-label="Remover item">
