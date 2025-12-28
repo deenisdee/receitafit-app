@@ -867,11 +867,12 @@ window.clearShoppingList = function() {
   if (confirm('Tem certeza que deseja limpar toda a lista?')) {
     shoppingList = [];
     saveShoppingList();
-    // não renderiza "Lista de compras vazia" — só fecha o modal
-    if (typeof closeShoppingList === 'function') closeShoppingList();
-    else closeModal(shoppingModal);
+    updateShoppingCounter();  // mantém o contador certo
+    closeShoppingList();      // fecha o modal automaticamente
+    // (opcional) showNotification('Tudo certo', 'Lista de compras limpa.');
   }
 };
+
 
 
 
