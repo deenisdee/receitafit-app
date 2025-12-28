@@ -677,7 +677,11 @@ ${recipe.tags && recipe.tags.length > 0 ? `
 
   recipeGrid.classList.add('hidden');
   recipeDetail.classList.remove('hidden');
-  window.scrollTo(0, 0);
+ 
+  window.scrollTo({
+  top: 0,
+  behavior: 'smooth'
+});
 
   // 👇 INICIALIZA ÍCONES LUCIDE
   if (typeof lucide !== 'undefined') {
