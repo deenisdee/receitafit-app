@@ -4,70 +4,133 @@
 // 46 RECEITAS TOTAIS (6 originais + 40 novas)
 
 const RECIPES = [
-    {
-        id: 1,
-        name: 'Bowl de Açaí Proteico',
-        category: 'Café da Manhã',
-        calories: 320,
-        protein: 25,
-        carbs: 42,
-        fats: 8,
-        fiber: 6,
-        time: 10,
-        servings: 1,
-        difficulty: 'Fácil',
-        featured: true,
-        tags: [
-                'Post-treino',
-                'Energético',
-                'Antioxidante',
-                'Rico em proteína'
-            ],
-        benefits: [
-                'Acelera recuperação muscular',
-                'Rico em antioxidantes naturais',
-                'Energia prolongada sem picos de insulina',
-                'Ajuda na queima de gordura'
-            ],
-        allergens: [
-                'Leite (opcional)',
-                'Oleaginosas'
-            ],
-        image: 'https://images.unsplash.com/photo-1630361802236-e2b611c7065c?q=80',
-        ingredients: [
-                '200g de polpa de açaí puro (sem xarope de guaraná)',
-                '1 scoop (30g) de whey protein sabor baunilha ou neutro',
-                '1 banana congelada média (aproximadamente 100g)',
-                '50ml de leite de amêndoas sem açúcar',
-                '2 colheres de sopa de granola sem açúcar (20g)',
-                '1 colher de chá de pasta de amendoim integral',
-                'Frutas frescas: morango, kiwi, banana (50g total)',
-                'Opcional: 1 colher de chá de mel puro',
-                'Opcional: coco ralado sem açúcar para finalizar'
-            ],
-        instructions: [
-                'Corte a banana em rodelas e congele por pelo menos 2 horas antes do preparo',
-                'No liquidificador ou processador, adicione a polpa de açaí semi-descongelada (textura cremosa, não líquida)',
-                'Adicione a banana congelada, whey protein e leite de amêndoas',
-                'Bata em velocidade média por 30-45 segundos até obter consistência cremosa e homogênea (similar a sorvete)',
-                'Se ficar muito grosso, adicione 10ml de leite por vez até atingir a textura ideal',
-                'Despeje em uma tigela funda (bowl)',
-                'Decore com granola em uma metade e frutas frescas na outra',
-                'Finalize com a pasta de amendoim por cima e opcional mel em fio',
-                'Sirva imediatamente para manter a temperatura ideal'
-            ],
-        tips: [
-                '🔥 Dica Pro: Congele a banana cortada em rodelas para facilitar',
-                '💪 Para mais proteína: adicione 1 colher de pasta de amendoim',
-                '⚡ Post-treino: adicione 5g de creatina monohidratada',
-                '🥤 Versão smoothie: adicione 100ml de leite para textura líquida',
-                '❄️ Textura perfeita: açaí semi-congelado (não totalmente duro)'
-            ],
-        macros: {
-            breakfast: '30% proteína, 55% carboidratos, 15% gorduras',
-            postWorkout: 'Perfeito para janela anabólica (até 1h pós-treino)'
+   {
+    id: 1,
+    name: 'Bowl de Açaí Proteico',
+    category: 'Café da Manhã',
+    calories: 320,
+    protein: 25,
+    carbs: 42,
+    fats: 8,
+    fiber: 6,
+    time: 10,
+    servings: 1,
+    difficulty: 'Fácil',
+    featured: true,
+    
+    tags: [
+        'Post-treino',
+        'Energético',
+        'Antioxidante',
+        'Rico em proteína'
+    ],
+    
+    benefits: [
+        'Acelera recuperação muscular',
+        'Rico em antioxidantes naturais',
+        'Energia prolongada sem picos de insulina',
+        'Ajuda na queima de gordura'
+    ],
+    
+    allergens: [
+        'Leite (opcional)',
+        'Oleaginosas'
+    ],
+    
+    image: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=1200&h=740&fit=crop',
+    
+    // 👇 NOVA ESTRUTURA DE INGREDIENTES COM ÍCONES
+    ingredients: [
+        { 
+            icon: 'droplets',
+            quantity: '200g',
+            text: 'de polpa de açaí puro (sem xarope de guaraná)'
+        },
+        { 
+            icon: 'zap',
+            quantity: '1 scoop (30g)',
+            text: 'de whey protein sabor baunilha ou neutro'
+        },
+        { 
+            icon: 'banana',
+            quantity: '1 unidade (100g)',
+            text: 'banana congelada média'
+        },
+        { 
+            icon: 'milk',
+            quantity: '50ml',
+            text: 'de leite de amêndoas sem açúcar'
+        },
+        { 
+            icon: 'wheat',
+            quantity: '2 colheres sopa (20g)',
+            text: 'de granola sem açúcar'
+        },
+        { 
+            icon: 'nut',
+            quantity: '1 colher chá',
+            text: 'de pasta de amendoim integral'
+        },
+        { 
+            icon: 'apple',
+            quantity: '50g total',
+            text: 'frutas frescas: morango, kiwi, banana'
+        },
+        { 
+            icon: 'droplet',
+            quantity: '1 colher chá',
+            text: 'de mel puro',
+            optional: true
+        },
+        { 
+            icon: 'circle',
+            quantity: 'a gosto',
+            text: 'coco ralado sem açúcar para finalizar',
+            optional: true
         }
+    ],
+    
+    instructions: [
+        'Corte a banana em rodelas e congele por pelo menos 2 horas antes do preparo',
+        'No liquidificador ou processador, adicione a polpa de açaí semi-descongelada (textura cremosa, não líquida)',
+        'Adicione a banana congelada, whey protein e leite de amêndoas',
+        'Bata em velocidade média por 30-45 segundos até obter consistência cremosa e homogênea (similar a sorvete)',
+        'Se ficar muito grosso, adicione 10ml de leite por vez até atingir a textura ideal',
+        'Despeje em uma tigela funda (bowl)',
+        'Decore com granola em uma metade e frutas frescas na outra',
+        'Finalize com a pasta de amendoim por cima e opcional mel em fio',
+        'Sirva imediatamente para manter a temperatura ideal'
+    ],
+    
+    tips: [
+        '🔥 Dica Pro: Congele a banana cortada em rodelas para facilitar',
+        '💪 Para mais proteína: adicione 1 colher de pasta de amendoim',
+        '⚡ Post-treino: adicione 5g de creatina monohidratada',
+        '🥤 Versão smoothie: adicione 100ml de leite para textura líquida',
+        '❄️ Textura perfeita: açaí semi-congelado (não totalmente duro)'
+    ],
+    
+    // 👇 FOTOS DAS ETAPAS (quando gerar no Leonardo.ai)
+    images: {
+        hero: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=1200&h=740&fit=crop',
+        steps: [
+            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 1
+            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 2
+            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 3
+            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 4
+            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 5
+            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 6
+            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 7
+            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 8
+            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop'  // passo 9
+        ]
     },
+    
+    macros: {
+        breakfast: '30% proteína, 55% carboidratos, 15% gorduras',
+        postWorkout: 'Perfeito para janela anabólica (até 1h pós-treino)'
+    }
+},
     {
         id: 2,
         name: 'Frango Grelhado com Batata Doce',
