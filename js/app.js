@@ -1415,6 +1415,9 @@ function showNotification(title, message) {
   if (messageEl) messageEl.textContent = message;
   if (modal) {
     modal.classList.remove('hidden');
+
+
+    
     document.body.classList.add('modal-open');
   }
 }
@@ -1444,6 +1447,14 @@ function showConfirm(title, message, onConfirm) {
   noBtn.onclick = cleanup;
 
   modal.classList.remove('hidden');
+
+  // fechar clicando fora do conteúdo
+  modal.onclick = (e) => {
+  if (e.target === modal) {
+  modal.classList.add('hidden');
+  }
+  
+};
 }
 
 
