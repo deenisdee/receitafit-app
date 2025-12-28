@@ -457,92 +457,217 @@ window.viewRecipe = function(recipeId) {
   showRecipeDetail(recipe);
 };
 
-function showRecipeDetail(recipe) {
-  if (!recipeGrid || !recipeDetail) return;
 
-  const slider = document.getElementById('heroSlider');
-  const categories = document.querySelector('.categories-new');
-  if (slider) slider.classList.add('hidden');
-  if (categories) categories.style.display = 'none';
 
-  recipeGrid.classList.add('hidden');
-  recipeDetail.classList.remove('hidden');
+
+
+
+
+
+function showRecipeDetail(recipeId) {
+  const recipe = allRecipes.find(r => r.id === recipeId);
+  if (!recipe) return;
+
+  currentRecipe = recipe;
+
+  const heroImage = recipe.images?.hero || recipe.image;
 
   recipeDetail.innerHTML = `
-    <button class="back-button" onclick="closeRecipeDetail()">← Voltar</button>
-    <img src="${recipe.image}" alt="${recipe.name}" class="detail-image"
-         onerror="this.src='https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1200&q=80'">
-    <div class="detail-content">
-      <div class="detail-header">
-        <h2 class="detail-title">${recipe.name}</h2>
-        <button onclick="addToShoppingList(${recipe.id})" class="btn-add-list">
-          <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-          </svg>
-          Adicionar à Lista
-        </button>
-      </div>
+    <button class="back-btn" onclick="closeRecipeDetail()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      Voltar
+    </button>
 
+    <img src="${heroImage}" alt="${recipe.name}" class="detail-hero-image">
+
+    <div class="detail-content-wrapper">
+      <h2 class="detail-title">${recipe.name}</h2>
+
+      ${recipe.tags && recipe.tags.length > 0 ? `
+        <div class="tags-container">
+          ${recipe.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+        </div>
+      ` : ''}
+
+      <!-- STATS -->
       <div class="detail-stats">
         <div class="detail-stat">
           <div class="detail-stat-value">${recipe.calories}</div>
-          <div class="detail-stat-label">calorias</div>
+          <div class="detail-stat-label">Calorias</div>
         </div>
         <div class="detail-stat">
           <div class="detail-stat-value">${recipe.protein}g</div>
-          <div class="detail-stat-label">proteína</div>
+          <div class="detail-stat-label">Proteína</div>
+        </div>
+        <div class="detail-stat">
+          <div class="detail-stat-value">${recipe.carbs}g</div>
+          <div class="detail-stat-label">Carbos</div>
+        </div>
+        <div class="detail-stat">
+          <div class="detail-stat-value">${recipe.fats}g</div>
+          <div class="detail-stat-label">Gorduras</div>
         </div>
         <div class="detail-stat">
           <div class="detail-stat-value">${recipe.time}min</div>
-          <div class="detail-stat-label">tempo</div>
+          <div class="detail-stat-label">Tempo</div>
         </div>
         <div class="detail-stat">
-          <div class="detail-stat-value">${recipe.servings}</div>
-          <div class="detail-stat-label">porções</div>
+          <div class="detail-stat-value">${recipe.difficulty}</div>
+          <div class="detail-stat-label">Dificuldade</div>
         </div>
       </div>
 
+      <!-- PLANEJAMENTO SEMANAL -->
       <div class="detail-section">
-        <h3 class="section-title">Adicionar ao Planejamento Semanal</h3>
-        <div style="display:flex;flex-wrap:wrap;gap:0.5rem;">
-          ${['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'].map(day => `
-            <button onclick="selectDayForPlanning('${day}', ${recipe.id})" class="btn-secondary" style="padding:0.6rem 1rem;">
+        <h3 class="section-title">
+          <i data-lucide="calendar-plus" class="section-icon"></i>
+          Adicionar ao Planejamento Semanal
+        </h3>
+        <p class="planner-subtitle">Selecione o dia da semana que você quer fazer esta receita</p>
+        <div class="planner-days">
+          ${['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado', 'Domingo'].map(day => `
+            <button class="planner-day" onclick="addToWeekPlan('${day}', ${recipe.id})">
               ${day}
             </button>
           `).join('')}
         </div>
       </div>
 
+      <!-- BENEFÍCIOS -->
+      ${recipe.benefits && recipe.benefits.length > 0 ? `
+        <div class="detail-section">
+          <h3 class="section-title">
+            <i data-lucide="heart-pulse" class="section-icon"></i>
+            Benefícios
+          </h3>
+          <div class="benefits-grid">
+            ${recipe.benefits.map(benefit => `
+              <div class="benefit-item">
+                <i data-lucide="check-circle" class="benefit-icon"></i>
+                <span>${benefit}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      <!-- INGREDIENTES COM ÍCONES -->
       <div class="detail-section">
-        <h3 class="section-title">Ingredientes</h3>
-        <ul class="ingredients-list">
-          ${(recipe.ingredients || []).map(ing => `
-            <li class="ingredient-item">
-              <span class="check-icon">✓</span>
-              <span>${ing}</span>
-            </li>
-          `).join('')}
-        </ul>
+        <h3 class="section-title">
+          <i data-lucide="chef-hat" class="section-icon"></i>
+          Ingredientes
+        </h3>
+        <div class="ingredients-grid">
+          ${(recipe.ingredients || []).map(ing => {
+            if (typeof ing === 'string') {
+              // Formato antigo (string simples)
+              return `
+                <div class="ingredient-item">
+                  <div class="ingredient-icon-wrapper">
+                    <i data-lucide="circle-dot" class="ingredient-icon"></i>
+                  </div>
+                  <div class="ingredient-content">
+                    <span class="ingredient-text">${ing}</span>
+                  </div>
+                </div>
+              `;
+            } else {
+              // Formato novo (objeto com ícone)
+              return `
+                <div class="ingredient-item">
+                  <div class="ingredient-icon-wrapper">
+                    <i data-lucide="${ing.icon || 'circle-dot'}" class="ingredient-icon"></i>
+                  </div>
+                  <div class="ingredient-content">
+                    <span class="ingredient-quantity">${ing.quantity}</span>
+                    <span class="ingredient-text">${ing.text}</span>
+                    ${ing.optional ? '<span class="ingredient-optional">Opcional</span>' : ''}
+                  </div>
+                </div>
+              `;
+            }
+          }).join('')}
+        </div>
       </div>
 
+      <!-- MODO DE PREPARO COM FOTOS -->
       <div class="detail-section">
-        <h3 class="section-title">Modo de Preparo</h3>
+        <h3 class="section-title">
+          <i data-lucide="utensils" class="section-icon"></i>
+          Modo de Preparo
+        </h3>
         <ol class="instructions-list">
           ${(recipe.instructions || []).map((step, idx) => `
             <li class="instruction-item">
-              <div class="instruction-number">${idx + 1}</div>
-              <div class="instruction-text">${step}</div>
+              <div class="instruction-header">
+                <div class="instruction-number">${idx + 1}</div>
+                <div class="instruction-text">${step}</div>
+              </div>
+              ${recipe.images?.steps && recipe.images.steps[idx] ? `
+                <img 
+                  src="${recipe.images.steps[idx]}" 
+                  alt="Passo ${idx + 1}"
+                  class="instruction-image"
+                  loading="lazy"
+                >
+              ` : ''}
             </li>
           `).join('')}
         </ol>
       </div>
+
+      <!-- DICAS -->
+      ${recipe.tips && recipe.tips.length > 0 ? `
+        <div class="detail-section">
+          <h3 class="section-title">
+            <i data-lucide="lightbulb" class="section-icon"></i>
+            Dicas do Chef
+          </h3>
+          <div class="tips-list">
+            ${recipe.tips.map(tip => `<div class="tip-item">${tip}</div>`).join('')}
+          </div>
+        </div>
+      ` : ''}
+
+      <!-- ALÉRGENOS -->
+      ${recipe.allergens && recipe.allergens.length > 0 ? `
+        <div class="detail-section">
+          <h3 class="section-title">
+            <i data-lucide="alert-triangle" class="section-icon"></i>
+            Alérgenos
+          </h3>
+          <div class="allergens-container">
+            ${recipe.allergens.map(allergen => `
+              <div class="allergen-badge">
+                <i data-lucide="alert-circle" class="allergen-icon"></i>
+                ${allergen}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
     </div>
   `;
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  recipeGrid.classList.add('hidden');
+  recipeDetail.classList.remove('hidden');
+  window.scrollTo(0, 0);
+
+  // 👇 INICIALIZA ÍCONES LUCIDE
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
 }
+
+
+
+
+
+
+
+
 
 window.closeRecipeDetail = function() {
   if (!recipeDetail || !recipeGrid) return;
