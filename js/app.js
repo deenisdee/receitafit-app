@@ -710,10 +710,14 @@ window.addToShoppingList = function(recipeId) {
   const recipe = RECIPES.find(r => r.id === recipeId);
   if (!recipe) return;
 
-  (recipe.ingredients || []).forEach(ing => {
-    const existingItem = shoppingList.find(item =>
-      item.text.toLowerCase() === ing.toLowerCase()
-    );
+(recipe.ingredients || []).forEach(ing => {
+  // Converte ingrediente para string
+  const ingText = typeof ing === 'string' ? ing : `${ing.quantity || ''} ${ing.text || ''}`.trim();
+  
+  const existingItem = shoppingList.find(item => {
+    const itemText = typeof item.text === 'string' ? item.text : `${item.quantity || ''} ${item.text || ''}`.trim();
+    return itemText.toLowerCase() === ingText.toLowerCase();
+  });
 
     if (existingItem) {
       if (!existingItem.recipes) existingItem.recipes = [existingItem.recipe];
@@ -721,7 +725,7 @@ window.addToShoppingList = function(recipeId) {
     } else {
       shoppingList.push({
         id: Date.now() + Math.random(),
-        text: ing,
+        text: ingText,
         checked: false,
         recipe: recipe.name,
         recipes: [recipe.name]
