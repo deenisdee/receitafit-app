@@ -677,7 +677,14 @@ ${recipe.tags && recipe.tags.length > 0 ? `
 
   recipeGrid.classList.add('hidden');
   recipeDetail.classList.remove('hidden');
-  window.scrollTo(0, 0);
+  
+  // 👇 ROLA ATÉ ONDE COMEÇA A RECEITA (depois do header)
+setTimeout(() => {
+  window.scrollTo({
+    top: 444,
+    behavior: 'smooth'
+  });
+}, 100);
 
   // 👇 INICIALIZA ÍCONES LUCIDE
   if (typeof lucide !== 'undefined') {
