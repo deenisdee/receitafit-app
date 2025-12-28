@@ -886,19 +886,33 @@ window.closeMealSelector = function() {
   document.body.classList.remove('modal-open');
 };
 
+// Função que abre o modal de escolha de refeição
+function addToWeekPlan(day, recipeId) {
+  selectedDayForPlanner = day;
+  selectedRecipeForPlanner = recipeId;
+  
+  const mealModal = document.getElementById('meal-selector-modal');
+  if (mealModal) {
+    mealModal.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+  }
+}
+
+// Função que adiciona ao planner depois de escolher a refeição
 window.addToWeekPlanWithMeal = function(meal) {
   if (!selectedDayForPlanner || !selectedRecipeForPlanner) return;
-  addToWeekPlan(selectedRecipeForPlanner, selectedDayForPlanner, meal);
-  window.closeMealSelector();
-};
-
-function addToWeekPlan(recipe, day, meal) {
-  const key = `${day}-${meal}`;
+  
+  const recipe = RECIPES.find(r => r.id === selectedRecipeForPlanner);
+  if (!recipe) return;
+  
+  const key = `${selectedDayForPlanner}-${meal}`;
   weekPlan[key] = recipe;
   
   saveWeekPlan();
-  showNotification('Receita Adicionada!', `${recipe.name} adicionada ao ${day} - ${meal}.`);
-}
+  showNotification('Receita Adicionada!', `${recipe.name} adicionada ao ${selectedDayForPlanner} - ${meal}.`);
+  
+  window.closeMealSelector();
+};
 
 function renderWeekPlanner() {
   const content = document.getElementById('week-planner-content');
