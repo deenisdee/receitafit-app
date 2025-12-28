@@ -1565,5 +1565,30 @@ body.premium-active #premium-btn {
 }
 
 
+/* Botão Adicionar à Lista */
+.btn-add-shopping {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 2rem;
+}
 
+.btn-add-shopping:hover {
+  background: #15803d;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+}
+
+.btn-add-shopping svg {
+  flex-shrink: 0;
+}
 
