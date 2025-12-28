@@ -677,13 +677,18 @@ ${recipe.tags && recipe.tags.length > 0 ? `
 
 
   
+
+
+  recipeGrid.classList.add('hidden');
+  recipeDetail.classList.remove('hidden');
+
+  // Scroll suave
+  document.body.scrollTop = 0; // Safari
+  document.documentElement.scrollTop = 0; // Chrome, Firefox, IE, Opera
   window.scrollTo({
   top: 0,
   behavior: 'smooth'
   });
-
-  recipeGrid.classList.add('hidden');
-  recipeDetail.classList.remove('hidden');
  
 
   // 👇 INICIALIZA ÍCONES LUCIDE
