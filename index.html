@@ -354,6 +354,71 @@
   </div>
 </div>
 
+
+  <!-- Modal Escolha de Refeição -->
+<div id="meal-selector-modal" class="modal hidden">
+  <div class="modal-overlay" onclick="closeMealSelector()"></div>
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeMealSelector()" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    
+    <h2 class="modal-title">Escolha a Refeição</h2>
+    <p class="modal-subtitle" id="meal-selector-subtitle"></p>
+    
+    <div class="meal-options">
+      <button class="meal-option-btn" onclick="addToWeekPlanWithMeal('Café da Manhã')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+          <line x1="6" x2="6" y1="2" y2="4"/>
+          <line x1="10" x2="10" y1="2" y2="4"/>
+          <line x1="14" x2="14" y1="2" y2="4"/>
+        </svg>
+        <span>Café da Manhã</span>
+      </button>
+      
+      <button class="meal-option-btn" onclick="addToWeekPlanWithMeal('Lanche da Manhã')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span>Lanche da Manhã</span>
+      </button>
+      
+      <button class="meal-option-btn" onclick="addToWeekPlanWithMeal('Almoço')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+          <line x1="6" x2="6" y1="1" y2="4"/>
+          <line x1="10" x2="10" y1="1" y2="4"/>
+          <line x1="14" x2="14" y1="1" y2="4"/>
+        </svg>
+        <span>Almoço</span>
+      </button>
+      
+      <button class="meal-option-btn" onclick="addToWeekPlanWithMeal('Lanche da Tarde')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span>Lanche da Tarde</span>
+      </button>
+      
+      <button class="meal-option-btn" onclick="addToWeekPlanWithMeal('Jantar')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="2"/>
+          <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
+        </svg>
+        <span>Jantar</span>
+      </button>
+    </div>
+    
+    <button class="btn-cancel" onclick="closeMealSelector()">Cancelar</button>
+  </div>
+</div>
+
   
 </body>
 </html>
