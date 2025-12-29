@@ -1746,120 +1746,229 @@ z-index: 5;
 
 
 
-/* ================================
-   MICRO UX MOBILE (touch devices)
-   - tap targets maiores
-   - feedback instantâneo no toque
-   - sem afetar desktop (mouse)
-   ================================ */
+/* =========================================================
+   RECEITAFIT.APP — UI POLISH (OVERRIDE FINAL)
+   Cole este bloco NO FINAL do styles.css
+   ========================================================= */
 
-/* ================================
-   MICRO UX MOBILE – TOQUE LIMPO
-   ================================ */
-@media (pointer: coarse) {
-
-  /* 🔒 bloqueia copiar / seleção / menu estranho + remove highlight azul */
-  .tool-btn,
-  .category-card-new,
-  .recipe-card,
-  .back-btn,
-  .btn-premium,
-  #premium-btn,
-  .btn-primary,
-  .btn-secondary,
-  .modal-close,
-  button,
-  a {
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-    will-change: transform;
-    transition: transform .08s ease, filter .08s ease, opacity .08s ease;
-  }
-
-
-     .tap {
-    -webkit-user-select: none;
-    user-select: none;
-    -webkit-touch-callout: none;
-    -webkit-tap-highlight-color: transparent;
-    touch-action: manipulation;
-  }
-
-  /* TOQUE = cresce (sempre igual) */
-  .tap:active {
-    transform: scale(1.08);
-    filter: brightness(0.98);
-  }
-
-  /* 👆 ÍCONES DO TOPO (mais perceptível) */
-  .tool-btn:active {
-    transform: scale(1.12);
-    opacity: 0.96;
-    filter: brightness(0.98);
-  }
-
-  /* 🍀 CHIPS DE CATEGORIA */
-  .category-card-new:active {
-    transform: scale(1.10);
-    opacity: 0.97;
-    filter: brightness(0.98);
-  }
-
-  /* 🧩 CARDS DE RECEITA (feedback moderado) */
-  .recipe-card:active {
-    transform: scale(1.04);
-    opacity: 0.97;
-    filter: brightness(0.99);
-  }
-
-  /* 🔘 BOTÕES PRINCIPAIS */
-  .back-btn:active,
-  .btn-primary:active,
-  .btn-secondary:active,
-  #premium-btn:active,
-  .btn-premium:active,
-  .modal-close:active {
-    transform: scale(1.10);
-    opacity: 0.97;
-    filter: brightness(0.98);
-  }
-}
-
-
-
-/* Respeita acessibilidade: se o usuário não quer animações */
+/* 0) Acessibilidade: se o usuário não quer animações */
 @media (prefers-reduced-motion: reduce) {
   .tool-btn, .category-card-new, .recipe-card,
-  .back-btn, #premium-btn, .btn-premium,
-  .btn-primary, .btn-secondary {
+  .slider-arrow-new, .slider-dot-new,
+  .planner-day, .btn-add-shopping, .btn-primary, .btn-secondary,
+  .modal-close, .modal-actions button,
+  a.logo {
     transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* 1) Tokens de interação (padronização) */
+:root{
+  --rf-ease: cubic-bezier(.2,0,.2,1);
+  --rf-fast: 140ms;
+  --rf-fastest: 90ms;
+
+  --rf-hover-scale: 1.03;   /* desktop */
+  --rf-active-scale: 1.08;  /* mobile (você escolheu) */
+
+  --rf-hover-shadow: 0 10px 22px rgba(17,24,39,.10);
+  --rf-active-shadow: 0 12px 26px rgba(17,24,39,.14);
+
+  --rf-hover-brightness: 0.985;
+}
+
+/* 2) Padroniza transição base (sem mudar layout) */
+.tool-btn, .category-card-new, .recipe-card,
+.slider-arrow-new, .slider-dot-new,
+.planner-day, .btn-add-shopping,
+.btn-primary, .btn-secondary,
+.modal-close, .modal-actions button,
+a.logo {
+  transition: transform var(--rf-fast) var(--rf-ease),
+              box-shadow var(--rf-fast) var(--rf-ease),
+              filter var(--rf-fast) var(--rf-ease),
+              background-color var(--rf-fast) var(--rf-ease),
+              border-color var(--rf-fast) var(--rf-ease);
+  will-change: transform;
+}
+
+/* 3) HOVER PADRÃO (DESKTOP) — tudo reage igual */
+@media (hover: hover) and (pointer: fine) {
+  .tool-btn:hover,
+  .category-card-new:hover,
+  .recipe-card:hover,
+  .slider-arrow-new:hover,
+  .slider-dot-new:hover,
+  .planner-day:hover,
+  .btn-add-shopping:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .modal-close:hover,
+  .modal-actions button:hover,
+  a.logo:hover {
+    transform: scale(var(--rf-hover-scale));
+    box-shadow: var(--rf-hover-shadow);
+    filter: brightness(var(--rf-hover-brightness));
+  }
+
+  /* Remove “subir/descer” antigo do planner hover (padroniza) */
+  .planner-day:hover {
+    transform: scale(var(--rf-hover-scale)) !important;
+  }
+}
+
+/* 4) MOBILE — toque mais perceptível + evita seleção/callout */
+@media (pointer: coarse) {
+  .tool-btn, .category-card-new, .recipe-card,
+  .slider-arrow-new, .slider-dot-new,
+  .planner-day, .btn-add-shopping, .btn-primary, .btn-secondary,
+  .modal-close, .modal-actions button,
+  a.logo {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+  }
+
+  /* Toque (active) padronizado */
+  .tool-btn:active,
+  .category-card-new:active,
+  .recipe-card:active,
+  .slider-arrow-new:active,
+  .slider-dot-new:active,
+  .planner-day:active,
+  .btn-add-shopping:active,
+  .btn-primary:active,
+  .btn-secondary:active,
+  .modal-close:active,
+  .modal-actions button:active,
+  a.logo:active {
+    transform: scale(var(--rf-active-scale));
+    box-shadow: var(--rf-active-shadow);
+    filter: brightness(.98);
+  }
+
+  /* Animação mais “instantânea” no mobile */
+  .tool-btn, .category-card-new, .recipe-card,
+  .slider-arrow-new, .slider-dot-new,
+  .planner-day, .btn-add-shopping, .btn-primary, .btn-secondary,
+  .modal-close, .modal-actions button,
+  a.logo {
+    transition-duration: var(--rf-fastest) !important;
+  }
+}
+
+/* 5) HEADER — pill (ativo) mais bonito + aumenta área no mobile */
+
+/* Mantém os tool buttons como “pill” suave, sem cara de quadrado feio */
+.tool-btn{
+  border-radius: 9999px !important;
+  box-shadow: 0 6px 14px rgba(17,24,39,.06);
+}
+
+/* Estado “ativo/aberto” (quando você colocar classe .is-active no botão) */
+.tool-btn.is-active{
+  background: #e8fff0 !important;
+  border: 1px solid rgba(22,163,74,.28) !important;
+  box-shadow: 0 10px 22px rgba(22,163,74,.14) !important;
+}
+
+/* Se você não usa .is-active hoje, isso ainda não quebra nada. */
+
+/* MOBILE: mais largo (aproveita espaço) mantendo bordas redondas */
+@media (max-width: 768px) {
+  .header-tools{
+    gap: .6rem !important;
+  }
+  .tool-btn{
+    width: 56px !important;
+    height: 48px !important;
+    border-radius: 9999px !important;
+  }
+}
+
+/* 6) CATEGORIAS — mais altas no mobile (e não corta shadow) */
+@media (max-width: 768px) {
+  .category-card-new{
+    min-height: 44px !important;
+    padding: 0.9rem 1.1rem !important;
+    border-radius: 9999px !important;
+  }
+
+  /* container com espaço pra sombra não ser cortada */
+  .categories-grid-new{
+    padding: 22px !important; /* você já testou — mantém */
+    overflow-y: visible !important;
+  }
+}
+
+/* 7) SLIDER — botões maiores no mobile */
+@media (max-width: 768px) {
+  .slider-arrow-new{
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 9999px !important;
+  }
+  .slider-dot-new{
+    width: 10px !important;
+    height: 10px !important;
+  }
+}
+
+/* 8) MODAIS — scroll invisível + tamanhos mobile */
+
+/* Scroll invisível (igual “Central de ajuda”) */
+#shopping-modal .modal-content-medium,
+#planner-modal .modal-content-xlarge,
+#faq-modal .modal-content-xlarge,
+#calculator-modal .modal-content-large,
+#premium-modal .modal-content-large {
+  scrollbar-width: none;            /* Firefox */
+  -ms-overflow-style: none;         /* IE/Edge antigo */
+}
+#shopping-modal .modal-content-medium::-webkit-scrollbar,
+#planner-modal .modal-content-xlarge::-webkit-scrollbar,
+#faq-modal .modal-content-xlarge::-webkit-scrollbar,
+#calculator-modal .modal-content-large::-webkit-scrollbar,
+#premium-modal .modal-content-large::-webkit-scrollbar {
+  display: none;                    /* Chrome/Safari */
+}
+
+/* Planejador: menos alto no mobile */
+@media (max-width: 768px) {
+  #planner-modal .modal-content-xlarge{
+    max-height: 72vh !important; /* menor que 85/90vh */
+    overflow: auto !important;
+  }
+}
+
+/* Planner wrapper: scroll horizontal/vertical invisível */
+.week-planner-wrapper{
+  overflow: auto !important;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.week-planner-wrapper::-webkit-scrollbar{ display:none; }
+
+/* 9) Botões de fechar (X) — corrigir oval/achatado no mobile */
+@media (max-width: 768px) {
+  .modal-close{
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 9999px !important;
+    padding: 0 !important;
+    display: grid !important;
+    place-items: center !important;
+  }
+  .modal-close svg{
+    width: 22px !important;
+    height: 22px !important;
   }
 }
 
 
-/* Botão de fechar sempre circular (mobile e desktop) */
-.modal-close{
-  padding: 0 !important;
-  aspect-ratio: 1 / 1;
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  border-radius: 9999px;
-  line-height: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
 
 
-.tap {
-  transition: transform .08s cubic-bezier(.2,0,.2,1),
-              filter .08s ease,
-              opacity .08s ease;
-  will-change: transform;
-}
 
