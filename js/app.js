@@ -704,11 +704,18 @@ ${recipe.tags && recipe.tags.length > 0 ? `
   
   // 👇 ROLA ATÉ ONDE COMEÇA A RECEITA (depois do header)
 setTimeout(() => {
-  window.scrollTo({
-    top: 444,
-    behavior: 'smooth'
-  });
-}, 100);
+  const header = document.getElementById('header');
+  const headerH = header ? header.offsetHeight : 0;
+
+  // topo real do recipeDetail na página
+  const detailTop = recipeDetail.getBoundingClientRect().top + window.scrollY;
+
+  // joga a receita pra ficar logo abaixo do header (com folga)
+  const target = Math.max(detailTop - headerH - 12, 0);
+
+  window.scrollTo({ top: target, behavior: 'smooth' });
+}, 50);
+
 
   // 👇 INICIALIZA ÍCONES LUCIDE
   if (typeof lucide !== 'undefined') {
