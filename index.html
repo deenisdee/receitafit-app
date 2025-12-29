@@ -84,7 +84,7 @@
           </div>
 
           <div class="header-tools">
-            <button id="calculator-btn" class="tool-btn tool-blue" title="Calculadora de Calorias">
+            <button id="calculator-btn" class="tool-btn tool-blue tap" title="Calculadora de Calorias">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <rect x="4" y="2" width="16" height="20" rx="2"></rect>
                 <line x1="8" y1="6" x2="16" y2="6"></line>
@@ -94,7 +94,7 @@
               </svg>
             </button>
 
-            <button id="shopping-btn" class="tool-btn tool-purple" title="Lista de Compras">
+            <button id="shopping-btn" class="tool-btn tool-purple tap" title="Lista de Compras">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <circle cx="9" cy="21" r="1"></circle>
                 <circle cx="20" cy="21" r="1"></circle>
@@ -103,7 +103,7 @@
               <span id="shopping-counter" class="tool-counter hidden">0</span>
             </button>
 
-            <button id="planner-btn" class="tool-btn tool-orange" title="Planejador Semanal">
+            <button id="planner-btn" class="tool-btn tool-orange tap" title="Planejador Semanal">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -112,7 +112,7 @@
               </svg>
             </button>
 
-            <button id="faq-btn" class="tool-btn tool-purple" title="Ajuda">
+            <button id="faq-btn" class="tool-btn tool-purple tap" title="Ajuda">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
@@ -133,7 +133,7 @@
   <span>3 créditos</span>
 </div>
 
-            <button id="premium-btn" class="btn-premium">Ativar Premium</button>
+            <button id="premium-btn" class="btn-premium tap">Ativar Premium</button>
           </div>
         </div>
       </div>
@@ -142,8 +142,8 @@
     <!-- SLIDER HERO FULL-WIDTH -->
     <div class="hero-slider-fullwidth" id="heroSlider">
       <div class="slider-track-new" id="sliderTrack"></div>
-      <button class="slider-arrow-new prev" onclick="changeSlideNew(-1)">‹</button>
-      <button class="slider-arrow-new next" onclick="changeSlideNew(1)">›</button>
+      <button class="slider-arrow-new prev tap" onclick="changeSlideNew(-1)">‹</button>
+      <button class="slider-arrow-new next tap" onclick="changeSlideNew(1)">›</button>
       <div class="slider-dots-new" id="sliderDots"></div>
     </div>
 
@@ -162,7 +162,7 @@
     <div id="calculator-modal" class="modal hidden">
       <div class="modal-overlay"></div>
       <div class="modal-content-large modal-surface">
-        <button class="modal-close" onclick="closeCalculator()" aria-label="Fechar">
+        <button class="modal-close tap" onclick="closeCalculator()" aria-label="Fechar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -208,7 +208,7 @@
             </select>
           </div>
 
-          <button onclick="calculateCalories()" class="btn-calculate">Calcular</button>
+          <button onclick="calculateCalories()" class="btn-calculate tap">Calcular</button>
           <div id="calc-results" class="calc-results hidden"></div>
         </div>
       </div>
@@ -218,7 +218,7 @@
     <div id="shopping-modal" class="modal hidden">
       <div class="modal-overlay"></div>
       <div class="modal-content-medium modal-surface">
-        <button class="modal-close" onclick="closeShoppingList()" aria-label="Fechar">
+        <button class="modal-close tap" onclick="closeShoppingList()" aria-label="Fechar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -234,7 +234,7 @@
     <div id="planner-modal" class="modal hidden">
       <div class="modal-overlay"></div>
       <div class="modal-content-xlarge modal-surface">
-        <button class="modal-close" onclick="closeWeekPlanner()" aria-label="Fechar">
+        <button class="modal-close tap" onclick="closeWeekPlanner()" aria-label="Fechar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -250,7 +250,7 @@
     <div id="premium-modal" class="modal hidden">
       <div class="modal-overlay"></div>
       <div class="modal-content modal-surface" style="max-width: 480px;">
-        <button class="modal-close" onclick="closePremiumModal()" aria-label="Fechar">
+        <button class="modal-close tap" onclick="closePremiumModal()" aria-label="Fechar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -277,8 +277,8 @@
         </div>
 
         <div class="modal-actions">
-          <button id="modal-cancel" class="btn-secondary">Agora não</button>
-          <button id="modal-activate" class="btn-primary">Ativar Premium</button>
+          <button id="modal-cancel tap" class="btn-secondary">Agora não</button>
+          <button id="modal-activate tap" class="btn-primary">Ativar Premium</button>
         </div>
 
         <div class="premium-footer">
@@ -333,7 +333,7 @@
   <div class="modal-content-small">
     <h3 id="notification-title" class="modal-title">Sucesso!</h3>
     <p id="notification-message" class="modal-text"></p>
-    <button class="btn-primary" onclick="closeNotification()">OK</button>
+    <button class="btn-primary tap" onclick="closeNotification()">OK</button>
   </div>
 </div>
 
@@ -342,7 +342,7 @@
 <div id="meal-selector-modal" class="modal hidden">
   <div class="modal-overlay" onclick="closeMealSelector()"></div>
   <div class="modal-content">
-    <button class="modal-close" onclick="closeMealSelector()" aria-label="Fechar">
+    <button class="modal-close tap" onclick="closeMealSelector()" aria-label="Fechar">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M18 6L6 18M6 6l12 12"/>
       </svg>
@@ -352,7 +352,7 @@
     <p class="modal-subtitle" id="meal-selector-subtitle"></p>
     
     <div class="meal-options">
-      <button class="meal-option-btn" onclick="addToWeekPlanWithMeal('Café da Manhã')">
+      <button class="meal-option-btn tap" onclick="addToWeekPlanWithMeal('Café da Manhã')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
           <line x1="6" x2="6" y1="2" y2="4"/>
@@ -362,7 +362,7 @@
         <span>Café da Manhã</span>
       </button>
       
-      <button class="meal-option-btn" onclick="addToWeekPlanWithMeal('Lanche da Manhã')">
+      <button class="meal-option-btn tap" onclick="addToWeekPlanWithMeal('Lanche da Manhã')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="10"/>
           <polyline points="12 6 12 12 16 14"/>
@@ -370,7 +370,7 @@
         <span>Lanche da Manhã</span>
       </button>
       
-      <button class="meal-option-btn" onclick="addToWeekPlanWithMeal('Almoço')">
+      <button class="meal-option-btn tap" onclick="addToWeekPlanWithMeal('Almoço')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
           <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
@@ -381,7 +381,7 @@
         <span>Almoço</span>
       </button>
       
-      <button class="meal-option-btn" onclick="addToWeekPlanWithMeal('Lanche da Tarde')">
+      <button class="meal-option-btn tap" onclick="addToWeekPlanWithMeal('Lanche da Tarde')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="10"/>
           <polyline points="12 6 12 12 16 14"/>
@@ -389,7 +389,7 @@
         <span>Lanche da Tarde</span>
       </button>
       
-      <button class="meal-option-btn" onclick="addToWeekPlanWithMeal('Jantar')">
+      <button class="meal-option-btn tap" onclick="addToWeekPlanWithMeal('Jantar')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="2"/>
           <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
@@ -398,7 +398,7 @@
       </button>
     </div>
     
-    <button class="btn-cancel" onclick="closeMealSelector()">Cancelar</button>
+    <button class="btn-cancel tap" onclick="closeMealSelector()">Cancelar</button>
   </div>
 </div>
 
@@ -409,8 +409,8 @@
     <p class="confirm-message" style="margin:0 0 16px 0; opacity:.9;"></p>
 
     <div style="display:flex; gap:10px; justify-content:flex-end;">
-      <button class="confirm-no btn-secondary">Não, prefiro confirmar</button>
-      <button class="confirm-yes btn-primary">Sim, tenho certeza</button>
+      <button class="confirm-no btn-secondary tap">Não, prefiro confirmar</button>
+      <button class="confirm-yes btn-primary tap">Sim, tenho certeza</button>
     </div>
   </div>
 </div>
