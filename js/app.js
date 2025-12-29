@@ -384,13 +384,28 @@ function initCategoriesDrag() {
   grid.style.cursor = 'grab';
 }
 
+
+
+
+
 window.filterByCategory = function(category, element) {
   document.querySelectorAll('.category-card-new').forEach(card => card.classList.remove('active'));
   if (element) element.classList.add('active');
+
+  if (element && element.scrollIntoView) {
+    element.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+  }
+
   searchTerm = category || '';
   closeRecipeDetail();
   renderRecipes();
 };
+
+
+
+
+
+
 
 // RECEITAS
 function renderRecipes() {
