@@ -1739,3 +1739,94 @@ z-index: 5;
   margin-bottom: 0.5rem;
   text-align: center;
 }
+
+
+
+
+
+
+
+/* ================================
+   MICRO UX MOBILE (touch devices)
+   - tap targets maiores
+   - feedback instantâneo no toque
+   - sem afetar desktop (mouse)
+   ================================ */
+
+@media (pointer: coarse) {
+
+  /* remove highlight azul padrão do mobile */
+  .tool-btn, .category-card-new, .recipe-card, .back-btn, .btn-premium,
+  #premium-btn, button {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* -------- 1) TOP HEADER: ícones (tap target + feedback) -------- */
+  .tool-btn{
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .08s ease, opacity .08s ease;
+    touch-action: manipulation;
+  }
+  .tool-btn:active{
+    transform: scale(0.94);
+    opacity: .9;
+  }
+
+  /* botão PREMIUM (tap target + feedback) */
+  #premium-btn, .btn-premium{
+    min-height: 44px;
+    transition: transform .08s ease, opacity .08s ease;
+    touch-action: manipulation;
+  }
+  #premium-btn:active, .btn-premium:active{
+    transform: scale(0.96);
+    opacity: .92;
+  }
+
+  /* -------- 2) CHIPS CATEGORIAS: feedback ao toque -------- */
+  .category-card-new{
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .08s ease, opacity .08s ease;
+    touch-action: manipulation;
+  }
+  .category-card-new:active{
+    transform: scale(0.96);
+    opacity: .9;
+  }
+
+  /* -------- 3) CARDS DE RECEITA: feedback ao toque -------- */
+  .recipe-card{
+    transition: transform .10s ease, opacity .10s ease;
+    touch-action: manipulation;
+  }
+  .recipe-card:active{
+    transform: scale(0.985);
+    opacity: .96;
+  }
+
+  /* -------- 4) DETALHE DA RECEITA: botões principais -------- */
+  .back-btn, .btn-primary, .btn-secondary, .modal-close{
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+  .back-btn:active, .btn-primary:active, .btn-secondary:active{
+    transform: scale(0.97);
+    opacity: .95;
+  }
+}
+
+/* Respeita acessibilidade: se o usuário não quer animações */
+@media (prefers-reduced-motion: reduce) {
+  .tool-btn, .category-card-new, .recipe-card,
+  .back-btn, #premium-btn, .btn-premium,
+  .btn-primary, .btn-secondary {
+    transition: none !important;
+  }
+}
