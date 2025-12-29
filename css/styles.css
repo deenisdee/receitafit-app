@@ -1751,220 +1751,225 @@ z-index: 5;
    Cole este bloco NO FINAL do styles.css
    ========================================================= */
 
-/* 0) Acessibilidade: se o usuário não quer animações */
+/* Acessibilidade: se o usuário não quer animações */
 @media (prefers-reduced-motion: reduce) {
-  .tool-btn, .category-card-new, .recipe-card,
-  .slider-arrow-new, .slider-dot-new,
-  .planner-day, .btn-add-shopping, .btn-primary, .btn-secondary,
-  .modal-close, .modal-actions button,
-  a.logo {
-    transition: none !important;
-    animation: none !important;
-  }
+  * { transition: none !important; animation: none !important; }
 }
 
-/* 1) Tokens de interação (padronização) */
+/* Tokens */
 :root{
   --rf-ease: cubic-bezier(.2,0,.2,1);
   --rf-fast: 140ms;
-  --rf-fastest: 90ms;
+  --rf-faster: 100ms;
 
-  --rf-hover-scale: 1.03;   /* desktop */
-  --rf-active-scale: 1.08;  /* mobile (você escolheu) */
+  --rf-lift: -2px;               /* desktop hover = sobe */
+  --rf-lift-strong: -4px;        /* cards */
+  --rf-shadow: 0 10px 22px rgba(17,24,39,.12);
+  --rf-shadow-strong: 0 14px 30px rgba(17,24,39,.14);
 
-  --rf-hover-shadow: 0 10px 22px rgba(17,24,39,.10);
-  --rf-active-shadow: 0 12px 26px rgba(17,24,39,.14);
-
-  --rf-hover-brightness: 0.985;
+  --rf-active-scale: 1.08;       /* mobile press (exceto cards) */
 }
 
-/* 2) Padroniza transição base (sem mudar layout) */
-.tool-btn, .category-card-new, .recipe-card,
-.slider-arrow-new, .slider-dot-new,
-.planner-day, .btn-add-shopping,
-.btn-primary, .btn-secondary,
-.modal-close, .modal-actions button,
-a.logo {
+/* Base: transições padronizadas (sem blur no desktop porque não escala) */
+.tool-btn, .category-card-new, .btn-primary, .btn-secondary,
+.btn-premium, .back-btn, .slider-arrow-new, .slider-dot-new,
+.btn-calculate, .meal-option-btn, .modal-actions button,
+.btn-clear-list, .btn-delete, a.logo {
   transition: transform var(--rf-fast) var(--rf-ease),
               box-shadow var(--rf-fast) var(--rf-ease),
-              filter var(--rf-fast) var(--rf-ease),
               background-color var(--rf-fast) var(--rf-ease),
-              border-color var(--rf-fast) var(--rf-ease);
+              border-color var(--rf-fast) var(--rf-ease),
+              filter var(--rf-fast) var(--rf-ease);
   will-change: transform;
 }
 
-/* 3) HOVER PADRÃO (DESKTOP) — tudo reage igual */
+/* =========================
+   DESKTOP HOVER (sem scale → sem “desfocado”)
+   ========================= */
 @media (hover: hover) and (pointer: fine) {
+
+  /* Botões e chips: sobe + sombra */
   .tool-btn:hover,
   .category-card-new:hover,
-  .recipe-card:hover,
-  .slider-arrow-new:hover,
-  .slider-dot-new:hover,
-  .planner-day:hover,
-  .btn-add-shopping:hover,
   .btn-primary:hover,
   .btn-secondary:hover,
-  .modal-close:hover,
+  .btn-premium:hover,
+  .back-btn:hover,
+  .slider-arrow-new:hover,
+  .slider-dot-new:hover,
+  .btn-calculate:hover,
+  .meal-option-btn:hover,
   .modal-actions button:hover,
-  a.logo:hover {
-    transform: scale(var(--rf-hover-scale));
-    box-shadow: var(--rf-hover-shadow);
-    filter: brightness(var(--rf-hover-brightness));
+  .btn-clear-list:hover,
+  a.logo:hover{
+    transform: translateY(var(--rf-lift));
+    box-shadow: var(--rf-shadow);
   }
 
-  /* Remove “subir/descer” antigo do planner hover (padroniza) */
-  .planner-day:hover {
-    transform: scale(var(--rf-hover-scale)) !important;
+  /* Cards: somente subir (como você pediu) */
+  .recipe-card:hover{
+    transform: translateY(var(--rf-lift-strong)) !important;
+    box-shadow: var(--rf-shadow-strong) !important;
+  }
+
+  /* Botão voltar voltou a ter efeito mesmo se for gerado via JS */
+  .back-btn:hover{
+    box-shadow: var(--rf-shadow);
   }
 }
 
-/* 4) MOBILE — toque mais perceptível + evita seleção/callout */
+/* =========================
+   MOBILE (toque / remove “copiar”)
+   ========================= */
 @media (pointer: coarse) {
-  .tool-btn, .category-card-new, .recipe-card,
-  .slider-arrow-new, .slider-dot-new,
-  .planner-day, .btn-add-shopping, .btn-primary, .btn-secondary,
-  .modal-close, .modal-actions button,
-  a.logo {
+
+  /* Remove seleção/copy/callout em elementos tocáveis */
+  .tool-btn, .category-card-new, .btn-primary, .btn-secondary,
+  .btn-premium, .back-btn, .slider-arrow-new, .slider-dot-new,
+  .btn-calculate, .meal-option-btn, .modal-actions button,
+  .btn-clear-list, .btn-delete, a.logo {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
     touch-action: manipulation;
+    transition-duration: var(--rf-faster) !important;
   }
 
-  /* Toque (active) padronizado */
+  /* Press padrão: scale + sombra (EXCETO cards) */
   .tool-btn:active,
   .category-card-new:active,
-  .recipe-card:active,
-  .slider-arrow-new:active,
-  .slider-dot-new:active,
-  .planner-day:active,
-  .btn-add-shopping:active,
   .btn-primary:active,
   .btn-secondary:active,
-  .modal-close:active,
+  .btn-premium:active,
+  .back-btn:active,
+  .slider-arrow-new:active,
+  .slider-dot-new:active,
+  .btn-calculate:active,
+  .meal-option-btn:active,
   .modal-actions button:active,
-  a.logo:active {
+  .btn-clear-list:active,
+  a.logo:active{
     transform: scale(var(--rf-active-scale));
-    box-shadow: var(--rf-active-shadow);
-    filter: brightness(.98);
+    box-shadow: var(--rf-shadow);
   }
 
-  /* Animação mais “instantânea” no mobile */
-  .tool-btn, .category-card-new, .recipe-card,
-  .slider-arrow-new, .slider-dot-new,
-  .planner-day, .btn-add-shopping, .btn-primary, .btn-secondary,
-  .modal-close, .modal-actions button,
-  a.logo {
-    transition-duration: var(--rf-fastest) !important;
+  /* Cards mobile: só subir, sem scale (pra não “estourar” na borda) */
+  .recipe-card:active{
+    transform: translateY(-3px) !important;
+    box-shadow: var(--rf-shadow-strong) !important;
   }
 }
 
-/* 5) HEADER — pill (ativo) mais bonito + aumenta área no mobile */
+/* =========================
+   HEADER MOBILE — layout 83x77 (#DDDDDD / #AAAAAA)
+   ========================= */
+@media (max-width: 768px) {
+  .tool-btn{
+    width: 83px !important;
+    height: 77px !important;
+    background: #DDDDDD !important;
+    border-radius: 24px !important; /* mantém arredondado */
+    box-shadow: 0 8px 18px rgba(17,24,39,.10);
+  }
+  .tool-btn:active{
+    background: #AAAAAA !important;
+  }
+}
 
-/* Mantém os tool buttons como “pill” suave, sem cara de quadrado feio */
+/* “Pill” do header no desktop (sem quadrado feio) */
 .tool-btn{
-  border-radius: 9999px !important;
-  box-shadow: 0 6px 14px rgba(17,24,39,.06);
+  border-radius: 9999px;
 }
 
-/* Estado “ativo/aberto” (quando você colocar classe .is-active no botão) */
+/* Se você usar estado ativo via classe no futuro */
 .tool-btn.is-active{
   background: #e8fff0 !important;
   border: 1px solid rgba(22,163,74,.28) !important;
   box-shadow: 0 10px 22px rgba(22,163,74,.14) !important;
 }
 
-/* Se você não usa .is-active hoje, isso ainda não quebra nada. */
-
-/* MOBILE: mais largo (aproveita espaço) mantendo bordas redondas */
-@media (max-width: 768px) {
-  .header-tools{
-    gap: .6rem !important;
-  }
-  .tool-btn{
-    width: 56px !important;
-    height: 48px !important;
-    border-radius: 9999px !important;
-  }
+/* =========================
+   MODAIS — hover nos botões internos + scroll invisível
+   ========================= */
+.btn-calculate,
+.modal-actions button{
+  box-shadow: 0 8px 18px rgba(17,24,39,.10);
 }
 
-/* 6) CATEGORIAS — mais altas no mobile (e não corta shadow) */
-@media (max-width: 768px) {
-  .category-card-new{
-    min-height: 44px !important;
-    padding: 0.9rem 1.1rem !important;
-    border-radius: 9999px !important;
-  }
-
-  /* container com espaço pra sombra não ser cortada */
-  .categories-grid-new{
-    padding: 22px !important; /* você já testou — mantém */
-    overflow-y: visible !important;
-  }
-}
-
-/* 7) SLIDER — botões maiores no mobile */
-@media (max-width: 768px) {
-  .slider-arrow-new{
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 9999px !important;
-  }
-  .slider-dot-new{
-    width: 10px !important;
-    height: 10px !important;
-  }
-}
-
-/* 8) MODAIS — scroll invisível + tamanhos mobile */
-
-/* Scroll invisível (igual “Central de ajuda”) */
 #shopping-modal .modal-content-medium,
 #planner-modal .modal-content-xlarge,
 #faq-modal .modal-content-xlarge,
 #calculator-modal .modal-content-large,
 #premium-modal .modal-content-large {
-  scrollbar-width: none;            /* Firefox */
-  -ms-overflow-style: none;         /* IE/Edge antigo */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 #shopping-modal .modal-content-medium::-webkit-scrollbar,
 #planner-modal .modal-content-xlarge::-webkit-scrollbar,
 #faq-modal .modal-content-xlarge::-webkit-scrollbar,
 #calculator-modal .modal-content-large::-webkit-scrollbar,
 #premium-modal .modal-content-large::-webkit-scrollbar {
-  display: none;                    /* Chrome/Safari */
+  display: none;
 }
 
-/* Planejador: menos alto no mobile */
+/* Planejador: menor altura no mobile */
 @media (max-width: 768px) {
   #planner-modal .modal-content-xlarge{
-    max-height: 72vh !important; /* menor que 85/90vh */
+    max-height: 72vh !important;
     overflow: auto !important;
   }
 }
 
-/* Planner wrapper: scroll horizontal/vertical invisível */
+/* Planejador: scroll horizontal/vertical invisível + thumb arredondado (quando suportado) */
 .week-planner-wrapper{
   overflow: auto !important;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-.week-planner-wrapper::-webkit-scrollbar{ display:none; }
+.week-planner-wrapper::-webkit-scrollbar{
+  height: 10px;
+}
+.week-planner-wrapper::-webkit-scrollbar-track{
+  background: transparent;
+}
+.week-planner-wrapper::-webkit-scrollbar-thumb{
+  background: #cfcfcf;
+  border-radius: 9999px;
+}
+.week-planner-wrapper::-webkit-scrollbar{ display:none; } /* invisível como você pediu */
 
-/* 9) Botões de fechar (X) — corrigir oval/achatado no mobile */
+/* =========================
+   LISTA DE COMPRAS — botão Limpar + lixeira 20x20
+   ========================= */
+.btn-clear-list{
+  box-shadow: 0 8px 18px rgba(17,24,39,.10);
+}
+
+/* Lixeira individual 20x20 */
+.btn-delete svg{
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* =========================
+   VOLTAR / PREMIUM — garantir efeito e remover “copiar”
+   ========================= */
+.back-btn, .btn-premium{
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* =========================
+   CARDS MOBILE — manter 2 colunas
+   (se já existe, isso só reforça)
+   ========================= */
 @media (max-width: 768px) {
-  .modal-close{
-    width: 44px !important;
-    height: 44px !important;
-    border-radius: 9999px !important;
-    padding: 0 !important;
-    display: grid !important;
-    place-items: center !important;
-  }
-  .modal-close svg{
-    width: 22px !important;
-    height: 22px !important;
+  .recipes-grid,
+  .recipes-grid-new{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
 }
 
