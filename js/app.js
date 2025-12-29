@@ -53,7 +53,12 @@ console.log('🔍 premiumBtn encontrado?', premiumBtn); // 👈 ADICIONE AQUI
 
 
 const modalMessage = document.getElementById('modal-message');
-const premiumCodeInput = document.getElementById('premium-code-input');
+
+
+const code = document.getElementById('premium-code-input')?.value.trim();
+if (!code) { showNotification('Aviso', 'Digite um código'); return; }
+
+
 const modalCancel = document.getElementById('modal-cancel');
 const modalActivate = document.getElementById('modal-activate');
 
