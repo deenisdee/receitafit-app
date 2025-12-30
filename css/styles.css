@@ -1599,7 +1599,7 @@ body.premium-active #premium-btn {
   }
 
    .recipe-category{
-  position:absolute; top:1rem; left:1rem;
+  position:absolute; top:1rem; center:1rem;
    }
    
   .detail-hero-image {
