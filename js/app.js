@@ -838,7 +838,7 @@ let selectedDayForPlanner = null;
 let selectedRecipeForPlanner = null;
 
 // ✅ B) abre modal existente no HTML (#meal-selector-modal)
-function addToWeekPlan(day, recipeId) {
+window.addToWeekPlan = function(day, recipeId) {
   selectedDayForPlanner = day;
   selectedRecipeForPlanner = recipeId;
 
@@ -847,11 +847,13 @@ function addToWeekPlan(day, recipeId) {
     mealSelectorSubtitle.textContent = `${day} - ${recipe.name}`;
   }
 
-  if (mealSelectorModal) {
-    mealSelectorModal.classList.remove('hidden');
+  const mealModal = document.getElementById('meal-selector-modal');
+  if (mealModal) {
+    mealModal.classList.remove('hidden');
     document.body.classList.add('modal-open');
   }
-}
+};
+
 
 window.addToWeekPlanWithMeal = function(meal) {
   if (!selectedDayForPlanner || !selectedRecipeForPlanner) return;
