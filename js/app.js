@@ -1227,6 +1227,7 @@ async function activatePremium() {
 
     isPremium = true;
     await storage.set('fit_premium', 'true');
+    updateUI();
 
     showNotification('Sucesso', 'Premium ativado com sucesso!');
     window.closePremiumModal();
