@@ -2195,10 +2195,7 @@ background: #16a34a !important;
 
 :root { --header-h: 0px; }
 
-/* trava scroll do site quando a receita está aberta */
-body.detail-open {
-  overflow: hidden;
-}
+
 
 .recipe-detail {
     background: white;
