@@ -53,7 +53,7 @@ console.log('🔍 premiumBtn encontrado?', premiumBtn); // 👈 ADICIONE AQUI
 
 
 const modalMessage = document.getElementById('modal-message');
-const code = document.getElementById('premium-code-input')?.value.trim();
+const premiumCodeInput = document.getElementById('premium-code-input');
 const modalCancel = document.getElementById('modal-cancel');
 const modalActivate = document.getElementById('modal-activate');
 
@@ -139,51 +139,6 @@ async function saveWeekPlan() {
     await storage.set('fit_weekplan', JSON.stringify(weekPlan));
   } catch (e) {}
 }
-
-
-
-
-
-
-
-
-// ==============================
-// REGRA CENTRAL: acesso à receita
-// ==============================
-function canAccessRecipe(recipeId) {
-  if (isPremium) return true;
-  if (unlockedRecipes.includes(recipeId)) return true;
-  return credits > 0;
-}
-
-function ensureRecipeAccess(recipeId) {
-  // Já pode acessar?
-  if (isPremium || unlockedRecipes.includes(recipeId)) return true;
-
-  // Tem crédito? então desbloqueia agora (primeiro acesso)
-  if (credits > 0) {
-    credits--;
-    unlockedRecipes.push(recipeId);
-    saveUserData();     // mantém seu padrão (sem await)
-    updateUI();
-    renderRecipes();
-    return true;
-  }
-
-  // Sem crédito: bloqueia e chama premium
-  if (modalMessage) modalMessage.textContent =
-    'Seus créditos acabaram. Ative o Premium para acesso ilimitado.';
-
-  const warning = document.getElementById('credits-warning');
-  if (warning) warning.classList.remove('hidden');
-
-  openModal(premiumModal);
-  return false;
-}
-
-
-
-
 
 
 
@@ -384,28 +339,13 @@ function initCategoriesDrag() {
   grid.style.cursor = 'grab';
 }
 
-
-
-
-
 window.filterByCategory = function(category, element) {
   document.querySelectorAll('.category-card-new').forEach(card => card.classList.remove('active'));
   if (element) element.classList.add('active');
-
-  if (element && element.scrollIntoView) {
-    element.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-  }
-
   searchTerm = category || '';
   closeRecipeDetail();
   renderRecipes();
 };
-
-
-
-
-
-
 
 // RECEITAS
 function renderRecipes() {
@@ -495,12 +435,29 @@ function renderRecipes() {
   }).join('');
 }
 
-
-
-
 window.viewRecipe = function(recipeId) {
-  haptic(10);
-  if (!ensureRecipeAccess(recipeId)) return;
+  const recipe = RECIPES.find(r => r.id === recipeId);
+  if (!recipe) return;
+
+  const isUnlocked = isPremium || unlockedRecipes.includes(recipeId);
+
+  if (!isUnlocked) {
+    if (credits > 0) {
+      credits--;
+      unlockedRecipes.push(recipeId);
+      saveUserData();
+      updateUI();
+      renderRecipes();
+    } else {
+      if (modalMessage) modalMessage.textContent = 'Seus créditos acabaram. Ative o Premium para acesso ilimitado.';
+      const warning = document.getElementById('credits-warning');
+      if (warning) warning.classList.remove('hidden');
+      openModal(premiumModal);
+      return;
+    }
+  }
+
+  currentRecipe = recipe;
   showRecipeDetail(recipeId);
 };
 
@@ -508,10 +465,10 @@ window.viewRecipe = function(recipeId) {
 
 
 
-function showRecipeDetail(recipeId) {
 
-  if (!ensureRecipeAccess(recipeId)) return;
-  
+
+
+function showRecipeDetail(recipeId) {
   const recipe = allRecipes.find(r => r.id === recipeId);
   if (!recipe) return;
 
@@ -720,18 +677,11 @@ ${recipe.tags && recipe.tags.length > 0 ? `
   
   // 👇 ROLA ATÉ ONDE COMEÇA A RECEITA (depois do header)
 setTimeout(() => {
-  const header = document.getElementById('header');
-  const headerH = header ? header.offsetHeight : 0;
-
-  // topo real do recipeDetail na página
-  const detailTop = recipeDetail.getBoundingClientRect().top + window.scrollY;
-
-  // joga a receita pra ficar logo abaixo do header (com folga)
-  const target = Math.max(detailTop - headerH - 12, 0);
-
-  window.scrollTo({ top: target, behavior: 'smooth' });
-}, 50);
-
+  window.scrollTo({
+    top: 444,
+    behavior: 'smooth'
+  });
+}, 100);
 
   // 👇 INICIALIZA ÍCONES LUCIDE
   if (typeof lucide !== 'undefined') {
@@ -882,29 +832,13 @@ window.removeShoppingItem = function(id) {
   renderShoppingList();
 };
 
-
-
-
-
 window.clearShoppingList = function() {
-  showConfirm(
-    'Limpar lista',
-    'Tem certeza que deseja limpar toda a lista de compras?',
-    () => {
-      shoppingList = [];
-      saveShoppingList();
-      updateShoppingCounter();
-      closeShoppingList();
-      showNotification('Tudo certo', 'Lista de compras limpa.');
-    }
-  );
+  if (confirm('Tem certeza que deseja limpar toda a lista?')) {
+    shoppingList = [];
+    saveShoppingList();
+    renderShoppingList();
+  }
 };
-
-
-
-
-
-
 
 // PLANEJADOR SEMANAL
 let selectedDayForPlanner = null;
@@ -1067,18 +1001,9 @@ function renderWeekPlanner() {
   `;
 }
 
-
-
-
-
 window.saveWeekPlanConfirm = function() {
-  showNotification('Planejamento salvo', 'Planejamento semanal salvo com sucesso.');
+  alert('Planejamento semanal salvo com sucesso.');
 };
-
-
-
-
-
 
 window.removeFromWeekPlan = function(day, meal) {
   const key = `${day}-${meal}`;
@@ -1095,15 +1020,11 @@ window.calculateCalories = function() {
   const gender = document.getElementById('calc-gender')?.value;
   const activity = document.getElementById('calc-activity')?.value;
 
-
-  
   if (!weight || !height || !age) {
-   showNotification('Atenção', 'Preencha todos os campos.');
+    alert('Preencha todos os campos.');
     return;
   }
 
-
-  
   let bmr;
   if (gender === 'male') {
     bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
@@ -1209,13 +1130,8 @@ window.closeWeekPlanner = function() { closeModal(plannerModal); };
 
 // PREMIUM
 async function activatePremium() {
-  const input = document.getElementById('premium-code-input');
-  const code = input ? input.value.trim().toUpperCase() : '';
-
-  if (!code) {
-    showNotification('Aviso', 'Digite um código');
-    return;
-  }
+  const code = (premiumCodeInput?.value || '').trim().toUpperCase();
+  if (!code) { alert('Digite um código.'); return; }
 
   try {
     const res = await fetch('/api/redeem', {
@@ -1225,23 +1141,45 @@ async function activatePremium() {
     });
 
     const data = await res.json();
-
-    if (!data.ok) {
-      showNotification('Erro', data.error || 'Código inválido');
-      return;
-    }
+    if (!data.ok) { alert(data.error || 'Código inválido.'); return; }
 
     isPremium = true;
     await storage.set('fit_premium', 'true');
-
-    showNotification('Sucesso', 'Premium ativado com sucesso!');
-    closePremiumModal();
-
-  } catch (e) {
-    showNotification('Erro', 'Erro ao validar código');
+    
+    // Atualiza badge
+    if (creditsBadge) {
+      creditsBadge.classList.remove('ready');
+      creditsBadge.classList.add('premium');
+      creditsBadge.innerHTML = `
+        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        <span>PREMIUM</span>
+      `;
+      
+      setTimeout(() => {
+        creditsBadge.classList.add('ready');
+      }, 50);
+    }
+    
+    // Esconde botão verde (tripla garantia)
+    if (premiumBtn) {
+      premiumBtn.style.display = 'none';
+      premiumBtn.style.visibility = 'hidden';
+    }
+    
+    // Adiciona classe no body
+    document.body.classList.add('premium-active');
+    
+    renderRecipes();
+    window.closePremiumModal();
+    alert('Premium ativado com sucesso.');
+    
+  } catch (err) {
+    console.error('Erro ao ativar premium:', err);
+    alert('Erro ao validar o código.');
   }
 }
-
 
 
 
@@ -1419,59 +1357,9 @@ function showNotification(title, message) {
   if (messageEl) messageEl.textContent = message;
   if (modal) {
     modal.classList.remove('hidden');
-
-
-    
     document.body.classList.add('modal-open');
   }
 }
-
-
-function showConfirm(title, message, onConfirm) {
-  const modal = document.getElementById('confirm-modal');
-  const titleEl = modal.querySelector('.confirm-title');
-  const messageEl = modal.querySelector('.confirm-message');
-  const yesBtn = modal.querySelector('.confirm-yes');
-  const noBtn = modal.querySelector('.confirm-no');
-
-  titleEl.textContent = title;
-  messageEl.textContent = message;
-
-  const cleanup = () => {
-    yesBtn.onclick = null;
-    noBtn.onclick = null;
-    modal.classList.add('hidden');
-  };
-
-  yesBtn.onclick = () => {
-    cleanup();
-    onConfirm();
-  };
-
-  noBtn.onclick = cleanup;
-
-  modal.classList.remove('hidden');
-
-  // fechar clicando fora do conteúdo
- modal.onclick = (e) => {
-  if (e.target === modal) {
-  modal.classList.add('hidden');
-  }
-  
-};
-}
-
-
-function haptic(ms = 8) {
-  try {
-    if (window.matchMedia('(pointer: coarse)').matches) {
-      if (navigator.vibrate) navigator.vibrate(ms);
-    }
-  } catch(e){}
-}
-
-
-
 
 window.closeNotification = function() {
   const modal = document.getElementById('notification-modal');
@@ -1493,10 +1381,3 @@ window.closeMealSelector = function() {
   selectedDayForPlanner = null;
   selectedRecipeForPlanner = null;
 }
-
-
-
-document.addEventListener('touchstart', (e) => {
-  const target = e.target.closest('.tap');
-  if (target) haptic(8);
-}, { passive: true });
