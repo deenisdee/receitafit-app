@@ -910,7 +910,7 @@ body.modal-open{ overflow:hidden; height:100vh; }
   .slide-title-new{ font-size:1.75rem; }
   .slide-description-new{ font-size:1rem; }
   .slide-overlay-new{ padding:2rem 1.5rem; }
-  .slider-arrow-new{ width:40px; height:40px; font-size:1.5rem; }
+  .slider-arrow-new{ width:50px; height:50px; font-size:1.5rem; }
   .slider-arrow-new.prev{ left:1rem; }
   .slider-arrow-new.next{ right:1rem; }
 }
