@@ -2058,3 +2058,38 @@ background: #16a34a !important;
   }
 }
 
+
+/* =========================================================
+   LOGO — sem animação / sem sombra / sem “tap” visual
+   (cole no FINAL do styles.css)
+   ========================================================= */
+
+.logo,
+.logo * {
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+/* garante que hover/active não aplique nada no logo */
+.logo:hover,
+.logo:active,
+.logo:focus,
+.logo:focus-visible {
+  transform: none !important;
+  filter: none !important;
+  box-shadow: none !important;
+}
+
+/* remove “selecionar/copiar” no logo (mobile) */
+@media (pointer: coarse) {
+  .logo,
+  .logo * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+}
+
