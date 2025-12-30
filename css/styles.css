@@ -2052,5 +2052,9 @@ background: #16a34a !important;
   }
 }
 
-
+@media (max-width: 768px) {
+  #header {
+    box-shadow: none !important;
+  }
+}
 
