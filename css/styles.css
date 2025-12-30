@@ -915,10 +915,13 @@ body.modal-open{ overflow:hidden; height:100vh; }
   .slider-arrow-new.next{ right:1rem; }
 }
 
+
+
+
 @media (max-width:480px){
   .hero-slider-fullwidth{ height:285px;  }
   .slide-title-new{ font-size:1.5rem;  }
-  .category-card-new{ padding:1.10rem 1.10rem; font-size:.875rem; border-radius: 50px; }
+  .category-card-new{ padding:1.0rem 1.20rem; font-size:.875rem; border-radius: 50px; }
 }
 
 
