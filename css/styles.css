@@ -1818,8 +1818,7 @@ z-index: 5;
   .btn-calculate:hover,
   .meal-option-btn:hover,
   .modal-actions button:hover,
-  .btn-clear-list:hover,
-  a.logo:hover{
+  .btn-clear-list:hover{
     transform: translateY(var(--rf-lift));
     box-shadow: var(--rf-shadow);
   }
