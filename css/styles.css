@@ -2093,3 +2093,30 @@ background: #16a34a !important;
   }
 }
 
+/* =========================================================
+   GRID DE RECEITAS — 2 (mobile) / 3 (tablet) / 4 (desktop)
+   Cole no FINAL do styles.css
+   ========================================================= */
+
+/* Base (desktop) */
+#recipe-grid, .recipe-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  #recipe-grid, .recipe-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 16px !important;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  #recipe-grid, .recipe-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+}
