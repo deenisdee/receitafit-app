@@ -898,9 +898,9 @@ setTimeout(() => {
   
   // Scroll suave customizado (800ms)
   const start = window.scrollY;
-  const target = sliderHeight - 350;  // ← 🎯 SETA 1: DIMINUI ESSE VALOR (ex: -50, 0, 10)
+  const target = sliderHeight + 50;  // ← 🎯 SETA 1: DIMINUI ESSE VALOR (ex: -50, 0, 10)
   const distance = target - start;
-  const duration = 500; // 800ms = bem suave
+  const duration = 1000; // 800ms = bem suave
   let startTime = null;
   function animation(currentTime) {
     if (startTime === null) startTime = currentTime;
@@ -927,7 +927,7 @@ setTimeout(() => {
   const lockScroll = () => {
     const slider = document.getElementById('heroSlider');
     const sliderHeight = slider ? slider.offsetHeight : 100;
-    const minScroll = sliderHeight - 350 ;  // ← 🎯 SETA 2: DIMINUI ESSE TAMBÉM (mesmo valor da SETA 1)
+    const minScroll = sliderHeight + 50 ;  // ← 🎯 SETA 2: DIMINUI ESSE TAMBÉM (mesmo valor da SETA 1)
     
     if (window.scrollY < minScroll && scrollLocked) {
       window.scrollTo({ top: minScroll, behavior: 'instant' });
