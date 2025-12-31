@@ -15,7 +15,7 @@
 // ============================================
 // PROTEÇÃO ANTI-BURLA (3 camadas) - V2
 // ============================================
-
+/*
 (function() {
   'use strict';
   
@@ -117,6 +117,8 @@
   console.log('%c✅ Proteções ativas (v2)', 'color:#16a34a;font-weight:bold');
 
 })();
+
+*/
 
 
 
