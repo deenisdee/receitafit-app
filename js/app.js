@@ -562,6 +562,7 @@ function initCategoriesDrag() {
   });
 
   grid.style.cursor = 'grab';
+  
 }
 
 window.filterByCategory = function(category, element) {
@@ -914,25 +915,34 @@ async function showRecipeDetail(recipeId) {
 
 
 window.closeRecipeDetail = function() {
-  if (!recipeDetail || !recipeGrid) return;
+  const recipeDetailEl = document.getElementById('recipe-detail');
+  const recipeGridEl = document.getElementById('recipe-grid');
+  
+  if (!recipeDetailEl || !recipeGridEl) return;
 
-  setTimeout(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 100);
+  // ✅ PRIMEIRO: Volta pro topo
+  window.scrollTo({ top: 0, behavior: 'instant' }); // instant = imediato
 
-  recipeDetail.classList.add('hidden');
-  recipeGrid.classList.remove('hidden');
+  // Esconde detalhe, mostra grid
+  recipeDetailEl.classList.add('hidden');
+  recipeGridEl.classList.remove('hidden');
+  
   currentRecipe = null;
 
-  const slider = document.getElementById('heroSlider');
-  const categories = document.querySelector('.categories-new');
-  if (slider) slider.classList.remove('hidden');
-  if (categories) categories.style.display = 'block';
+  // ✅ DEPOIS: Mostra slider e categorias
+  setTimeout(() => {
+    const slider = document.getElementById('heroSlider');
+    const categories = document.querySelector('.categories-new');
+    if (slider) slider.style.display = 'block';
+    if (categories) categories.style.display = 'block';
+  }, 50);
 
+  // Re-renderiza receitas
   renderRecipes();
+  
+  // Remove classe do body
   document.body.classList.remove('detail-open');
 };
-
 
 
 
