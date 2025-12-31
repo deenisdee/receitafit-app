@@ -698,17 +698,9 @@ window.viewRecipe = function(recipeId) {
 // ==============================
 // DETALHE DA RECEITA
 // ==============================
-async function showRecipeDetail(recipeId) {
-  let recipe = allRecipes.find(r => r.id === recipeId);
-  
-  // Se premium, busca versão completa do servidor (se você tiver essa lógica)
-  if (isPremium && recipe?.isPremium) {
-    const recipeCompleta = await fetchRecipeComplete?.(recipeId);
-    if (recipeCompleta) {
-      recipe = recipeCompleta;
-    }
-  }
-  
+function showRecipeDetail(recipeId) {
+  // ❌ NÃO chama ensureRecipeAccess aqui (evita dupla cobrança)
+  const recipe = allRecipes.find(r => r.id === recipeId);
   if (!recipe) return;
 
   currentRecipe = recipe;
@@ -891,87 +883,44 @@ async function showRecipeDetail(recipeId) {
 
   document.body.classList.add('detail-open');
 
- // Esconde slider e categorias COM FADE
-  const slider = document.getElementById('heroSlider');
-  const categories = document.querySelector('.categories-new');
-  
-  if (slider) {
-    slider.style.transition = 'opacity 0.3s ease';
-    slider.style.opacity = '0';
-    setTimeout(() => {
-      slider.style.display = 'none';
-    }, 300);
-  }
-  
-  if (categories) {
-    categories.style.transition = 'opacity 0.3s ease';
-    categories.style.opacity = '0';
-    setTimeout(() => {
-      categories.style.display = 'none';
-    }, 300);
-  }
+  const header = document.getElementById('header');
+  const headerH = header ? header.offsetHeight : 0;
+  document.documentElement.style.setProperty('--header-h', `${headerH}px`);
 
-  // ✅ Scroll suave até a receita
+  recipeDetail.scrollTop = 0;
+
   setTimeout(() => {
-    const recipeDetailEl = document.getElementById('recipe-detail');
-    if (recipeDetailEl) {
-      const headerHeight = 105; // altura do header
-      const detailTop = recipeDetailEl.getBoundingClientRect().top + window.scrollY;
-      
-      window.scrollTo({ 
-        top: detailTop - headerHeight - 20,
-        behavior: 'smooth' 
-      });
-    }
-  }, 100);
+    const header2 = document.getElementById('header');
+    const headerH2 = header2 ? header2.offsetHeight : 0;
+    const detailTop = recipeDetail.getBoundingClientRect().top + window.scrollY;
+    const target = Math.max(detailTop - headerH2 - 12, 0);
+    window.scrollTo({ top: target, behavior: 'smooth' });
+  }, 50);
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 
 
+
 window.closeRecipeDetail = function() {
-  const recipeDetailEl = document.getElementById('recipe-detail');
-  const recipeGridEl = document.getElementById('recipe-grid');
-  
-  if (!recipeDetailEl || !recipeGridEl) return;
+  if (!recipeDetail || !recipeGrid) return;
 
-  // ✅ Scroll suave pro topo PRIMEIRO
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
-  // Aguarda scroll terminar (500ms)
   setTimeout(() => {
-    // Esconde detalhe, mostra grid
-    recipeDetailEl.classList.add('hidden');
-    recipeGridEl.classList.remove('hidden');
-    
-    currentRecipe = null;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 100);
 
-    // ✅ Mostra slider e categorias COM FADE IN
-    const slider = document.getElementById('heroSlider');
-    const categories = document.querySelector('.categories-new');
-    
-    if (slider) {
-      slider.style.display = 'block';
-      slider.style.opacity = '0';
-      setTimeout(() => {
-        slider.style.transition = 'opacity 0.3s ease';
-        slider.style.opacity = '1';
-      }, 50);
-    }
-    
-    if (categories) {
-      categories.style.display = 'block';
-      categories.style.opacity = '0';
-      setTimeout(() => {
-        categories.style.transition = 'opacity 0.3s ease';
-        categories.style.opacity = '1';
-      }, 50);
-    }
+  recipeDetail.classList.add('hidden');
+  recipeGrid.classList.remove('hidden');
+  currentRecipe = null;
 
-    renderRecipes();
-    document.body.classList.remove('detail-open');
-  }, 500); // Tempo do scroll smooth
+  const slider = document.getElementById('heroSlider');
+  const categories = document.querySelector('.categories-new');
+  if (slider) slider.classList.remove('hidden');
+  if (categories) categories.style.display = 'block';
+
+  renderRecipes();
+  document.body.classList.remove('detail-open');
 };
 
 
