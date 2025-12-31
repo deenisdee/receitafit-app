@@ -893,7 +893,7 @@ async function showRecipeDetail(recipeId) {
   // ✅ scrollTo() para esconder banner
   setTimeout(() => {
     const slider = document.getElementById('heroSlider');
-    const sliderHeight = slider ? slider.offsetHeight : 400;
+    const sliderHeight = slider ? slider.offsetHeight : 50;
     
     window.scrollTo({ 
       top: sliderHeight + 20, 
