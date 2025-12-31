@@ -908,7 +908,7 @@ async function showRecipeDetail(recipeId) {
       window.scrollTo({ top: minScroll, behavior: 'instant' });
     }
   };
-
+  }
   recipeDetail.scrollTop = 0;
 
   setTimeout(() => {
