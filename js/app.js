@@ -881,7 +881,7 @@ async function showRecipeDetail(recipeId) {
   `;
 
 
- recipeGrid.classList.add('hidden');
+recipeGrid.classList.add('hidden');
   recipeDetail.classList.remove('hidden');
   document.body.classList.add('detail-open');
   
@@ -895,12 +895,13 @@ async function showRecipeDetail(recipeId) {
   setTimeout(() => {
     const slider = document.getElementById('heroSlider');
     const sliderHeight = slider ? slider.offsetHeight : 400;
+    const headerHeight = 105; // Altura do header fixo
     
     // Configuração da animação
     const start = window.scrollY;
-    const target = sliderHeight + 200;  // Para 200px depois do slider
+    const target = sliderHeight + 20; // ← 🎯 DIMINUI PRA +20 (era +200)
     const distance = target - start;
-    const duration = 1000; // 1 segundo
+    const duration = 800; // ← 🎯 800ms (era 1000)
     let startTime = null;
     
     function animation(currentTime) {
@@ -923,26 +924,25 @@ async function showRecipeDetail(recipeId) {
     requestAnimationFrame(animation);
   }, 100);
   
-  // ✅ TRAVA scroll pra não voltar pro banner
-  let scrollLocked = false;
-  const lockScroll = () => {
-    const slider = document.getElementById('heroSlider');
-    const sliderHeight = slider ? slider.offsetHeight : 400;
-    const minScroll = sliderHeight + 200;  // Mesmo valor do target
-    
-    if (window.scrollY < minScroll && scrollLocked) {
-      window.scrollTo({ top: minScroll, behavior: 'instant' });
-    }
-  };
-  
+  // ✅ TRAVA scroll DEPOIS da animação terminar
   setTimeout(() => {
-    scrollLocked = true;
+    let scrollLocked = true;
+    const lockScroll = () => {
+      const slider = document.getElementById('heroSlider');
+      const sliderHeight = slider ? slider.offsetHeight : 400;
+      const minScroll = sliderHeight + 20; // ← 🎯 MESMO +20
+      
+      if (window.scrollY < minScroll && scrollLocked) {
+        window.scrollTo({ top: minScroll, behavior: 'instant' });
+      }
+    };
+    
     window.addEventListener('scroll', lockScroll);
     window._scrollLockHandler = lockScroll;
-  }, 500);
+  }, 1000); // ← 🎯 Só trava DEPOIS de 1 segundo (após animação)
   
   if (typeof lucide !== 'undefined') lucide.createIcons();
-} 
+}
 
 
 
