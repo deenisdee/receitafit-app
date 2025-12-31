@@ -878,38 +878,28 @@ function showRecipeDetail(recipeId) {
     </div>
   `;
 
-// ... todo o HTML da receita já foi gerado acima ...
-
   recipeGrid.classList.add('hidden');
   recipeDetail.classList.remove('hidden');
+
   document.body.classList.add('detail-open');
 
-  // ✅ Esconde slider e categorias
-  const slider = document.getElementById('heroSlider');
-  const categories = document.querySelector('.categories-new');
-  if (slider) slider.style.display = 'none';
-  if (categories) categories.style.display = 'none';
+  const header = document.getElementById('header');
+  const headerH = header ? header.offsetHeight : 0;
+  document.documentElement.style.setProperty('--header-h', `${headerH}px`);
 
-  // ✅ Scroll: trava mostrando o botão Voltar
+  recipeDetail.scrollTop = 0;
+
   setTimeout(() => {
-    const backBtn = document.querySelector('.back-btn');
-    if (backBtn) {
-      const backBtnRect = backBtn.getBoundingClientRect();
-      const currentScroll = window.scrollY;
-      
-      // Se botão está acima da viewport, rola até ele ficar visível
-      if (backBtnRect.top < 120) {
-        const scrollTarget = currentScroll + backBtnRect.top - 120;
-        window.scrollTo({ 
-          top: scrollTarget,
-          behavior: 'smooth' 
-        });
-      }
-    }
-  }, 100);
+    const header2 = document.getElementById('header');
+    const headerH2 = header2 ? header2.offsetHeight : 0;
+    const detailTop = recipeDetail.getBoundingClientRect().top + window.scrollY;
+    const target = Math.max(detailTop - headerH2 - 12, 0);
+    window.scrollTo({ top: target, behavior: 'smooth' });
+  }, 50);
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
+
 
 
 
