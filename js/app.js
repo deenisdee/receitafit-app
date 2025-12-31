@@ -903,13 +903,13 @@ setTimeout(() => {
   const start = window.scrollY;
   const target = sliderHeight + 30;
   const distance = target - start;
-  const duration = 100; // 800ms = bem suave
+  const duration = 1500; // 800ms = bem suave
   let startTime = null;
 
   function animation(currentTime) {
     if (startTime === null) startTime = currentTime;
     const timeElapsed = currentTime - startTime;
-    const progress = Math.min(timeElapsed / duration, 50);
+    const progress = Math.min(timeElapsed / duration, 5);
     
     // Easing (suaviza início e fim)
     const ease = progress < 0.5
