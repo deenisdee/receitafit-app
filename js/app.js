@@ -909,10 +909,10 @@ setTimeout(() => {
   function animation(currentTime) {
     if (startTime === null) startTime = currentTime;
     const timeElapsed = currentTime - startTime;
-    const progress = Math.min(timeElapsed / duration, 1);
+    const progress = Math.min(timeElapsed / duration, 50);
     
     // Easing (suaviza início e fim)
-    const ease = progress < 5.5
+    const ease = progress < 0.5
       ? 2 * progress * progress
       : 1 - Math.pow(-2 * progress + 2, 2) / 2;
     
