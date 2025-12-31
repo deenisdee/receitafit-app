@@ -916,7 +916,7 @@ setTimeout(() => {
       ? 2 * progress * progress
       : 1 - Math.pow(-2 * progress + 2, 2) / 2;
     
-    window.scrollTo(0, start + (distance * ease));
+    window.scrollTo(100, start + (distance * ease));
     
     if (timeElapsed < duration) {
       requestAnimationFrame(animation);
@@ -924,7 +924,7 @@ setTimeout(() => {
   }
   
   requestAnimationFrame(animation);
-}, 10);
+}, 100);
 
 
   
