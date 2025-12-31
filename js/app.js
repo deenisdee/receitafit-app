@@ -13,7 +13,7 @@
 // ============================================
 
 // ============================================
-// PROTEÇÃO ANTI-BURLA (3 camadas)
+// PROTEÇÃO ANTI-BURLA (3 camadas) - V2
 // ============================================
 
 (function() {
@@ -76,32 +76,45 @@
     }
   }, 1000);
 
-  // 3️⃣ PROTEGER VARIÁVEIS CRÍTICAS
-  // Impede modificação direta das variáveis
-  const protectedVars = ['isPremium', 'credits', 'premiumToken', 'unlockedRecipes'];
-  
-  protectedVars.forEach(varName => {
-    let internalValue;
+  // 3️⃣ MONITORAR MUDANÇAS NO LOCALSTORAGE
+  // Detecta modificações suspeitas
+  const originalSetItem = localStorage.setItem;
+  localStorage.setItem = function(key, value) {
+    // Detecta tentativas de burla
+    if (key === 'fit_premium' && value === 'true') {
+      const token = localStorage.getItem('fit_premium_token');
+      if (!token || token.length < 20) {
+        console.error('🚨 Tentativa de burla detectada!');
+        console.warn('Premium sem token válido.');
+        // Não permite setar
+        return;
+      }
+    }
     
-    Object.defineProperty(window, varName, {
-      set: function(value) {
-        // Só permite se vier do código legítimo (não do console)
-        const stack = new Error().stack;
-        if (stack && stack.includes('at eval') || stack.includes('at <anonymous>')) {
-          console.error(`🚫 Tentativa de modificar ${varName} bloqueada`);
-          console.warn('Esta ação foi registrada.');
-          return;
-        }
-        internalValue = value;
-      },
-      get: function() {
-        return internalValue;
-      },
-      configurable: false
-    });
-  });
+    // Chama original
+    return originalSetItem.apply(this, arguments);
+  };
 
-  console.log('%c✅ Proteções ativas', 'color:#16a34a;font-weight:bold');
+  // 4️⃣ VALIDAÇÃO EXTRA AO ACESSAR RECEITAS
+  // Intercepta cliques nas receitas
+  document.addEventListener('click', function(e) {
+    const recipeCard = e.target.closest('.recipe-card');
+    if (recipeCard) {
+      // Valida estado premium
+      const premium = localStorage.getItem('fit_premium');
+      const token = localStorage.getItem('fit_premium_token');
+      
+      if (premium === 'true' && (!token || token.length < 20)) {
+        e.preventDefault();
+        e.stopPropagation();
+        console.error('🚨 Estado inválido detectado');
+        localStorage.clear();
+        location.reload();
+      }
+    }
+  }, true);
+
+  console.log('%c✅ Proteções ativas (v2)', 'color:#16a34a;font-weight:bold');
 
 })();
 
