@@ -903,7 +903,7 @@ setTimeout(() => {
   const start = window.scrollY;
   const target = sliderHeight + 30;
   const distance = target - start;
-  const duration = 100; // 800ms = bem suave
+  const duration = 500; // 800ms = bem suave
   let startTime = null;
 
   function animation(currentTime) {
