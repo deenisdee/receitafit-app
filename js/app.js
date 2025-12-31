@@ -895,11 +895,7 @@ async function showRecipeDetail(recipeId) {
     const slider = document.getElementById('heroSlider');
     const sliderHeight = slider ? slider.offsetHeight : 400;
     
-    window.scrollTo({ 
-      top:sliderHeight + 100, 
-      behavior: 'smooth' 
-    });
-  }, 500);
+ 
 
   // ✅ TRAVA scroll pra não voltar pro banner
   let scrollLocked = false;
