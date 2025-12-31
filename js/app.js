@@ -58,9 +58,6 @@
 
 })();
 
-// FONTE ÚNICA DE DADOS
-const ALL_RECIPES = (typeof RECIPES !== 'undefined' ...
-// ... resto do seu código continua normal
 
 
 
