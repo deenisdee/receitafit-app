@@ -890,16 +890,44 @@ async function showRecipeDetail(recipeId) {
   if (slider) slider.style.display = 'none';
   if (categories) categories.style.display = 'none';
 
-  // ✅ scrollTo() para esconder banner
-  setTimeout(() => {
-    const slider = document.getElementById('heroSlider');
-    const sliderHeight = slider ? slider.offsetHeight : 400;
+
+  
+  
+  
+  // ✅ POR ISSO (scroll animado customizado):
+setTimeout(() => {
+  const slider = document.getElementById('heroSlider');
+  const sliderHeight = slider ? slider.offsetHeight : 400;
+  
+  // Scroll suave customizado (800ms)
+  const start = window.scrollY;
+  const target = sliderHeight + 20;
+  const distance = target - start;
+  const duration = 800; // 800ms = bem suave
+  let startTime = null;
+
+  function animation(currentTime) {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const progress = Math.min(timeElapsed / duration, 1);
     
-    window.scrollTo({ 
-      top: sliderHeight + 20, 
-      behavior: 'smooth' 
-    });
-  }, 100);
+    // Easing (suaviza início e fim)
+    const ease = progress < 0.5
+      ? 2 * progress * progress
+      : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+    
+    window.scrollTo(0, start + (distance * ease));
+    
+    if (timeElapsed < duration) {
+      requestAnimationFrame(animation);
+    }
+  }
+  
+  requestAnimationFrame(animation);
+}, 100);
+
+
+  
 
   // ✅ TRAVA scroll pra não voltar pro banner
   let scrollLocked = false;
