@@ -880,73 +880,71 @@ async function showRecipeDetail(recipeId) {
     </div>
   `;
 
-  recipeGrid.classList.add('hidden');
+
+ recipeGrid.classList.add('hidden');
   recipeDetail.classList.remove('hidden');
   document.body.classList.add('detail-open');
+  
   // Esconde slider e categorias
   const slider = document.getElementById('heroSlider');
   const categories = document.querySelector('.categories-new');
   if (slider) slider.style.display = 'none';
   if (categories) categories.style.display = 'none';
   
-  
-  
-  // ✅ POR ISSO (scroll animado customizado):
-setTimeout(() => {
-  const slider = document.getElementById('heroSlider');
-  const sliderHeight = slider ? slider.offsetHeight : 400;
-  
-  // Scroll suave customizado (800ms)
-// Scroll suave customizado (1000ms)
-const start = window.scrollY;
-const target = sliderHeight + 200;  // ← Para 200px depois do slider
-const distance = target - start;
-const duration = 1000; // 1 segundo
-let startTime = null;
-
-function animation(currentTime) {
-  if (startTime === null) startTime = currentTime;
-  const timeElapsed = currentTime - startTime;
-  const progress = Math.min(timeElapsed / duration, 1); // ← 🔴 CORRIGE PRA 1
-  
-  // Easing (suaviza início e fim)
-  const ease = progress < 0.5
-    ? 2 * progress * progress
-    : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-  
-  window.scrollTo(0, start + (distance * ease));
-  
-  if (timeElapsed < duration) {
-    requestAnimationFrame(animation);
-  }
-}
-
-requestAnimationFrame(animation);
+  // ✅ Scroll animado customizado
+  setTimeout(() => {
+    const slider = document.getElementById('heroSlider');
+    const sliderHeight = slider ? slider.offsetHeight : 400;
+    
+    // Configuração da animação
+    const start = window.scrollY;
+    const target = sliderHeight + 200;  // Para 200px depois do slider
+    const distance = target - start;
+    const duration = 1000; // 1 segundo
+    let startTime = null;
+    
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      
+      // Easing (suaviza início e fim)
+      const ease = progress < 0.5
+        ? 2 * progress * progress
+        : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+      
+      window.scrollTo(0, start + (distance * ease));
+      
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
     }
-  }
-  
-  requestAnimationFrame(animation);
-}, 100);
+    
+    requestAnimationFrame(animation);
+  }, 100);
   
   // ✅ TRAVA scroll pra não voltar pro banner
   let scrollLocked = false;
   const lockScroll = () => {
     const slider = document.getElementById('heroSlider');
-    const sliderHeight = slider ? slider.offsetHeight : 100;
-    const minScroll = sliderHeight + 200 ;  // ← 🎯 SETA 2: DIMINUI ESSE TAMBÉM (mesmo valor da SETA 1)
+    const sliderHeight = slider ? slider.offsetHeight : 400;
+    const minScroll = sliderHeight + 200;  // Mesmo valor do target
     
     if (window.scrollY < minScroll && scrollLocked) {
       window.scrollTo({ top: minScroll, behavior: 'instant' });
     }
   };
+  
   setTimeout(() => {
     scrollLocked = true;
     window.addEventListener('scroll', lockScroll);
-    // Guarda referência pra remover depois
     window._scrollLockHandler = lockScroll;
   }, 500);
+  
   if (typeof lucide !== 'undefined') lucide.createIcons();
-}
+} 
+
+
 
 
 
