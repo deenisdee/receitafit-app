@@ -378,11 +378,11 @@ function updateUI() {
       document.body.classList.add('premium-active');
 
       creditsBadge.classList.add('premium');
-     let badgeText = 'PREMIUM';
+     let badgeText = 'Premium';
       if (premiumExpires) {
         const daysLeft = Math.ceil((premiumExpires - Date.now()) / (1000 * 60 * 60 * 24));
         if (daysLeft > 0 && daysLeft <= 30) {
-          badgeText = `PREMIUM (${daysLeft}d)`;
+          badgeText = `Premium (${daysLeft}D)`;
         }
       }
 
