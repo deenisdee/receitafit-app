@@ -28,6 +28,8 @@ export default async function handler(req, res) {
   const VALID_CODES = new Map([
     ['684884', 30], 
     ['1310', 0.0001],
+    ['10', 10],
+    ['30', 30],
      ['60', 60],
     ['90', 90],
     ['365', 365],
