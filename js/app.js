@@ -8,13 +8,6 @@
 // ============================================
 
 
-// Simular expiração em 10 segundos
-const agora = Date.now();
-const expiraEm10seg = agora + (10 * 1000);
-localStorage.setItem('fit_premium_expires', expiraEm10seg.toString());
-
-
-
 // ==============================
 // FONTE ÚNICA DE DADOS (receitas)
 // ==============================
