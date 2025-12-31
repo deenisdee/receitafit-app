@@ -896,28 +896,32 @@ function showRecipeDetail(recipeId) {
   const categories = document.querySelector('.categories-new');
   if (slider) slider.style.display = 'none';
   if (categories) categories.style.display = 'none';
+
+
+
+  
   
   // ✅ NOVO: Scroll até o topo da área de detalhe (sem esconder header)
-  setTimeout(() => {
-    const header = document.getElementById('header');
-    const headerHeight = header ? header.offsetHeight : 0;
-    
-    // Scroll suave até logo abaixo do header
-    window.scrollTo({ 
-      top: headerHeight, 
-      behavior: 'smooth' 
-    });
-  }, 100);
+setTimeout(() => {
+  const recipeDetailEl = document.getElementById('recipe-detail');
+  if (!recipeDetailEl) return;
   
-  if (typeof lucide !== 'undefined') lucide.createIcons();
-}
+  const header = document.getElementById('header');
+  const headerHeight = header ? header.offsetHeight : 105; // fallback
+  
+  // Posição do elemento de detalhe
+  const detailTop = recipeDetailEl.getBoundingClientRect().top + window.scrollY;
+  
+  // Scroll até o topo do detalhe, deixando espaço pro header
+  window.scrollTo({ 
+    top: detailTop - headerHeight - 10, // -10px margem extra
+    behavior: 'smooth' 
+  });
+}, 100);
 
-window.closeRecipeDetail = function() {
-  if (!recipeDetail || !recipeGrid) return;
 
-  setTimeout(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 100);
+
+  
 
   recipeDetail.classList.add('hidden');
   recipeGrid.classList.remove('hidden');
