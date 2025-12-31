@@ -891,23 +891,39 @@ async function showRecipeDetail(recipeId) {
 
   document.body.classList.add('detail-open');
 
-  // ✅ Esconde slider e categorias
+ // Esconde slider e categorias COM FADE
   const slider = document.getElementById('heroSlider');
   const categories = document.querySelector('.categories-new');
-  if (slider) slider.style.display = 'none';
-  if (categories) categories.style.display = 'none';
+  
+  if (slider) {
+    slider.style.transition = 'opacity 0.3s ease';
+    slider.style.opacity = '0';
+    setTimeout(() => {
+      slider.style.display = 'none';
+    }, 300);
+  }
+  
+  if (categories) {
+    categories.style.transition = 'opacity 0.3s ease';
+    categories.style.opacity = '0';
+    setTimeout(() => {
+      categories.style.display = 'none';
+    }, 300);
+  }
 
-  // ✅ Scroll até mostrar o botão Voltar (sem cortar)
+  // ✅ Scroll suave até a receita
   setTimeout(() => {
-    const header = document.getElementById('header');
-    const headerHeight = header ? header.offsetHeight : 105;
-    
-    // Scroll até logo abaixo do header (mostra botão completo)
-    window.scrollTo({ 
-      top: 0, 
-      behavior: 'smooth' 
-    });
-  }, 50);
+    const recipeDetailEl = document.getElementById('recipe-detail');
+    if (recipeDetailEl) {
+      const headerHeight = 105; // altura do header
+      const detailTop = recipeDetailEl.getBoundingClientRect().top + window.scrollY;
+      
+      window.scrollTo({ 
+        top: detailTop - headerHeight - 20,
+        behavior: 'smooth' 
+      });
+    }
+  }, 100);
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
@@ -920,28 +936,42 @@ window.closeRecipeDetail = function() {
   
   if (!recipeDetailEl || !recipeGridEl) return;
 
-  // ✅ PRIMEIRO: Volta pro topo
-  window.scrollTo({ top: 0, behavior: 'instant' }); // instant = imediato
+  // ✅ Scroll suave pro topo PRIMEIRO
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  // Esconde detalhe, mostra grid
-  recipeDetailEl.classList.add('hidden');
-  recipeGridEl.classList.remove('hidden');
-  
-  currentRecipe = null;
-
-  // ✅ DEPOIS: Mostra slider e categorias
+  // Aguarda scroll terminar (500ms)
   setTimeout(() => {
+    // Esconde detalhe, mostra grid
+    recipeDetailEl.classList.add('hidden');
+    recipeGridEl.classList.remove('hidden');
+    
+    currentRecipe = null;
+
+    // ✅ Mostra slider e categorias COM FADE IN
     const slider = document.getElementById('heroSlider');
     const categories = document.querySelector('.categories-new');
-    if (slider) slider.style.display = 'block';
-    if (categories) categories.style.display = 'block';
-  }, 50);
+    
+    if (slider) {
+      slider.style.display = 'block';
+      slider.style.opacity = '0';
+      setTimeout(() => {
+        slider.style.transition = 'opacity 0.3s ease';
+        slider.style.opacity = '1';
+      }, 50);
+    }
+    
+    if (categories) {
+      categories.style.display = 'block';
+      categories.style.opacity = '0';
+      setTimeout(() => {
+        categories.style.transition = 'opacity 0.3s ease';
+        categories.style.opacity = '1';
+      }, 50);
+    }
 
-  // Re-renderiza receitas
-  renderRecipes();
-  
-  // Remove classe do body
-  document.body.classList.remove('detail-open');
+    renderRecipes();
+    document.body.classList.remove('detail-open');
+  }, 500); // Tempo do scroll smooth
 };
 
 
