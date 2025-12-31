@@ -21,7 +21,7 @@ export default async function handler(req, res) {
 
   // ✅ CÓDIGOS VÁLIDOS
   const VALID_CODES = new Map([
-    ['684884', 30],
+    ['G8A8B4', 30],
     ['TESTE-45P', 30],
     ['FITPR02024', 30],
     ['LANCAMENTO2025', 90],
