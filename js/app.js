@@ -19,6 +19,8 @@ let allRecipes = ALL_RECIPES; // compat
 let credits = 3;
 let unlockedRecipes = [];
 let isPremium = false;
+let premiumToken = null;        // ⭐ ADICIONAR
+let premiumExpires = null;      // ⭐ ADICIONAR
 
 // UI state
 let currentRecipe = null;
@@ -157,10 +159,39 @@ function ensureRecipeAccess(recipeId) {
 // ==============================
 async function loadUserData() {
   try {
-    const premiumResult = await storage.get('fit_premium');
-    if (premiumResult && premiumResult.value === 'true') {
-      isPremium = true;
+    // Carrega token premium
+    const tokenResult = await storage.get('fit_premium_token');
+    const expiresResult = await storage.get('fit_premium_expires');
+    
+    if (tokenResult && tokenResult.value) {
+      premiumToken = tokenResult.value;
+      premiumExpires = expiresResult ? parseInt(expiresResult.value) : null;
+      
+      // ✅ VALIDAÇÃO DE EXPIRAÇÃO
+      if (premiumExpires && Date.now() > premiumExpires) {
+        // Token expirado
+        console.log('[PREMIUM] Token expirado');
+        await storage.set('fit_premium', 'false');
+        await storage.set('fit_premium_token', '');
+        await storage.set('fit_premium_expires', '');
+        isPremium = false;
+        premiumToken = null;
+        premiumExpires = null;
+      } else {
+        // Token válido
+        isPremium = true;
+        await storage.set('fit_premium', 'true');
+      }
     } else {
+      // Não tem token - verifica flag antiga
+      const premiumResult = await storage.get('fit_premium');
+      if (premiumResult && premiumResult.value === 'true') {
+        isPremium = true;
+      }
+    }
+    
+    // Se não é premium, carrega créditos
+    if (!isPremium) {
       const creditsResult = await storage.get('fit_credits');
       const unlockedResult = await storage.get('fit_unlocked');
       if (creditsResult) credits = parseInt(creditsResult.value || '3', 10);
@@ -171,20 +202,40 @@ async function loadUserData() {
     const weekPlanResult = await storage.get('fit_weekplan');
     if (shoppingResult && shoppingResult.value) shoppingList = JSON.parse(shoppingResult.value);
     if (weekPlanResult && weekPlanResult.value) weekPlan = JSON.parse(weekPlanResult.value);
-  } catch (e) {}
+    
+  } catch (e) {
+    console.error('Erro ao carregar dados:', e);
+  }
 
   updateUI();
   updateShoppingCounter();
   initSliderAndCategories();
   renderRecipes();
+
+  // Verifica expiração a cada 1 hora
+  setInterval(checkPremiumExpiration, 60 * 60 * 1000);
+  checkPremiumExpiration();
+  
 }
 
 async function saveUserData() {
   try {
-    await storage.set('fit_credits', credits.toString());
-    await storage.set('fit_unlocked', JSON.stringify(unlockedRecipes));
-    await storage.set('fit_premium', isPremium.toString());
-  } catch (e) {}
+    if (isPremium && premiumToken) {
+      // Salva token premium
+      await storage.set('fit_premium', 'true');
+      await storage.set('fit_premium_token', premiumToken);
+      if (premiumExpires) {
+        await storage.set('fit_premium_expires', premiumExpires.toString());
+      }
+    } else {
+      // Salva créditos
+      await storage.set('fit_credits', credits.toString());
+      await storage.set('fit_unlocked', JSON.stringify(unlockedRecipes));
+      await storage.set('fit_premium', 'false');
+    }
+  } catch (e) {
+    console.error('Erro ao salvar dados:', e);
+  }
 }
 
 async function saveShoppingList() {
@@ -212,11 +263,19 @@ function updateUI() {
       document.body.classList.add('premium-active');
 
       creditsBadge.classList.add('premium');
+     let badgeText = 'PREMIUM';
+      if (premiumExpires) {
+        const daysLeft = Math.ceil((premiumExpires - Date.now()) / (1000 * 60 * 60 * 24));
+        if (daysLeft > 0 && daysLeft <= 30) {
+          badgeText = `PREMIUM (${daysLeft}d)`;
+        }
+      }
+
       creditsBadge.innerHTML = `
         <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
         </svg>
-        <span>PREMIUM</span>
+        <span>${badgeText}</span>
       `;
 
       if (premiumBtn) premiumBtn.style.display = 'none';
@@ -1100,7 +1159,7 @@ async function activatePremium() {
   const code = input ? input.value.trim().toUpperCase() : '';
 
   if (!code) {
-    showNotification('Aviso', 'Digite um código');
+    showNotification('Aviso', 'Digite um código válido');
     return;
   }
 
@@ -1108,21 +1167,64 @@ async function activatePremium() {
     const data = await redeemPremiumCode(code);
 
     if (!data || !data.ok) {
-      showNotification('Erro', (data && data.error) ? data.error : 'Código inválido');
+      showNotification('Erro', data?.error || 'Código inválido');
       return;
     }
 
+    // ✅ ATIVA PREMIUM COM TOKEN
     isPremium = true;
+    premiumToken = data.token;
+    premiumExpires = data.expiresAt;
+    
     await storage.set('fit_premium', 'true');
+    await storage.set('fit_premium_token', data.token);
+    await storage.set('fit_premium_expires', data.expiresAt.toString());
+    
     updateUI();
 
-    showNotification('Sucesso', 'Premium ativado com sucesso!');
+    const daysLeft = data.expiresInDays || 30;
+    showNotification(
+      'Premium Ativado! 🎉', 
+      `Você tem acesso ilimitado por ${daysLeft} dias!`
+    );
+    
     window.closePremiumModal();
 
+    console.log('[PREMIUM] Ativado', { expires: new Date(data.expiresAt).toISOString() });
+
   } catch (e) {
-    showNotification('Erro', 'Erro ao validar código');
+    console.error('Erro ao ativar premium:', e);
+    showNotification('Erro', 'Erro ao validar código. Tente novamente.');
   }
 }
+
+
+async function checkPremiumExpiration() {
+  if (!isPremium || !premiumExpires) return;
+  
+  const now = Date.now();
+  
+  if (now > premiumExpires) {
+    console.log('[PREMIUM] Expirado');
+    
+    isPremium = false;
+    premiumToken = null;
+    premiumExpires = null;
+    
+    await storage.set('fit_premium', 'false');
+    await storage.set('fit_premium_token', '');
+    await storage.set('fit_premium_expires', '');
+    
+    updateUI();
+    renderRecipes();
+    
+    showNotification(
+      'Premium Expirado', 
+      'Seu acesso premium expirou. Adquira um novo código.'
+    );
+  }
+}
+
 
 // ==============================
 // EVENTOS
