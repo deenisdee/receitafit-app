@@ -933,7 +933,7 @@ setTimeout(() => {
   let scrollLocked = false;
   const lockScroll = () => {
     const slider = document.getElementById('heroSlider');
-    const sliderHeight = slider ? slider.offsetHeight : 400;
+    const sliderHeight = slider ? slider.offsetHeight : 50;
     const minScroll = sliderHeight;
     
     if (window.scrollY < minScroll && scrollLocked) {
