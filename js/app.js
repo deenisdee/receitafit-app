@@ -896,7 +896,7 @@ async function showRecipeDetail(recipeId) {
     const sliderHeight = slider ? slider.offsetHeight : 400;
     
     window.scrollTo({ 
-      top:sliderHeight + 200, 
+      top:sliderHeight + 400, 
       behavior: 'smooth' 
     });
   }, 500);
