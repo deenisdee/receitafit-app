@@ -905,12 +905,11 @@ function showRecipeDetail(recipeId) {
   };
 
   setTimeout(() => {
-    const header2 = document.getElementById('header');
-    const headerH2 = header2 ? header2.offsetHeight : 0;
-    const detailTop = recipeDetail.getBoundingClientRect().top + window.scrollY;
-    const target = Math.max(detailTop - headerH2 - 12, 0);
-    window.scrollTo({ top: target, behavior: 'smooth' });
-  }, 50);
+    scrollLocked = true;
+    window.addEventListener('scroll', lockScroll);
+    // Guarda referência pra remover depois
+    window._scrollLockHandler = lockScroll;
+  }, 500);
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
