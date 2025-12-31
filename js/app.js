@@ -894,8 +894,12 @@ function showRecipeDetail(recipeId) {
     const headerH2 = header2 ? header2.offsetHeight : 0;
     const detailTop = recipeDetail.getBoundingClientRect().top + window.scrollY;
     const target = Math.max(detailTop - headerH2 - 35, 0);
+    const currentScroll = window.scrollY;
+    
     window.scrollTo({ top: target, behavior: 'smooth' });
   }, 50);
+
+  
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
