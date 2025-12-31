@@ -697,9 +697,17 @@ window.viewRecipe = function(recipeId) {
 // ==============================
 // DETALHE DA RECEITA
 // ==============================
-function showRecipeDetail(recipeId) {
-  // ❌ NÃO chama ensureRecipeAccess aqui (evita dupla cobrança)
-  const recipe = allRecipes.find(r => r.id === recipeId);
+async function showRecipeDetail(recipeId) {
+  let recipe = allRecipes.find(r => r.id === recipeId);
+  
+  // Se premium, busca versão completa do servidor (se você tiver essa lógica)
+  if (isPremium && recipe?.isPremium) {
+    const recipeCompleta = await fetchRecipeComplete?.(recipeId);
+    if (recipeCompleta) {
+      recipe = recipeCompleta;
+    }
+  }
+  
   if (!recipe) return;
 
   currentRecipe = recipe;
@@ -882,63 +890,26 @@ function showRecipeDetail(recipeId) {
 
   document.body.classList.add('detail-open');
 
-
-
-
-
-
-
-
-
-  
-
+  // ✅ Esconde slider e categorias
   const slider = document.getElementById('heroSlider');
   const categories = document.querySelector('.categories-new');
   if (slider) slider.style.display = 'none';
   if (categories) categories.style.display = 'none';
 
+  // ✅ Scroll até mostrar o botão Voltar (sem cortar)
+  setTimeout(() => {
+    const header = document.getElementById('header');
+    const headerHeight = header ? header.offsetHeight : 105;
+    
+    // Scroll até logo abaixo do header (mostra botão completo)
+    window.scrollTo({ 
+      top: headerHeight + 10, 
+      behavior: 'smooth' 
+    });
+  }, 50);
 
-
-  
-  
-  // ✅ NOVO: Scroll até o topo da área de detalhe (sem esconder header)
-setTimeout(() => {
-  const recipeDetailEl = document.getElementById('recipe-detail');
-  if (!recipeDetailEl) return;
-  
-  const header = document.getElementById('header');
-  const headerHeight = header ? header.offsetHeight : 105; // fallback
-  
-  // Posição do elemento de detalhe
-  const detailTop = recipeDetailEl.getBoundingClientRect().top + window.scrollY;
-  
-  // Scroll até o topo do detalhe, deixando espaço pro header
-  window.scrollTo({ 
-    top: detailTop - headerHeight - 10, // -10px margem extra
-    behavior: 'smooth' 
-  });
-}, 100);
-
-
-
-  
-
-  recipeDetail.classList.add('hidden');
-  recipeGrid.classList.remove('hidden');
-  currentRecipe = null;
-  
-// ✅ MOSTRA o slider novamente
-  const slider = document.getElementById('heroSlider');
-  const categories = document.querySelector('.categories-new');
-  if (slider) slider.style.display = 'block';
-  if (categories) categories.style.display = 'block';
-
-  renderRecipes();
-  document.body.classList.remove('detail-open');
-  
-  // ✅ Volta pro topo
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
+  if (typeof lucide !== 'undefined') lucide.createIcons();
+}
 
 
 
