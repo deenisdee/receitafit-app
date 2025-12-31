@@ -897,7 +897,7 @@ async function showRecipeDetail(recipeId) {
   // ✅ POR ISSO (scroll animado customizado):
 setTimeout(() => {
   const slider = document.getElementById('heroSlider');
-  const sliderHeight = slider ? slider.offsetHeight : 100;
+  const sliderHeight = slider ? slider.offsetHeight : 400;
   
   // Scroll suave customizado (800ms)
   const start = window.scrollY;
@@ -912,9 +912,9 @@ setTimeout(() => {
     const progress = Math.min(timeElapsed / duration, 1);
     
     // Easing (suaviza início e fim)
-    const ease = progress < 0.5
+    const ease = progress < 2.5
       ? 2 * progress * progress
-      : 1 - Math.pow(-2 * progress + 2, 100) / 2;
+      : 1 - Math.pow(-2 * progress + 2, 2) / 2;
     
     window.scrollTo(0, start + (distance * ease));
     
@@ -933,7 +933,7 @@ setTimeout(() => {
   let scrollLocked = false;
   const lockScroll = () => {
     const slider = document.getElementById('heroSlider');
-    const sliderHeight = slider ? slider.offsetHeight : 50;
+    const sliderHeight = slider ? slider.offsetHeight : 100;
     const minScroll = sliderHeight;
     
     if (window.scrollY < minScroll && scrollLocked) {
