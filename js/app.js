@@ -896,10 +896,10 @@ async function showRecipeDetail(recipeId) {
     const sliderHeight = slider ? slider.offsetHeight : 400;
     
     window.scrollTo({ 
-      top:0 + 100, 
+      top:sliderHeight + 200, 
       behavior: 'smooth' 
     });
-  }, 100);
+  }, 500);
 
   // ✅ TRAVA scroll pra não voltar pro banner
   let scrollLocked = false;
