@@ -1392,32 +1392,27 @@ async function checkPremiumExpiration() {
   if (now > premiumExpires) {
     console.log('[PREMIUM] Expirado');
     
-    // Limpa estado
     isPremium = false;
     premiumToken = null;
     premiumExpires = null;
     
-    // Limpa storage
     await storage.set('fit_premium', 'false');
     await storage.set('fit_premium_token', '');
     await storage.set('fit_premium_expires', '');
     
-    // ✅ FIX 1: Atualiza UI imediatamente
     updateUI();
-    
-    // ✅ FIX 2: Re-renderiza receitas para bloquear
     renderRecipes();
-
-
     
-// OU mantém showNotification MAS adiciona fallback:
-if (typeof showNotification === 'function') {
-  showNotification('Premium Expirado', 'Seu acesso premium expirou.');
-} else {
-  alert('⚠️ Premium Expirado\n\nSeu acesso expirou.');
-}
-
+    // ✅ MOSTRA POPUP + ABRE MODAL PREMIUM AUTOMATICAMENTE
+    showNotification(
+      'Premium Expirado', 
+      'Seu acesso premium expirou. Adquira um novo código para continuar.'
+    );
     
+    // ✅ Abre modal premium após 2 segundos
+    setTimeout(() => {
+      window.openPremiumModal();
+    }, 2000);
   }
 }
 
