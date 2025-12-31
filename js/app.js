@@ -901,7 +901,7 @@ setTimeout(() => {
   
   // Scroll suave customizado (800ms)
   const start = window.scrollY;
-  const target = sliderHeight + 20;
+  const target = sliderHeight + 50;
   const distance = target - start;
   const duration = 800; // 800ms = bem suave
   let startTime = null;
