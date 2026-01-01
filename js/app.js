@@ -290,22 +290,41 @@ async function loadUserData() {
     
     if (tokenResult && tokenResult.value) {
       premiumToken = tokenResult.value;
-      premiumExpires = expiresResult ? parseInt(expiresResult.value) : null;
       
-      // ✅ VALIDAÇÃO DE EXPIRAÇÃO
-      if (premiumExpires && Date.now() > premiumExpires) {
-        // Token expirado
-        console.log('[PREMIUM] Token expirado');
-        await storage.set('fit_premium', 'false');
-        await storage.set('fit_premium_token', '');
-        await storage.set('fit_premium_expires', '');
-        isPremium = false;
-        premiumToken = null;
-        premiumExpires = null;
+      // ✅ CONVERSÃO CORRETA DO TIMESTAMP
+      const expiresStr = expiresResult?.value;
+      if (expiresStr) {
+        // Garante que é número
+        premiumExpires = parseInt(expiresStr, 10);
+        
+        // ✅ DEBUG - MOSTRA OS VALORES
+        console.log('[LOAD] Premium data:', {
+          token: premiumToken,
+          expiresStr: expiresStr,
+          expiresNum: premiumExpires,
+          now: Date.now(),
+          expiresDate: new Date(premiumExpires).toISOString(),
+          isExpired: Date.now() > premiumExpires
+        });
+        
+        // ✅ VALIDAÇÃO DE EXPIRAÇÃO
+        if (Date.now() > premiumExpires) {
+          console.log('[PREMIUM] Token expirado ao carregar');
+          await storage.set('fit_premium', 'false');
+          await storage.set('fit_premium_token', '');
+          await storage.set('fit_premium_expires', '');
+          isPremium = false;
+          premiumToken = null;
+          premiumExpires = null;
+        } else {
+          // Token válido
+          console.log('[PREMIUM] Token válido!');
+          isPremium = true;
+          await storage.set('fit_premium', 'true');
+        }
       } else {
-        // Token válido
-        isPremium = true;
-        await storage.set('fit_premium', 'true');
+        // Sem data de expiração
+        isPremium = false;
       }
     } else {
       // Não tem token - verifica flag antiga
@@ -337,7 +356,7 @@ async function loadUserData() {
   initSliderAndCategories();
   renderRecipes();
 
-  // ✅ NOVO - Sistema hybrid de verificação
+  // ✅ SETUP TIMERS DEPOIS DE TUDO
   _setupPremiumTimers();
 }
 
@@ -1364,6 +1383,23 @@ async function activatePremium() {
       return;
     }
 
+
+    
+
+    // ✅ DEBUG - MOSTRA O QUE A API RETORNOU
+    console.log('[ACTIVATE] API Response:', {
+      token: data.token,
+      expiresAt: data.expiresAt,
+      expiresInDays: data.expiresInDays,
+      expiresDate: new Date(data.expiresAt).toISOString(),
+      now: Date.now(),
+      diff: data.expiresAt - Date.now()
+    });
+
+
+
+    
+
     // ✅ ATIVA PREMIUM COM TOKEN
     isPremium = true;
     premiumToken = data.token;
@@ -1464,7 +1500,7 @@ function _setupPremiumTimers() {
     timeLeftDays: Math.ceil(timeLeft / (1000 * 60 * 60 * 24))
   });
   
-  // Se já expirou, executa imediatamente
+  // ✅ CORREÇÃO: Se já expirou, executa imediatamente
   if (timeLeft <= 0) {
     console.log('[PREMIUM] Já expirado ao configurar timer');
     _handlePremiumExpiration();
@@ -1479,15 +1515,18 @@ function _setupPremiumTimers() {
     _handlePremiumExpiration();
   }, timeLeft);
   
-  // ✅ VERIFICAÇÃO BACKUP (setInterval a cada 30s)
+  // ✅ VERIFICAÇÃO BACKUP (setInterval a cada 60s) - AUMENTADO DE 30s
   _premiumInterval = setInterval(() => {
     const now = Date.now();
-    if (now > premiumExpires) {
+    if (now >= premiumExpires) {
       console.log('[PREMIUM] Interval backup detectou expiração');
       _handlePremiumExpiration();
     }
-  }, 30000); // 30 segundos
+  }, 60000); // 60 segundos
 }
+
+
+
 
 function _clearPremiumTimers() {
   if (_premiumTimeout) {
