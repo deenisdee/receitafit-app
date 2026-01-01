@@ -40,7 +40,7 @@ const RECIPES = [
         'Oleaginosas'
     ],
     
-    image: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=1200&h=740&fit=crop',
+    image: 'https://plus.unsplash.com/premium_photo-1663840135701-da69afd32423?q=80',
     
     // 👇 NOVA ESTRUTURA DE INGREDIENTES COM ÍCONES
     ingredients: [
@@ -117,15 +117,7 @@ const RECIPES = [
     images: {
         hero: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=1200&h=740&fit=crop',
         steps: [
-            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 1
-            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 2
-            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 3
-            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 4
-            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 5
-            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 6
-            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 7
-            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop', // passo 8
-            'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=600&h=370&fit=crop'  // passo 9
+            
         ]
     },
     
