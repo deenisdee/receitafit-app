@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     ['G8A8B4', 30],           // 30 dias
     ['TESTE-45P', 30],        // 30 dias
     ['FITPR02024', 30],       // 30 dias
-    ['LANCAMENTO2025', 90],   // 90 dias
+    ['LANCAMENTO2026', 90],   // 90 dias
     ['BETA-TESTER', 365],     // 1 ano
   ]);
   
