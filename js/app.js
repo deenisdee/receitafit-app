@@ -1527,7 +1527,7 @@ function _setupPremiumTimers() {
 
 
     
-  }, 2000); // Verifica a cada 30 segundos
+  }, 30000); // Verifica a cada 30 segundos
 
   
   
