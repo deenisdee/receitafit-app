@@ -1826,6 +1826,32 @@ document.addEventListener('touchstart', (e) => {
   if (target) haptic(8);
 }, { passive: true });
 
+
+
+// ================================
+// BOTÃO VOLTAR AO TOPO
+// ================================
+const backToTopBtn = document.getElementById('back-to-top');
+
+// Mostra/esconde baseado no scroll
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    backToTopBtn?.classList.remove('hidden');
+  } else {
+    backToTopBtn?.classList.add('hidden');
+  }
+});
+
+// Função de scroll suave
+window.scrollToTop = function() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+};
+
+
+
 // ==============================
 // START
 // ==============================
