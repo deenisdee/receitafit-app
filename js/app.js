@@ -1868,7 +1868,7 @@ window.addEventListener('scroll', () => {
     // Aparece depois de 500px, some quando volta pra menos de 200px
     if (scrollY > 1000) {
       backToTopBtn.classList.remove('hidden');
-    } else if (scrollY < 50) {
+    } else if (scrollY < 1000) {
       backToTopBtn.classList.add('hidden');
     }
   }
