@@ -946,7 +946,7 @@ function showRecipeDetail(recipeId) {
     
     window.addEventListener('scroll', lockScroll);
     window._scrollLockHandler = lockScroll;
-  }, 500); // Ativa o lock 300ms depois (após o scroll suave terminar)
+  }, 800); // Ativa o lock 300ms depois (após o scroll suave terminar)
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
