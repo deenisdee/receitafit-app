@@ -946,7 +946,7 @@ function showRecipeDetail(recipeId) {
     
     window.addEventListener('scroll', lockScroll);
     window._scrollLockHandler = lockScroll;
-  }, 50); // Ativa o lock 300ms depois (após o scroll suave terminar)
+  }, 300); // Ativa o lock 300ms depois (após o scroll suave terminar)
 
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
@@ -1835,22 +1835,25 @@ document.addEventListener('touchstart', (e) => {
 // ================================
 const backToTopBtn = document.getElementById('back-to-top');
 
+
+
 // Mostra/esconde baseado no scroll
+
+
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) {
-    backToTopBtn?.classList.remove('hidden');
-  } else {
-    backToTopBtn?.classList.add('hidden');
+  const backToTopBtn = document.getElementById('back-to-top');
+  
+  if (backToTopBtn) {
+    const scrollY = window.scrollY;
+    
+    // Aparece depois de 500px, some quando volta pra menos de 200px
+    if (scrollY > 500) {
+      backToTopBtn.classList.remove('hidden');
+    } else if (scrollY < 200) {
+      backToTopBtn.classList.add('hidden');
+    }
   }
 });
-
-// Função de scroll suave
-window.scrollToTop = function() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
-};
 
 
 
