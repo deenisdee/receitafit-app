@@ -359,7 +359,7 @@ async function loadUserData() {
   // ✅ SETUP TIMERS DEPOIS DE TUDO
   _setupPremiumTimers();
   
-
+}
 
 
 async function saveUserData() {
