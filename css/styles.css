@@ -1667,16 +1667,13 @@ body.premium-active #premium-btn {
 
 
 
-
-
 /* ================================
    BREADCRUMBS
    ================================ */
 .breadcrumbs-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
   padding: 0 1rem;
   flex-wrap: wrap;
@@ -1739,8 +1736,6 @@ body.premium-active #premium-btn {
     max-width: 250px;
   }
 }
-
-
 
 
 
