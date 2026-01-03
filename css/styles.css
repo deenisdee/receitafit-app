@@ -961,12 +961,21 @@ z-index: 999 !important;
   border-radius: 9px !important;
 }
 
+
+
+
 #premium-modal .modal-actions{
   display: grid !important;
   grid-template-columns: 1fr 1.4fr;
   gap: 12px;
   align-items: stretch;
+
+   z-index: 99999!important;
+
 }
+
+
+
 
 #premium-modal .btn-secondary,
 #premium-modal .btn-primary{
