@@ -1943,38 +1943,31 @@ window.closeConfirmCreditModal = function() {
 };
 
 window.confirmUnlockRecipe = function() {
-  console.log('[CONFIRM] pendingRecipeId:', pendingRecipeId);
-  
   if (!pendingRecipeId) {
     console.error('[CONFIRM] Erro: pendingRecipeId está null!');
     return;
   }
   
-  console.log('[CONFIRM] Credits antes:', credits);
+  // ✅ SALVA O ID ANTES DE FECHAR O MODAL
+  const recipeToOpen = pendingRecipeId;
   
   // Gasta o crédito e desbloqueia
   if (credits > 0) {
     credits--;
-    unlockedRecipes.push(pendingRecipeId);
+    unlockedRecipes.push(recipeToOpen);
     saveUserData();
     updateUI();
     renderRecipes();
     
-    console.log('[CONFIRM] Credits depois:', credits);
-    console.log('[CONFIRM] Fechando modal...');
-    
-    // Fecha modal
+    // Fecha modal (isso vai resetar pendingRecipeId)
     closeConfirmCreditModal();
     
-    console.log('[CONFIRM] Abrindo receita:', pendingRecipeId);
+    // ✅ USA A VARIÁVEL SALVA
+    showRecipeDetail(recipeToOpen);
     
-    // Abre receita
-    showRecipeDetail(pendingRecipeId);
-  } else {
-    console.error('[CONFIRM] Sem créditos!');
+    console.log('[CONFIRM] Receita aberta:', recipeToOpen);
   }
 };
-
 
 
 // ==============================
