@@ -2012,3 +2012,35 @@ body.premium-active #premium-btn {
 body.detail-open {
   overflow-y: scroll; /* mantém scroll */
 }
+
+
+
+
+
+
+/* ================================
+   TRANSIÇÃO SUAVE ENTRE TELAS
+   ================================ */
+#recipe-grid,
+#recipe-detail,
+#heroSlider,
+.categories-new {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#recipe-grid.fade-out,
+#recipe-detail.fade-out,
+#heroSlider.fade-out,
+.categories-new.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+#recipe-grid.fade-in,
+#recipe-detail.fade-in,
+#heroSlider.fade-in,
+.categories-new.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
