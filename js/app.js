@@ -919,15 +919,39 @@ recipeGrid.classList.add('hidden');
   if (slider) slider.style.display = 'none';
   if (categories) categories.style.display = 'none';
 
-  // ✅ Renderiza os ícones Lucide primeiro
+// ✅ Renderiza os ícones Lucide
   if (typeof lucide !== 'undefined') lucide.createIcons();
 
-  // ✅ SCROLL SUAVE COM DELAY (aguarda o DOM renderizar)
+  // ✅ ANIMAÇÃO SUAVE
+  const slider = document.getElementById('heroSlider');
+  const categories = document.querySelector('.categories-new');
+  
+  // Fade out: grid, slider, categorias
+  recipeGrid.classList.add('fade-out');
+  if (slider) slider.classList.add('fade-out');
+  if (categories) categories.classList.add('fade-out');
+  
   setTimeout(() => {
+    // Esconde os elementos
+    recipeGrid.classList.add('hidden');
+    recipeGrid.classList.remove('fade-out');
+    if (slider) {
+      slider.style.display = 'none';
+      slider.classList.remove('fade-out');
+    }
+    if (categories) {
+      categories.style.display = 'none';
+      categories.classList.remove('fade-out');
+    }
+    
+    // Mostra receita
+    recipeDetail.classList.remove('hidden');
+    recipeDetail.classList.add('fade-in');
+    
+    // Scroll suave pro topo
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 50);
+  }, 300);
 }
-
 
 
 
@@ -938,24 +962,37 @@ window.closeRecipeDetail = function() {
   
   if (!recipeDetailEl || !recipeGridEl) return;
 
-  // Esconde detalhe, mostra grid
-  recipeDetailEl.classList.add('hidden');
-  recipeGridEl.classList.remove('hidden');
-  
-  currentRecipe = null;
-
-  // ✅ MOSTRA SLIDER E CATEGORIAS DE VOLTA
   const slider = document.getElementById('heroSlider');
   const categories = document.querySelector('.categories-new');
-  if (slider) slider.style.display = 'block';
-  if (categories) categories.style.display = 'block';
-
- renderRecipes();
   
-  // ✅ SCROLL SUAVE COM DELAY
+  // Fade out: receita
+  recipeDetailEl.classList.add('fade-out');
+  
   setTimeout(() => {
+    // Esconde receita
+    recipeDetailEl.classList.add('hidden');
+    recipeDetailEl.classList.remove('fade-out', 'fade-in');
+    
+    currentRecipe = null;
+    
+    // Mostra grid, slider, categorias
+    recipeGridEl.classList.remove('hidden');
+    recipeGridEl.classList.add('fade-in');
+    
+    if (slider) {
+      slider.style.display = 'block';
+      slider.classList.add('fade-in');
+    }
+    if (categories) {
+      categories.style.display = 'block';
+      categories.classList.add('fade-in');
+    }
+    
+    renderRecipes();
+    
+    // Scroll suave pro topo
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 50);
+  }, 300);
 };
 
 
