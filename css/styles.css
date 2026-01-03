@@ -1454,7 +1454,7 @@ body.premium-active #premium-btn {
   cursor: pointer;
   font-weight: 600;
   font-size: 1rem;
-  margin: 1.5rem;
+  margin: 1.5rem 1.5rem 0.5rem 0.5rem;
 }
 
 .back-btn svg {
