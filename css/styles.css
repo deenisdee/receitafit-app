@@ -761,14 +761,14 @@ body.modal-open{ overflow:hidden; height:100vh; }
 #premium-modal .input-group label{ font-weight:600; }
 
 #confirm-credit-modal {
-z-index: 999 !important;
+ z-index: 99999!important;
 }
 
 
 
 
 #premium-modal {
-  z-index: 2000 !important;
+ z-index: 99999!important;
 }
 
 
@@ -785,7 +785,7 @@ z-index: 999 !important;
 }
 
 #premium-modal #premium-code-input:focus{ border-color:#16a34a !important; outline:none !important;
- z-index: 99999!important;                                        
+                                   
 }
 
 .premium-footer{ padding-top:1rem; border-top:1px solid #e5e7eb; text-align:center; margin-top:1rem; }
