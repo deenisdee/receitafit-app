@@ -1943,12 +1943,9 @@ window.closeConfirmCreditModal = function() {
 };
 
 window.confirmUnlockRecipe = function() {
-  if (!pendingRecipeId) {
-    console.error('[CONFIRM] Erro: pendingRecipeId está null!');
-    return;
-  }
+  if (!pendingRecipeId) return;
   
-  // ✅ SALVA O ID ANTES DE FECHAR O MODAL
+  // Salva o ID antes de fechar o modal
   const recipeToOpen = pendingRecipeId;
   
   // Gasta o crédito e desbloqueia
@@ -1959,16 +1956,11 @@ window.confirmUnlockRecipe = function() {
     updateUI();
     renderRecipes();
     
-    // Fecha modal (isso vai resetar pendingRecipeId)
+    // Fecha modal e abre receita
     closeConfirmCreditModal();
-    
-    // ✅ USA A VARIÁVEL SALVA
     showRecipeDetail(recipeToOpen);
-    
-    console.log('[CONFIRM] Receita aberta:', recipeToOpen);
   }
 };
-
 
 // ==============================
 // START
