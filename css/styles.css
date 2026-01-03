@@ -1885,6 +1885,12 @@ body.premium-active #premium-btn {
 
     box-shadow: 0 12px 26px rgba(245,158,11,.28) !important;
   }
+
+  #premium-btn:hover, .btn-premium:hover, .premium-btnhover {
+
+    box-shadow: 0 12px 26px rgba(17, 24, 39, .10) !important;
+  }
+   
 }
 
 /* “Pill” do header no desktop */
