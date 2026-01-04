@@ -794,60 +794,7 @@ body.modal-open{ overflow:hidden; height:100vh; }
 
 
 
-/* ================================
-   FIX: BOTÕES MODAL PREMIUM - FORÇAR TAMANHO IGUAL
-   ================================ */
-#premium-modal .btn-cancel,
-#premium-modal .btn-primary {
-  flex: 1 !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  width: auto !important;
-  padding: 0.875rem 1rem !important;
-  font-size: 1rem !important;
-  font-weight: 600 !important;
-  border-radius: 12px !important;
-  cursor: pointer !important;
-  transition: all 0.2s !important;
-  white-space: nowrap !important;
-  text-align: center !important;
-}
 
-#premium-modal .btn-cancel {
-  background: #f3f4f6 !important;
-  color: #374151 !important;
-  border: 2px solid #e5e7eb !important;
-}
-
-#premium-modal .btn-cancel:hover {
-  background: #fff !important;
-  border-color: #d1d5db !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
-}
-
-#premium-modal .btn-primary {
-  background: #16a34a !important;
-  color: #fff !important;
-  border: 2px solid #16a34a !important;
-}
-
-#premium-modal .btn-primary:hover {
-  background: #15803d !important;
-  border-color: #15803d !important;
-  transform: translateY(-2px) !important;
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3) !important;
-}
-```
-
----
-
-## 📍 ONDE ADICIONAR:
-```
-linha 784: }
-linha 785:
-linha 786: /* ================================  ← COLE AQUI
-linha 787:    FIX: BOTÕES MODAL PREMIUM
 
 
 
@@ -1021,16 +968,15 @@ linha 787:    FIX: BOTÕES MODAL PREMIUM
   border-radius: 9px !important;
 }
 
-#premium-modal .modal-actions,
-#premium-modal > div > div:last-child {
-  display: flex;
-  gap: 0.75rem;
-  width: 100%;
+#premium-modal .modal-actions{
+  display: grid !important;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 12px;
+  align-items: stretch;
 }
 
 #premium-modal .btn-secondary,
 #premium-modal .btn-primary{
-   flex: 1 !important;
   height: 46px;
   border-radius: 12px;
 }
@@ -1671,15 +1617,17 @@ body.premium-active #premium-btn {
 
 /* Botão "Agora não" - ESTADO NORMAL (background cinza) */
 #premium-modal .btn-cancel,
-#premium-modal .btn-primary {
-   flex: 1 !important;       /* ← DIVIDE ESPAÇO IGUALMENTE */
-  padding: 0.875rem;
+.btn-cancel {
+  width: 100%;
+  padding: 0.875rem;      /* ← MESMO padding do Ativar Premium */
+  background: #f3f4f6;    /* ← Cinza claro (invertido) */
+  color: #374151;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
-  border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  white-space: nowrap;  /* ← Evita quebra de texto */
 }
 
 .modal-subtitle {
@@ -2006,7 +1954,9 @@ body.premium-active #premium-btn {
    MODAIS — hover nos botões internos
    ========================= */
 .btn-calculate,
-.modal-actions button{}
+.modal-actions button{
+  box-shadow: 0 8px 18px rgba(17,24,39,.10);
+}
 
 /* Planejador: menor altura no mobile */
 @media (max-width: 768px) {
