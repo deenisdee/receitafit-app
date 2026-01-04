@@ -696,29 +696,43 @@ function renderRecipes() {
 
 window.viewRecipe = function(recipeId) {
   haptic(10);
-  // ✅ garante 1 única cobrança aqui
-  if (!ensureRecipeAccess(recipeId)) return;
 
-
-
-window.viewRecipe = function(recipeId) {
-  haptic(10);
-  
-  // ✅ VERIFICA EXPIRAÇÃO ANTES DE ABRIR RECEITA
-  if (isPremium && premiumExpires && Date.now() > premiumExpires) {
-    console.log('[PREMIUM] Expirou ao tentar abrir receita');
-    _handlePremiumExpiration();
-    return; // Bloqueia acesso
+  // já tem acesso?
+  if (isPremium || unlockedRecipes.includes(recipeId)) {
+    showRecipeDetail(recipeId);
+    return;
   }
-  
-  if (!ensureRecipeAccess(recipeId)) return;
-  showRecipeDetail(recipeId);
+
+  // tem crédito? confirma antes de gastar
+  if (credits > 0) {
+    const recipe = allRecipes.find(r => r.id === recipeId) || RECIPES.find(r => r.id === recipeId);
+    const name = recipe?.name ? `: ${recipe.name}` : '';
+
+    showConfirm(
+      'Desbloquear esta receita?',
+      `Você tem ${credits} crédito(s) restante(s).\nDeseja usar 1 crédito para desbloquear${name}?`,
+      () => {
+        credits--;
+        unlockedRecipes.push(recipeId);
+        saveUserData();     // mantém seu padrão
+        updateUI();
+        renderRecipes();
+        showRecipeDetail(recipeId);
+      }
+    );
+    return;
+  }
+
+  // sem crédito -> abre premium
+  if (modalMessage) {
+    modalMessage.textContent = 'Seus créditos acabaram. Ative o Premium para acesso ilimitado.';
+  }
+  const warning = document.getElementById('credits-warning');
+  if (warning) warning.classList.remove('hidden');
+
+  openModal(premiumModal);
 };
 
-  
-  
-  showRecipeDetail(recipeId);
-};
 
 // ==============================
 // DETALHE DA RECEITA
