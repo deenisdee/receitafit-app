@@ -1276,12 +1276,13 @@ window.addToWeekPlan = function(day, recipeId) {
   }
   
   
-  // ✅ Renderiza ícones Lucide
+    // ✅ Renderiza ícones Lucide
 if (typeof lucide !== 'undefined') {
   lucide.createIcons();
 }
     
 };
+
 
 
 window.addToWeekPlanWithMeal = function(meal) {
