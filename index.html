@@ -391,7 +391,12 @@
 </div>
 
 
-  <!-- Modal Escolha de Refeição -->
+
+
+
+
+
+<!-- Modal Escolha de Refeição -->
 <div id="meal-selector-modal" class="modal hidden">
   <div class="modal-overlay" onclick="closeMealSelector()"></div>
   <div class="modal-content">
@@ -401,59 +406,69 @@
       </svg>
     </button>
     
-    <h2 class="modal-title">Escolha a Refeição</h2>
+    <h3 class="modal-title">Quando você vai comer isso?</h3>
     <p class="modal-subtitle" id="meal-selector-subtitle"></p>
     
-    <div class="meal-options">
-      <button class="meal-option-btn tap" onclick="addToWeekPlanWithMeal('Café da Manhã')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M17 8h1a4 4 0 1 1 0 8h-1M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
-          <line x1="6" x2="6" y1="2" y2="4"/>
-          <line x1="10" x2="10" y1="2" y2="4"/>
-          <line x1="14" x2="14" y1="2" y2="4"/>
-        </svg>
-        <span>Café da Manhã</span>
+    <div class="meal-selector-options">
+      <button class="meal-option tap" onclick="addToWeekPlanWithMeal('Café da Manhã')">
+        <i data-lucide="coffee" class="meal-icon"></i>
+        <div class="meal-info">
+          <div class="meal-name">Café da Manhã</div>
+          <div class="meal-time">6h - 9h</div>
+        </div>
       </button>
       
-      <button class="meal-option-btn tap" onclick="addToWeekPlanWithMeal('Lanche da Manhã')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12 6 12 12 16 14"/>
-        </svg>
-        <span>Lanche da Manhã</span>
+      <button class="meal-option tap" onclick="addToWeekPlanWithMeal('Lanche da Manhã')">
+        <i data-lucide="apple" class="meal-icon"></i>
+        <div class="meal-info">
+          <div class="meal-name">Lanche da Manhã</div>
+          <div class="meal-time">9h - 11h</div>
+        </div>
       </button>
       
-      <button class="meal-option-btn tap" onclick="addToWeekPlanWithMeal('Almoço')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
-          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
-          <line x1="6" x2="6" y1="1" y2="4"/>
-          <line x1="10" x2="10" y1="1" y2="4"/>
-          <line x1="14" x2="14" y1="1" y2="4"/>
-        </svg>
-        <span>Almoço</span>
+      <button class="meal-option tap" onclick="addToWeekPlanWithMeal('Almoço')">
+        <i data-lucide="utensils" class="meal-icon"></i>
+        <div class="meal-info">
+          <div class="meal-name">Almoço</div>
+          <div class="meal-time">12h - 14h</div>
+        </div>
       </button>
       
-      <button class="meal-option-btn tap" onclick="addToWeekPlanWithMeal('Lanche da Tarde')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12 6 12 12 16 14"/>
-        </svg>
-        <span>Lanche da Tarde</span>
+      <button class="meal-option tap" onclick="addToWeekPlanWithMeal('Lanche da Tarde')">
+        <i data-lucide="cookie" class="meal-icon"></i>
+        <div class="meal-info">
+          <div class="meal-name">Lanche da Tarde</div>
+          <div class="meal-time">15h - 17h</div>
+        </div>
       </button>
       
-      <button class="meal-option-btn tap" onclick="addToWeekPlanWithMeal('Jantar')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="2"/>
-          <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/>
-        </svg>
-        <span>Jantar</span>
+      <button class="meal-option tap" onclick="addToWeekPlanWithMeal('Jantar')">
+        <i data-lucide="moon" class="meal-icon"></i>
+        <div class="meal-info">
+          <div class="meal-name">Jantar</div>
+          <div class="meal-time">19h - 21h</div>
+        </div>
       </button>
     </div>
+	
+	</button>
     
-    <button class="btn-cancel tap" onclick="closeMealSelector()">Cancelar</button>
+    
+    <!-- ✅ ADICIONE AQUI -->
+    <button class="btn-cancel tap" onclick="closeMealSelector()" style="margin-top: 1rem; width: 100%;">
+      Cancelar
+    </button>
+    
   </div>
 </div>
+  </div>
+</div>
+
+
+
+
+
+
 
 <!-- Confirm Modal -->
 <div id="confirm-modal" class="modal hidden">
