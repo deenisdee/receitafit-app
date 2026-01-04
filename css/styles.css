@@ -562,6 +562,7 @@ body.modal-open{ overflow:hidden; height:100vh; }
 /* Botões padrão */
 .btn-secondary,
 .btn-primary{
+
   padding:.875rem;
   border:none;
   border-radius:10px;
@@ -1781,6 +1782,66 @@ body.premium-active #premium-btn {
 
 
 
+/* ================================
+   MODAL REFEIÇÕES - ÍCONES E HORÁRIOS
+   ================================ */
+.meal-selector-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.meal-option {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+padding: 1.25rem 1.5rem !important;  /* ← AUMENTADO ainda mais */
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  width: 100%;
+  
+  
+  
+  
+  
+}
+
+.meal-option:hover {
+  background: #f0fdf4;
+  border-color: #16a34a;
+  transform: translateX(4px);
+}
+
+.meal-icon {
+  width: 24px;
+  height: 24px;
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+.meal-info {
+  flex: 1;
+}
+
+.meal-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.125rem;
+}
+
+.meal-time {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+
+
 
 
 
@@ -1955,7 +2016,7 @@ body.premium-active #premium-btn {
    ========================= */
 .btn-calculate,
 .modal-actions button{
- 
+  box-shadow: 0 8px 18px rgba(17,24,39,.10);
 }
 
 /* Planejador: menor altura no mobile */
@@ -2169,4 +2230,11 @@ body.detail-open {
 .categories-new.fade-in {
   opacity: 1;
   transform: translateY(0);
+}
+
+
+
+/* FORÇA PADDING MAIOR NOS BOTÕES DE REFEIÇÃO */
+#meal-selector-modal button.meal-option.tap {
+  padding: 1.5rem 1.75rem !important;
 }
