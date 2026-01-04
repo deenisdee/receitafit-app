@@ -759,6 +759,7 @@ body.modal-open{ overflow:hidden; height:100vh; }
 .premium-warning p{ margin:0; color:#92400e; font-weight:600; font-size:.9rem; }
 
 #premium-modal .input-group label{ font-weight:600; }
+
 #premium-modal #premium-code-input{
   border-radius:8px !important;
   border:2px solid #e5e7eb !important;
@@ -979,7 +980,17 @@ html { scrollbar-gutter: stable; }
 }
 
 #premium-btn {
-  display: var(--show-premium-btn) !important;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  padding: 0.625rem 1.5rem;
+  border-radius: 9999px;
+  font-size: 0.9375rem;  /* ← MESMO tamanho do badge créditos */
+  font-weight: 600;       /* ← MESMO peso do badge créditos */
+  font-family: inherit;   /* ← MESMA fonte */
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
 }
 
 /* Ícone estrela para premium */
@@ -1741,6 +1752,50 @@ body.premium-active #premium-btn {
 
 
 
+
+
+/* Botão "Agora não" - ESTADO NORMAL (background cinza) */
+#premium-modal .btn-cancel,
+.btn-cancel {
+  width: 100%;
+  padding: 0.875rem;      /* ← MESMO padding do Ativar Premium */
+  background: #f3f4f6;    /* ← Cinza claro (invertido) */
+  color: #374151;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+/* Botão "Agora não" - HOVER (fica branco com borda) */
+#premium-modal .btn-cancel:hover,
+.btn-cancel:hover {
+  background: #fff;       /* ← Branco no hover (invertido) */
+  border-color: #d1d5db;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão "Ativar Premium" - garantir tamanho igual */
+#premium-modal .btn-primary,
+.btn-primary {
+  width: 100%;
+  padding: 0.875rem;      /* ← MESMO padding do Agora não */
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+
+
+
+
+
+
+
+
+
 /* =========================================================
    RECEITAFIT.APP — UI POLISH (OVERRIDE FINAL)
    ========================================================= */
@@ -1888,7 +1943,10 @@ body.premium-active #premium-btn {
 
   #premium-btn:hover, .btn-premium:hover, .premium-btnhover {
 
-    box-shadow: 0 12px 26px rgba(17, 24, 39, .10) !important;
+   background: #15803d;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+     
   }
    
 }
