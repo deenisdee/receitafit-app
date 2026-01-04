@@ -2175,27 +2175,3 @@ body.detail-open {
 
 
 
-/* =========================================================
-   FIX DEFINITIVO — MODAIS SEMPRE ACIMA DE TUDO
-========================================================= */
-
-.modal {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 999999999999 !important;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal:not(.hidden) {
-  display: flex !important;
-}
-
-/* recipe-detail NÃO pode competir com modal */
-#recipe-detail {
-  position: relative;
-  z-index: 1 !important;
-}
-
-
