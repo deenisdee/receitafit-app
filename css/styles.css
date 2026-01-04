@@ -769,6 +769,35 @@ body.modal-open{ overflow:hidden; height:100vh; }
 }
 #premium-modal #premium-code-input:focus{ border-color:#16a34a !important; outline:none !important; }
 
+
+
+
+
+
+/* Botão "Agora não" - HOVER (fica branco com borda) */
+#premium-modal .btn-cancel:hover,
+.btn-cancel:hover {
+  background: #fff;       /* ← Branco no hover (invertido) */
+  border-color: #d1d5db;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Botão "Ativar Premium" - garantir tamanho igual */
+#premium-modal .btn-primary,
+.btn-primary {
+  width: 100%;
+  padding: 0.875rem;      /* ← MESMO padding do Agora não */
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+
+
+
+
+
+
 .premium-footer{ padding-top:1rem; border-top:1px solid #e5e7eb; text-align:center; margin-top:1rem; }
 .premium-footer-text{ color:#6b7280; font-size:.85rem; font-weight:400; margin:0 0 .75rem; }
 
@@ -1586,22 +1615,19 @@ body.premium-active #premium-btn {
   flex: 1;
 }
 
+/* Botão "Agora não" - ESTADO NORMAL (background cinza) */
+#premium-modal .btn-cancel,
 .btn-cancel {
   width: 100%;
-  padding: 0.875rem;
-  background: #f3f4f6;
-  color: #6b7280;
-  border: none;
-  border-radius: 0.75rem;
-  font-weight: 600;
+  padding: 0.875rem;      /* ← MESMO padding do Ativar Premium */
+  background: #f3f4f6;    /* ← Cinza claro (invertido) */
+  color: #374151;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  margin-top: 0.5rem;
-}
-
-.btn-cancel:hover {
-  background: #e5e7eb;
 }
 
 .modal-subtitle {
@@ -1749,44 +1775,6 @@ body.premium-active #premium-btn {
     max-width: 250px;
   }
 }
-
-
-
-
-
-/* Botão "Agora não" - ESTADO NORMAL (background cinza) */
-#premium-modal .btn-cancel,
-.btn-cancel {
-  width: 100%;
-  padding: 0.875rem;      /* ← MESMO padding do Ativar Premium */
-  background: #f3f4f6;    /* ← Cinza claro (invertido) */
-  color: #374151;
-  border: 2px solid #e5e7eb;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-/* Botão "Agora não" - HOVER (fica branco com borda) */
-#premium-modal .btn-cancel:hover,
-.btn-cancel:hover {
-  background: #fff;       /* ← Branco no hover (invertido) */
-  border-color: #d1d5db;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Botão "Ativar Premium" - garantir tamanho igual */
-#premium-modal .btn-primary,
-.btn-primary {
-  width: 100%;
-  padding: 0.875rem;      /* ← MESMO padding do Agora não */
-  font-size: 1rem;
-  font-weight: 600;
-}
-
 
 
 
