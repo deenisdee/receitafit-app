@@ -1820,7 +1820,7 @@ body.premium-active #premium-btn {
 .meal-name {
   flex: 1;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #1f2937;
   text-align: left;
 }
