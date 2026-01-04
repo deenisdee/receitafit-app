@@ -1954,9 +1954,7 @@ body.premium-active #premium-btn {
    MODAIS — hover nos botões internos
    ========================= */
 .btn-calculate,
-.modal-actions button{
-  box-shadow: 0 8px 18px rgba(17,24,39,.10);
-}
+.modal-actions button{}
 
 /* Planejador: menor altura no mobile */
 @media (max-width: 768px) {
