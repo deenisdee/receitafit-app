@@ -2938,7 +2938,8 @@ body.modal-open .bottom-tab-bar {
     position: relative !important;
 
     /* força centralização visual */
-    left: 40% !important;
+    left: 41% !important;
+    top: 5px !important;
     transform: translateX(-50%) !important;
 
     /* evita heranças estranhas */
@@ -2948,4 +2949,10 @@ body.modal-open .bottom-tab-bar {
     align-items: center !important;
     white-space: nowrap;
   }
+  
+  .categories-new {
+    margin: 0.5rem auto !important
+  
 }
+
+
