@@ -1887,6 +1887,597 @@ body.premium-active #premium-btn {
 
 
 
+/* ================================
+   TAB BAR MOBILE
+   ================================ */
+.tab-bar {
+  display: none; /* Escondido no desktop */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
+  padding: 0.5rem 0;
+  z-index: 1000;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tab-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.2s;
+  color: #6b7280;
+}
+
+.tab-item:active {
+  transform: scale(0.95);
+}
+
+.tab-item.active {
+  color: #16a34a;
+}
+
+.tab-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.tab-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ================================
+   DROPDOWN PLANNER (abre pra cima)
+   ================================ */
+.planner-dropdown {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.planner-dropdown.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(100%);
+}
+
+.planner-dropdown-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.planner-dropdown-content {
+  position: relative;
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  padding: 1.5rem 1rem 6rem 1rem; /* 6rem bottom para não ficar atrás da tab bar */
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.planner-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #1f2937;
+  text-align: left;
+  width: 100%;
+}
+
+.planner-dropdown-item:active {
+  transform: scale(0.98);
+  background: #f0fdf4;
+  border-color: #16a34a;
+}
+
+.planner-dropdown-icon {
+  width: 24px;
+  height: 24px;
+  color: #16a34a;
+  flex-shrink: 0;
+}
+
+/* ================================
+   MENU HAMBÚRGUER
+   ================================ */
+.hamburger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+  transition: opacity 0.3s ease;
+}
+
+.hamburger-menu.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.hamburger-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.hamburger-content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 280px;
+  max-width: 85%;
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.hamburger-menu.hidden .hamburger-content {
+  transform: translateX(100%);
+}
+
+.hamburger-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.hamburger-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.hamburger-logo-icon {
+  width: 24px;
+  height: 24px;
+  color: #16a34a;
+}
+
+.hamburger-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #6b7280;
+  transition: color 0.2s;
+}
+
+.hamburger-close:active {
+  color: #1f2937;
+}
+
+.hamburger-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.hamburger-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hamburger-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hamburger-section-title svg {
+  width: 18px;
+  height: 18px;
+  color: #16a34a;
+}
+
+.hamburger-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #1f2937;
+  text-align: left;
+  text-decoration: none;
+  width: 100%;
+}
+
+.hamburger-link:active {
+  background: #f3f4f6;
+  transform: scale(0.98);
+}
+
+.hamburger-link svg {
+  width: 20px;
+  height: 20px;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.hamburger-sublink {
+  padding-left: 2.5rem;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.hamburger-divider {
+  height: 1px;
+  background: #e5e7eb;
+  margin: 0.5rem 0;
+}
+
+.hamburger-premium-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.2s;
+  margin-top: 0.5rem;
+}
+
+.hamburger-premium-btn:active {
+  background: #15803d;
+  transform: scale(0.98);
+}
+
+.hamburger-premium-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ================================
+   RODAPÉ DESKTOP
+   ================================ */
+.footer {
+  display: none; /* Escondido no mobile */
+  background: #1f2937;
+  color: #fff;
+  margin-top: 4rem;
+  padding: 3rem 0 0;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.footer-logo-icon {
+  width: 32px;
+  height: 32px;
+  color: #16a34a;
+}
+
+.footer-description {
+  color: #9ca3af;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 350px;
+}
+
+.footer-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-link {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color: #16a34a;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-social-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.footer-bottom {
+  border-top: 1px solid #374151;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.footer-copyright {
+  color: #6b7280;
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+/* ================================
+   RESPONSIVE - MOBILE / DESKTOP
+   ================================ */
+@media (max-width: 768px) {
+  /* MOSTRA tab bar no mobile */
+  .tab-bar {
+    display: flex;
+  }
+  
+  /* Adiciona padding bottom no body para não ficar atrás da tab bar */
+  body {
+    padding-bottom: 70px;
+  }
+  
+  /* ESCONDE rodapé no mobile */
+  .footer {
+    display: none;
+  }
+}
+
+@media (min-width: 769px) {
+  /* MOSTRA rodapé no desktop */
+  .footer {
+    display: block;
+  }
+  
+  /* ESCONDE tab bar no desktop */
+  .tab-bar {
+    display: none !important;
+  }
+  
+  /* ESCONDE dropdown planner no desktop */
+  .planner-dropdown {
+    display: none !important;
+  }
+  
+  /* ESCONDE menu hambúrguer no desktop */
+  .hamburger-menu {
+    display: none !important;
+  }
+}
+
+
+
+
+/* ================================
+   BOTÃO HAMBÚRGUER - FORÇA APARECER NO MOBILE
+   ================================ */
+body .hamburger-btn,
+#header .hamburger-btn,
+.header-content .hamburger-btn {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  body .hamburger-btn,
+  #header .hamburger-btn,
+  .header-content .hamburger-btn {
+    display: block !important;
+    position: relative !important;
+    z-index: 100 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    margin-left: auto !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 0.5rem !important;
+    color: #1f2937 !important;
+  }
+  
+  .hamburger-btn:active {
+    color: #16a34a !important;
+  }
+  
+  .hamburger-btn svg,
+  .hamburger-btn i {
+    width: 24px !important;
+    height: 24px !important;
+  }
+}
+
+
+
+/* ================================
+   HEADER - LAYOUT MOBILE
+   ================================ */
+@media (max-width: 768px) {
+  .header-content {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 1rem !important;
+  }
+  
+  .logo {
+    flex: 0 0 auto !important;
+    order: 1 !important;
+  }
+  
+  .hamburger-btn {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    order: 2 !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    position: relative !important;
+    z-index: 100 !important;
+  }
+  
+  /* Esconde outros elementos do header no mobile (aparecem no menu) */
+  .header-actions,
+  .search-container {
+    order: 3 !important;
+    width: 100% !important;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .header-content {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto !important;
+    grid-template-rows: auto auto !important;
+    gap: 1rem !important;
+    align-items: center !important;
+  }
+  
+  /* Primeira linha: Logo | Espaço | Hambúrguer */
+  .logo {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+  }
+  
+  .hamburger-btn {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  
+  /* Segunda linha: Busca (full width) */
+  .search-container {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+  }
+  
+  /* Terceira linha: Badges */
+  .header-actions {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+  }
+  
+  /* ESCONDE ferramentas no mobile */
+  .header-tools {
+    display: none !important;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .premium-btn {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    z-index: 10 !important;
+  }
+}
+
+
+/* Oculta botões de ferramentas no mobile (aparecem na tab bar) */
+@media (max-width: 768px) {
+  #calculator-btn,
+  #shopping-btn,
+  #planner-btn,
+  #faq-btn,
+  .header-actions .icon-btn {
+    display: none !important;
+  }
+  
+  /* Mantém visíveis apenas créditos e premium */
+  #credits-badge,
+  #premium-btn {
+    display: flex !important;
+  }
+}
+
+
+
 
 /* =========================================================
    RECEITAFIT.APP — UI POLISH (OVERRIDE FINAL)
@@ -2059,7 +2650,7 @@ body.premium-active #premium-btn {
    ========================= */
 .btn-calculate,
 .modal-actions button{
-  box-shadow: 0 8px 18px rgba(17,24,39,.10);
+  
 }
 
 /* Planejador: menor altura no mobile */
@@ -2274,3 +2865,39 @@ body.detail-open {
   opacity: 1;
   transform: translateY(0);
 }
+
+
+/* ================================
+   FIX: BOTÕES MODAL PREMIUM FOCADOS
+   ================================ */
+#premium-modal .modal-content,
+#premium-modal .modal-content * {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+#premium-modal .btn-primary,
+#premium-modal .btn-cancel,
+#premium-modal input,
+#premium-modal button {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  z-index: auto !important;
+}
+
+#premium-modal {
+  z-index: 3000 !important;
+}
+
+#premium-modal .modal-overlay {
+  z-index: 1 !important;
+}
+
+#premium-modal .modal-content {
+  z-index: 2 !important;
+  position: relative !important;
+}
+
+
+
