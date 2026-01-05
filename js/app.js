@@ -420,6 +420,10 @@ async function loadUserData() {
   updateShoppingCounter();
   initSliderAndCategories();
   renderRecipes();
+  
+   if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
 
   // ✅ SETUP TIMERS DEPOIS DE TUDO
   _setupPremiumTimers();
@@ -1982,12 +1986,211 @@ document.addEventListener('touchstart', (e) => {
 // BOTÃO VOLTAR AO TOPO
 // ================================
 const backToTopBtn = document.getElementById('back-to-top');
-
-
-
 // Mostra/esconde baseado no scroll
 
 
+// ================================
+// TAB BAR - FUNÇÕES
+// ================================
+window.tabGoHome = function() {
+  haptic(10);
+  
+  // Fecha modal de detalhes se estiver aberto
+  closeRecipeDetail();
+  
+  // Reseta busca
+  searchTerm = '';
+  const searchInput = document.getElementById('search-input');
+  if (searchInput) searchInput.value = '';
+  
+  // Renderiza todas as receitas
+  renderRecipes();
+  
+  // Scroll pro topo
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // Atualiza estado ativo
+  setActiveTab(0);
+};
+
+window.tabGoSearch = function() {
+  haptic(10);
+  
+  // Scroll pro topo
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  
+  // Foca no campo de busca
+  setTimeout(() => {
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      searchInput.focus();
+      searchInput.select();
+    }
+  }, 300);
+  
+  // Atualiza estado ativo
+  setActiveTab(1);
+};
+
+window.togglePlannerDropdown = function() {
+  haptic(10);
+  const dropdown = document.getElementById('planner-dropdown');
+  if (dropdown) {
+    dropdown.classList.toggle('hidden');
+    
+    // Renderiza ícones Lucide
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  }
+  
+  // Atualiza estado ativo
+  setActiveTab(2);
+};
+
+window.closePlannerDropdown = function() {
+  const dropdown = document.getElementById('planner-dropdown');
+  if (dropdown) {
+    dropdown.classList.add('hidden');
+  }
+};
+
+window.tabGoPremium = function() {
+  haptic(10);
+  openPremiumModal();
+  setActiveTab(3);
+};
+
+function setActiveTab(index) {
+  const tabs = document.querySelectorAll('.tab-item');
+  tabs.forEach((tab, i) => {
+    if (i === index) {
+      tab.classList.add('active');
+    } else {
+      tab.classList.remove('active');
+    }
+  });
+}
+
+
+
+
+// ================================
+// DROPDOWN PLANNER - FUNÇÕES
+// ================================
+window.openCalorieCalculator = function() {
+  closePlannerDropdown();
+  haptic(10);
+  
+  // ✅ Chama a função do botão calculadora
+  const calcBtn = document.getElementById('calculator-btn');
+  if (calcBtn) {
+    calcBtn.click();
+  }
+};
+
+window.openShoppingList = function() {
+  closePlannerDropdown();
+  haptic(10);
+  
+  // ✅ Chama a função do botão lista
+  const shoppingBtn = document.getElementById('shopping-btn');
+  if (shoppingBtn) {
+    shoppingBtn.click();
+  }
+};
+
+window.openWeekPlanner = function() {
+  closePlannerDropdown();
+  haptic(10);
+  
+  // ✅ Chama a função do botão planner
+  const plannerBtn = document.getElementById('planner-btn');
+  if (plannerBtn) {
+    plannerBtn.click();
+  }
+};
+
+
+
+window.openCalorieCalculator = function() {
+  haptic(10);
+  
+  const calcBtn = document.getElementById('calculator-btn');
+  if (calcBtn) {
+    calcBtn.click();
+    // ✅ Fecha dropdown DEPOIS
+    setTimeout(() => closePlannerDropdown(), 100);
+  }
+};
+
+window.openShoppingList = function() {
+  haptic(10);
+  
+  const shoppingBtn = document.getElementById('shopping-btn');
+  if (shoppingBtn) {
+    shoppingBtn.click();
+    // ✅ Fecha dropdown DEPOIS
+    setTimeout(() => closePlannerDropdown(), 100);
+  }
+};
+
+window.openWeekPlanner = function() {
+  haptic(10);
+  
+  const plannerBtn = document.getElementById('planner-btn');
+  if (plannerBtn) {
+    plannerBtn.click();
+    // ✅ Fecha dropdown DEPOIS
+    setTimeout(() => closePlannerDropdown(), 100);
+  }
+};
+
+// ================================
+// MENU HAMBÚRGUER - FUNÇÕES
+// ================================
+window.openHamburgerMenu = function() {
+  haptic(10);
+  const menu = document.getElementById('hamburger-menu');
+  if (menu) {
+    menu.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+    
+    // Renderiza ícones Lucide
+    if (typeof lucide !== 'undefined') {
+      lucide.createIcons();
+    }
+  }
+};
+
+window.closeHamburgerMenu = function() {
+  const menu = document.getElementById('hamburger-menu');
+  if (menu) {
+    menu.classList.add('hidden');
+    document.body.classList.remove('modal-open');
+  }
+};
+
+// ================================
+// RODAPÉ - FUNÇÕES
+// ================================
+window.openFAQModal = function() {
+  haptic(10);
+  const faqModal = document.getElementById('faq-modal');
+  if (faqModal) {
+    faqModal.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+  }
+};
+
+window.openPremiumModal = function() {
+  haptic(10);
+  const premiumModal = document.getElementById('premium-modal');
+  if (premiumModal) {
+    premiumModal.classList.remove('hidden');
+    document.body.classList.add('modal-open');
+  }
+};
 
 
 
@@ -1996,6 +2199,28 @@ const backToTopBtn = document.getElementById('back-to-top');
 // START
 // ==============================
 loadUserData();
+
+
+
+// ================================
+// RENDERIZA ÍCONES LUCIDE AO CARREGAR
+// ================================
+window.addEventListener('DOMContentLoaded', function() {
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+    console.log('Ícones Lucide renderizados');
+  }
+});
+
+// Renderiza novamente após 500ms (garantia)
+setTimeout(() => {
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
+}, 500);
+
+
+
 
 // ================================
 // BOTÃO VOLTAR AO TOPO
