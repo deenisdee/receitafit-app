@@ -2950,6 +2950,11 @@ body.modal-open .bottom-tab-bar {
     white-space: nowrap;
   }
   
+  
+   .header-actions, .search-container {
+    margin-top: 5px !important;
+   }
+  
   .categories-new {
     margin: 0.5rem auto !important
   
