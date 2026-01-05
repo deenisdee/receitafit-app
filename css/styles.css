@@ -2938,7 +2938,7 @@ body.modal-open .bottom-tab-bar {
     position: relative !important;
 
     /* força centralização visual */
-    left: 50% !important;
+    left: 40% !important;
     transform: translateX(-50%) !important;
 
     /* evita heranças estranhas */
