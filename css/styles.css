@@ -117,10 +117,10 @@ a { color:inherit; text-decoration:none; }
   padding:.75rem 1.5rem;
   border-radius:9999px;
   display:flex; align-items:center; gap:.5rem;
-  
+
   font-weight: 600; /* ← MESMO PESO */
   font-size: 0.95rem; /* ← MESMO TAMANHO */
-   
+
   white-space:nowrap;
   height:48px;
   flex-shrink:0;
@@ -147,11 +147,6 @@ a { color:inherit; text-decoration:none; }
   flex-shrink:0;
 }
 .btn-premium:hover{ background:#15803d; }
-
-
-
-
-
 
 /* ============================================
    SLIDER HERO
@@ -271,6 +266,7 @@ a { color:inherit; text-decoration:none; }
   opacity: 0.9;
   background:#16a34a;
   color:#fff;
+  font-size: 0.95rem;
   border-color:#16a34a;
   box-shadow: 0 8px 16px rgba(22,163,74,.22);
   z-index: 2;
@@ -526,7 +522,6 @@ body.modal-open{ overflow:hidden; height:100vh; }
 .modal-content-xlarge{
   padding-right:18px;
   margin-right:-18px;
-   max-width: 80%;
 }
 
 .modal-close{
@@ -770,16 +765,11 @@ body.modal-open{ overflow:hidden; height:100vh; }
 }
 #premium-modal #premium-code-input:focus{ border-color:#16a34a !important; outline:none !important; }
 
-
-
-
-
-
-/* Botão "Agora não" - HOVER (fica branco com borda) */
+/* Botão "Agora não" - HOVER */
 #premium-modal .btn-cancel:hover,
 .btn-cancel:hover {
-  background: #15803d;       /* ← Branco no hover (invertido) */
-  border-color: none;
+  background: #15803d;
+  border-color: transparent;
   transform: translateY(-4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -788,16 +778,10 @@ body.modal-open{ overflow:hidden; height:100vh; }
 #premium-modal .btn-primary,
 .btn-primary {
   width: 100%;
-  padding: 0.875rem;      /* ← MESMO padding do Agora não */
+  padding: 0.875rem;
   font-size: 1rem;
   font-weight: 600;
 }
-
-
-
-
-
-
 
 .premium-footer{ padding-top:1rem; border-top:1px solid #e5e7eb; text-align:center; margin-top:1rem; }
 .premium-footer-text{ color:#6b7280; font-size:.85rem; font-weight:400; margin:0 0 .75rem; }
@@ -1015,9 +999,9 @@ html { scrollbar-gutter: stable; }
   border: none;
   padding: 0.625rem 1.5rem;
   border-radius: 9999px;
-  font-size: 0.9375rem;  /* ← MESMO tamanho do badge créditos */
-  font-weight: 600;       /* ← MESMO peso do badge créditos */
-  font-family: inherit;   /* ← MESMA fonte */
+  font-size: 0.9375rem;
+  font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
@@ -1112,14 +1096,11 @@ body.premium-active #premium-btn {
 }
 
 @media (max-width: 640px) {
-
-
-#notification-title {
+  #notification-title {
     font-size: 1.3rem;
-    margin: 0px 0px 14px 51px ! important;
-}
+    margin: 0px 0px 14px 51px !important;
+  }
 
-   
   .detail-section div[style*="display:flex"] {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -1463,8 +1444,7 @@ body.premium-active #premium-btn {
 
 /* Mobile */
 @media (max-width: 768px) {
-
-.back-to-top {
+  .back-to-top {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
@@ -1483,36 +1463,15 @@ body.premium-active #premium-btn {
     z-index: 999;
     opacity: 1;
     transform: scale(1);
-}
-
-   
-  .detail-title {
-    font-size: 1.7rem;
   }
 
-  .detail-hero-image {
-    height: 300px;
-  }
-
-  .detail-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .benefits-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ingredients-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .planner-days {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .instruction-image {
-    max-width: 100%;
-  }
+  .detail-title { font-size: 1.7rem; }
+  .detail-hero-image { height: 300px; }
+  .detail-stats { grid-template-columns: repeat(2, 1fr); }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .ingredients-grid { grid-template-columns: 1fr; }
+  .planner-days { grid-template-columns: repeat(2, 1fr); }
+  .instruction-image { max-width: 100%; }
 }
 
 .back-btn {
@@ -1559,9 +1518,7 @@ body.premium-active #premium-btn {
   box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
 }
 
-.btn-add-shopping svg {
-  flex-shrink: 0;
-}
+.btn-add-shopping svg { flex-shrink: 0; }
 
 /* Modal de Notificação */
 .modal-content-small {
@@ -1608,11 +1565,7 @@ body.premium-active #premium-btn {
 }
 
 /* Modal Escolha de Refeição */
-.meal-options {
-  display: grid;
-  gap: 0.75rem;
-  margin: 1.5rem 0;
-}
+.meal-options { display: grid; gap: 0.75rem; margin: 1.5rem 0; }
 
 .meal-option-btn {
   display: flex;
@@ -1623,7 +1576,6 @@ body.premium-active #premium-btn {
   border: 2px solid #e5e7eb;
   border-radius: 0.75rem;
   cursor: pointer;
-  
   transition: all 0.2s;
   font-size: 1rem;
   font-weight: 500;
@@ -1644,16 +1596,14 @@ body.premium-active #premium-btn {
   flex-shrink: 0;
 }
 
-.meal-option-btn span {
-  flex: 1;
-}
+.meal-option-btn span { flex: 1; }
 
-/* Botão "Agora não" - ESTADO NORMAL (background cinza) */
+/* Botão "Agora não" - ESTADO NORMAL */
 #premium-modal .btn-cancel,
 .btn-cancel {
   width: 100%;
-  padding: 0.875rem;      /* ← MESMO padding do Ativar Premium */
-  background: #16a34a;    /* ← Cinza claro (invertido) */
+  padding: 0.875rem;
+  background: #16a34a;
   color: #fff;
   border: none;
   border-radius: 12px;
@@ -1668,9 +1618,7 @@ body.premium-active #premium-btn {
   color: #16a34a;
   margin-bottom: 0.5rem;
   text-align: center;
-   
 }
-
 
 /* ================================
    BOTÃO VOLTAR AO TOPO
@@ -1702,9 +1650,7 @@ body.premium-active #premium-btn {
   box-shadow: 0 12px 32px rgba(22, 163, 74, 0.4);
 }
 
-.back-to-top:active {
-  transform: scale(0.95);
-}
+.back-to-top:active { transform: scale(0.95); }
 
 .back-to-top svg {
   width: 24px;
@@ -1727,18 +1673,11 @@ body.premium-active #premium-btn {
     bottom: 1.5rem;
     right: 1.5rem;
   }
-  
-  .back-to-top svg {
-    width: 20px;
-    height: 20px;
-  }
+  .back-to-top svg { width: 20px; height: 20px; }
 }
 
-
-
-
 /* ================================
-   BREADCRUMBS
+   BREADCRUMBS  (FIXED)
    ================================ */
 .breadcrumbs-wrapper {
   display: flex;
@@ -1797,29 +1736,19 @@ body.premium-active #premium-btn {
     align-items: flex-start;
     gap: 0.75rem;
   }
-  
+
   .breadcrumbs {
     font-size: 0.8125rem;
-   margin: 0.0rem 1.5rem 0.5rem 0.6rem;
-    }
+    margin: 0.0rem 1.5rem 0.5rem 0.6rem;
   }
-  
-  .breadcrumb-current {
-    max-width: 250px;
-  }
+
+  .breadcrumb-current { max-width: 250px; }
 }
-
-
-
 
 /* ================================
    MODAL REFEIÇÕES - ÍCONES E HORÁRIOS NA MESMA LINHA
    ================================ */
-.meal-selector-options {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
+.meal-selector-options { display: flex; flex-direction: column; gap: 0.75rem; }
 
 .meal-option {
   display: flex;
@@ -1842,12 +1771,7 @@ body.premium-active #premium-btn {
   transform: translateX(4px);
 }
 
-.meal-icon {
-  width: 24px;
-  height: 24px;
-  color: #16a34a;
-  flex-shrink: 0;
-}
+.meal-icon { width: 24px; height: 24px; color: #16a34a; flex-shrink: 0; }
 
 .meal-name {
   flex: 1;
@@ -1865,12 +1789,6 @@ body.premium-active #premium-btn {
   margin-left: auto;
 }
 
-
-
-
-
-
-
 /* ================================
    NOTIFICAÇÃO - QUEBRA DE LINHA E CENTRALIZAÇÃO
    ================================ */
@@ -1881,17 +1799,14 @@ body.premium-active #premium-btn {
 }
 
 #notification-title {
-  margin: 0px 0px 14px 51px ! important;
+  margin: 0px 0px 14px 51px !important;
 }
-
-
-
 
 /* ================================
    TAB BAR MOBILE
    ================================ */
 .tab-bar {
-  display: none; /* Escondido no desktop */
+  display: none;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -1918,23 +1833,12 @@ body.premium-active #premium-btn {
   color: #6b7280;
 }
 
-.tab-item:active {
-  transform: scale(0.95);
-}
+.tab-item:active { transform: scale(0.95); }
+.tab-item.active { color: #16a34a; }
 
-.tab-item.active {
-  color: #16a34a;
-}
+.tab-icon { width: 24px; height: 24px; }
 
-.tab-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.tab-label {
-  font-size: 0.75rem;
-  font-weight: 500;
-}
+.tab-label { font-size: 0.75rem; font-weight: 500; }
 
 /* ================================
    DROPDOWN PLANNER (abre pra cima)
@@ -1968,7 +1872,7 @@ body.premium-active #premium-btn {
   position: relative;
   background: #fff;
   border-radius: 20px 20px 0 0;
-  padding: 1.5rem 1rem 6rem 1rem; /* 6rem bottom para não ficar atrás da tab bar */
+  padding: 1.5rem 1rem 6rem 1rem;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -1998,12 +1902,7 @@ body.premium-active #premium-btn {
   border-color: #16a34a;
 }
 
-.planner-dropdown-icon {
-  width: 24px;
-  height: 24px;
-  color: #16a34a;
-  flex-shrink: 0;
-}
+.planner-dropdown-icon { width: 24px; height: 24px; color: #16a34a; flex-shrink: 0; }
 
 /* ================================
    MENU HAMBÚRGUER
@@ -2018,10 +1917,7 @@ body.premium-active #premium-btn {
   transition: opacity 0.3s ease;
 }
 
-.hamburger-menu.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
+.hamburger-menu.hidden { opacity: 0; pointer-events: none; }
 
 .hamburger-overlay {
   position: absolute;
@@ -2046,9 +1942,7 @@ body.premium-active #premium-btn {
   transition: transform 0.3s ease;
 }
 
-.hamburger-menu.hidden .hamburger-content {
-  transform: translateX(100%);
-}
+.hamburger-menu.hidden .hamburger-content { transform: translateX(100%); }
 
 .hamburger-header {
   display: flex;
@@ -2066,11 +1960,7 @@ body.premium-active #premium-btn {
   font-weight: 700;
 }
 
-.hamburger-logo-icon {
-  width: 24px;
-  height: 24px;
-  color: #16a34a;
-}
+.hamburger-logo-icon { width: 24px; height: 24px; color: #16a34a; }
 
 .hamburger-close {
   background: none;
@@ -2081,9 +1971,7 @@ body.premium-active #premium-btn {
   transition: color 0.2s;
 }
 
-.hamburger-close:active {
-  color: #1f2937;
-}
+.hamburger-close:active { color: #1f2937; }
 
 .hamburger-nav {
   flex: 1;
@@ -2094,11 +1982,7 @@ body.premium-active #premium-btn {
   gap: 0.5rem;
 }
 
-.hamburger-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
+.hamburger-section { display: flex; flex-direction: column; gap: 0.25rem; }
 
 .hamburger-section-title {
   display: flex;
@@ -2112,11 +1996,7 @@ body.premium-active #premium-btn {
   letter-spacing: 0.05em;
 }
 
-.hamburger-section-title svg {
-  width: 18px;
-  height: 18px;
-  color: #16a34a;
-}
+.hamburger-section-title svg { width: 18px; height: 18px; color: #16a34a; }
 
 .hamburger-link {
   display: flex;
@@ -2136,29 +2016,13 @@ body.premium-active #premium-btn {
   width: 100%;
 }
 
-.hamburger-link:active {
-  background: #f3f4f6;
-  transform: scale(0.98);
-}
+.hamburger-link:active { background: #f3f4f6; transform: scale(0.98); }
 
-.hamburger-link svg {
-  width: 20px;
-  height: 20px;
-  color: #6b7280;
-  flex-shrink: 0;
-}
+.hamburger-link svg { width: 20px; height: 20px; color: #6b7280; flex-shrink: 0; }
 
-.hamburger-sublink {
-  padding-left: 2.5rem;
-  font-size: 0.9rem;
-  color: #6b7280;
-}
+.hamburger-sublink { padding-left: 2.5rem; font-size: 0.9rem; color: #6b7280; }
 
-.hamburger-divider {
-  height: 1px;
-  background: #e5e7eb;
-  margin: 0.5rem 0;
-}
+.hamburger-divider { height: 1px; background: #e5e7eb; margin: 0.5rem 0; }
 
 .hamburger-premium-btn {
   display: flex;
@@ -2177,21 +2041,15 @@ body.premium-active #premium-btn {
   margin-top: 0.5rem;
 }
 
-.hamburger-premium-btn:active {
-  background: #15803d;
-  transform: scale(0.98);
-}
+.hamburger-premium-btn:active { background: #15803d; transform: scale(0.98); }
 
-.hamburger-premium-btn svg {
-  width: 20px;
-  height: 20px;
-}
+.hamburger-premium-btn svg { width: 20px; height: 20px; }
 
 /* ================================
    RODAPÉ DESKTOP
    ================================ */
 .footer {
-  display: none; /* Escondido no mobile */
+  display: none;
   background: #1f2937;
   color: #fff;
   margin-top: 4rem;
@@ -2207,11 +2065,7 @@ body.premium-active #premium-btn {
   gap: 3rem;
 }
 
-.footer-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+.footer-section { display: flex; flex-direction: column; gap: 1rem; }
 
 .footer-logo {
   display: flex;
@@ -2222,11 +2076,7 @@ body.premium-active #premium-btn {
   margin-bottom: 0.5rem;
 }
 
-.footer-logo-icon {
-  width: 32px;
-  height: 32px;
-  color: #16a34a;
-}
+.footer-logo-icon { width: 32px; height: 32px; color: #16a34a; }
 
 .footer-description {
   color: #9ca3af;
@@ -2235,12 +2085,7 @@ body.premium-active #premium-btn {
   max-width: 350px;
 }
 
-.footer-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 0.5rem;
-}
+.footer-title { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem; }
 
 .footer-links {
   list-style: none;
@@ -2259,20 +2104,11 @@ body.premium-active #premium-btn {
   display: inline-block;
 }
 
-.footer-link:hover {
-  color: #16a34a;
-}
+.footer-link:hover { color: #16a34a; }
 
-.footer-social {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
+.footer-social { display: flex; align-items: center; gap: 0.5rem; }
 
-.footer-social-icon {
-  width: 20px;
-  height: 20px;
-}
+.footer-social-icon { width: 20px; height: 20px; }
 
 .footer-bottom {
   border-top: 1px solid #374151;
@@ -2290,46 +2126,17 @@ body.premium-active #premium-btn {
    RESPONSIVE - MOBILE / DESKTOP
    ================================ */
 @media (max-width: 768px) {
-  /* MOSTRA tab bar no mobile */
-  .tab-bar {
-    display: flex;
-  }
-  
-  /* Adiciona padding bottom no body para não ficar atrás da tab bar */
-  body {
-    padding-bottom: 70px;
-  }
-  
-  /* ESCONDE rodapé no mobile */
-  .footer {
-    display: none;
-  }
+  .tab-bar { display: flex; }
+  body { padding-bottom: 70px; }
+  .footer { display: none; }
 }
 
 @media (min-width: 769px) {
-  /* MOSTRA rodapé no desktop */
-  .footer {
-    display: block;
-  }
-  
-  /* ESCONDE tab bar no desktop */
-  .tab-bar {
-    display: none !important;
-  }
-  
-  /* ESCONDE dropdown planner no desktop */
-  .planner-dropdown {
-    display: none !important;
-  }
-  
-  /* ESCONDE menu hambúrguer no desktop */
-  .hamburger-menu {
-    display: none !important;
-  }
+  .footer { display: block; }
+  .tab-bar { display: none !important; }
+  .planner-dropdown { display: none !important; }
+  .hamburger-menu { display: none !important; }
 }
-
-
-
 
 /* ================================
    BOTÃO HAMBÚRGUER - FORÇA APARECER NO MOBILE
@@ -2356,19 +2163,15 @@ body .hamburger-btn,
     padding: 0.5rem !important;
     color: #1f2937 !important;
   }
-  
-  .hamburger-btn:active {
-    color: #16a34a !important;
-  }
-  
+
+  .hamburger-btn:active { color: #16a34a !important; }
+
   .hamburger-btn svg,
   .hamburger-btn i {
     width: 24px !important;
     height: 24px !important;
   }
 }
-
-
 
 /* ================================
    HEADER - LAYOUT MOBILE
@@ -2380,12 +2183,9 @@ body .hamburger-btn,
     justify-content: space-between !important;
     gap: 1rem !important;
   }
-  
-  .logo {
-    flex: 0 0 auto !important;
-    order: 1 !important;
-  }
-  
+
+  .logo { flex: 0 0 auto !important; order: 1 !important; }
+
   .hamburger-btn {
     display: block !important;
     opacity: 1 !important;
@@ -2396,16 +2196,13 @@ body .hamburger-btn,
     position: relative !important;
     z-index: 100 !important;
   }
-  
-  /* Esconde outros elementos do header no mobile (aparecem no menu) */
+
   .header-actions,
   .search-container {
     order: 3 !important;
     width: 100% !important;
   }
 }
-
-
 
 @media (max-width: 768px) {
   .header-content {
@@ -2415,13 +2212,9 @@ body .hamburger-btn,
     gap: 1rem !important;
     align-items: center !important;
   }
-  
-  /* Primeira linha: Logo | Espaço | Hambúrguer */
-  .logo {
-    grid-column: 1 !important;
-    grid-row: 1 !important;
-  }
-  
+
+  .logo { grid-column: 1 !important; grid-row: 1 !important; }
+
   .hamburger-btn {
     grid-column: 3 !important;
     grid-row: 1 !important;
@@ -2429,26 +2222,12 @@ body .hamburger-btn,
     opacity: 1 !important;
     visibility: visible !important;
   }
-  
-  /* Segunda linha: Busca (full width) */
-  .search-container {
-    grid-column: 1 / -1 !important;
-    grid-row: 2 !important;
-  }
-  
-  /* Terceira linha: Badges */
-  .header-actions {
-    grid-column: 1 / -1 !important;
-    grid-row: 3 !important;
-  }
-  
-  /* ESCONDE ferramentas no mobile */
-  .header-tools {
-    display: none !important;
-  }
+
+  .search-container { grid-column: 1 / -1 !important; grid-row: 2 !important; }
+  .header-actions { grid-column: 1 / -1 !important; grid-row: 3 !important; }
+
+  .header-tools { display: none !important; }
 }
-
-
 
 @media (max-width: 768px) {
   .premium-btn {
@@ -2457,7 +2236,6 @@ body .hamburger-btn,
     z-index: 10 !important;
   }
 }
-
 
 /* Oculta botões de ferramentas no mobile (aparecem na tab bar) */
 @media (max-width: 768px) {
@@ -2468,22 +2246,15 @@ body .hamburger-btn,
   .header-actions .icon-btn {
     display: none !important;
   }
-  
-  /* Mantém visíveis apenas créditos e premium */
+
   #credits-badge,
-  #premium-btn {
-    display: flex !important;
-  }
+  #premium-btn { display: flex !important; }
 }
-
-
-
 
 /* =========================================================
    RECEITAFIT.APP — UI POLISH (OVERRIDE FINAL)
    ========================================================= */
 
-/* Acessibilidade: se o usuário não quer animações */
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
@@ -2499,7 +2270,8 @@ body .hamburger-btn,
   --rf-shadow: 0 10px 22px rgba(17,24,39,.12);
   --rf-shadow-strong: 0 14px 30px rgba(17,24,39,.14);
 
-  --rf-active-scale: 1.08;
+  /* ✅ reduz o “blur” em iOS: scale alto + subpixel costuma borrar texto */
+  --rf-active-scale: 1.04;
 }
 
 /* Base: transições padronizadas */
@@ -2541,9 +2313,7 @@ body .hamburger-btn,
     box-shadow: var(--rf-shadow-strong) !important;
   }
 
-  .back-btn:hover{
-    box-shadow: var(--rf-shadow);
-  }
+  .back-btn:hover{ box-shadow: var(--rf-shadow); }
 }
 
 /* =========================
@@ -2613,44 +2383,30 @@ body .hamburger-btn,
     align-items: center !important;
     justify-content: center !important;
     gap: 10px !important;
-
+    font-size: 0.95rem;
     background: #16a34a !important;
     color: #fff !important;
     border: none !important;
 
     border-radius: 9999px !important;
     padding: 0 18px !important;
-
-
   }
 
-  #premium-btn:hover, .btn-premium:hover, .premium-btnhover {
-
-   background: #15803d;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
-     
+  /* FIX: seletor correto (tinha typo .premium-btnhover) */
+  #premium-btn:hover, .btn-premium:hover, .premium-btn:hover {
+    background: #15803d;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
   }
-   
 }
 
 /* “Pill” do header no desktop */
-.tool-btn{
-  border-radius: 9999px;
-}
+.tool-btn{ border-radius: 9999px; }
 
 .tool-btn.is-active{
   background: #e8fff0 !important;
   border: 1px solid rgba(22,163,74,.28) !important;
   box-shadow: 0 10px 22px rgba(22,163,74,.14) !important;
-}
-
-/* =========================
-   MODAIS — hover nos botões internos
-   ========================= */
-.btn-calculate,
-.modal-actions button{
-  
 }
 
 /* Planejador: menor altura no mobile */
@@ -2669,17 +2425,10 @@ body .hamburger-btn,
 }
 .week-planner-wrapper::-webkit-scrollbar{ display:none; }
 
-/* =========================
-   LISTA DE COMPRAS — lixeira 20x20
-   ========================= */
-.btn-delete svg{
-  width: 20px !important;
-  height: 20px !important;
-}
+/* LISTA DE COMPRAS — lixeira 20x20 */
+.btn-delete svg{ width: 20px !important; height: 20px !important; }
 
-/* =========================
-   VOLTAR / PREMIUM — remove “copiar”
-   ========================= */
+/* VOLTAR / PREMIUM — remove “copiar” */
 .back-btn, .btn-premium{
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -2687,9 +2436,7 @@ body .hamburger-btn,
   user-select: none;
 }
 
-/* =========================
-   GRID DE RECEITAS — 2/3/4
-   ========================= */
+/* GRID DE RECEITAS — 2/3/4 */
 #recipe-grid, .recipe-grid {
   display: grid !important;
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
@@ -2710,43 +2457,25 @@ body .hamburger-btn,
   }
 }
 
-/* =========================================
-   CARD DE RECEITA — ALINHAMENTO MOBILE
-   ========================================= */
-.recipe-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+/* CARD DE RECEITA — ALINHAMENTO MOBILE */
+.recipe-card { display: flex; flex-direction: column; height: 100%; }
 
-.recipe-content {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
+.recipe-content { display: flex; flex-direction: column; flex: 1; }
 
 .recipe-title {
   min-height: 3.2em;
   line-height: 1.6;
-
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-.recipe-meta,
-.recipe-stats {
-  margin-top: auto;
-}
+.recipe-meta, .recipe-stats { margin-top: auto; }
 
-.recipe-button {
-  margin-top: 12px;
-}
+.recipe-button { margin-top: 12px; }
 
-/* ==============================
-   BOTÃO LOCK — texto diferente no mobile
-   ============================== */
+/* BOTÃO LOCK — texto diferente no mobile */
 .btn-label-mobile { display: none; }
 .btn-label-desktop { display: inline; }
 
@@ -2754,10 +2483,7 @@ body .hamburger-btn,
   .btn-label-desktop { display: none; }
   .btn-label-mobile { display: inline; }
 
-  .recipe-button.locked {
-    padding: 12px 10px;
-    gap: 8px;
-  }
+  .recipe-button.locked { padding: 12px 10px; gap: 8px; }
 
   .recipe-button.locked .btn-label-mobile {
     font-weight: 700;
@@ -2765,10 +2491,7 @@ body .hamburger-btn,
   }
 }
 
-/* ================================
-   Recipe Detail = tela independente
-   (não deixa “vazar” outras receitas)
-   ================================ */
+/* Recipe Detail = tela independente */
 :root { --header-h: 0px; }
 
 .recipe-detail {
@@ -2780,17 +2503,14 @@ body .hamburger-btn,
 }
 
 /* garante que o grid some de verdade */
-#recipe-grid.hidden {
-  display: none !important;
-}
+#recipe-grid.hidden { display: none !important; }
 
 /* garante que popups fiquem acima do modal premium */
 #notification-modal { z-index: 9999 !important; }
 #confirm-modal { z-index: 9998 !important; }
 
 /* Logo sem hover/efeito */
-.logo,
-.logo * {
+.logo, .logo * {
   transition: none !important;
   transform: none !important;
   animation: none !important;
@@ -2806,8 +2526,7 @@ body .hamburger-btn,
   box-shadow: none !important;
 }
 @media (pointer: coarse) {
-  .logo,
-  .logo * {
+  .logo, .logo * {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     user-select: none;
@@ -2817,35 +2536,18 @@ body .hamburger-btn,
 @media (hover: hover) and (pointer: fine) {
   .site-logo:hover,
   .header-logo:hover,
-  .logo:hover {
-    opacity: 0.92;
-  }
+  .logo:hover { opacity: 0.92; }
 }
 
 @media (max-width: 768px) {
-  #header {
-    box-shadow: none !important;
-  }
+  #header { box-shadow: none !important; }
 }
-
 
 /* ✅ Trava scroll pra cima quando receita aberta */
-body.detail-open {
-  overflow-y: scroll; /* mantém scroll */
-}
+body.detail-open { overflow-y: scroll; }
 
-
-
-
-
-
-/* ================================
-   TRANSIÇÃO SUAVE ENTRE TELAS
-   ================================ */
-#recipe-grid,
-#recipe-detail,
-#heroSlider,
-.categories-new {
+/* TRANSIÇÃO SUAVE ENTRE TELAS */
+#recipe-grid, #recipe-detail, #heroSlider, .categories-new {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
@@ -2866,10 +2568,7 @@ body.detail-open {
   transform: translateY(0);
 }
 
-
-/* ================================
-   FIX: BOTÕES MODAL PREMIUM FOCADOS
-   ================================ */
+/* FIX: BOTÕES MODAL PREMIUM FOCADOS */
 #premium-modal .modal-content,
 #premium-modal .modal-content * {
   opacity: 1 !important;
@@ -2886,18 +2585,348 @@ body.detail-open {
   z-index: auto !important;
 }
 
-#premium-modal {
-  z-index: 3000 !important;
+#premium-modal { z-index: 3000 !important; }
+#premium-modal .modal-overlay { z-index: 1 !important; }
+#premium-modal .modal-content { z-index: 2 !important; position: relative !important; }
+
+
+
+
+
+
+/* =====================================================
+   PATCH FINAL — Anti-blur iOS + micro ajustes seguros
+   (override only — não altera classes existentes)
+   ===================================================== */
+
+/* 1) Reduz blur de texto em botões (iOS / Safari) */
+@media (pointer: coarse) {
+  .tool-btn:active,
+  .category-card-new:active,
+  .btn-primary:active,
+  .btn-secondary:active,
+  .btn-premium:active,
+  .back-btn:active,
+  .slider-arrow-new:active,
+  .slider-dot-new:active,
+  .btn-calculate:active,
+  .meal-option-btn:active,
+  .modal-actions button:active,
+  .btn-clear-list:active {
+    transform: scale(1.03) !important; /* antes era mais agressivo */
+  }
 }
 
-#premium-modal .modal-overlay {
-  z-index: 1 !important;
+/* 2) Força renderização de texto mais nítida */
+button,
+.tool-btn,
+.btn-primary,
+.btn-secondary,
+.btn-premium,
+.recipe-button {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
 }
 
-#premium-modal .modal-content {
-  z-index: 2 !important;
-  position: relative !important;
+/* 3) Scrollbar hack só no desktop (evita desalinhamento mobile) */
+@media (min-width: 769px) {
+  .modal-surface,
+  .modal-content,
+  .modal-content-medium,
+  .modal-content-large,
+  .modal-content-xlarge {
+    padding-right: 18px;
+    margin-right: -18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-surface,
+  .modal-content,
+  .modal-content-medium,
+  .modal-content-large,
+  .modal-content-xlarge {
+
+    margin-right: 0 !important;
+  }
+}
+
+/* 4) Foco acessível sem sombra feia */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 2px solid rgba(22,163,74,.55);
+  outline-offset: 2px;
+}
+
+/* 5) Remove highlight estranho de toque em cards */
+.recipe-card button {
+  -webkit-tap-highlight-color: transparent;
 }
 
 
+
+/* =====================================================
+   PATCH EXTRA — iOS Safari text blur fix (override only)
+   ===================================================== */
+
+/* 1) iOS: texto borra quando o botão é transformado (scale/translate).
+   => No mobile, REMOVER transform dos BOTÕES (mantém UI nítida). */
+@media (pointer: coarse) {
+
+  /* Botões com texto (principais) */
+  button,
+  .btn-primary, .btn-secondary, .btn-premium,
+  .recipe-button,
+  .planner-day,
+  .meal-option, .meal-option-btn,
+  .hamburger-link, .hamburger-premium-btn,
+  .tab-item,
+  .modal-actions button,
+  .btn-clear-list,
+  .btn-delete,
+  .back-btn {
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Também zera no estado ativo (onde costuma borrar mais) */
+  button:active,
+  .btn-primary:active, .btn-secondary:active, .btn-premium:active,
+  .recipe-button:active,
+  .planner-day:active,
+  .meal-option:active, .meal-option-btn:active,
+  .hamburger-link:active, .hamburger-premium-btn:active,
+  .tab-item:active,
+  .modal-actions button:active,
+  .btn-clear-list:active,
+  .btn-delete:active,
+  .back-btn:active {
+    transform: none !important;
+  }
+
+  /* Mantém o “feedback” sem scale: usa leve brilho/sombra */
+  button:active,
+  .btn-primary:active, .btn-secondary:active, .btn-premium:active,
+  .recipe-button:active,
+  .planner-day:active,
+  .meal-option:active, .meal-option-btn:active,
+  .hamburger-link:active, .hamburger-premium-btn:active,
+  .tab-item:active,
+  .modal-actions button:active,
+  .btn-clear-list:active {
+    filter: brightness(0.97) !important;
+    box-shadow: 0 10px 22px rgba(17,24,39,.10) !important;
+  }
+
+  /* Cards podem continuar com “efeito” sem afetar texto do botão */
+  .recipe-card:active {
+    transform: translateY(-3px) !important;
+  }
+}
+
+/* 2) Força composição estável no Safari (evita blur intermitente) */
+button,
+.btn-primary, .btn-secondary, .btn-premium,
+.recipe-button,
+.planner-day,
+.meal-option, .meal-option-btn,
+.hamburger-link, .hamburger-premium-btn,
+.tab-item,
+.modal-actions button,
+.back-btn {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* 3) Evita zoom/troca de métrica no iOS que piora blur */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/* =====================================================
+   PATCH — Categorias nítidas no iOS/mobile
+   (remove transform/filters que borram texto)
+   ===================================================== */
+@media (pointer: coarse) {
+
+  /* Remove scale/translate do pill (texto borra no iOS) */
+  .category-card-new,
+  .category-card-new:active,
+  .category-card-new:hover {
+    transform: none !important;
+    filter: none !important;
+    will-change: auto !important;
+  }
+
+  /* Feedback de toque sem transform */
+  .category-card-new:active {
+    filter: brightness(0.97) !important;
+    box-shadow: 0 10px 22px rgba(17,24,39,.10) !important;
+  }
+
+  /* Mantém destaque do ativo sem drop-shadow (drop-shadow borra no iOS) */
+  .category-card-new.active {
+    filter: none !important;
+    box-shadow: 0 8px 16px rgba(22,163,74,.22) !important;
+  }
+}
+
+/* Garante composição estável do texto do pill */
+.category-card-new {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* 3) Cards no mobile: imagem menor para ganhar tela */
+@media (max-width: 768px) {
+  .recipe-image-container {
+    height: 160px !important; /* antes: 224px */
+  }
+}
+
+
+/* =========================================
+   PATCH — “LOGO NÃO DANÇA” (mobile)
+   - trava layout e evita reflow quando Premium/badge muda
+   - sem trocar flex/grid do seu header, só estabiliza
+   ========================================= */
+@media (max-width: 768px) {
+
+  /* 1) Estabiliza o bloco do header (não deixa variar com conteúdos) */
+  #header .header-content{
+    position: relative !important;
+    width: 100% !important;
+  }
+
+  /* 2) Reserva “colunas” invisíveis nas laterais:
+        esquerda = hambúrguer
+        direita = espaço equivalente (pra logo ficar no centro real) */
+  #header .header-content::before,
+  #header .header-content::after{
+    content: "" !important;
+    display: block !important;
+    width: 44px !important;      /* mesma “largura” do botão hambúrguer */
+    height: 1px !important;
+    flex: 0 0 44px !important;
+  }
+
+  /* 3) Garante que a logo fica central e não empurra */
+  #header .logo{
+    margin: 10px 39% 10px !important;
+    margin-right: auto !important;
+    justify-content: center !important;
+    text-align: center !important;
+    flex: 0 1 auto !important;
+  }
+
+  /* 4) Trava o hambúrguer numa largura fixa (evita variar) */
+  #header .hamburger-btn{
+    width: 44px !important;
+    height: 44px !important;
+    flex: 0 0 44px !important;
+  }
+
+  /* 5) Evita “pulo” quando Premium some/aparece (display troca causa reflow).
+        Em vez de display:none, mantém espaço com visibility/opacity quando possível */
+  body.premium-active #premium-btn{
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    display: inline-flex !important; /* mantém espaço */
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  #header .header-content{
+    gap: 8px !important;          /* era 1rem em alguns trechos */
+    padding: 10px 0 !important;   /* reduz altura */
+  }
+
+  /* reduz padding interno da busca pra subir um pouco */
+  #header .search-container{
+    margin-top: 0 !important;
+  }
+}
+
+
+/* =====================================================
+   PATCH — Tab bar sempre visível (Planner / Modais)
+   ===================================================== */
+
+/* 1) Garante que a tab bar fique ACIMA dos modais */
+.tab-bar,
+.tabbar,
+.bottom-tab-bar {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0;
+  right: 0;
+  z-index: 1200 !important;
+  background: #fff;
+}
+
+/* 2) Modal do planner NÃO cobre a tab bar */
+#planner-modal {
+  bottom: 64px !important; /* altura da tab bar */
+}
+
+/* 3) Modal genérico respeita a tab bar */
+.modal {
+  padding-bottom: 80px !important;
+}
+
+/* 4) Remove overlay “cego” que intercepta clique */
+.modal::after {
+  pointer-events: none !important;
+}
+
+/* 5) Evita que body.modal-open esconda a tab bar */
+body.modal-open .tab-bar,
+body.modal-open .tabbar,
+body.modal-open .bottom-tab-bar {
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+/* 6) Segurança: ícones da tab bar sempre acima */
+.tab-bar *,
+.tabbar *,
+.bottom-tab-bar * {
+  pointer-events: auto !important;
+}
+
+
+/* =========================================
+   PATCH FINAL — Back-to-top acima da Tab Bar (mobile)
+   ========================================= */
+@media (max-width: 768px) {
+  .back-to-top {
+    /* sobe o botão para não ficar atrás da tab bar */
+    bottom: calc(78px + 16px + env(safe-area-inset-bottom, 0px)) !important;
+    right: 16px !important;
+
+    /* garante que fica acima de tudo no mobile */
+    z-index: 2500 !important;
+  }
+  
+  .lock-icon {
+    width: 2.3rem !important;
+    height: 2.3rem !important;
+    margin-top: 30px !important;
+    stroke: #fff;
+    stroke-width: 2;
+	
+
+  
+}
+	
 
