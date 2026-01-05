@@ -2246,3 +2246,9 @@ window.addEventListener('scroll', () => {
     }
   }
 });
+
+
+document.addEventListener('click', (e) => {
+  const tabItem = e.target.closest('.tab-item');
+  if (tabItem) closePlannerDropdown();
+}, true);
