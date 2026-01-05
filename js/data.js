@@ -115,7 +115,7 @@ const RECIPES = [
     
     // 👇 FOTOS DAS ETAPAS (quando gerar no Leonardo.ai)
     images: {
-        hero: 'https://images.unsplash.com/photo-1590301157890-4810ed352733?w=1200&h=740&fit=crop',
+        hero: 'https://plus.unsplash.com/premium_photo-1663840135701-da69afd32423?q=80',
         steps: [
             
         ]
