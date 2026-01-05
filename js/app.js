@@ -1033,7 +1033,7 @@ function showRecipeDetail(recipeId) {
     
     // Scroll suave pro topo
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 500);
+  }, 300);
 }
 
 
@@ -2252,3 +2252,53 @@ document.addEventListener('click', (e) => {
   const tabItem = e.target.closest('.tab-item');
   if (tabItem) closePlannerDropdown();
 }, true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ================================
+// AUTO-ABRIR FERRAMENTAS VIA URL
+// ================================
+window.addEventListener('DOMContentLoaded', function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const tool = urlParams.get('tool');
+  
+  if (tool) {
+    setTimeout(() => {
+      switch(tool) {
+        case 'calculator':
+          const calcBtn = document.getElementById('calculator-btn');
+          if (calcBtn) calcBtn.click();
+          break;
+        case 'shopping':
+          const shopBtn = document.getElementById('shopping-btn');
+          if (shopBtn) shopBtn.click();
+          break;
+        case 'planner':
+          const planBtn = document.getElementById('planner-btn');
+          if (planBtn) planBtn.click();
+          break;
+        case 'faq':
+          const faqBtn = document.getElementById('faq-btn');
+          if (faqBtn) faqBtn.click();
+          break;
+        case 'premium':
+          const premBtn = document.getElementById('premium-btn');
+          if (premBtn) premBtn.click();
+          break;
+      }
+      
+      // Limpa URL depois de abrir
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }, 500);
+  }
+});
