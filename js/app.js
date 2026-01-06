@@ -2060,10 +2060,13 @@ window.closePlannerDropdown = function() {
     if (modalMessage) modalMessage.textContent = 'Tenha acesso ilimitado a todas as receitas.';
     openModal(premiumModal);
     return;
-  }
-   setTimeout(() => {
+	
+	setTimeout(() => {
       if (premiumCodeInput) premiumCodeInput.focus();
     }, 100);
+	
+  }
+
 
 }; 
 
