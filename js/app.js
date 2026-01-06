@@ -464,65 +464,133 @@ async function saveWeekPlan() {
   } catch (e) {}
 }
 
+
+
+
+
+
+
+
+
+
 // ==============================
 // UI (Badge / Premium)
 // ==============================
 function updateUI() {
-  try {
-    if (!creditsBadge) return;
+  // Verifica expiração do premium
+  if (isPremium && premiumExpires && Date.now() > premiumExpires) {
+    _handlePremiumExpiration();
+  }
 
+  // Atualiza badge de créditos
+  const creditsText = document.getElementById('credits-text');
+  const creditsBadge = document.getElementById('credits-badge');
+  
+  if (creditsText) {
     if (isPremium) {
-      document.body.classList.remove('free-user');
-      document.body.classList.add('premium-active');
-
-      creditsBadge.classList.add('premium');
-     let badgeText = 'Premium';
-      if (premiumExpires) {
-        const daysLeft = Math.ceil((premiumExpires - Date.now()) / (1000 * 60 * 60 * 24));
-       
-        if (daysLeft > 0) { // ← REMOVE O "&& daysLeft <= 30"
-          badgeText = `PREMIUM (${daysLeft}D)`;
-        }
+      creditsText.textContent = 'Premium Ativo';
+      if (creditsBadge) {
+        creditsBadge.style.background = 'linear-gradient(135deg, #fbbf24, #f59e0b)';
+        creditsBadge.style.color = '#fff';
       }
-
-      creditsBadge.innerHTML = `
-        <svg class="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-        </svg>
-        <span>${badgeText}</span>
-      `;
-
-     if (premiumBtn) {
-  premiumBtn.style.display = 'none';
-  // ✅ Força reflow para aplicar mudança imediatamente
-  premiumBtn.offsetHeight;
-}
-
     } else {
-      document.body.classList.add('free-user');
-      document.body.classList.remove('premium-active');
-
-      creditsBadge.classList.remove('premium');
-      creditsBadge.innerHTML = `
-        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-          <circle cx="12" cy="12" r="3"></circle>
-        </svg>
-        <span id="credits-text">${credits} Créditos</span>
-      `;
-
-      if (premiumBtn) {
-  premiumBtn.style.display = 'block';
-  // ✅ Força reflow
-  premiumBtn.offsetHeight;
-}
+      creditsText.textContent = credits === 1 ? '1 Crédito' : `${credits} Créditos`;
+      if (creditsBadge) {
+        creditsBadge.style.background = '';
+        creditsBadge.style.color = '';
+      }
     }
+  }
 
-    creditsBadge.classList.add('ready');
-  } catch (error) {
-    console.error('Erro em updateUI:', error);
+  // Atualiza botão premium
+  const premiumBtn = document.getElementById('premium-btn');
+  if (premiumBtn) {
+    if (isPremium) {
+      premiumBtn.textContent = 'Premium Ativo';
+      premiumBtn.style.background = 'linear-gradient(135deg, #fbbf24, #f59e0b)';
+      premiumBtn.style.color = '#fff';
+    } else {
+      premiumBtn.textContent = 'Ativar Premium';
+      premiumBtn.style.background = '';
+      premiumBtn.style.color = '';
+    }
+  }
+
+  // Atualiza contador da lista de compras
+  const shoppingCounter = document.getElementById('shopping-counter');
+  if (shoppingCounter) {
+    if (shoppingList.length > 0) {
+      shoppingCounter.textContent = shoppingList.length;
+      shoppingCounter.classList.remove('hidden');
+    } else {
+      shoppingCounter.classList.add('hidden');
+    }
+  }
+
+  // ✅ ATUALIZA BOTÕES PREMIUM (TAB BAR + MENU HAMBÚRGUER)
+  updatePremiumButtons();
+}
+
+
+
+
+// ================================
+// ATUALIZA BOTÕES PREMIUM (TAB BAR + MENU)
+// ================================
+function updatePremiumButtons() {
+  const tabPremiumBtn = document.getElementById('tab-premium-btn');
+  const tabPremiumLabel = document.getElementById('tab-premium-label');
+  const hamburgerPremiumBtn = document.getElementById('hamburger-premium-btn');
+  const hamburgerPremiumText = document.getElementById('hamburger-premium-text');
+  
+  if (isPremium && premiumExpires) {
+    const daysLeft = Math.ceil((premiumExpires - Date.now()) / (1000 * 60 * 60 * 24));
+    
+    // ✅ TAB BAR - Fica amarelo
+    if (tabPremiumBtn) {
+      tabPremiumBtn.classList.add('has-premium');
+    }
+    if (tabPremiumLabel) {
+      tabPremiumLabel.textContent = 'Premium';
+    }
+    
+    // ✅ MENU HAMBÚRGUER - Fica amarelo + mostra dias
+    if (hamburgerPremiumBtn) {
+      hamburgerPremiumBtn.classList.add('has-premium');
+    }
+    if (hamburgerPremiumText) {
+      hamburgerPremiumText.textContent = `Premium (${daysLeft}D)`;
+    }
+    
+  } else {
+    // ❌ SEM PREMIUM - Volta ao normal
+    if (tabPremiumBtn) {
+      tabPremiumBtn.classList.remove('has-premium');
+    }
+    if (tabPremiumLabel) {
+      tabPremiumLabel.textContent = 'Premium';
+    }
+    
+    if (hamburgerPremiumBtn) {
+      hamburgerPremiumBtn.classList.remove('has-premium');
+    }
+    if (hamburgerPremiumText) {
+      hamburgerPremiumText.textContent = 'Seja Premium';
+    }
+  }
+  
+  // Renderiza ícones Lucide
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
   }
 }
+
+
+
+
+
+
+
 
 function updateShoppingCounter() {
   if (!shoppingCounter) return;
