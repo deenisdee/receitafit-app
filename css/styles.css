@@ -2968,15 +2968,16 @@ body.modal-open .bottom-tab-bar {
 
 
 
+
 /* ============================= */
-/* TAB BAR – PREMIUM ATIVO */
+/* TAB BAR – PREMIUM (estrela cheia) */
 /* ============================= */
 
-body.premium-active .tab-bar .tab-item:nth-child(4) {
+body.premium-active .tab-bar .tab-item:nth-child(4) .tab-icon {
   color: #ffcc00;
+  fill: #ffcc00;
 }
 
-body.premium-active .tab-bar .tab-item:nth-child(4) .tab-icon,
 body.premium-active .tab-bar .tab-item:nth-child(4) .tab-label {
-  color: #ffcc00;
+  color: #9ca3af; /* cinza neutro (melhor leitura) */
 }
