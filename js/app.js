@@ -222,11 +222,30 @@ const mealSelectorSubtitle = document.getElementById('meal-selector-subtitle');
 // ==============================
 // MODAL HELPERS
 // ==============================
+
+
+
 function openModal(el) {
   if (!el) return;
+
   el.classList.remove('hidden');
   document.body.classList.add('modal-open');
+
+  // ✅ Foco automático se for o modal Premium (cobre TODOS os caminhos)
+  if (el.id === 'premium-modal') {
+    setTimeout(() => {
+      const input = document.getElementById('premium-code-input');
+      if (input) {
+        input.focus();
+        input.select();
+      }
+    }, 150);
+  }
 }
+
+
+
+
 function closeModal(el) {
   if (!el) return;
   el.classList.add('hidden');
