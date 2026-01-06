@@ -2055,11 +2055,37 @@ window.closePlannerDropdown = function() {
   }
 };
 
+
+
+
+
 window.tabGoPremium = function() {
   haptic(10);
+
+  // 1) Se premium e expirou, derruba premium e sai
+  if (isPremium && premiumExpires && Date.now() > premiumExpires) {
+    _handlePremiumExpiration();
+    return;
+  }
+
+  // 2) Se já é premium válido: NÃO abre modal.
+  //    Só marca a tab ativa (e o updateUI já cuida das cores do badge e do botão premium)
+  if (isPremium) {
+    setActiveTab(3);
+    return;
+  }
+
+  // 3) Se não é premium: abre o modal (comportamento atual)
   openPremiumModal();
   setActiveTab(3);
 };
+
+
+
+
+
+
+
 
 function setActiveTab(index) {
   const tabs = document.querySelectorAll('.tab-item');
