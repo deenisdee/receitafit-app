@@ -2055,25 +2055,11 @@ window.closePlannerDropdown = function() {
   }
 };
 
-
-
 window.tabGoPremium = function() {
-    if (!isPremium) {
-    if (modalMessage) modalMessage.textContent = 'Tenha acesso ilimitado a todas as receitas.';
-    openModal(premiumModal);
-    return;
-	
-	  haptic(10);
+  haptic(10);
   openPremiumModal();
   setActiveTab(3);
-
-  }
-  
-
-  
 };
-
-
 
 function setActiveTab(index) {
   const tabs = document.querySelectorAll('.tab-item');
