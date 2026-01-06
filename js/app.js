@@ -2061,19 +2061,23 @@ window.closePlannerDropdown = function() {
 
 
 
-window.closePremiumModal = function () {
-  if (premiumCodeInput) premiumCodeInput.value = '';
+window.tabGoPremium = function() {
+    if (!isPremium) {
+     	
+	  haptic(10);
+	  openPremiumModal();
+	  setActiveTab(3);
 
-  const warning = document.getElementById('credits-warning');
-  if (warning) warning.classList.add('hidden');
-
-  closeModal(premiumModal);
-
-  // ✅ REMOVE ativação da Tab Premium
-  if (typeof setActiveTab === 'function') {
-    setActiveTab(0); // volta para "Início"
-  }
+    };
+	
+	if window.closePremiumModal() {
+		
+      setActiveTab(0);
+	
+	};
+	
 };
+
 
 
 
