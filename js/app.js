@@ -2061,10 +2061,9 @@ window.tabGoPremium = function() {
     openModal(premiumModal);
     return;
   }
-  renderWeekPlanner();
-  openModal(plannerModal);
+
 };
-window.closeWeekPlanner = function() { closeModal(plannerModal); };
+
 
 
 
