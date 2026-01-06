@@ -2079,7 +2079,9 @@ if (premiumBtn) {
       if (premiumCodeInput) premiumCodeInput.focus();
     }, 100);
   });
+ }
 }
+
 
 
 
