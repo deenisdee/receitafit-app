@@ -2061,6 +2061,21 @@ window.tabGoPremium = function() {
   setActiveTab(3);
 };
 
+
+
+window.tabGoPremium = function() {
+    if (!isPremium) {
+ 
+      	
+	  haptic(10);
+	  openPremiumModal();
+	  setActiveTab(3);
+
+	  }
+	 };
+
+
+
 function setActiveTab(index) {
   const tabs = document.querySelectorAll('.tab-item');
   tabs.forEach((tab, i) => {
