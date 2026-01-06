@@ -2070,17 +2070,11 @@ window.tabGoPremium = function() {
 	  haptic(10);
 	  openPremiumModal();
 	  setActiveTab(3);
-     
 	  
-	 if (closePremiumModal()) 
-		setActiveTab();
-    }
+
+
 	  }
 	 };
-
-
-
-/* if (modalCancel) modalCancel.addEventListener('click', () => window.closePremiumModal()); */
 
 
 
