@@ -2056,10 +2056,23 @@ window.closePlannerDropdown = function() {
 };
 
 window.tabGoPremium = function() {
-  haptic(10);
-  openPremiumModal();
-  setActiveTab(3);
+  if (!isPremium) {
+    if (modalMessage) modalMessage.textContent = 'Teste';
+    openModal(premiumModal);
+    return;
+  }
+  renderWeekPlanner();
+  openModal(plannerModal);
 };
+window.closeWeekPlanner = function() { closeModal(plannerModal); };
+
+
+
+
+
+
+
+
 
 function setActiveTab(index) {
   const tabs = document.querySelectorAll('.tab-item');
