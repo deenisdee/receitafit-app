@@ -2055,45 +2055,21 @@ window.closePlannerDropdown = function() {
   }
 };
 
- window.tabGoPremium = function() {
-  if (!isPremium) {
+
+
+window.tabGoPremium = function() {
+    if (!isPremium) {
     if (modalMessage) modalMessage.textContent = 'Tenha acesso ilimitado a todas as receitas.';
     openModal(premiumModal);
     return;
-	
-	setTimeout(() => {
-      if (premiumCodeInput) premiumCodeInput.focus();
-    }, 100);
-	
+
   }
-
-
-}; 
-
-
-/* window.tabGoPremium = function() {
-if (premiumBtn) {
-  premiumBtn.addEventListener('click', () => {
-    if (modalMessage) modalMessage.textContent = 'Tenha acesso ilimitado a todas as receitas.';
-    const warning = document.getElementById('credits-warning');
-    if (warning) {
-      if (credits === 0) warning.classList.remove('hidden');
-      else warning.classList.add('hidden');
-    }
-    openModal(premiumModal);
-
-    setTimeout(() => {
-      if (premiumCodeInput) premiumCodeInput.focus();
-    }, 100);
-  });
- }
-} */
-
-
-
-
-
-
+  
+  haptic(10);
+  openPremiumModal();
+  setActiveTab(3);
+  
+};
 
 
 
