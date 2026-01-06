@@ -2067,15 +2067,14 @@ window.tabGoPremium = function() {
 	const warning = document.getElementById('credits-warning');
     if (warning) warning.classList.add('hidden');
 
-      closeModal(premiumModal);	
-		
+      	
 	  haptic(10);
 	  openPremiumModal();
 	  setActiveTab(3);
 
     };
 	
-    if (typeof setActiveTab === 'function') {
+    if (typeof closeModal(premiumModal); === 'function') {
     setActiveTab(0); // volta para "Início"
     }
 	
