@@ -2905,6 +2905,7 @@ body.modal-open .bottom-tab-bar {
 }
 
 
+
 /* =========================================
    PATCH FINAL — Back-to-top acima da Tab Bar (mobile)
    ========================================= */
@@ -2917,14 +2918,14 @@ body.modal-open .bottom-tab-bar {
     /* garante que fica acima de tudo no mobile */
     z-index: 2500 !important;
   }
-  
+
   .lock-icon {
     width: 2.3rem !important;
     height: 2.3rem !important;
     margin-top: 30px !important;
     stroke: #fff;
     stroke-width: 2;
-	  
+  }
 }
 
 /* =========================================
@@ -2932,7 +2933,6 @@ body.modal-open .bottom-tab-bar {
    independe de grid/flex/estrutura
    ========================================= */
 @media (max-width: 768px) {
-
   /* O botão amarelo é SEMPRE o credits-badge em Premium */
   body.premium-active #credits-badge {
     position: relative !important;
@@ -2949,117 +2949,78 @@ body.modal-open .bottom-tab-bar {
     align-items: center !important;
     white-space: nowrap;
   }
-  
-  
-   .header-actions, .search-container {
+
+  .header-actions,
+  .search-container {
     margin-top: 5px !important;
-   }
-  
+  }
+
   .categories-new {
-    margin: 0.5rem auto !important
-	
- 
+    margin: 0.5rem auto !important;
+  }
 }
 
 @media (max-width: 768px) {
-	.container {
+  .container {
     margin: -10px auto !important;
-	}
-
-
-
-
-/* ============================= */
-/* TAB BAR – PREMIUM (estrela cheia) */
-/* ============================= */
-
-body.premium-active .tab-bar .tab-item:nth-child(4) .tab-icon {
-  color: #f6a20e;
-  fill: #f6a20e;
-}
-
-body.premium-active .tab-bar .tab-item:nth-child(4) .tab-label {
-  color: #9ca3af; /* cinza neutro (melhor leitura) */
-}
-
-
-/* ============================= */
-/* HAMBURGER – PREMIUM ATIVO */
-/* ============================= */
-
-.hamburger-premium-btn.premium {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #fff;
-}
-
-.hamburger-premium-btn.premium i,
-.hamburger-premium-btn.premium span {
-
-  color: #fff;
-  font-weight: 600;
-}
-
-/* estrela preenchida */
-.hamburger-premium-btn.premium svg {
-  fill: currentColor;
-  stroke: none;
-}
-
-/* estado free (mantém verde atual) */
-.hamburger-premium-btn.free {
-  background: #16a34a;
-  color: #ffffff;
+  }
 }
 
 
 
-/* Premium ativo - botão hambúrguer */
-.hamburger-premium-btn.is-premium {
-  background: linear-gradient(135deg, #fbbf24, #facc15); 
-  color: #ffffff;
 
-  /* garante que o gradiente é do FUNDO */
-  -webkit-background-clip: border-box;
-  background-clip: border-box;
+/* =========================================
+   PREMIUM — Padronização Badges / Disabled
+   ========================================= */
+
+/* bloquear clique + feedback visual */
+.is-disabled,
+.is-disabled * {
+  pointer-events: none !important;
+  opacity: .55 !important;
+  filter: grayscale(0.15) !important;
 }
 
+/* (Opcional) cursor */
+.is-disabled { cursor: not-allowed !important; }
 
-.hamburger-premium-btn.is-premium span {
-  background: none !important;
-  -webkit-background-clip: initial !important;
-  -webkit-text-fill-color: #ffffff !important;
-  color: #ffffff !important;
+/* =========================================
+   TAB BAR — Ícone Premium (estrela)
+   Regras:
+   - aberto pelo tab: verde outline (sem fill)
+   - premium ativo: amarelo preenchido (pode ser sólido ou gradiente)
+   ========================================= */
+
+/* ajuste: coloque a classe .tab-premium no botão/aba premium */
+.tab-premium svg {
+  transition: filter .2s ease, color .2s ease;
 }
 
-.hamburger-premium-btn.is-premium svg {
-  stroke: #ffffff;
-  fill: #ffffff;
+/* estado: modal aberto via TAB => verde outline */
+body.premium-modal-open.premium-open--tab .tab-premium svg {
+  fill: none !important;
+  stroke: #16a34a !important;
 }
 
-
-
-/* Premium amarelo no botão do hambúrguer */
-.hamburger-premium-btn.premium-on {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
-  color: #fff !important;
+/* estado: premium ativo => amarelo preenchido */
+body.premium-active .tab-premium svg {
+  fill: #f59e0b !important;     /* sólido (simples e confiável) */
+  stroke: #f59e0b !important;
 }
 
-.hamburger-premium-btn.premium-on span {
-  color: #fff !important;
-  background: transparent !important;
-  -webkit-background-clip: initial !important;
-  background-clip: initial !important;
-  -webkit-text-fill-color: #fff !important;
+/* Se você quiser “parecer” gradiente sem mexer no SVG:
+   leve brilho (não é gradiente real, mas dá sensação premium) */
+body.premium-active .tab-premium svg {
+  filter: drop-shadow(0 4px 10px rgba(245,158,11,.25));
 }
 
-.hamburger-premium-btn.premium-on svg,
-.hamburger-premium-btn.premium-on i {
-  color: #fff !important;
-}
+/* =========================================
+   HEADER/HAMBURGER — Badge amarelo enquanto modal aberto
+   (seu header já funciona: vamos garantir pro hamburger também)
+   ========================================= */
 
-/* estrela “cheia” */
-.hamburger-premium-btn.premium-on svg.lucide,
-.hamburger-premium-btn.premium-on svg[data-lucide] {
-  fill: #fff !important;
-  stroke: #fff !important;
+/* quando o modal abrir por hamburger, força o badge a ficar premium */
+body.premium-modal-open.premium-open--hamburger #credits-badge,
+body.premium-modal-open.premium-open--hamburger .badge {
+  background: linear-gradient(135deg,#fbbf24 0%, #f59e0b 100%) !important;
 }
