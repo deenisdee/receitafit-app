@@ -564,22 +564,23 @@ function updateUI() {
     const hamburgerLabel = document.getElementById('hamburger-premium-label');
     const hamburgerBtn = document.querySelector('.hamburger-premium-btn');
 
-    if (hamburgerLabel && hamburgerBtn) {
-      if (isPremium) {
-        hamburgerLabel.textContent = badgeText;
-        hamburgerBtn.classList.add('premium');
-        hamburgerBtn.classList.remove('free');
-      } else {
-        hamburgerLabel.textContent = 'Seja Premium';
-        hamburgerBtn.classList.remove('premium');
-        hamburgerBtn.classList.add('free');
-      }
-    }
-
-  } catch (error) {
-    console.error('Erro em updateUI:', error);
+    if (isPremium && premiumExpires && Date.now() > premiumExpires) {
+    _handlePremiumExpiration();
+    return;
   }
+
+  // 2) Se já é premium válido: NÃO abre modal.
+  //    Só marca a tab ativa (e o updateUI já cuida das cores do badge e do botão premium)
+  if (isPremium) {
+    setActiveTab(3);
+    return;
+  }
+
+  // 3) Se não é premium: abre o modal (comportamento atual)
+  openPremiumModal();
+  setActiveTab(3);
 }
+
 
 
 
