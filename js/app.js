@@ -579,13 +579,70 @@ function updateUI() {
   } catch (error) {
     console.error('Erro em updateUI:', error);
   }
+  updateHamburgerPremiumUI();
+
 }
 
 
+function updateHamburgerPremiumUI() {
+  const btn = document.querySelector('.hamburger-premium-btn');
+  const label = document.getElementById('hamburger-premium-label');
+  const icon = btn?.querySelector('[data-lucide="star"]');
 
+  if (!btn || !label || !icon) return;
 
+  // -------------------------
+  // PREMIUM ATIVO
+  // -------------------------
+  if (isPremium) {
+    const daysLeft = premiumExpires
+      ? Math.ceil((premiumExpires - Date.now()) / (1000 * 60 * 60 * 24))
+      : null;
 
+    // visual
+    btn.style.background = '#ffcc00';
+    btn.style.borderColor = '#ffcc00';
+    btn.style.color = '#ffffff';
 
+    label.textContent = daysLeft && daysLeft > 0
+      ? `PREMIUM (${daysLeft}D)`
+      : 'PREMIUM';
+
+    // estrela preenchida
+    icon.outerHTML = `
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+        <path d="M12 2l2.9 6.6 7.1.6-5.4 4.6 1.6 6.9L12 17.8 5.8 20.7 7.4 13.8 2 9.2l7.1-.6L12 2z"/>
+      </svg>
+    `;
+
+    // desativa clique
+    btn.style.pointerEvents = 'none';
+    btn.setAttribute('aria-disabled', 'true');
+  }
+
+  // -------------------------
+  // NÃO PREMIUM
+  // -------------------------
+  else {
+    btn.style.background = '';
+    btn.style.borderColor = '';
+    btn.style.color = '';
+
+    label.textContent = 'Seja Premium';
+
+    icon.outerHTML = `
+      <i data-lucide="star"></i>
+    `;
+
+    btn.style.pointerEvents = 'auto';
+    btn.removeAttribute('aria-disabled');
+  }
+
+  // re-render ícones lucide
+  if (typeof lucide !== 'undefined') {
+    lucide.createIcons();
+  }
+}
 
 
 
