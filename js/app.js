@@ -661,8 +661,37 @@ function updateUI() {
     console.error('Erro em updateUI:', error);
   }
   updateHamburgerPremiumUI();
+  updateHamburgerPremiumLabel();
 
 }
+
+
+
+
+function updateHamburgerPremiumLabel() {
+  const label = document.getElementById('hamburger-premium-label');
+  const link = document.getElementById('hamburger-premium-link');
+  if (!label || !link) return;
+
+  if (isPremium) {
+    const daysLeft = premiumExpires
+      ? Math.ceil((premiumExpires - Date.now()) / (1000 * 60 * 60 * 24))
+      : 0;
+
+    label.textContent = daysLeft > 0 ? `PREMIUM (${daysLeft}D)` : 'PREMIUM';
+
+    // ✅ opcional: se quiser impedir clique total
+    link.addEventListener('click', (e) => {
+      if (isPremium) e.preventDefault();
+    }, { once: true });
+
+  } else {
+    label.textContent = 'Seja Premium';
+  }
+}
+
+
+
 
 
 function updateHamburgerPremiumUI() {
@@ -2415,24 +2444,29 @@ window.openFAQModal = function() {
   }
 };
 
+
+
+
+
 window.openPremiumModal = function() {
   haptic(10);
 
+  // ✅ Se já é premium, NÃO abre modal
+  if (isPremium) return;
+
   const premiumModal = document.getElementById('premium-modal');
-  if (!premiumModal) return;
+  if (premiumModal) {
+    premiumModal.classList.remove('hidden');
+    document.body.classList.add('modal-open');
 
-  premiumModal.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-
-  // 🎯 Foco automático no input do código
-  setTimeout(() => {
-    const input = document.getElementById('premium-code-input');
-    if (input) {
-      input.focus();
-      input.select();
-    }
-  }, 150);
+    // ✅ foco sempre
+    setTimeout(() => {
+      const input = document.getElementById('premium-code-input');
+      if (input) input.focus();
+    }, 120);
+  }
 };
+
 
 
 
@@ -2534,10 +2568,22 @@ window.addEventListener('DOMContentLoaded', function() {
           const faqBtn = document.getElementById('faq-btn');
           if (faqBtn) faqBtn.click();
           break;
+		  
+		  
+		  
         case 'premium':
-          const premBtn = document.getElementById('premium-btn');
-          if (premBtn) premBtn.click();
-          break;
+  // ✅ Se já é premium, não abre modal
+  if (isPremium) {
+    // opcional: fecha dropdown/menu e volta pro home
+    if (typeof setActiveTab === 'function') setActiveTab(0);
+  } else {
+    // abre modal de premium
+    if (typeof window.openPremiumModal === 'function') window.openPremiumModal();
+  }
+  break;
+
+
+
       }
       
       // Limpa URL depois de abrir
