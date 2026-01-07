@@ -3035,3 +3035,31 @@ body.premium-active .tab-bar .tab-item:nth-child(4) .tab-label {
   stroke: #ffffff;
   fill: #ffffff;
 }
+
+
+
+/* Premium amarelo no botão do hambúrguer */
+.hamburger-premium-btn.premium-on {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b) !important;
+  color: #fff !important;
+}
+
+.hamburger-premium-btn.premium-on span {
+  color: #fff !important;
+  background: transparent !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+.hamburger-premium-btn.premium-on svg,
+.hamburger-premium-btn.premium-on i {
+  color: #fff !important;
+}
+
+/* estrela “cheia” */
+.hamburger-premium-btn.premium-on svg.lucide,
+.hamburger-premium-btn.premium-on svg[data-lucide] {
+  fill: #fff !important;
+  stroke: #fff !important;
+}
