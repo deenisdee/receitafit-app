@@ -2989,12 +2989,13 @@ body.premium-active .tab-bar .tab-item:nth-child(4) .tab-label {
 
 .hamburger-premium-btn.premium {
   background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-  color: #1f2937;
+  color: #fff;
 }
 
 .hamburger-premium-btn.premium i,
 .hamburger-premium-btn.premium span {
-  color: #1f2937;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  color: #fff;
   font-weight: 600;
 }
 
