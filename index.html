@@ -413,10 +413,14 @@
          <i data-lucide="calendar-days" class="tab-icon"></i>
          <span class="tab-label">Planner</span>
          </button>
+		 
+		 
          <button class="tab-item" onclick="tabGoPremium()" aria-label="Premium">
          <i data-lucide="star" class="tab-icon"></i>
          <span class="tab-label">Premium</span>
          </button>
+		 
+		 
       </nav>
       <!-- DROPDOWN PLANNER (abre pra cima) -->
       <div id="planner-dropdown" class="planner-dropdown hidden">
@@ -494,11 +498,16 @@
                <span>Instagram</span>
                </a>
                <div class="hamburger-divider"></div>
+			   
+			   
                <!-- Botão Premium destacado -->
                <button class="hamburger-premium-btn tap" onclick="openPremiumModal(); closeHamburgerMenu();">
                <i data-lucide="star"></i>
-               <span>Seja Premium</span>
+               <span id="hamburger-premium-label">Seja Premium</span>
+
                </button>
+			   
+			   
             </nav>
          </div>
       </div>
