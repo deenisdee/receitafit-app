@@ -121,7 +121,17 @@
                         </svg>
                         <span>3 Créditos</span>
                      </div>
-                     <button id="premium-btn" class="btn-premium tap">Ativar Premium</button>
+					 
+					 
+					 
+					 
+                     <button id="premium-btn" class="btn-premium tap" onclick="openPremiumModal('header')">
+					  Ativar Premium
+					 </button>
+
+
+
+					 
                   </div>
                   <button class="hamburger-btn" onclick="openHamburgerMenu()" aria-label="Menu">
                   <i data-lucide="menu"></i>
@@ -327,9 +337,8 @@
             </div>
          </div>
       </div>
-      <!-- Scripts -->
-      <script src="js/data.js"></script>
-      <script src="js/app.js"></script>
+	  
+
       <!-- Modal de Notificação -->
       <div id="notification-modal" class="modal hidden">
          <div class="modal-overlay"></div>
@@ -399,25 +408,9 @@
             <path d="M12 19V5M5 12l7-7 7 7"/>
          </svg>
       </button>
-      <!-- TAB BAR MOBILE -->
-      <nav class="tab-bar">
-         <button class="tab-item" onclick="tabGoHome()" aria-label="Início">
-         <i data-lucide="home" class="tab-icon"></i>
-         <span class="tab-label">Início</span>
-         </button>
-         <button class="tab-item" onclick="tabGoSearch()" aria-label="Buscar">
-         <i data-lucide="search" class="tab-icon"></i>
-         <span class="tab-label">Buscar</span>
-         </button>
-         <button class="tab-item" onclick="togglePlannerDropdown()" aria-label="Planner">
-         <i data-lucide="calendar-days" class="tab-icon"></i>
-         <span class="tab-label">Planner</span>
-         </button>
-         <button class="tab-item" onclick="tabGoPremium()" aria-label="Premium">
-         <i data-lucide="star" class="tab-icon"></i>
-         <span class="tab-label">Premium</span>
-         </button>
-      </nav>
+	  
+	  
+
       <!-- DROPDOWN PLANNER (abre pra cima) -->
       <div id="planner-dropdown" class="planner-dropdown hidden">
          <div class="planner-dropdown-overlay" onclick="closePlannerDropdown()"></div>
@@ -494,11 +487,18 @@
                <span>Instagram</span>
                </a>
                <div class="hamburger-divider"></div>
-               <!-- Botão Premium destacado -->
-               <button class="hamburger-premium-btn tap" onclick="openPremiumModal(); closeHamburgerMenu();">
-               <i data-lucide="star"></i>
-               <span>Seja Premium</span>
-               </button>
+			   
+			   
+			   
+<button id="hamburger-premium-btn" class="hamburger-premium-btn tap" onclick="openPremiumModal('hamburger'); closeHamburgerMenu();">
+  <i data-lucide="star"></i>
+  <span>Seja Premium</span>
+</button>
+
+
+			   
+			   
+			   
             </nav>
          </div>
       </div>
@@ -554,5 +554,17 @@
             <path d="M12 19V5M5 12l7-7 7 7"/>
          </svg>
       </button>
+
+
+      <!-- Scripts -->
+<script src="js/ui-components.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+
+	  
+<div id="rf-hamburger-root"></div>
+<div id="rf-tabbar-root"></div>
+	  
+<div id="tabbar-root"></div>	  
    </body>
 </html>
