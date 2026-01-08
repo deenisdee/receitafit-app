@@ -37,9 +37,55 @@
         input.focus();
     }
 
-    function getPlannerDropdown() {
-        return document.querySelector('.planner-dropdown');
-    }
+
+
+
+
+function getPlannerDropdown() {
+  let dd = document.querySelector('.planner-dropdown');
+  if (dd) return dd;
+
+  // Se não existir no HTML, cria automaticamente (centralizado no ui-components)
+  dd = document.createElement('div');
+  dd.className = 'planner-dropdown hidden';
+  dd.id = 'planner-dropdown';
+
+  dd.innerHTML = `
+    <div class="planner-dropdown-overlay" onclick="closePlannerDropdown()"></div>
+
+    <div class="planner-dropdown-content">
+      <button class="planner-dropdown-item tap" onclick="openCalorieCalculator()">
+        <i data-lucide="calculator" class="planner-dropdown-icon"></i>
+        <span>Calculadora de Calorias</span>
+      </button>
+
+      <button class="planner-dropdown-item tap" onclick="openShoppingList()">
+        <i data-lucide="shopping-cart" class="planner-dropdown-icon"></i>
+        <span>Lista de Compras</span>
+      </button>
+
+      <button class="planner-dropdown-item tap" onclick="openWeekPlanner()">
+        <i data-lucide="calendar-days" class="planner-dropdown-icon"></i>
+        <span>Planejador Semanal</span>
+      </button>
+    </div>
+  `;
+
+  // coloca no final do body (antes de </body>)
+  document.body.appendChild(dd);
+
+  // re-render dos ícones (lucide)
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+
+  return dd;
+}
+
+
+
+
+
 
     function openPlannerDropdown() {
         const dd = getPlannerDropdown();
