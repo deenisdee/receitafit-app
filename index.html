@@ -133,9 +133,7 @@
 
 					 
                   </div>
-                  <button class="hamburger-btn" onclick="openHamburgerMenu()" aria-label="Menu">
-                  <i data-lucide="menu"></i>
-                  </button> 
+
                </div>
             </div>
          </header>
@@ -410,98 +408,11 @@
       </button>
 	  
 	  
-
-      <!-- DROPDOWN PLANNER (abre pra cima) -->
-      <div id="planner-dropdown" class="planner-dropdown hidden">
-         <div class="planner-dropdown-overlay" onclick="closePlannerDropdown()"></div>
-         <div class="planner-dropdown-content">
-            <button class="planner-dropdown-item tap" onclick="openCalorieCalculator()">
-            <i data-lucide="calculator" class="planner-dropdown-icon"></i>
-            <span>Calculadora de Calorias</span>
-            </button>
-            <button class="planner-dropdown-item tap" onclick="openShoppingList()">
-            <i data-lucide="shopping-cart" class="planner-dropdown-icon"></i>
-            <span>Lista de Compras</span>
-            </button>
-            <button class="planner-dropdown-item tap" onclick="openWeekPlanner()">
-            <i data-lucide="calendar-check" class="planner-dropdown-icon"></i>
-            <span>Planejador Semanal</span>
-            </button>
-         </div>
-      </div>
-      <!-- MENU HAMBÚRGUER -->
-      <div id="hamburger-menu" class="hamburger-menu hidden">
-         <div class="hamburger-overlay" onclick="closeHamburgerMenu()"></div>
-         <div class="hamburger-content">
-            <!-- Header do Menu -->
-            <div class="hamburger-header">
-               <div class="hamburger-logo">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                           <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/>
-                           <line x1="6" y1="17" x2="18" y2="17"/>
-                        </svg>
-                  <span>Receitafit<span style="color: #16a34a;">.App</span></span>
-               </div>
-               <button class="hamburger-close tap" onclick="closeHamburgerMenu()" aria-label="Fechar menu">
-               <i data-lucide="x"></i>
-               </button>
-            </div>
-            <!-- Links do Menu -->
-            <nav class="hamburger-nav">
-               <!-- Planner com submenu -->
-               <div class="hamburger-section">
-                  <div class="hamburger-section-title">
-                     <i data-lucide="calendar-days"></i>
-                     <span>Planner</span>
-                  </div>
-                  <button class="hamburger-link hamburger-sublink tap" onclick="openCalorieCalculator(); closeHamburgerMenu();">
-                  <i data-lucide="calculator"></i>
-                  <span>Calculadora de Calorias</span>
-                  </button>
-                  <button class="hamburger-link hamburger-sublink tap" onclick="openShoppingList(); closeHamburgerMenu();">
-                  <i data-lucide="shopping-cart"></i>
-                  <span>Lista de Compras</span>
-                  </button>
-                  <button class="hamburger-link hamburger-sublink tap" onclick="openWeekPlanner(); closeHamburgerMenu();">
-                  <i data-lucide="calendar-check"></i>
-                  <span>Planejador Semanal</span>
-                  </button>
-               </div>
-               <div class="hamburger-divider"></div>
-               <!-- Links principais -->
-               <a href="quem-somos.html" class="hamburger-link tap">
-               <i data-lucide="users"></i>
-               <span>Quem Somos</span>
-               </a>
-			   
-			   
-				<a href="index.html?tool=faq" class="hamburger-link tap">
-				<i data-lucide="help-circle"></i>
-				<span>Ajuda</span>
-			    </a>
-				
-		   
-		   
-               <a href="https://instagram.com/receitafit.app" target="_blank" rel="noopener noreferrer" class="hamburger-link tap">
-               <i data-lucide="instagram"></i>
-               <span>Instagram</span>
-               </a>
-               <div class="hamburger-divider"></div>
-			   
-			   
-			   
-<button id="hamburger-premium-btn" class="hamburger-premium-btn tap" onclick="openPremiumModal('hamburger'); closeHamburgerMenu();">
-  <i data-lucide="star"></i>
-  <span>Seja Premium</span>
-</button>
-
-
-			   
-			   
-			   
-            </nav>
-         </div>
-      </div>
+	  
+	  
+	  
+	  
+	  
       <!-- RODAPÉ DESKTOP -->
       <footer class="footer">
          <div class="footer-container">
@@ -564,7 +475,6 @@
 	  
 <div id="rf-hamburger-root"></div>
 <div id="rf-tabbar-root"></div>
-	  
-<div id="tabbar-root"></div>	  
-   </body>
+
+</body>
 </html>
