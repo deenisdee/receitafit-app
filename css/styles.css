@@ -2939,7 +2939,7 @@ body.modal-open .bottom-tab-bar {
 
     /* força centralização visual */
     left: 41% !important;
-    top: 5px !important;
+    top: 0px !important;
     transform: translateX(-50%) !important;
 
     /* evita heranças estranhas */
@@ -2952,7 +2952,7 @@ body.modal-open .bottom-tab-bar {
 
   .header-actions,
   .search-container {
-    margin-top: 5px !important;
+    margin-top: 8px !important;
   }
 
   .categories-new {
