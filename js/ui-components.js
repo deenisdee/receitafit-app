@@ -210,18 +210,22 @@ function renderTabbar(root) {
       return;
     }
 
-   // 3) Planner (toggle abre/fecha)
+
+
+
+   // 3) Planner (toggle abre/fecha) — abre em QUALQUER página
 if (tab === 'planner') {
-  if (!/index\.html/i.test(location.pathname) && location.pathname !== '/') {
-    window.location.href = 'index.html#rf-planner';
-    return;
-  }
-  // Chama a função global
   if (typeof window.togglePlannerDropdown === 'function') {
     window.togglePlannerDropdown();
+  } else if (typeof window.openPlannerDropdown === 'function') {
+    window.openPlannerDropdown();
   }
   return;
 }
+
+
+
+
 
     // 4) Premium (sem premium ativo: deve ficar verde ao clicar)
     if (tab === 'premium') {
