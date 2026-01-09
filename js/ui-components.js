@@ -40,64 +40,76 @@
 
 
 
-
+// --------- PLANNER DROPDOWN (estável) ---------
 function getPlannerDropdown() {
   let dd = document.querySelector('.planner-dropdown');
-  if (dd) return dd;
 
-  // Se não existir no HTML, cria automaticamente (centralizado no ui-components)
-  dd = document.createElement('div');
-  dd.className = 'planner-dropdown hidden';
-  dd.id = 'planner-dropdown';
+  // se não existe, cria
+  if (!dd) {
+    dd = document.createElement('div');
+    dd.className = 'planner-dropdown hidden';
+    dd.id = 'planner-dropdown';
 
-  dd.innerHTML = `
-    <div class="planner-dropdown-overlay" onclick="closePlannerDropdown()"></div>
+    dd.innerHTML = `
+      <div class="planner-dropdown-overlay" onclick="window.closePlannerDropdown && window.closePlannerDropdown()"></div>
 
-    <div class="planner-dropdown-content">
-      <button class="planner-dropdown-item tap" onclick="openCalorieCalculator()">
-        <i data-lucide="calculator" class="planner-dropdown-icon"></i>
-        <span>Calculadora de Calorias</span>
-      </button>
+      <div class="planner-dropdown-content">
+        <button class="planner-dropdown-item tap" type="button" onclick="window.openCalorieCalculator && window.openCalorieCalculator()">
+          <i data-lucide="calculator" class="planner-dropdown-icon"></i>
+          <span>Calculadora de Calorias</span>
+        </button>
 
-      <button class="planner-dropdown-item tap" onclick="openShoppingList()">
-        <i data-lucide="shopping-cart" class="planner-dropdown-icon"></i>
-        <span>Lista de Compras</span>
-      </button>
+        <button class="planner-dropdown-item tap" type="button" onclick="window.openShoppingList && window.openShoppingList()">
+          <i data-lucide="shopping-cart" class="planner-dropdown-icon"></i>
+          <span>Lista de Compras</span>
+        </button>
 
-      <button class="planner-dropdown-item tap" onclick="openWeekPlanner()">
-        <i data-lucide="calendar-days" class="planner-dropdown-icon"></i>
-        <span>Planejador Semanal</span>
-      </button>
-    </div>
-  `;
+        <button class="planner-dropdown-item tap" type="button" onclick="window.openWeekPlanner && window.openWeekPlanner()">
+          <i data-lucide="calendar-days" class="planner-dropdown-icon"></i>
+          <span>Planejador Semanal</span>
+        </button>
+      </div>
+    `;
 
-  // coloca no final do body (antes de </body>)
-  document.body.appendChild(dd);
+    document.body.appendChild(dd);
 
-  // re-render dos ícones (lucide)
-  if (window.lucide && typeof window.lucide.createIcons === 'function') {
-    window.lucide.createIcons();
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
   }
 
   return dd;
 }
 
+// ✅ precisa ser função "nomeada" (não só window.xxx = function)
+// pra nunca existir re-assign errado depois.
+function openPlannerDropdown() {
+  const dd = getPlannerDropdown();
+  if (!dd) return;
+  dd.classList.remove('hidden');
+}
+
+function closePlannerDropdown() {
+  const dd = getPlannerDropdown();
+  if (!dd) return;
+  dd.classList.add('hidden');
+}
+
+function togglePlannerDropdown() {
+  const dd = getPlannerDropdown();
+  if (!dd) return;
+  dd.classList.toggle('hidden');
+}
+
+// ✅ expõe certinho no window (SEM reatribuir pra algo inexistente)
+window.openPlannerDropdown = openPlannerDropdown;
+window.closePlannerDropdown = closePlannerDropdown;
+window.togglePlannerDropdown = togglePlannerDropdown;
 
 
 
 
 
-    function openPlannerDropdown() {
-        const dd = getPlannerDropdown();
-        if (!dd) return;
-        dd.classList.remove('hidden');
-    }
-
-    function togglePlannerDropdown() {
-        const dd = getPlannerDropdown();
-        if (!dd) return;
-        dd.classList.toggle('hidden');
-    }
 
     // --------- PREMIUM OPEN (centralizado) ---------
     // OBS: você já tem a openPremiumModal() e ela está ok.
@@ -121,73 +133,109 @@ function getPlannerDropdown() {
         }
     };
 
-    // --------- TAB BAR RENDER ---------
-    function renderTabbar(root) {
-        if (!root) return;
-        if (root.dataset.mounted === '1') return;
-        root.dataset.mounted = '1';
+ // --------- TAB BAR RENDER (ATIVO VERDE) ---------
+function renderTabbar(root) {
+  if (!root) return;
+  if (root.dataset.mounted === '1') return;
+  root.dataset.mounted = '1';
 
-        root.innerHTML = `
-      <div class="tab-bar" id="rf-tabbar">
-        <button class="tab-item" type="button" aria-label="Início" data-tab="home">
-          <i data-lucide="home" class="tab-icon"></i>
-          <span class="tab-label">Início</span>
-        </button>
+  root.innerHTML = `
+    <div class="tab-bar" id="rf-tabbar">
+      <button class="tab-item" type="button" aria-label="Início" data-tab="home">
+        <i data-lucide="home" class="tab-icon"></i>
+        <span class="tab-label">Início</span>
+      </button>
 
-        <button class="tab-item" type="button" aria-label="Busca" data-tab="search">
-          <i data-lucide="search" class="tab-icon"></i>
-          <span class="tab-label">Busca</span>
-        </button>
+      <button class="tab-item" type="button" aria-label="Busca" data-tab="search">
+        <i data-lucide="search" class="tab-icon"></i>
+        <span class="tab-label">Busca</span>
+      </button>
 
-        <button class="tab-item" type="button" aria-label="Planner" data-tab="planner">
-          <i data-lucide="calendar" class="tab-icon"></i>
-          <span class="tab-label">Planner</span>
-        </button>
+      <button class="tab-item" type="button" aria-label="Planner" data-tab="planner">
+        <i data-lucide="calendar" class="tab-icon"></i>
+        <span class="tab-label">Planner</span>
+      </button>
 
-        <button class="tab-item tab-premium" type="button" aria-label="Premium" data-open-premium="tab">
-          <i data-lucide="star" class="tab-icon"></i>
-          <span class="tab-label">Premium</span>
-        </button>
-      </div>
-    `;
+      <button class="tab-item tab-premium" type="button" aria-label="Premium" data-tab="premium" data-open-premium="tab">
+        <i data-lucide="star" class="tab-icon"></i>
+        <span class="tab-label">Premium</span>
+      </button>
+    </div>
+  `;
 
-        // clique
-        root.addEventListener('click', (e) => {
-            const btnHome = e.target.closest('[data-tab="home"]');
-            if (btnHome) {
-                window.location.href = 'index.html';
-                return;
-            }
+  // === helpers de ativo ===
+  function setActive(tabName) {
+    const items = root.querySelectorAll('.tab-item');
+    items.forEach((b) => b.classList.remove('active'));
 
-            const btnSearch = e.target.closest('[data-tab="search"]');
-            if (btnSearch) {
-                // se não estiver na index, volta pra index e abre busca via hash
-                if (!/index\.html/i.test(location.pathname)) {
-                    window.location.href = 'index.html#rf-search';
-                    return;
-                }
-                focusSearch();
-                return;
-            }
+    const btn = root.querySelector(`.tab-item[data-tab="${tabName}"]`);
+    if (btn) btn.classList.add('active');
 
-            const btnPlanner = e.target.closest('[data-tab="planner"]');
-            if (btnPlanner) {
-                // se não estiver na index, volta pra index e abre planner via hash
-                if (!/index\.html/i.test(location.pathname)) {
-                    window.location.href = 'index.html#rf-planner';
-                    return;
-                }
-                togglePlannerDropdown();
-                return;
-            }
+    // guarda para manter ao trocar de página
+    try { sessionStorage.setItem('rf_active_tab', tabName); } catch (_) {}
+  }
 
-            const btnPremium = e.target.closest('[data-open-premium]');
-            if (btnPremium) {
-                window.openPremium('tab');
-                return;
-            }
-        });
+  function applyActiveFromStorage() {
+    let saved = 'home';
+    try { saved = sessionStorage.getItem('rf_active_tab') || 'home'; } catch (_) {}
+    setActive(saved);
+  }
+
+  // aplica ao montar
+  applyActiveFromStorage();
+
+  // Clique (robusto: pega clique no <button>, <i> ou <span>)
+  root.addEventListener('click', (e) => {
+    const btn = e.target.closest('button');
+    if (!btn || !root.contains(btn)) return;
+
+    const tab = btn.dataset.tab;
+
+    // marca o ativo primeiro (pra feedback imediato)
+    if (tab) setActive(tab);
+
+    // 1) Início
+    if (tab === 'home') {
+      window.location.href = 'index.html';
+      return;
     }
+
+    // 2) Busca
+    if (tab === 'search') {
+      if (!/index\.html/i.test(location.pathname)) {
+        window.location.href = 'index.html#rf-search';
+        return;
+      }
+      focusSearch();
+      return;
+    }
+
+    // 3) Planner (toggle abre/fecha)
+    if (tab === 'planner') {
+      if (!/index\.html/i.test(location.pathname)) {
+        window.location.href = 'index.html#rf-planner';
+        return;
+      }
+      if (typeof window.togglePlannerDropdown === 'function') {
+        window.togglePlannerDropdown();
+      } else if (typeof togglePlannerDropdown === 'function') {
+        togglePlannerDropdown();
+      }
+      return;
+    }
+
+    // 4) Premium (sem premium ativo: deve ficar verde ao clicar)
+    if (tab === 'premium') {
+      if (typeof window.openPremium === 'function') {
+        window.openPremium('tab');
+      } else if (typeof window.openPremiumModal === 'function') {
+        window.openPremiumModal('tab');
+      }
+      return;
+    }
+  });
+}
+
 
 
 
