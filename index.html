@@ -483,5 +483,23 @@
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
 
+
+<script>
+  // Abre premium automaticamente se vier da URL
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('open') === 'premium') {
+    setTimeout(function() {
+      if (typeof window.openPremiumModal === 'function') {
+        window.openPremiumModal();
+      }
+      // Limpa URL
+      window.history.replaceState({}, '', 'index.html');
+    }, 500);
+  }
+</script>
+
+
+
+
 </body>
 </html>
