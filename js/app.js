@@ -2518,25 +2518,22 @@ window.addEventListener('DOMContentLoaded', function() {
 // ===============================
 // PARTE 9 — DEBUG: QUEM CHAMA openPlannerDropdown()
 // (não altera comportamento)
-// ===============================
-(function debugOpenPlannerCalls(){
-  'use strict';
+window.openPlannerDropdown = function () {
+  const dropdown =
+    document.getElementById('planner-dropdown') ||
+    document.querySelector('.planner-dropdown');
 
-  if (window.__debugPlannerPatched) return;
-  window.__debugPlannerPatched = true;
+  // deixa o Planner ativo (verde)
+  setActiveTab(2); // <-- ajuste se o Planner não for 2
 
-  const originalOpen = window.openPlannerDropdown;
-
-  if (typeof originalOpen === 'function') {
-    window.openPlannerDropdown = function () {
-      console.log('[DEBUG] openPlannerDropdown() foi chamado em:', location.pathname);
-      console.trace('[DEBUG] stack openPlannerDropdown');
-      return originalOpen.apply(this, arguments);
-    };
-  } else {
-    console.warn('[DEBUG] openPlannerDropdown não existe neste momento.');
+  if (dropdown) {
+    dropdown.classList.remove('hidden');
   }
-})();
+
+  // badge muda em runtime
+  if (typeof updatePlannerBadge === 'function') updatePlannerBadge();
+};
+
 
 
 
