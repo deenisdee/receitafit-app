@@ -606,5 +606,23 @@
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
 
+<script>
+  // Limpa tab ativo
+  try {
+    sessionStorage.removeItem('rf_active_tab');
+  } catch(e) {}
+  
+  // Garante que os cliques funcionem
+  document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+      const tabbar = document.querySelector('.tab-bar');
+      if (tabbar) {
+        // Força o foco no tabbar para ativar eventos
+        tabbar.style.pointerEvents = 'auto';
+      }
+    }, 300);
+  });
+</script>
+
 </body>
 </html>
