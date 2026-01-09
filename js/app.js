@@ -2427,14 +2427,6 @@ document.addEventListener('click', (e) => {
 
 
 
-
-
-
-
-
-
-
-
 // ================================
 // AUTO-ABRIR FERRAMENTAS VIA URL
 // ================================
@@ -2478,39 +2470,104 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 
-// ============================================
-// PREMIUM — PONTO ÚNICO DE CONTROLE (BASE)
-// ============================================
-/* document.addEventListener('DOMContentLoaded', () => {
-  const premiumHeaderBtn = document.getElementById('premium-btn');
-  const premiumTabBtn = document.getElementById('tab-premium-btn');
-  const premiumHamburgerBtn = document.getElementById('hamburger-premium-btn');
 
 
-  function handleOpenPremium(origin) {
-    console.log('[Premium] Aberto por:', origin);
 
-    if (typeof openPremiumModal === 'function') {
-      openPremiumModal(origin);
+// ===============================
+// DEBUG TABBAR + PLANNER (temporário)
+// ===============================
+(function debugPlannerTabbar(){
+  'use strict';
+
+  function pick(sel){ return document.querySelector(sel); }
+  function closestAny(el, sels){
+    for (const s of sels) {
+      const c = el.closest(s);
+      if (c) return c;
     }
+    return null;
   }
 
-  if (premiumHeaderBtn) {
-    premiumHeaderBtn.addEventListener('click', () => handleOpenPremium('header'));
+  const TABBAR_SEL = ['.tabbar', '#tabbar', '.tab-bar', '#tab-bar'];
+  const DROPDOWN_SEL = ['#plannerDropdown', '#planner-dropdown', '.plannerDropdown', '.planner-dropdown'];
+
+  document.addEventListener('click', (e) => {
+    const tabbar = closestAny(e.target, TABBAR_SEL);
+    if (!tabbar) return;
+
+    const a = e.target.closest('a');
+    const btn = e.target.closest('button');
+    const dd = DROPDOWN_SEL.map(s => pick(s)).find(Boolean);
+
+    console.log('--- TABBAR CLICK ---');
+    console.log('page:', location.pathname);
+    console.log('target:', e.target);
+    console.log('closest <a> href:', a ? a.getAttribute('href') : null);
+    console.log('closest <button>:', !!btn);
+    console.log('tabbar matched selector:', TABBAR_SEL.find(s => e.target.closest(s)));
+    console.log('dropdown found:', dd ? (dd.id ? '#'+dd.id : dd.className) : 'NOT FOUND');
+    console.log('defaultPrevented:', e.defaultPrevented);
+  }, true);
+})();
+
+
+
+// ===============================
+// PARTE 9 — DEBUG: QUEM CHAMA openPlannerDropdown()
+// (não altera comportamento)
+// ===============================
+(function debugOpenPlannerCalls(){
+  'use strict';
+
+  if (window.__debugPlannerPatched) return;
+  window.__debugPlannerPatched = true;
+
+  const originalOpen = window.openPlannerDropdown;
+
+  if (typeof originalOpen === 'function') {
+    window.openPlannerDropdown = function () {
+      console.log('[DEBUG] openPlannerDropdown() foi chamado em:', location.pathname);
+      console.trace('[DEBUG] stack openPlannerDropdown');
+      return originalOpen.apply(this, arguments);
+    };
+  } else {
+    console.warn('[DEBUG] openPlannerDropdown não existe neste momento.');
+  }
+})();
+
+
+
+
+// ===============================
+// PARTE 10 — FALLBACK INDEX: criar/abrir planner-dropdown após clique
+// (não interfere nos handlers existentes)
+// ===============================
+(function plannerIndexFallback(){
+  'use strict';
+
+  function isIndexPage() {
+    const p = (location.pathname || '').toLowerCase();
+    return p.endsWith('/index.html') || p === '/' || p.endsWith('/index');
   }
 
-  if (premiumTabBtn) {
-    premiumTabBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      handleOpenPremium('tab');
-    });
+  function isPlannerButtonClick(target) {
+    const btn = target.closest('button');
+    if (!btn) return false;
+    return !!btn.querySelector('svg.lucide-calendar, svg.lucide.lucide-calendar');
   }
 
-  if (premiumHamburgerBtn) {
-    premiumHamburgerBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      handleOpenPremium('hamburger');
-    });
-  }
-});
- */
+  if (!isIndexPage()) return;
+
+  document.addEventListener('click', function(e){
+    if (!e.target.closest('.tab-bar')) return;
+    if (!isPlannerButtonClick(e.target)) return;
+
+    // deixa TODOS os handlers atuais rodarem primeiro
+    setTimeout(function(){
+      const dd = document.getElementById('planner-dropdown');
+      if (!dd && typeof window.openPlannerDropdown === 'function') {
+        window.openPlannerDropdown();
+      }
+    }, 0);
+  }, false);
+})();
