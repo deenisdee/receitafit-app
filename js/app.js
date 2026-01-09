@@ -1794,6 +1794,7 @@ function updatePremiumButtons() {
   if (isPremium && premiumExpires) {
     const daysLeft = Math.ceil((premiumExpires - Date.now()) / (1000 * 60 * 60 * 24));
     
+    // ✅ TAB BAR - Fica amarelo
     if (tabPremiumBtn) {
       tabPremiumBtn.classList.add('has-premium');
     }
@@ -1801,14 +1802,22 @@ function updatePremiumButtons() {
       tabPremiumLabel.textContent = 'Premium';
     }
     
+    // ✅ MENU HAMBÚRGUER - Fica amarelo + mostra dias + DESABILITA CLIQUE
     if (hamburgerPremiumBtn) {
       hamburgerPremiumBtn.classList.add('has-premium');
+      hamburgerPremiumBtn.disabled = true;
+      hamburgerPremiumBtn.style.cursor = 'default';
+      hamburgerPremiumBtn.style.opacity = '1';
+      
+      // Remove onclick
+      hamburgerPremiumBtn.onclick = null;
     }
     if (hamburgerPremiumText) {
       hamburgerPremiumText.textContent = `Premium (${daysLeft}D)`;
     }
     
   } else {
+    // ❌ SEM PREMIUM - Volta ao normal
     if (tabPremiumBtn) {
       tabPremiumBtn.classList.remove('has-premium');
     }
@@ -1818,6 +1827,15 @@ function updatePremiumButtons() {
     
     if (hamburgerPremiumBtn) {
       hamburgerPremiumBtn.classList.remove('has-premium');
+      hamburgerPremiumBtn.disabled = false;
+      hamburgerPremiumBtn.style.cursor = 'pointer';
+      hamburgerPremiumBtn.style.opacity = '';
+      
+      // Restaura onclick
+      hamburgerPremiumBtn.onclick = function() {
+        if (window.openPremiumModal) window.openPremiumModal();
+        if (window.closeHamburgerMenu) window.closeHamburgerMenu();
+      };
     }
     if (hamburgerPremiumText) {
       hamburgerPremiumText.textContent = 'Seja Premium';
