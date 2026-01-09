@@ -1640,6 +1640,9 @@ window.openWeekPlanner = function() {
 };
 window.closeWeekPlanner = function() { closeModal(plannerModal); };
 
+
+
+
 // ==============================
 // PREMIUM (pronto p/ evoluir)
 // ==============================
@@ -1700,8 +1703,13 @@ async function activatePremium() {
     await storage.set('fit_premium_expires', data.expiresAt.toString());
     
     updateUI();
+    
+    // ✅ Atualiza botões premium (tab bar + menu hambúrguer)
+    if (typeof window.updatePremiumButtons === 'function') {
+        window.updatePremiumButtons();
+    }
+    
     _setupPremiumTimers();
-
     const daysLeft = data.expiresInDays || 30;
     showNotification(
       'Premium Ativado! 🎉', 
