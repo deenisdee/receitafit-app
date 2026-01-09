@@ -2518,21 +2518,23 @@ window.addEventListener('DOMContentLoaded', function() {
 // ===============================
 // PARTE 9 — DEBUG: QUEM CHAMA openPlannerDropdown()
 // (não altera comportamento)
-window.openPlannerDropdown = function () {
-  const dropdown =
-    document.getElementById('planner-dropdown') ||
-    document.querySelector('.planner-dropdown');
+(function debugOpenPlannerCalls(){
+  'use strict';
 
-  // deixa o Planner ativo (verde)
-  setActiveTab(2); // <-- ajuste se o Planner não for 2
+  if (window.__debugPlannerPatched) return;
+  window.__debugPlannerPatched = true;
 
-  if (dropdown) {
-    dropdown.classList.remove('hidden');
-  }
+  const originalOpen = window.openPlannerDropdown;
 
-  // badge muda em runtime
-  if (typeof updatePlannerBadge === 'function') updatePlannerBadge();
-};
+  window.openPlannerDropdown = function () {
+    console.log('[DEBUG] openPlannerDropdown() em:', location.pathname);
+    console.trace('[DEBUG] stack openPlannerDropdown');
+
+    if (typeof originalOpen === 'function') {
+      return originalOpen.apply(this, arguments);
+    }
+  };
+})();
 
 
 
