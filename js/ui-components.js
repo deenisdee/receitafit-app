@@ -234,6 +234,12 @@ function renderTabbar(root) {
       return;
     }
   });
+  
+// ✅ Atualiza estado do botão premium após renderizar
+  if (typeof window.updatePremiumButtons === 'function') {
+    setTimeout(() => window.updatePremiumButtons(), 100);
+  }
+}
 }
 
 
@@ -315,9 +321,9 @@ function renderTabbar(root) {
 			
 			
 
-            <button class="hamburger-premium-btn tap" onclick="openPremiumModal('hamburger'); closeHamburgerMenu();">
+            <button class="hamburger-premium-btn tap" id="hamburger-premium-btn" onclick="openPremiumModal('hamburger'); closeHamburgerMenu();">
               <i data-lucide="star"></i>
-              <span>Seja Premium</span>
+              <span id="hamburger-premium-text">Seja Premium</span>
             </button>
           </div>
 
@@ -332,6 +338,11 @@ function renderTabbar(root) {
         // Recria os ícones lucide (se estiver usando)
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
             window.lucide.createIcons();
+        }
+		
+		// ✅ Atualiza estado do botão premium após renderizar
+        if (typeof window.updatePremiumButtons === 'function') {
+            setTimeout(() => window.updatePremiumButtons(), 100);
         }
     }
 
