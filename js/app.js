@@ -1125,7 +1125,7 @@ function showRecipeDetail(recipeId) {
     
     // Scroll suave pro topo
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, 500);
+  }, 300);
 }
 
 
@@ -2717,58 +2717,72 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 
-
-
-
-
 // ===============================
 // TOUR PREMIUM (card no banner)
+// - Botão aparece apenas no FREE
+// - Premium continua podendo acessar o tour por outros gatilhos (ex: ?)
 // ===============================
 (function premiumTourCard(){
   'use strict';
 
-  const openBtn = document.getElementById('open-tour-btn');
-  const card = document.getElementById('tour-card');
-  const textEl = document.getElementById('tour-text');
+  const openBtn   = document.getElementById('open-tour-btn');
+  const card      = document.getElementById('tour-card');
+  const textEl    = document.getElementById('tour-text');
   const counterEl = document.getElementById('tour-counter');
-  const closeBtn = document.getElementById('tour-close');
-  const prevBtn = document.getElementById('tour-prev');
-  const nextBtn = document.getElementById('tour-next');
+  const closeBtn  = document.getElementById('tour-close');
+  const prevBtn   = document.getElementById('tour-prev');
+  const nextBtn   = document.getElementById('tour-next');
 
-  if (!openBtn || !card || !textEl || !counterEl || !closeBtn || !prevBtn || !nextBtn) return;
+  // Se não estiver na HOME (não existe botão/card), não faz nada
+  if (!openBtn || !card || !textEl || !counterEl || !closeBtn || !prevBtn || !nextBtn) {
+    return;
+  }
 
   const steps = [
-    "1) Aqui não existe cobrança nem pressão. O site foi criado para te ajudar a decidir com mais leveza.",
-    "2) Escolha uma receita simples. Uma escolha por vez já tira o peso do dia.",
-    "3) Calculadora de Calorias (Premium): Clareza, não paranoia. Você entende o que seu corpo precisa.",
-    "4) Lista de Compras (Premium): Você vai ao mercado com mapa na mão, sem esquecer nada.",
-    "5) Planejador Semanal (Premium): Organiza sua semana, soma suas calorias baseado nas receitas que escolheu e te livra do “o que eu como hoje?”.",
-    "6) Tudo se adapta à sua rotina. Mudou o dia? Você ajusta e segue — sem culpa.",
-    "7) Pronto. Quando quiser, ative o Premium e use as ferramentas completas."
+    "Aqui não existe cobrança. O Premium é um apoio para você decidir com mais leveza.",
+    "1) Escolha uma receita simples. Uma escolha por vez já tira o peso do dia.",
+    "2) Calculadora de Calorias: clareza, não paranoia. Você entende o que seu corpo precisa.",
+    "3) Lista de Compras: você vai ao mercado com mapa na mão, sem esquecer nada.",
+    "4) Planejador Semanal: organiza sua semana e te livra do “o que eu como hoje?”.",
+    "Mudou o dia? Sem problema. Você ajusta e segue — sem culpa, sem recomeço do zero.",
+    "Pronto. Se fizer sentido, ative o Premium e use as ferramentas completas."
   ];
 
   let i = 0;
 
+  // ===============================
+  // CONTROLE DE PLANO
+  // ===============================
   function isPremium(){
     return localStorage.getItem('fit_premium') === 'true';
   }
 
-  function syncButton(){
+  function syncPremiumUI(){
     if (isPremium()) {
+      // Premium: não mostra o botão no banner
       openBtn.classList.add('hidden');
+
+      // garante que o card não fique aberto
       card.classList.add('hidden');
     } else {
+      // Free: mostra o botão
       openBtn.classList.remove('hidden');
     }
   }
 
+  // ===============================
+  // RENDER
+  // ===============================
   function render(){
     textEl.textContent = steps[i];
-    counterEl.textContent = `${i+1}/${steps.length}`;
+    counterEl.textContent = `${i + 1}/${steps.length}`;
     prevBtn.disabled = (i === 0);
     nextBtn.textContent = (i === steps.length - 1) ? 'Fechar' : 'Avançar';
   }
 
+  // ===============================
+  // AÇÕES
+  // ===============================
   function open(){
     card.classList.remove('hidden');
     i = 0;
@@ -2779,12 +2793,17 @@ window.addEventListener('DOMContentLoaded', function() {
     card.classList.add('hidden');
   }
 
+  // ===============================
+  // EVENTOS
+  // ===============================
   openBtn.addEventListener('click', open);
   closeBtn.addEventListener('click', close);
 
   prevBtn.addEventListener('click', () => {
-    if (i > 0) i--;
-    render();
+    if (i > 0) {
+      i--;
+      render();
+    }
   });
 
   nextBtn.addEventListener('click', () => {
@@ -2796,10 +2815,12 @@ window.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // init
-  document.addEventListener('DOMContentLoaded', syncButton);
-  syncButton();
+  // ===============================
+  // INIT
+  // ===============================
+  syncPremiumUI();
 
-  // se você ativa premium em runtime, chame isto após setar fit_premium:
-  window.syncPremiumTour = syncButton;
+  // Expondo para uso externo (ex: após ativar Premium em runtime)
+  window.syncPremiumTour = syncPremiumUI;
+
 })();
