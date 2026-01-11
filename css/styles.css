@@ -3048,7 +3048,7 @@ body.premium-modal-open.premium-open--hamburger .badge {
 }
 
 .tab-premium.has-premium .tab-label {
-  color: #fbbf24 !important;
+  color: #6b7280 !important; /* Mantém cinza mesmo com premium */
 }
 
 .tab-premium .tab-icon {
