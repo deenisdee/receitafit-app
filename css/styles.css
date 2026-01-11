@@ -3117,6 +3117,8 @@ body.premium-modal-open.premium-open--hamburger .badge {
 
 
 
+
+
 /* ===============================
    HERO BANNER (sem imagem)
    =============================== */
@@ -3200,6 +3202,7 @@ body.premium-modal-open.premium-open--hamburger .badge {
 }
 
 .tour-x{
+	cursor: pointer;
   width: 34px;
   height: 34px;
   border-radius: 999px;
@@ -3230,6 +3233,7 @@ body.premium-modal-open.premium-open--hamburger .badge {
 }
 
 .tour-btn.ghost{
+	 cursor: pointer;
 	font-size: 15px;
   background: #fff;
     font-weight: 600;
@@ -3239,6 +3243,7 @@ body.premium-modal-open.premium-open--hamburger .badge {
 }
 
 .tour-btn.primary{
+	 cursor: pointer;
 	font-size: 15px;
   background: #3b82f6;
     font-weight: 600;
@@ -3275,6 +3280,9 @@ body.premium-modal-open.premium-open--hamburger .badge {
 
 .hero-btn,
 #open-tour-btn {
+	
+	 cursor: pointer;
+	opacity: 0.9;
     position: absolute !important;
     left: 17px;
     right: 17px;
@@ -3290,7 +3298,9 @@ body.premium-modal-open.premium-open--hamburger .badge {
 
 /* CARD flutuante sobre o banner */
 #tour-card,
+
 .tour-card {
+	
   position: absolute !important;
   left: 17px !important;
   top: 37px !important;
