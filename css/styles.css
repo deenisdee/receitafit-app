@@ -3121,11 +3121,11 @@ body.premium-modal-open.premium-open--hamburger .badge {
    HERO BANNER (sem imagem)
    =============================== */
 .hero-banner{
-  position: relative;
-  background: #1f2937;
-  color: #fff;
-  padding: 36px 18px 70px; /* espaço embaixo pro card flutuar sem esmagar */
-  border-radius: 0;
+    position: relative;
+    /* background: #1f2937; */
+    color: #fff;
+    padding: 0px 18px 0px !important;
+    border-radius: 0;
 }
 
 .hero-content{
@@ -3256,7 +3256,7 @@ body.premium-modal-open.premium-open--hamburger .badge {
   position: absolute !important;
   left: 12px;
   right: 12px;
-  top: 12px;                /* ⬅️ botão no topo do banner */
+  top: 35px;                /* ⬅️ botão no topo do banner */
   z-index: 90 !important;
   width: auto !important;
   margin: 0 !important;
@@ -3266,9 +3266,10 @@ body.premium-modal-open.premium-open--hamburger .badge {
 #tour-card,
 .tour-card {
   position: absolute !important;
-  left: 12px;
-  right: 12px;
-  bottom: 12px;             /* ⬅️ card embaixo do banner */
+  left: 12px !important;
+  top: 33px !important;
+  right: 12px !important;
+  bottom: 12px !important;             /* ⬅️ card embaixo do banner */
   z-index: 95 !important;
 }
 
