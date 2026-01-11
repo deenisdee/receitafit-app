@@ -2735,12 +2735,12 @@ window.addEventListener('DOMContentLoaded', function() {
 
   const steps = [
     "1) Aqui não existe cobrança nem pressão. O site foi criado para te ajudar a decidir com mais leveza.",
-    "1) Escolha uma receita simples. Uma escolha por vez já tira o peso do dia.",
-    "2) Calculadora de Calorias (Premium): clareza, não paranoia. Você entende o que seu corpo precisa.",
-    "3) Lista de Compras (Premium): você vai ao mercado com mapa na mão, sem esquecer nada.",
-    "4) Planejador Semanal (Premium): organiza sua semana e te livra do “o que eu como hoje?”.",
-    "5) Tudo se adapta à sua rotina. Mudou o dia? Você ajusta e segue — sem culpa.",
-    "6) Pronto. Quando quiser, ative o Premium e use as ferramentas completas."
+    "2) Escolha uma receita simples. Uma escolha por vez já tira o peso do dia.",
+    "3) Calculadora de Calorias (Premium): clareza, não paranoia. Você entende o que seu corpo precisa.",
+    "4) Lista de Compras (Premium): você vai ao mercado com mapa na mão, sem esquecer nada.",
+    "5) Planejador Semanal (Premium): organiza sua semana e te livra do “o que eu como hoje?”.",
+    "6) Tudo se adapta à sua rotina. Mudou o dia? Você ajusta e segue — sem culpa.",
+    "7) Pronto. Quando quiser, ative o Premium e use as ferramentas completas."
   ];
 
   let i = 0;
