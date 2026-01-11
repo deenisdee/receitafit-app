@@ -3226,17 +3226,23 @@ body.premium-modal-open.premium-open--hamburger .badge {
   flex: 1;
   border: 0;
   padding: 12px 12px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .tour-btn.ghost{
+	font-size: 15px;
   background: #fff;
+    font-weight: 600;
+    font-family:inherit;
   border-top: 1px solid #e5e7eb;
   border-right: 1px solid #e5e7eb;
 }
 
 .tour-btn.primary{
+	font-size: 15px;
   background: #3b82f6;
+    font-weight: 600;
+  font-family:inherit;
   color: #fff;
   border-top: 1px solid rgba(0,0,0,.08);
 }
