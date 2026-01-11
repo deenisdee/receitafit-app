@@ -3151,8 +3151,8 @@ body.premium-modal-open.premium-open--hamburger .badge {
   border-radius: 14px;
   padding: 14px 16px;
   font-weight: 800;
-  background: #22c55e;
-  color: #0b1220;
+  background: #16a34a !important;
+  color: #fff !important;
 }
 
 /* ===============================
