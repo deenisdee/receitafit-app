@@ -2712,74 +2712,90 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+
+
+
+
 // ===============================
-// TOUR GUIADO — PREMIUM
+// TOUR PREMIUM (card no banner)
 // ===============================
-(function premiumTour() {
-  const btn = document.getElementById('open-tour-btn');
-  const modal = document.getElementById('tour-modal');
-  const text = document.getElementById('tour-text');
+(function premiumTourCard(){
+  'use strict';
+
+  const openBtn = document.getElementById('open-tour-btn');
+  const card = document.getElementById('tour-card');
+  const textEl = document.getElementById('tour-text');
+  const counterEl = document.getElementById('tour-counter');
   const closeBtn = document.getElementById('tour-close');
   const prevBtn = document.getElementById('tour-prev');
   const nextBtn = document.getElementById('tour-next');
 
-  if (!btn || !modal || !text) return;
+  if (!openBtn || !card || !textEl || !counterEl || !closeBtn || !prevBtn || !nextBtn) return;
 
   const steps = [
     "Aqui não existe cobrança nem pressão. O site foi criado para te ajudar a decidir com mais leveza.",
-    "Primeiro, você escolhe uma receita simples. Não precisa planejar tudo hoje. Uma escolha já é um avanço.",
-    "No Premium, a Calculadora de Calorias te mostra o que seu corpo precisa — sem paranoia, só clareza.",
-    "Depois, a Lista de Compras organiza os ingredientes para você ir ao mercado sem esquecer nada.",
-    "O Planejador Semanal tira o peso do 'o que vou comer hoje?' e te ajuda a enxergar a semana.",
-    "O Premium não te controla. Ele te apoia. Você continua no comando."
+    "1) Escolha uma receita simples. Uma escolha por vez já tira o peso do dia.",
+    "2) Calculadora de Calorias (Premium): clareza, não paranoia. Você entende o que seu corpo precisa.",
+    "3) Lista de Compras (Premium): você vai ao mercado com mapa na mão, sem esquecer nada.",
+    "4) Planejador Semanal (Premium): organiza sua semana e te livra do “o que eu como hoje?”.",
+    "Tudo se adapta à sua rotina. Mudou o dia? Você ajusta e segue — sem culpa.",
+    "Pronto. Quando quiser, ative o Premium e use as ferramentas completas."
   ];
 
-  let step = 0;
+  let i = 0;
 
-  function isPremium() {
+  function isPremium(){
     return localStorage.getItem('fit_premium') === 'true';
   }
 
-  function render() {
-    text.textContent = steps[step];
-    prevBtn.disabled = step === 0;
-    nextBtn.textContent = step === steps.length - 1 ? 'Fechar' : 'Próximo';
+  function syncButton(){
+    if (isPremium()) {
+      openBtn.classList.add('hidden');
+      card.classList.add('hidden');
+    } else {
+      openBtn.classList.remove('hidden');
+    }
   }
 
-  function open() {
-    modal.classList.remove('hidden');
-    step = 0;
+  function render(){
+    textEl.textContent = steps[i];
+    counterEl.textContent = `${i+1}/${steps.length}`;
+    prevBtn.disabled = (i === 0);
+    nextBtn.textContent = (i === steps.length - 1) ? 'Fechar' : 'Avançar';
+  }
+
+  function open(){
+    card.classList.remove('hidden');
+    i = 0;
     render();
   }
 
-  function close() {
-    modal.classList.add('hidden');
+  function close(){
+    card.classList.add('hidden');
   }
 
-  btn.addEventListener('click', open);
+  openBtn.addEventListener('click', open);
   closeBtn.addEventListener('click', close);
 
   prevBtn.addEventListener('click', () => {
-    if (step > 0) step--;
+    if (i > 0) i--;
     render();
   });
 
   nextBtn.addEventListener('click', () => {
-    if (step < steps.length - 1) {
-      step++;
+    if (i < steps.length - 1) {
+      i++;
       render();
     } else {
       close();
     }
   });
 
-  // só aparece para Free
-  function sync() {
-    if (isPremium()) btn.classList.add('hidden');
-    else btn.classList.remove('hidden');
-  }
+  // init
+  document.addEventListener('DOMContentLoaded', syncButton);
+  syncButton();
 
-  document.addEventListener('DOMContentLoaded', sync);
-  sync();
-
+  // se você ativa premium em runtime, chame isto após setar fit_premium:
+  window.syncPremiumTour = syncButton;
 })();
