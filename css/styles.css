@@ -3150,10 +3150,22 @@ body.premium-modal-open.premium-open--hamburger .badge {
   border: 0;
   border-radius: 14px;
   padding: 14px 16px;
-  font-weight: 800;
+  font-weight: 500;
   background: #16a34a !important;
   color: #f9fafb !important;
+  
+  font-family: inherit;      /* usa a fonte do site */
+  font-size: 14px;           /* ajuste fino se precisar */
+         /* mesmo “peso” visual do Premium */
+  letter-spacing: 0; 
+  text-transform: none;
+  line-height: 1;
 }
+
+
+
+
+
 
 /* ===============================
    TOUR CARD (flutuante sobre banner)
@@ -3193,7 +3205,7 @@ body.premium-modal-open.premium-open--hamburger .badge {
   border-radius: 999px;
   border: 0;
   background: #22c55e;
-  color: #0b1220;
+  color: #fff;
   font-weight: 900;
 }
 
@@ -3262,6 +3274,8 @@ body.premium-modal-open.premium-open--hamburger .badge {
     right: 17px;
     top: 37px;
     z-index: 45 !important;
+	font-size: 0.95rem;
+	font-weight:500px!important;
     width: auto !important;
     height: 50px;
     margin: 0 !important;
@@ -3272,9 +3286,9 @@ body.premium-modal-open.premium-open--hamburger .badge {
 #tour-card,
 .tour-card {
   position: absolute !important;
-  left: 12px !important;
-  top: 33px !important;
-  right: 12px !important;
+  left: 17px !important;
+  top: 37px !important;
+  right: 17px !important;
   bottom: 12px !important;             /* ⬅️ card embaixo do banner */
   z-index: 95 !important;
 }
