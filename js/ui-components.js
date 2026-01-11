@@ -353,20 +353,18 @@ if (tab === 'planner') {
         return;
     }
     
-    // DEBUG: mostra alert
-    const dropdown = document.querySelector('.planner-dropdown');
-    if (!dropdown) {
-        alert('Dropdown não existe!');
-        return;
+    // Garante que dropdown existe antes de abrir
+    if (typeof window.openPlannerDropdown === 'function') {
+        window.openPlannerDropdown();
+    } else {
+        // Cria dropdown se não existe
+        getPlannerDropdown();
+        setTimeout(() => {
+            if (typeof window.openPlannerDropdown === 'function') {
+                window.openPlannerDropdown();
+            }
+        }, 100);
     }
-    
-    alert('Abrindo dropdown... classe antes: ' + dropdown.className);
-    
-    dropdown.classList.remove('hidden');
-    
-    setTimeout(() => {
-        alert('Classe depois: ' + dropdown.className);
-    }, 500);
     
     return;
 }
