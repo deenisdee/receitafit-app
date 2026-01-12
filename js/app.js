@@ -1167,38 +1167,27 @@ function showRecipeDetail(recipeId) {
           Ingredientes
         </h3>
         <div class="ingredients-grid">
-          ${(recipe.ingredients || []).map(ing => {
-            if (typeof ing === 'string') {
-              return `
-                <div class="ingredient-item">
-                  <div class="ingredient-icon-wrapper">
-                    <i data-lucide="circle-dot" class="ingredient-icon"></i>
-                  </div>
-                  <div class="ingredient-content">
-                    <span class="ingredient-text">${ing}</span>
-                  </div>
-                </div>
-              `;
-            }
-            return `
-              <div class="ingredient-item">
-                <div class="ingredient-icon-wrapper">
-				
-				
-				
-                  <i data-lucide="${ing.icon || getIconFromIngredientName(ing.name || ing.text || ing.quantity) || 'circle-dot'}" class="ingredient-icon"></i>
-               
-
-
-			   </div>
-                <div class="ingredient-content">
-                  <span class="ingredient-quantity">${ing.quantity || ''}</span>
-                  <span class="ingredient-text">${ing.text || ''}</span>
-                  ${ing.optional ? '<span class="ingredient-optional">Opcional</span>' : ''}
-                </div>
-              </div>
-            `;
-          }).join('')}
+		
+		
+		
+        ${(recipe.ingredients || []).map(ing => {
+  // Se for string, converte para objeto
+  if (typeof ing === 'string') {
+    ing = { text: ing, quantity: '', name: ing };
+  }
+  
+  return `
+    <div class="ingredient-item">
+      <div class="ingredient-icon-wrapper">
+        <i data-lucide="${ing.icon || getIconFromIngredientName(ing.text || ing.name || ing.quantity) || 'circle-dot'}" class="ingredient-icon"></i>
+      </div>
+      <div class="ingredient-content">
+        <span class="ingredient-text">${ing.text || ing.name || ing.quantity || ing}</span>
+        ${ing.optional ? '<span class="ingredient-optional">Opcional</span>' : ''}
+      </div>
+    </div>
+  `;
+}).join('')}
         </div>
       </div>
 
@@ -1220,6 +1209,9 @@ function showRecipeDetail(recipeId) {
               ` : ''}
             </li>
           `).join('')}
+		  
+		  
+		  
         </ol>
       </div>
 
