@@ -3185,7 +3185,7 @@ font-size:14px;
   border: 0;
   background: #22c55e;
   color: #0b1220;
-  font-weight: inherit; /* não força peso */
+
 }
 
 .tour-text{
@@ -3223,3 +3223,9 @@ font-size:14px;
   color: #fff;
   border-top: 1px solid rgba(0,0,0,.08);
 }
+
+
+
+
+
+
