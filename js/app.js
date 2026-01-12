@@ -240,16 +240,37 @@ RF.premium.syncUI();
 
 
 
-
-
-
-
-
 // ==============================
 // FONTE ÚNICA DE DADOS (receitas)
 // ==============================
 const ALL_RECIPES = (typeof RECIPES !== 'undefined' && Array.isArray(RECIPES)) ? RECIPES : [];
 let allRecipes = ALL_RECIPES; // compat
+
+
+
+
+// ============================================
+// Embaralhar receitas a cada carregamento (Fisher–Yates)
+// (compatível iPhone / ES5)
+// ============================================
+function shuffleArray(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+  return arr;
+}
+
+// embaralha 1x por load
+if (allRecipes && allRecipes.length > 1) {
+  shuffleArray(allRecipes);
+}
+
+
+
+
 
 // ==============================
 // ESTADO DO USUÁRIO
@@ -277,7 +298,7 @@ let shoppingList = [];
 let weekPlan = {};
 
 // ==============================
-// STORAGE ADAPTER (localStorage / Claude)
+// STORAGE ADAPTER (localStorage)
 // ==============================
 const isClaudeEnvironment = typeof window.storage !== 'undefined';
 
@@ -817,6 +838,11 @@ window.filterByCategory = function(category, element) {
   renderRecipes();
 };
 
+
+
+
+
+
 // ==============================
 // RENDER RECEITAS
 // ==============================
@@ -908,6 +934,17 @@ function renderRecipes() {
     `;
   }).join('');
 }
+
+
+
+
+
+
+
+
+
+
+
 
 window.viewRecipe = function(recipeId) {
   haptic(10);
@@ -2820,13 +2857,13 @@ window.addEventListener('DOMContentLoaded', function() {
   }
 
   const steps = [
-    "Aqui não existe cobrança. O Premium é um apoio para você decidir com mais leveza.",
-    "1) Escolha uma receita simples. Uma escolha por vez já tira o peso do dia.",
-    "2) Calculadora de Calorias: clareza, não paranoia. Você entende o que seu corpo precisa.",
-    "3) Lista de Compras: você vai ao mercado com mapa na mão, sem esquecer nada.",
-    "4) Planejador Semanal: organiza sua semana e te livra do “o que eu como hoje?”.",
-    "Mudou o dia? Sem problema. Você ajusta e segue — sem culpa, sem recomeço do zero.",
-    "Pronto. Se fizer sentido, ative o Premium e use as ferramentas completas."
+    "1) Aqui não existe cobrança. O Premium é um apoio para você decidir com mais leveza.",
+    "2) Escolha uma receita simples. Uma escolha por vez já tira o peso do dia.",
+    "3) Calculadora de Calorias: Clareza, não paranoia. Você entende o que seu corpo precisa.",
+    "4) Lista de Compras: Você vai ao mercado com mapa na mão, sem esquecer nada.",
+    "5) Planejador Semanal: Organiza sua semana, soma as calorias e te livra do “o que eu como hoje?”.",
+    "6) Mudou o dia? Sem problema. Você ajusta e segue — sem culpa, sem recomeço do zero.",
+    "7) Pronto. Se fizer sentido, ative o Premium e use as ferramentas completas."
   ];
 
   let i = 0;
