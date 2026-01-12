@@ -845,91 +845,99 @@ window.filterByCategory = function(category, element) {
 
 
 // ================================
-// MAPEAMENTO AUTOMÁTICO DE ÍCONES
+// MAPEAMENTO AUTOMÁTICO DE ÍCONES (Lucide + Font Awesome fallback)
 // ================================
 function getIconFromIngredientName(name) {
-  if (!name) return 'circle';
+  if (!name) return { type: 'lucide', icon: 'circle' };
   
   const nameLower = name.toLowerCase();
   
+  // Helper para retornar ícone Lucide
+  const lucide = (icon) => ({ type: 'lucide', icon });
+  
+  // Helper para retornar ícone Font Awesome
+  const fa = (icon) => ({ type: 'fa', icon });
+  
   // Proteínas - Carnes
-  if (nameLower.includes('frango') || nameLower.includes('peito') || nameLower.includes('coxa')) return 'drumstick';
-  if (nameLower.includes('carne') || nameLower.includes('boi') || nameLower.includes('patinho') || nameLower.includes('alcatra')) return 'beef';
-  if (nameLower.includes('peixe') || nameLower.includes('salmão') || nameLower.includes('tilápia') || nameLower.includes('atum')) return 'fish';
-  if (nameLower.includes('camarão') || nameLower.includes('frutos do mar')) return 'fish';
-  if (nameLower.includes('ovo')) return 'egg';
-  if (nameLower.includes('whey') || nameLower.includes('proteína')) return 'dumbbell';
+  if (nameLower.includes('frango') || nameLower.includes('peito') || nameLower.includes('coxa')) return lucide('drumstick');
+  if (nameLower.includes('carne') || nameLower.includes('boi') || nameLower.includes('patinho') || nameLower.includes('alcatra')) return lucide('beef');
+  if (nameLower.includes('peixe') || nameLower.includes('salmão') || nameLower.includes('tilápia') || nameLower.includes('atum')) return lucide('fish');
+  if (nameLower.includes('camarão') || nameLower.includes('frutos do mar')) return fa('fa-solid fa-shrimp');
+  if (nameLower.includes('ovo')) return lucide('egg');
+  if (nameLower.includes('whey') || nameLower.includes('proteína')) return lucide('dumbbell');
   
   // Frutas
-  if (nameLower.includes('banana')) return 'banana';
-  if (nameLower.includes('morango') || nameLower.includes('framboesa') || nameLower.includes('amora')) return 'cherry';
-  if (nameLower.includes('maçã')) return 'apple';
-  if (nameLower.includes('abacate')) return 'avocado';
-  if (nameLower.includes('kiwi') || nameLower.includes('fruta')) return 'apple';
-  if (nameLower.includes('limão') || nameLower.includes('lima')) return 'citrus';
-  if (nameLower.includes('laranja')) return 'orange';
+  if (nameLower.includes('banana')) return lucide('banana');
+  if (nameLower.includes('morango') || nameLower.includes('framboesa') || nameLower.includes('amora')) return lucide('cherry');
+  if (nameLower.includes('maçã')) return lucide('apple');
+  if (nameLower.includes('abacate')) return fa('fa-solid fa-avocado');
+  if (nameLower.includes('kiwi')) return fa('fa-solid fa-kiwi-bird');
+  if (nameLower.includes('limão') || nameLower.includes('lima')) return fa('fa-solid fa-lemon');
+  if (nameLower.includes('laranja')) return fa('fa-solid fa-orange');
+  if (nameLower.includes('melancia')) return fa('fa-solid fa-melon');
+  if (nameLower.includes('uva')) return fa('fa-solid fa-grapes');
   
   // Vegetais e Verduras
-  if (nameLower.includes('brócolis') || nameLower.includes('brocolis')) return 'broccoli';
-  if (nameLower.includes('batata')) return 'potato';
-  if (nameLower.includes('alho')) return 'garlic';
-  if (nameLower.includes('tomate')) return 'tomato';
-  if (nameLower.includes('cebola')) return 'onion';
-  if (nameLower.includes('cenoura')) return 'carrot';
-  if (nameLower.includes('alface') || nameLower.includes('rúcula') || nameLower.includes('espinafre')) return 'leaf';
-  if (nameLower.includes('couve') || nameLower.includes('repolho')) return 'leafy-green';
-  if (nameLower.includes('pimentão') || nameLower.includes('pimenta')) return 'pepper-hot';
-  if (nameLower.includes('aspargo') || nameLower.includes('vagem')) return 'carrot';
+  if (nameLower.includes('brócolis') || nameLower.includes('brocolis')) return fa('fa-solid fa-broccoli');
+  if (nameLower.includes('batata')) return fa('fa-solid fa-potato');
+  if (nameLower.includes('alho')) return lucide('flower-2');
+  if (nameLower.includes('tomate')) return fa('fa-solid fa-tomato');
+  if (nameLower.includes('cebola')) return fa('fa-solid fa-onion');
+  if (nameLower.includes('cenoura')) return fa('fa-solid fa-carrot');
+  if (nameLower.includes('alface') || nameLower.includes('rúcula') || nameLower.includes('espinafre')) return fa('fa-solid fa-leaf');
+  if (nameLower.includes('couve') || nameLower.includes('repolho')) return fa('fa-solid fa-cabbage');
+  if (nameLower.includes('pimentão') || nameLower.includes('pimenta')) return fa('fa-solid fa-pepper-hot');
+  if (nameLower.includes('aspargo') || nameLower.includes('vagem')) return fa('fa-solid fa-asparagus');
+  if (nameLower.includes('milho')) return fa('fa-solid fa-corn');
+  if (nameLower.includes('cogumelo')) return fa('fa-solid fa-mushroom');
   
   // Grãos e Cereais
-  if (nameLower.includes('aveia') || nameLower.includes('granola')) return 'wheat';
-  if (nameLower.includes('arroz')) return 'rice-bowl';
-  if (nameLower.includes('macarrão') || nameLower.includes('massa') || nameLower.includes('espaguete')) return 'noodles';
-  if (nameLower.includes('pão') || nameLower.includes('torrada')) return 'wheat';
-  if (nameLower.includes('quinoa')) return 'wheat';
+  if (nameLower.includes('aveia') || nameLower.includes('granola')) return fa('fa-solid fa-wheat-awn');
+  if (nameLower.includes('arroz')) return fa('fa-solid fa-bowl-rice');
+  if (nameLower.includes('macarrão') || nameLower.includes('massa') || nameLower.includes('espaguete')) return fa('fa-solid fa-spaghetti-monster-flying');
+  if (nameLower.includes('pão') || nameLower.includes('torrada')) return fa('fa-solid fa-bread-slice');
+  if (nameLower.includes('quinoa')) return fa('fa-solid fa-seedling');
   
   // Laticínios
-  if (nameLower.includes('leite')) return 'milk';
-  if (nameLower.includes('queijo')) return 'cheese';
-  if (nameLower.includes('iogurte') || nameLower.includes('yogurt')) return 'milk-off';
-  if (nameLower.includes('requeijão')) return 'cheese';
+  if (nameLower.includes('leite')) return lucide('milk');
+  if (nameLower.includes('queijo')) return fa('fa-solid fa-cheese');
+  if (nameLower.includes('iogurte') || nameLower.includes('yogurt')) return fa('fa-solid fa-cup-straw');
+  if (nameLower.includes('requeijão')) return fa('fa-solid fa-cheese-swiss');
   
   // Gorduras e Óleos
-  if (nameLower.includes('azeite') || nameLower.includes('óleo') || nameLower.includes('oleo')) return 'droplets';
-  if (nameLower.includes('manteiga')) return 'milk';
-  if (nameLower.includes('amendoim') || nameLower.includes('amêndoa') || nameLower.includes('castanha') || nameLower.includes('nozes')) return 'peanut';
-  if (nameLower.includes('abacate')) return 'avocado';
+  if (nameLower.includes('azeite') || nameLower.includes('óleo') || nameLower.includes('oleo')) return fa('fa-solid fa-oil-can');
+  if (nameLower.includes('manteiga')) return fa('fa-solid fa-butter');
+  if (nameLower.includes('amendoim') || nameLower.includes('amêndoa') || nameLower.includes('castanha') || nameLower.includes('nozes')) return fa('fa-solid fa-peanut');
   
   // Temperos e Condimentos
-  if (nameLower.includes('sal')) return 'sparkles';
-  if (nameLower.includes('pimenta')) return 'flame';
-  if (nameLower.includes('canela')) return 'wheat';
-  if (nameLower.includes('orégano') || nameLower.includes('tomilho') || nameLower.includes('alecrim') || nameLower.includes('manjericão') || nameLower.includes('erva')) return 'leaf';
-  if (nameLower.includes('tempero') || nameLower.includes('paprica') || nameLower.includes('páprica')) return 'sparkles';
-  if (nameLower.includes('mostarda')) return 'droplet';
-  if (nameLower.includes('molho') || nameLower.includes('shoyu')) return 'droplet';
+  if (nameLower.includes('sal')) return fa('fa-solid fa-salt-shaker');
+  if (nameLower.includes('pimenta')) return fa('fa-solid fa-pepper');
+  if (nameLower.includes('canela')) return fa('fa-solid fa-cinnamon-roll');
+  if (nameLower.includes('orégano') || nameLower.includes('tomilho') || nameLower.includes('alecrim') || nameLower.includes('manjericão') || nameLower.includes('erva')) return fa('fa-solid fa-leaf');
+  if (nameLower.includes('tempero') || nameLower.includes('paprica') || nameLower.includes('páprica')) return fa('fa-solid fa-mortar-pestle');
+  if (nameLower.includes('mostarda')) return fa('fa-solid fa-jar');
+  if (nameLower.includes('molho') || nameLower.includes('shoyu')) return fa('fa-solid fa-bottle-droplet');
   
   // Doces
-  if (nameLower.includes('mel')) return 'droplet';
-  if (nameLower.includes('açúcar') || nameLower.includes('acucar')) return 'candy';
-  if (nameLower.includes('chocolate')) return 'candy';
+  if (nameLower.includes('mel')) return fa('fa-solid fa-honey-pot');
+  if (nameLower.includes('açúcar') || nameLower.includes('acucar')) return fa('fa-solid fa-candy-cane');
+  if (nameLower.includes('chocolate')) return fa('fa-solid fa-chocolate-bar');
   
   // Especiais
-  if (nameLower.includes('pasta de amendoim')) return 'peanut';
-  if (nameLower.includes('açaí') || nameLower.includes('acai')) return 'ice-cream';
-  if (nameLower.includes('polpa')) return 'ice-cream';
-  if (nameLower.includes('coco')) return 'palmtree';
+  if (nameLower.includes('pasta de amendoim')) return fa('fa-solid fa-jar');
+  if (nameLower.includes('açaí') || nameLower.includes('acai')) return fa('fa-solid fa-ice-cream');
+  if (nameLower.includes('polpa')) return fa('fa-solid fa-blender');
+  if (nameLower.includes('coco')) return fa('fa-solid fa-coconut');
   
   // Bebidas
-  if (nameLower.includes('café')) return 'coffee';
-  if (nameLower.includes('chá') || nameLower.includes('cha')) return 'cup-soda';
-  if (nameLower.includes('água') || nameLower.includes('agua')) return 'droplet';
-  if (nameLower.includes('suco')) return 'glass-water';
+  if (nameLower.includes('café')) return fa('fa-solid fa-mug-hot');
+  if (nameLower.includes('chá') || nameLower.includes('cha')) return fa('fa-solid fa-cup-togo');
+  if (nameLower.includes('água') || nameLower.includes('agua')) return fa('fa-solid fa-glass-water');
+  if (nameLower.includes('suco')) return fa('fa-solid fa-glass-citrus');
   
-  // Padrão
-  return 'circle';
+  // Padrão - ícone genérico bonito
+  return fa('fa-solid fa-utensils');
 }
-
 
 
 
@@ -1190,16 +1198,27 @@ function showRecipeDetail(recipeId) {
 		
 		
 		
-        ${(recipe.ingredients || []).map(ing => {
-  // Se for string, converte para objeto
+		
+		
+ ${(recipe.ingredients || []).map(ing => {
   if (typeof ing === 'string') {
     ing = { text: ing, quantity: '', name: ing };
   }
   
+  // Pega ícone (Lucide ou Font Awesome)
+  const iconData = ing.icon 
+    ? { type: 'lucide', icon: ing.icon } 
+    : getIconFromIngredientName(ing.text || ing.name || ing.quantity);
+  
+  // Renderiza ícone correto
+  const iconHTML = iconData.type === 'fa'
+    ? `<i class="${iconData.icon} ingredient-icon"></i>`
+    : `<i data-lucide="${iconData.icon}" class="ingredient-icon"></i>`;
+  
   return `
     <div class="ingredient-item">
       <div class="ingredient-icon-wrapper">
-        <i data-lucide="${ing.icon || getIconFromIngredientName(ing.text || ing.name || ing.quantity) || 'circle-dot'}" class="ingredient-icon"></i>
+        ${iconHTML}
       </div>
       <div class="ingredient-content">
         <span class="ingredient-text">${ing.text || ing.name || ing.quantity || ing}</span>
@@ -1208,27 +1227,11 @@ function showRecipeDetail(recipeId) {
     </div>
   `;
 }).join('')}
-        </div>
-      </div>
 
-      <div class="detail-section">
-        <h3 class="section-title">
-          <i data-lucide="utensils" class="section-icon"></i>
-          Modo de Preparo
-        </h3>
-        <ol class="instructions-list">
-          ${(recipe.instructions || []).map((step, idx) => `
-            <li class="instruction-item">
-              <div class="instruction-header">
-                <div class="instruction-number">${idx + 1}</div>
-                <div class="instruction-text">${step}</div>
-              </div>
-              ${recipe.images?.steps && recipe.images.steps[idx] ? `
-                <img src="${recipe.images.steps[idx]}" alt="Passo ${idx + 1}"
-                     class="instruction-image" loading="lazy">
-              ` : ''}
-            </li>
-          `).join('')}
+
+
+
+
 		  
 		  
 		  
