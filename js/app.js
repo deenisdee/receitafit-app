@@ -1107,6 +1107,7 @@ function showRecipeDetail(recipeId) {
           </svg>
           Adicionar à Lista de compras
         </button>
+		<p class="planner-subtitle">Aproveite para adicionar os ingredientes desta receita na Lista de compras (Só para  Usuário Premium)</p>
       </div>
 
       ${recipe.tags && recipe.tags.length > 0 ? `
