@@ -843,102 +843,85 @@ window.filterByCategory = function(category, element) {
 
 
 
-
 // ================================
-// MAPEAMENTO AUTOMÁTICO DE ÍCONES (Lucide + Font Awesome fallback)
+// MAPEAMENTO AUTOMÁTICO DE ÍCONES (SÓ LUCIDE)
 // ================================
 function getIconFromIngredientName(name) {
-  if (!name) return { type: 'lucide', icon: 'chef-hat' };
+  if (!name) return 'utensils';
   
   const nameLower = name.toLowerCase();
   
-  // Helper para retornar ícone Lucide
-  const lucide = (icon) => ({ type: 'lucide', icon });
-  
-  // Helper para retornar ícone Font Awesome
-  const fa = (icon) => ({ type: 'fa', icon });
-  
-  // Proteínas - Carnes
-  if (nameLower.includes('frango') || nameLower.includes('peito') || nameLower.includes('coxa')) return lucide('drumstick');
-  if (nameLower.includes('carne') || nameLower.includes('boi') || nameLower.includes('patinho') || nameLower.includes('alcatra')) return lucide('beef');
-  if (nameLower.includes('peixe') || nameLower.includes('salmão') || nameLower.includes('tilápia') || nameLower.includes('atum')) return lucide('fish');
-  if (nameLower.includes('camarão') || nameLower.includes('frutos do mar')) return fa('fa-solid fa-shrimp');
-  if (nameLower.includes('ovo')) return lucide('egg');
-  if (nameLower.includes('whey') || nameLower.includes('proteína')) return lucide('dumbbell');
+  // Proteínas
+  if (nameLower.includes('frango') || nameLower.includes('peito') || nameLower.includes('coxa')) return 'drumstick';
+  if (nameLower.includes('carne') || nameLower.includes('boi') || nameLower.includes('patinho')) return 'beef';
+  if (nameLower.includes('peixe') || nameLower.includes('salmão') || nameLower.includes('atum')) return 'fish';
+  if (nameLower.includes('camarão')) return 'fish';
+  if (nameLower.includes('ovo')) return 'egg';
+  if (nameLower.includes('whey') || nameLower.includes('proteína')) return 'dumbbell';
   
   // Frutas
-  if (nameLower.includes('banana')) return lucide('banana');
-  if (nameLower.includes('morango') || nameLower.includes('framboesa') || nameLower.includes('amora')) return lucide('cherry');
-  if (nameLower.includes('maçã')) return lucide('apple');
-  if (nameLower.includes('abacate')) return fa('fa-solid fa-avocado');
-  if (nameLower.includes('kiwi')) return fa('fa-solid fa-kiwi-bird');
-  if (nameLower.includes('limão') || nameLower.includes('lima')) return fa('fa-solid fa-lemon');
-  if (nameLower.includes('laranja')) return fa('fa-solid fa-orange');
-  if (nameLower.includes('melancia')) return fa('fa-solid fa-melon');
-  if (nameLower.includes('uva')) return fa('fa-solid fa-grapes');
+  if (nameLower.includes('banana')) return 'banana';
+  if (nameLower.includes('morango') || nameLower.includes('framboesa')) return 'cherry';
+  if (nameLower.includes('maçã')) return 'apple';
+  if (nameLower.includes('limão') || nameLower.includes('lima')) return 'citrus';
+  if (nameLower.includes('laranja')) return 'orange';
+  if (nameLower.includes('abacate')) return 'leaf';
   
-  // Vegetais e Verduras
-  if (nameLower.includes('brócolis') || nameLower.includes('brocolis')) return fa('fa-solid fa-broccoli');
-  if (nameLower.includes('batata')) return fa('fa-solid fa-potato');
-  if (nameLower.includes('alho')) return lucide('flower-2');
-  if (nameLower.includes('tomate')) return fa('fa-solid fa-tomato');
-  if (nameLower.includes('cebola')) return fa('fa-solid fa-onion');
-  if (nameLower.includes('cenoura')) return fa('fa-solid fa-carrot');
-  if (nameLower.includes('alface') || nameLower.includes('rúcula') || nameLower.includes('espinafre')) return fa('fa-solid fa-leaf');
-  if (nameLower.includes('couve') || nameLower.includes('repolho')) return fa('fa-solid fa-cabbage');
-  if (nameLower.includes('pimentão') || nameLower.includes('pimenta')) return fa('fa-solid fa-pepper-hot');
-  if (nameLower.includes('aspargo') || nameLower.includes('vagem')) return fa('fa-solid fa-asparagus');
-  if (nameLower.includes('milho')) return fa('fa-solid fa-corn');
-  if (nameLower.includes('cogumelo')) return fa('fa-solid fa-mushroom');
+  // Vegetais
+  if (nameLower.includes('brócolis')) return 'leaf-maple';
+  if (nameLower.includes('batata')) return 'cookie';
+  if (nameLower.includes('alho')) return 'flower-2';
+  if (nameLower.includes('tomate')) return 'circle-dot';
+  if (nameLower.includes('cebola')) return 'circle';
+  if (nameLower.includes('cenoura')) return 'carrot';
+  if (nameLower.includes('alface') || nameLower.includes('rúcula') || nameLower.includes('espinafre')) return 'leaf';
+  if (nameLower.includes('couve') || nameLower.includes('repolho')) return 'leafy-green';
+  if (nameLower.includes('pimentão') || nameLower.includes('pimenta')) return 'flame';
+  if (nameLower.includes('milho')) return 'wheat';
   
-  // Grãos e Cereais
-  if (nameLower.includes('aveia') || nameLower.includes('granola')) return fa('fa-solid fa-wheat-awn');
-  if (nameLower.includes('arroz')) return fa('fa-solid fa-bowl-rice');
-  if (nameLower.includes('macarrão') || nameLower.includes('massa') || nameLower.includes('espaguete')) return fa('fa-solid fa-spaghetti-monster-flying');
-  if (nameLower.includes('pão') || nameLower.includes('torrada')) return fa('fa-solid fa-bread-slice');
-  if (nameLower.includes('quinoa')) return fa('fa-solid fa-seedling');
+  // Grãos
+  if (nameLower.includes('aveia') || nameLower.includes('granola')) return 'wheat';
+  if (nameLower.includes('arroz')) return 'wheat';
+  if (nameLower.includes('macarrão') || nameLower.includes('massa')) return 'wheat';
+  if (nameLower.includes('pão') || nameLower.includes('torrada')) return 'wheat';
   
   // Laticínios
-  if (nameLower.includes('leite')) return lucide('milk');
-  if (nameLower.includes('queijo')) return fa('fa-solid fa-cheese');
-  if (nameLower.includes('iogurte') || nameLower.includes('yogurt')) return fa('fa-solid fa-cup-straw');
-  if (nameLower.includes('requeijão')) return fa('fa-solid fa-cheese-swiss');
+  if (nameLower.includes('leite')) return 'milk';
+  if (nameLower.includes('queijo')) return 'milk';
+  if (nameLower.includes('iogurte')) return 'milk-off';
   
-  // Gorduras e Óleos
-  if (nameLower.includes('azeite') || nameLower.includes('óleo') || nameLower.includes('oleo')) return fa('fa-solid fa-oil-can');
-  if (nameLower.includes('manteiga')) return fa('fa-solid fa-butter');
-  if (nameLower.includes('amendoim') || nameLower.includes('amêndoa') || nameLower.includes('castanha') || nameLower.includes('nozes')) return fa('fa-solid fa-peanut');
+  // Gorduras
+  if (nameLower.includes('azeite') || nameLower.includes('óleo')) return 'droplets';
+  if (nameLower.includes('manteiga')) return 'square';
+  if (nameLower.includes('amendoim') || nameLower.includes('castanha')) return 'nut';
   
-  // Temperos e Condimentos
-  if (nameLower.includes('sal')) return fa('fa-solid fa-salt-shaker');
-  if (nameLower.includes('pimenta')) return fa('fa-solid fa-pepper');
-  if (nameLower.includes('canela')) return fa('fa-solid fa-cinnamon-roll');
-  if (nameLower.includes('orégano') || nameLower.includes('tomilho') || nameLower.includes('alecrim') || nameLower.includes('manjericão') || nameLower.includes('erva')) return fa('fa-solid fa-leaf');
-  if (nameLower.includes('tempero') || nameLower.includes('paprica') || nameLower.includes('páprica')) return fa('fa-solid fa-mortar-pestle');
-  if (nameLower.includes('mostarda')) return fa('fa-solid fa-jar');
-  if (nameLower.includes('molho') || nameLower.includes('shoyu')) return fa('fa-solid fa-bottle-droplet');
+  // Temperos
+  if (nameLower.includes('sal')) return 'sparkles';
+  if (nameLower.includes('pimenta')) return 'flame';
+  if (nameLower.includes('canela')) return 'wheat';
+  if (nameLower.includes('erva') || nameLower.includes('orégano') || nameLower.includes('alecrim')) return 'leaf';
+  if (nameLower.includes('tempero')) return 'sparkles';
+  if (nameLower.includes('mostarda') || nameLower.includes('molho')) return 'droplet';
   
   // Doces
-  if (nameLower.includes('mel')) return fa('fa-solid fa-honey-pot');
-  if (nameLower.includes('açúcar') || nameLower.includes('acucar')) return fa('fa-solid fa-candy-cane');
-  if (nameLower.includes('chocolate')) return fa('fa-solid fa-chocolate-bar');
+  if (nameLower.includes('mel')) return 'droplet';
+  if (nameLower.includes('açúcar')) return 'candy';
+  if (nameLower.includes('chocolate')) return 'candy';
   
   // Especiais
-  if (nameLower.includes('pasta de amendoim')) return fa('fa-solid fa-jar');
-  if (nameLower.includes('açaí') || nameLower.includes('acai')) return fa('fa-solid fa-ice-cream');
-  if (nameLower.includes('polpa')) return fa('fa-solid fa-blender');
-  if (nameLower.includes('coco')) return fa('fa-solid fa-coconut');
+  if (nameLower.includes('açaí')) return 'ice-cream';
+  if (nameLower.includes('polpa')) return 'package';
+  if (nameLower.includes('coco')) return 'palmtree';
   
   // Bebidas
-  if (nameLower.includes('café')) return fa('fa-solid fa-mug-hot');
-  if (nameLower.includes('chá') || nameLower.includes('cha')) return fa('fa-solid fa-cup-togo');
-  if (nameLower.includes('água') || nameLower.includes('agua')) return fa('fa-solid fa-glass-water');
-  if (nameLower.includes('suco')) return fa('fa-solid fa-glass-citrus');
+  if (nameLower.includes('café')) return 'coffee';
+  if (nameLower.includes('chá')) return 'cup-soda';
+  if (nameLower.includes('água')) return 'droplet';
+  if (nameLower.includes('suco')) return 'glass-water';
   
-  // Padrão - ícone genérico bonito
-  return fa('chef-hat');
+  // Padrão
+  return 'chef-hat';
 }
-
 
 
 
@@ -1205,15 +1188,11 @@ function showRecipeDetail(recipeId) {
     ing = { text: ing, quantity: '', name: ing };
   }
   
-  // Pega ícone (Lucide ou Font Awesome)
-  const iconData = ing.icon 
-    ? { type: 'lucide', icon: ing.icon } 
-    : getIconFromIngredientName(ing.text || ing.name || ing.quantity);
+  // Pega ícone (só Lucide agora)
+  const iconName = ing.icon || getIconFromIngredientName(ing.text || ing.name || ing.quantity);
   
-  // Renderiza ícone correto
-  const iconHTML = iconData.type === 'fa'
-    ? `<i class="${iconData.icon} ingredient-icon"></i>`
-    : `<i data-lucide="${iconData.icon}" class="ingredient-icon"></i>`;
+  // Renderiza ícone
+  const iconHTML = `<i data-lucide="${iconName}" class="ingredient-icon"></i>`;
   
   return `
     <div class="ingredient-item">
@@ -3032,5 +3011,6 @@ window.addEventListener('DOMContentLoaded', function() {
   window.syncPremiumTour = syncPremiumUI;
 
 })();
+
 
 
