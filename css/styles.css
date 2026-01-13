@@ -3490,3 +3490,41 @@ font-size:14px;
   scrollbar-width: thin;
 }
 
+
+
+/* =========================================================
+   PLANEJADOR — SCROLL HORIZONTAL (SEM ESPAÇO BRANCO)
+   ========================================================= */
+
+.planner-scroll-x{
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  padding-bottom: 12px;     /* espaço pra scrollbar */
+}
+
+/* 🔥 aqui é o ponto: preencher o container + manter min-width */
+.planner-scroll-x table{
+  width: 100%;              /* preenche o container -> não sobra “vão” */
+  min-width: 1100px;        /* garante scroll quando a tela for menor */
+  border-collapse: separate; /* mantém seu layout de tabela ok */
+}
+
+/* WebKit scrollbar */
+.planner-scroll-x::-webkit-scrollbar{ height: 10px; }
+.planner-scroll-x::-webkit-scrollbar-track{
+  background: #f3f4f6;
+  border-radius: 999px;
+}
+.planner-scroll-x::-webkit-scrollbar-thumb{
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+.planner-scroll-x::-webkit-scrollbar-thumb:hover{ background: #94a3b8; }
+
+/* Firefox */
+.planner-scroll-x{
+  scrollbar-color: #cbd5e1 #f3f4f6;
+  scrollbar-width: thin;
+}
