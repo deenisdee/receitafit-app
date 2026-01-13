@@ -3243,6 +3243,25 @@ font-size:14px;
    ========================================================= */
 @media (min-width: 769px) {
 
+
+
+.btn-clear-list {
+    width: 100%;
+    font-size: 15px; 
+    margin-top: 1rem;
+    padding: .75rem;
+    background: #16a34a;
+    color: #fff;
+    border: none;
+    height: 50px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+
+
   /* 1) BADGE (botão "Como funciona o Premium") */
   .hero-btn--overlay{
     position: absolute;
@@ -3403,6 +3422,10 @@ font-size:14px;
   #tour-prev,
   #tour-next{
     margin-bottom: 0 !important;
+	
+	
+	
+	
   }
 }
 
