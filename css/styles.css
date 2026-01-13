@@ -662,15 +662,14 @@ body.modal-open{ overflow:hidden; height:100vh; }
   width:100%;
   margin-top:1rem;
   padding:.75rem;
-  border:2px solid #fca5a5;
-  background:#fff;
-  color:#dc2626;
+  background:#16a34a;
+  color:#fff;
   border-radius:10px;
   font-weight:600;
   cursor:pointer;
   transition:all .2s;
 }
-.btn-clear-list:hover{ background:#fee2e2; }
+.btn-clear-list:hover{ background:#16a34a; }
 
 /* ============================================
    PLANEJADOR SEMANAL
