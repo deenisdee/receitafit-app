@@ -3461,7 +3461,7 @@ font-size:14px;
 
 /* garante que exista “largura” pra rolar */
 .planner-scroll-x table {
-  min-width: 1100px; /* ajuste se quiser mais/menos */
+  min-width: 800px; /* ajuste se quiser mais/menos */
   width: max-content;
 }
 
