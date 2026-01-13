@@ -3236,6 +3236,75 @@ font-size:14px;
 
 
 
+
+
+/* =========================================================
+   PLANEJADOR SEMANAL — SCROLL HORIZONTAL
+   ========================================================= */
+
+/* container que envolve a tabela */
+.planner-table-wrapper,
+.week-planner-table,
+.planner-table {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 12px; /* espaço para a scrollbar */
+}
+
+/* força largura mínima para gerar scroll */
+.planner-table-wrapper table,
+.week-planner-table table,
+.planner-table table {
+  min-width: 900px;
+}
+
+/* =========================
+   SCROLLBAR (Webkit)
+   ========================= */
+.planner-table-wrapper::-webkit-scrollbar,
+.week-planner-table::-webkit-scrollbar,
+.planner-table::-webkit-scrollbar {
+  height: 10px;
+}
+
+.planner-table-wrapper::-webkit-scrollbar-track,
+.week-planner-table::-webkit-scrollbar-track,
+.planner-table::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 999px;
+}
+
+.planner-table-wrapper::-webkit-scrollbar-thumb,
+.week-planner-table::-webkit-scrollbar-thumb,
+.planner-table::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 999px;
+}
+
+.planner-table-wrapper::-webkit-scrollbar-thumb:hover,
+.week-planner-table::-webkit-scrollbar-thumb:hover,
+.planner-table::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* =========================
+   Firefox
+   ========================= */
+.planner-table-wrapper,
+.week-planner-table,
+.planner-table {
+  scrollbar-color: #cbd5e1 #f3f4f6;
+  scrollbar-width: thin;
+}
+
+
+
+
+
+
+
+
+
 /* =========================================================
    MOBILE - FINALIZA AQUI
    ========================================================= */
