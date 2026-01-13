@@ -2934,7 +2934,7 @@ window.addEventListener('DOMContentLoaded', function() {
     "5) Planejador Semanal: Organiza, soma as calorias e te livra do “o que eu como hoje?”.",
     "6) Mudou o dia? Sem problema. Você ajusta e segue sem culpa, sem recomeço do zero.",
     "7) Pronto. Se fizer sentido, ative o Premium e use as ferramentas completas.",
-	"8) Onde acho estas ferramentas? Logo abaixo, ao lado do Buscar, se chama Planner"
+	"8) Onde Encontro estas ferramentas? Logo abaixo, ao lado do Buscar, se chama Planner."
   ];
 
   let i = 0;
