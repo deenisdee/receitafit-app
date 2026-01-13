@@ -567,7 +567,7 @@ body.modal-open{ overflow:hidden; height:100vh; }
   font-size:1rem;
 }
 .btn-secondary{ background:#e5e7eb; color:#374151; }
-.btn-secondary:hover{ background:#d1d5db; }
+.btn-secondary:hover{ background:#d1d5db; width: 100%; }
 .btn-primary{ background:#16a34a; color:#fff; }
 .btn-primary:hover{ background:#15803d; }
 
@@ -3232,19 +3232,6 @@ font-size:14px;
 }
 
 
-.confirm-actions{
-  display: flex;
-  gap: 12px;
-}
-
-.confirm-actions button{
-  flex: 1;                 /* 👈 força mesma largura */
-  height: 48px;            /* 👈 mesma altura */
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
 
 
 
