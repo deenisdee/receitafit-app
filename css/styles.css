@@ -2974,7 +2974,9 @@ body.modal-open .bottom-tab-bar {
   .container {
     margin: -10px auto !important;
   }
+   
 }
+
 
 
 
@@ -3554,4 +3556,55 @@ font-size:14px;
 /* canto inferior direito */
 .planner-scroll-x table tbody tr:last-child td:last-child {
   border-bottom-right-radius: 14px;
+}
+
+
+
+
+
+/* =========================================================
+   MOBILE — META compacta (tempo/ícones) + badge "Fácil" inteiro
+   ========================================================= */
+@media (max-width: 768px){
+
+  /* 1) Linha inteira da meta: não usar space-between, compactar */
+  .recipe-meta{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;  /* 👈 evita empurrar tudo pros cantos */
+    gap: 4px;                    /* 👈 espaço menor entre os grupos */
+    flex-wrap: nowrap;
+  }
+
+  /* 2) Cada item (relógio+tempo, pessoas, etc) mais compacto */
+  .recipe-meta > *{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;                     /* 👈 aproxima ícone do texto */
+ 
+  }
+
+  /* 3) Ícones um pouco menores (opcional, ajuda a caber) */
+  .recipe-meta svg{
+    width: 16px;
+    height: 16px;
+  }
+
+  /* 4) Badge "Fácil": não pode encolher / não pode cortar */
+  .recipe-meta .difficulty,
+  .recipe-meta .badge-difficulty,
+  .recipe-meta .recipe-difficulty{
+    flex: 0 0 auto;               /* 👈 não encolhe */
+    white-space: nowrap;          /* 👈 não quebra */
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 12px;
+    line-height: 1.2;
+    overflow: visible;            /* 👈 garante texto inteiro */
+  }
+
+  /* 5) Se algum CSS antigo estiver cortando o último item */
+  .recipe-meta{
+    overflow: visible;
+  }
 }
