@@ -934,7 +934,7 @@ const RECIPES = [
         time: 30,
         servings: 2,
         difficulty: 'Médio',
-        featured: true,
+        featured: false,
         tags: [
                 'Hipertrofia',
                 'Almoço',
@@ -1234,7 +1234,7 @@ const RECIPES = [
         time: 20,
         servings: 2,
         difficulty: 'Fácil',
-        featured: true,
+        featured: false,
         tags: [
                 'Veganas',
                 'Rico em fibras'
