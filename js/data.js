@@ -17,7 +17,7 @@ const RECIPES = [
     servings: 1,
     difficulty: 'Fácil',
 
-    featured: true,
+    featured: false,
     description: 'Bowl cremoso de açaí com 25g de proteína, perfeito para pós-treino',
     
     tags: [
@@ -520,7 +520,7 @@ const RECIPES = [
         time: 5,
         servings: 1,
         difficulty: 'Fácil',
-        featured: false,
+        featured: true,
         tags: [
                 'Café da manhã',
                 'Baixa caloria',
@@ -759,7 +759,7 @@ const RECIPES = [
         time: 5,
         servings: 1,
         difficulty: 'Fácil',
-        featured: false,
+        featured: true,
         tags: [
                 'Café da manhã',
                 'Rico em fibras',
@@ -1851,7 +1851,7 @@ const RECIPES = [
         time: 5,
         servings: 1,
         difficulty: 'Fácil',
-        featured: true,
+        featured: false,
         tags: [
                 'Emagrecimento',
                 'Definição',
@@ -2221,7 +2221,7 @@ const RECIPES = [
         time: 35,
         servings: 9,
         difficulty: 'Médio',
-        featured: true,
+        featured: false,
         tags: [
                 'Sobremesa fit',
                 'Baixa caloria',
@@ -2639,7 +2639,7 @@ const RECIPES = [
         time: 30,
         servings: 4,
         difficulty: 'Médio',
-        featured: true,
+        featured: false,
         tags: [
                 'Veganas',
                 'Rico em fibras',
@@ -3026,7 +3026,7 @@ const RECIPES = [
     time: 10,
     servings: 1,
     difficulty: 'Fácil',
-    featured: false,
+    featured: true,
     description: 'Omelete leve e proteico com vegetais coloridos',
     
     tags: [
@@ -3357,7 +3357,7 @@ const RECIPES = [
     time: 30,
     servings: 2,
     difficulty: 'Médio',
-    featured: true,
+    featured: false,
     description: 'Estrogonofe cremoso feito com cogumelos e creme de castanha',
     
     tags: [
@@ -3471,7 +3471,7 @@ const RECIPES = [
     time: 90,
     servings: 4,
     difficulty: 'Médio',
-    featured: true,
+    featured: false,
     description: 'Feijoada tradicional brasileira em versão 100% vegetal',
     
     tags: [
@@ -4130,7 +4130,7 @@ const RECIPES = [
     time: 40,
     servings: 3,
     difficulty: 'Médio',
-    featured: true,
+    featured: false,
     description: 'Curry aromático indiano com lentilhas e espinafre fresco',
     
     tags: [
@@ -4354,7 +4354,7 @@ const RECIPES = [
     time: 10,
     servings: 12,
     difficulty: 'Fácil',
-    featured: true,
+    featured: false,
     description: 'Bolinhas energéticas sem açúcar feitas com tâmaras e castanhas',
     
     tags: [
@@ -4770,7 +4770,7 @@ const RECIPES = [
     time: 5,
     servings: 1,
     difficulty: 'Fácil',
-    featured: true,
+    featured: false,
     description: 'Sorvete cremoso feito apenas com banana congelada',
     
     tags: [
