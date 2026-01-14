@@ -596,7 +596,7 @@ const RECIPES = [
                 'Ovos',
                 'Glúten (pode conter)'
             ],
-        image: 'https://images.pexels.com/photos/12049998/pexels-photo-12049998.jpeg?_gl=1*1lzpj1l*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDQxODEkajckbDAkaDA.',
+        image: 'https://images.pexels.com/photos/17146251/pexels-photo-17146251.jpeg?_gl=1*8hsnkj*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDYxNDUkajgkbDAkaDA.',
         ingredients: [
                 '2 ovos',
                 '100g de queijo minas',
