@@ -1207,16 +1207,34 @@ function showRecipeDetail(recipeId) {
     </div>
   `;
 }).join('')}
-
-
-
-
-
-		  
-		  
-		  
+ 
         </ol>
       </div>
+	  
+	  
+	  
+	  
+	  <!-- ✅ MODO DE PREPARO -->
+        ${recipe.instructions && (Array.isArray(recipe.instructions) ? recipe.instructions : recipe.instructions.steps || []).length > 0 ? `
+            <div class="detail-section">
+                <h3 class="section-title">
+                    <i data-lucide="chef-hat" class="section-icon"></i>
+                    Modo de Preparo
+                </h3>
+                <ol class="instructions-list">
+                    ${(Array.isArray(recipe.instructions) ? recipe.instructions : recipe.instructions.steps || []).map((step, index) => `
+                        <li class="instruction-step">
+                            <span class="step-number">${index + 1}</span>
+                            <span class="step-text">${step}</span>
+                        </li>
+                    `).join('')}
+                </ol>
+            </div>
+        ` : ''}
+	  
+	  
+	  
+	  
 
       ${recipe.tips && recipe.tips.length > 0 ? `
         <div class="detail-section">
