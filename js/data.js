@@ -538,7 +538,7 @@ const RECIPES = [
         allergens: [
                 'Leite/Laticínios'
             ],
-        image: 'https://images.unsplash.com/photo-1610970881699-44a5587cabec?w=800&q=80',
+        image: 'https://images.pexels.com/photos/12049998/pexels-photo-12049998.jpeg?_gl=1*1lzpj1l*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDQxODEkajckbDAkaDA.',
         ingredients: [
                 '1 banana',
                 '1 folha de couve',
@@ -596,7 +596,7 @@ const RECIPES = [
                 'Ovos',
                 'Glúten (pode conter)'
             ],
-        image: 'https://images.unsplash.com/photo-1760445530213-bd887eec98fa?q=80',
+        image: 'https://images.pexels.com/photos/12049998/pexels-photo-12049998.jpeg?_gl=1*1lzpj1l*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDQxODEkajckbDAkaDA.',
         ingredients: [
                 '2 ovos',
                 '100g de queijo minas',
@@ -3102,7 +3102,7 @@ const RECIPES = [
         'Glúten (aveia)'
     ],
     
-    image: 'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?q=80',
+    image: 'https://images.pexels.com/photos/27850089/pexels-photo-27850089.jpeg?_gl=1*waesq7*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDMyODkkajEwJGwwJGgw',
     
     ingredients: [
         { 
@@ -3162,7 +3162,7 @@ const RECIPES = [
     ],
     
     images: {
-        hero: 'https://images.unsplash.com/photo-1517673132405-a56a62b18caf?q=80',
+        hero: 'https://images.pexels.com/photos/27850089/pexels-photo-27850089.jpeg?_gl=1*waesq7*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDMyODkkajEwJGwwJGgw',
         steps: []
     },
     
@@ -3208,7 +3208,7 @@ const RECIPES = [
         'Ovos'
     ],
     
-    image: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80',
+    image: 'https://images.pexels.com/photos/89238/pexels-photo-89238.png?_gl=1*13ybdng*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDM0MTUkajMyJGwwJGgw',
     
     ingredients: [
         { 
@@ -3273,7 +3273,7 @@ const RECIPES = [
     ],
     
     images: {
-        hero: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?q=80',
+        hero: 'https://images.pexels.com/photos/89238/pexels-photo-89238.png?_gl=1*13ybdng*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDM0MTUkajMyJGwwJGgw',
         steps: []
     },
     
@@ -3319,7 +3319,7 @@ const RECIPES = [
         'Leite (requeijão)'
     ],
     
-    image: 'https://images.unsplash.com/photo-1619895092538-128341789043?q=80',
+    image: 'https://images.pexels.com/photos/3807512/pexels-photo-3807512.jpeg?_gl=1*1vs8y3a*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDM3MDkkajU5JGwwJGgw',
     
     ingredients: [
         { 
@@ -3373,7 +3373,7 @@ const RECIPES = [
     ],
     
     images: {
-        hero: 'https://images.unsplash.com/photo-1619895092538-128341789043?q=80',
+        hero: 'https://images.pexels.com/photos/3807512/pexels-photo-3807512.jpeg?_gl=1*1vs8y3a*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDM3MDkkajU5JGwwJGgw',
         steps: []
     },
     
@@ -3539,7 +3539,7 @@ const RECIPES = [
         'Castanhas'
     ],
     
-    image: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80',
+    image: 'https://images.pexels.com/photos/34599525/pexels-photo-34599525.png?_gl=1*t4gysq*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDM4NTQkajgkbDAkaDA.',
     
     ingredients: [
         { 
@@ -3609,7 +3609,7 @@ const RECIPES = [
     ],
     
     images: {
-        hero: 'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?q=80',
+        hero: 'https://images.pexels.com/photos/34599525/pexels-photo-34599525.png?_gl=1*t4gysq*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDM4NTQkajgkbDAkaDA.',
         steps: []
     },
     
@@ -3653,7 +3653,7 @@ const RECIPES = [
         'Soja (proteína texturizada)'
     ],
     
-    image: 'https://images.unsplash.com/photo-1628191081060-b7fb00be4719?q=80',
+    image: 'https://images.pexels.com/photos/7265077/pexels-photo-7265077.png?_gl=1*1aiy1nm*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDIzODgkajI0JGwwJGgw',
     
     ingredients: [
         { 
@@ -3728,7 +3728,7 @@ const RECIPES = [
     ],
     
     images: {
-        hero: 'https://images.unsplash.com/photo-1628191081060-b7fb00be4719?q=80',
+        hero: 'https://images.pexels.com/photos/7265077/pexels-photo-7265077.png?_gl=1*1aiy1nm*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDIzODgkajI0JGwwJGgw',
         steps: []
     },
     
@@ -3772,7 +3772,8 @@ const RECIPES = [
         'Queijo'
     ],
     
-    image: 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80',
+    image: 'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?q=80&w=1200',
+	
     
     ingredients: [
         { 
@@ -3880,7 +3881,7 @@ const RECIPES = [
         'Gergelim (tahine)'
     ],
     
-    image: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80',
+    image: 'https://images.pexels.com/photos/11161337/pexels-photo-11161337.jpeg?_gl=1*mook9p*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDQ2MzUkajE4JGwwJGgw',
     
     ingredients: [
         { 
@@ -3950,7 +3951,7 @@ const RECIPES = [
     ],
     
     images: {
-        hero: 'https://images.unsplash.com/photo-1626700051175-6818013e1d4f?q=80',
+        hero: 'https://images.pexels.com/photos/11161337/pexels-photo-11161337.jpeg?_gl=1*mook9p*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDQ2MzUkajE4JGwwJGgw',
         steps: []
     },
     
@@ -4104,7 +4105,7 @@ const RECIPES = [
         'Peixe'
     ],
     
-    image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80',
+    image: 'https://images.pexels.com/photos/16845479/pexels-photo-16845479.jpeg?_gl=1*16oy9x2*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDM1MzMkajMxJGwwJGgw',
     
     ingredients: [
         { 
@@ -4164,7 +4165,7 @@ const RECIPES = [
     ],
     
     images: {
-        hero: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?q=80',
+        hero: 'https://images.pexels.com/photos/16845479/pexels-photo-16845479.jpeg?_gl=1*16oy9x2*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDM1MzMkajMxJGwwJGgw',
         steps: []
     },
     
@@ -4208,7 +4209,7 @@ const RECIPES = [
         'Leite'
     ],
     
-    image: 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80',
+    image: 'https://images.pexels.com/photos/6529924/pexels-photo-6529924.jpeg?_gl=1*1ffgfxr*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDM5MzckajQwJGwwJGgw',
     
     ingredients: [
         { 
@@ -4268,7 +4269,7 @@ const RECIPES = [
     ],
     
     images: {
-        hero: 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?q=80',
+        hero: 'https://images.pexels.com/photos/6529924/pexels-photo-6529924.jpeg?_gl=1*1ffgfxr*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDM5MzckajQwJGwwJGgw',
         steps: []
     },
     
@@ -4536,7 +4537,7 @@ const RECIPES = [
         'Amendoim'
     ],
     
-    image: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80',
+    image: 'http://images.pexels.com/photos/27850069/pexels-photo-27850069.jpeg?_gl=1*13r8cwo*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDQyODgkajE3JGwwJGgw',
     
     ingredients: [
         { 
@@ -4597,7 +4598,7 @@ const RECIPES = [
     ],
     
     images: {
-        hero: 'https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80',
+        hero: 'https://images.pexels.com/photos/27850069/pexels-photo-27850069.jpeg?_gl=1*13r8cwo*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDQyODgkajE3JGwwJGgw',
         steps: []
     },
     
@@ -4848,7 +4849,7 @@ const RECIPES = [
         'Ovos'
     ],
     
-    image: 'https://images.unsplash.com/photo-1541636604-76fa9bedc02d?q=80',
+    image: 'https://images.pexels.com/photos/3026810/pexels-photo-3026810.jpeg?_gl=1*12726aw*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDQ0MzMkajEwJGwwJGgw',
     
     ingredients: [
         { 
@@ -4909,7 +4910,7 @@ const RECIPES = [
     ],
     
     images: {
-        hero: 'https://images.unsplash.com/photo-1541636604-76fa9bedc02d?q=80',
+        hero: 'https://images.pexels.com/photos/3026810/pexels-photo-3026810.jpeg?_gl=1*12726aw*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDQ0MzMkajEwJGwwJGgw',
         steps: []
     },
     
