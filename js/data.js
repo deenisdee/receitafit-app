@@ -2712,7 +2712,7 @@ const RECIPES = [
                 'Leite/Laticínios',
                 'Soja'
             ],
-        image: 'https://plus.unsplash.com/premium_photo-1723708960579-de1e03d9aa56?q=80',
+        image: 'https://images.pexels.com/photos/6120232/pexels-photo-6120232.jpeg?_gl=1*1t3jenz*_ga*OTcxMDE3MTI1LjE3Njg0MDIzNTI.*_ga_8JE65Q40S6*czE3Njg0MDIzNTIkbzEkZzEkdDE3Njg0MDY0MjgkajQ2JGwwJGgw',
         ingredients: [
                 '200g de tofu firme',
                 'Leite de coco',
