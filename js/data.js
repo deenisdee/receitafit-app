@@ -394,7 +394,7 @@ const RECIPES = [
     },
     {
         id: 6,
-        name: 'Bowl Vegano de Quinoa',
+        name: 'Bowl Veganas de Quinoa',
         category: 'Veganas',
         calories: 420,
         protein: 18,
@@ -407,7 +407,7 @@ const RECIPES = [
         featured: false,
         tags: [
                 'Ganho de peso',
-                'Vegano',
+                'Veganas',
                 'Rico em fibras',
                 'Energia sustentada'
             ],
@@ -1236,7 +1236,7 @@ const RECIPES = [
         difficulty: 'Fácil',
         featured: true,
         tags: [
-                'Vegano',
+                'Veganas',
                 'Rico em fibras'
             ],
         benefits: [
@@ -2629,7 +2629,7 @@ const RECIPES = [
     },
     {
         id: 43,
-        name: 'Buddha Bowl Vegano',
+        name: 'Buddha Bowl Veganas',
         category: 'Veganas',
         calories: 380,
         protein: 16,
@@ -2641,7 +2641,7 @@ const RECIPES = [
         difficulty: 'Médio',
         featured: false,
         tags: [
-                'Vegano',
+                'Veganas',
                 'Rico em fibras',
                 'Energia sustentada'
             ],
@@ -2697,7 +2697,7 @@ const RECIPES = [
         difficulty: 'Médio',
         featured: true,
         tags: [
-                'Vegano',
+                'Veganas',
                 'Rico em fibras',
                 'Energia sustentada'
             ],
@@ -2755,7 +2755,7 @@ const RECIPES = [
         difficulty: 'Médio',
         featured: false,
         tags: [
-                'Vegano',
+                'Veganas',
                 'Rico em fibras',
                 'Proteína'
             ],
@@ -2800,7 +2800,7 @@ const RECIPES = [
     },
     {
         id: 46,
-        name: 'Wrap Vegano de Falafel',
+        name: 'Wrap Veganas de Falafel',
         category: 'Veganas',
         calories: 350,
         protein: 15,
@@ -2812,7 +2812,7 @@ const RECIPES = [
         difficulty: 'Médio',
         featured: false,
         tags: [
-                'Vegano',
+                'Veganas',
                 'Rico em fibras'
             ],
         benefits: [
@@ -3387,8 +3387,8 @@ const RECIPES = [
 
 {
     id: 52,
-    name: 'Buddha Bowl Vegano',
-    category: 'Vegano',
+    name: 'Buddha Bowl Veganas',
+    category: 'Veganas',
     calories: 420,
     protein: 18,
     carbs: 58,
@@ -3401,7 +3401,7 @@ const RECIPES = [
     description: 'Bowl completo e colorido com proteína vegetal, grãos e vegetais assados',
     
     tags: [
-        'Vegano',
+        'Veganas',
         'Rico em fibras',
         'Antioxidante',
         'Completo'
@@ -3508,8 +3508,8 @@ const RECIPES = [
 
 {
     id: 53,
-    name: 'Estrogonofe de Cogumelos Vegano',
-    category: 'Vegano',
+    name: 'Estrogonofe de Cogumelos Veganas',
+    category: 'Veganas',
     calories: 380,
     protein: 14,
     carbs: 48,
@@ -3522,7 +3522,7 @@ const RECIPES = [
     description: 'Estrogonofe cremoso feito com cogumelos e creme de castanha',
     
     tags: [
-        'Vegano',
+        'Veganas',
         'Comfort food',
         'Rico em umami',
         'Cremoso'
@@ -3623,7 +3623,7 @@ const RECIPES = [
 {
     id: 54,
     name: 'Feijoada Vegana Completa',
-    category: 'Vegano',
+    category: 'Veganas',
     calories: 465,
     protein: 22,
     carbs: 68,
@@ -3636,7 +3636,7 @@ const RECIPES = [
     description: 'Feijoada tradicional brasileira em versão 100% vegetal',
     
     tags: [
-        'Vegano',
+        'Veganas',
         'Brasileiro',
         'Rico em ferro',
         'Proteína vegetal'
@@ -3741,7 +3741,7 @@ const RECIPES = [
 {
     id: 55,
     name: 'Lasanha de Berinjela Low Carb',
-    category: 'Vegano',
+    category: 'Veganas',
     calories: 340,
     protein: 28,
     carbs: 22,
@@ -3849,7 +3849,7 @@ const RECIPES = [
 {
     id: 56,
     name: 'Wrap de Grão de Bico com Hummus',
-    category: 'Vegano',
+    category: 'Veganas',
     calories: 385,
     protein: 16,
     carbs: 52,
@@ -3862,7 +3862,7 @@ const RECIPES = [
     description: 'Wrap integral recheado com hummus caseiro e vegetais crocantes',
     
     tags: [
-        'Vegano',
+        'Veganas',
         'Prático',
         'Rico em fibras',
         'Mediterrâneo'
@@ -3946,7 +3946,7 @@ const RECIPES = [
         '💪 Adicione falafel para mais proteína',
         '🌶️ Molho picante opcional: harissa ou sriracha',
         '📦 Ideal para marmita - não murcha',
-        '🥒 Tsatsiki vegano: iogurte de coco + pepino'
+        '🥒 Tsatsiki Veganas: iogurte de coco + pepino'
     ],
     
     images: {
@@ -3963,7 +3963,7 @@ const RECIPES = [
 {
     id: 57,
     name: 'Sopa Detox de Legumes',
-    category: 'Vegano',
+    category: 'Veganas',
     calories: 185,
     protein: 8,
     carbs: 32,
@@ -3976,7 +3976,7 @@ const RECIPES = [
     description: 'Sopa leve e nutritiva com variedade de vegetais detoxificantes',
     
     tags: [
-        'Vegano',
+        'Veganas',
         'Detox',
         'Baixa caloria',
         'Reconfortante'
@@ -4281,7 +4281,7 @@ const RECIPES = [
 {
     id: 60,
     name: 'Curry de Lentilha com Espinafre',
-    category: 'Vegano',
+    category: 'Veganas',
     calories: 365,
     protein: 20,
     carbs: 58,
@@ -4294,7 +4294,7 @@ const RECIPES = [
     description: 'Curry aromático indiano com lentilhas e espinafre fresco',
     
     tags: [
-        'Vegano',
+        'Veganas',
         'Rico em ferro',
         'Proteína vegetal',
         'Especiarias'
@@ -4518,7 +4518,7 @@ const RECIPES = [
     description: 'Bolinhas energéticas sem açúcar feitas com tâmaras e castanhas',
     
     tags: [
-        'Vegano',
+        'Veganas',
         'Sem açúcar',
         'Energético',
         'Pré-treino'
@@ -4610,7 +4610,7 @@ const RECIPES = [
 {
     id: 63,
     name: 'Pasta de Grão de Bico com Vegetais',
-    category: 'Vegano',
+    category: 'Veganas',
     calories: 195,
     protein: 10,
     carbs: 28,
@@ -4623,7 +4623,7 @@ const RECIPES = [
     description: 'Pasta proteica servida com palitos de cenoura e pepino',
     
     tags: [
-        'Vegano',
+        'Veganas',
         'Rico em proteína',
         'Sem glúten',
         'Prático'
@@ -4934,7 +4934,7 @@ const RECIPES = [
     description: 'Sorvete cremoso feito apenas com banana congelada',
     
     tags: [
-        'Vegano',
+        'Veganas',
         'Sem açúcar',
         '2 ingredientes',
         'Sem lactose'
