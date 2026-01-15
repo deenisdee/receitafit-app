@@ -3139,7 +3139,7 @@ body.premium-modal-open.premium-open--hamburger .badge {
   left: 17px;
   font-size: 16px;
   right: 17px;
-  top: 35px;
+  top: 33px;
   height: 48px;
   z-index: 45;
 font-family:inherit;
@@ -3158,6 +3158,7 @@ font-family:inherit;
    =============================== */
 
 .tour-card{
+	top: 90px;
   position: absolute;
   left: 17px;
   right: 17px;
