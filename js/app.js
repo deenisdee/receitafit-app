@@ -1936,8 +1936,6 @@ async function redeemPremiumCode(code) {
 
 
 
-
-
 async function activatePremium() {
   const input = document.getElementById('premium-code-input');
   const code = input ? input.value.trim().toUpperCase() : '';
@@ -1965,35 +1963,16 @@ async function activatePremium() {
       diff: data.expiresAt - Date.now()
     });
 
-    // ✅ ATIVA PREMIUM COM TOKEN (estado interno seu)
+    // ✅ ATIVA PREMIUM COM TOKEN
     isPremium = true;
     premiumToken = data.token;
     premiumExpires = data.expiresAt;
 
-    // ✅ 1) Persiste no storage (seu padrão)
     await storage.set('fit_premium', 'true');
     await storage.set('fit_premium_token', data.token);
     await storage.set('fit_premium_expires', data.expiresAt.toString());
 
-    // ✅ 2) Também persiste no localStorage (compatibilidade e UI instantânea no iPhone)
-    try {
-      localStorage.setItem('fit_premium', 'true');
-      localStorage.setItem('fit_premium_token', data.token);
-      localStorage.setItem('fit_premium_expires', data.expiresAt.toString());
-    } catch (e) {
-      // se localStorage falhar por algum motivo, não bloqueia a ativação
-      console.warn('[PREMIUM] localStorage falhou:', e);
-    }
-
-    // ✅ 3) Dispara o pipeline oficial de UI (sem reload)
-    if (window.RF && RF.premium && typeof RF.premium.setActive === 'function') {
-      RF.premium.setActive(true); // chama syncUI() dentro
-    } else if (window.RF && RF.premium && typeof RF.premium.syncUI === 'function') {
-      // fallback
-      RF.premium.syncUI();
-    }
-
-    // ✅ Mantém seu fluxo atual de UI (seu app pode depender disso)
+    // UI geral do seu app
     updateUI();
 
     // ✅ Atualiza botões premium (tab bar + menu hambúrguer)
@@ -2001,19 +1980,29 @@ async function activatePremium() {
       window.updatePremiumButtons();
     }
 
+    // ✅ NOVO: força o "estado único" do Premium e sincroniza SEM RELOAD
+    try {
+      if (window.RF?.premium?.setActive) RF.premium.setActive(true);
+      if (window.RF?.premium?.syncUI) RF.premium.syncUI();
+    } catch (e) {}
+
+    // ✅ NOVO: se algum modal dependente estiver aberto, re-renderiza
+    setTimeout(() => {
+      const shoppingModal = document.getElementById('shopping-modal');
+      if (shoppingModal && !shoppingModal.classList.contains('hidden')) {
+        if (typeof renderShoppingList === 'function') renderShoppingList();
+      }
+    }, 0);
+
     _setupPremiumTimers();
 
     const daysLeft = data.expiresInDays || 30;
-
-    // ✅ Fecha o modal ANTES de notificar (evita “modal por trás” visualmente)
-    if (typeof window.closePremiumModal === 'function') {
-      window.closePremiumModal();
-    }
-
     showNotification(
       'Premium Ativado! 🎉',
       `Você tem acesso ilimitado por ${daysLeft} dias!`
     );
+
+    window.closePremiumModal();
 
     console.log('[PREMIUM] Ativado', { expires: new Date(data.expiresAt).toISOString() });
 
@@ -2021,14 +2010,13 @@ async function activatePremium() {
     console.error('Erro ao ativar premium:', e);
 
     // ✅ MENSAGEM MAIS ESPECÍFICA
-    if (String(e.message || '').includes('fetch')) {
+    if (e.message && e.message.includes('fetch')) {
       showNotification('Erro de Conexão', 'Verifique sua internet e tente novamente.');
     } else {
       showNotification('Erro', 'Erro ao validar código. Tente novamente.');
     }
   }
 }
-
 
 
 
