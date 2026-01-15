@@ -1453,11 +1453,8 @@ function renderShoppingList() {
   const content = document.getElementById('shopping-list-content');
   if (!content) return;
 
-  // Premium checker (compat)
-  const isPremiumNow =
-    (window.RF && RF.premium && typeof RF.premium.isActive === 'function')
-      ? RF.premium.isActive()
-      : (typeof isPremium !== 'undefined' ? !!isPremium : (localStorage.getItem('fit_premium') === 'true'));
+ const isPremiumNow = (typeof window.isPremiumNow === 'function') ? window.isPremiumNow() : false;
+
 
   // ==========================
   // 1) VAZIO
@@ -3407,3 +3404,30 @@ window.addEventListener('DOMContentLoaded', function() {
   };
 
 })();
+
+
+
+// =========================================================
+// PREMIUM — fonte única (para evitar checker divergente)
+// =========================================================
+window.isPremiumNow = function () {
+  // 1) preferir o estado único RF, se existir
+  if (window.RF?.premium?.isActive) return !!RF.premium.isActive();
+
+  // 2) fallback para variável global
+  if (typeof isPremium !== 'undefined') return !!isPremium;
+
+  // 3) fallback localStorage
+  try { return localStorage.getItem('fit_premium') === 'true'; } catch (e) {}
+  return false;
+};
+
+
+// ✅ Premium: remove qualquer overlay/gate residual
+if (isPremiumNow) {
+  const overlay = content.querySelector('.sl-overlay');
+  if (overlay) overlay.remove();
+
+  // remove classes locked que possam ter sobrado no DOM
+  content.querySelectorAll('.shopping-item.sl-locked').forEach(el => el.classList.remove('sl-locked'));
+}
