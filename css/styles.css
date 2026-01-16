@@ -3717,3 +3717,134 @@ font-size:14px;
         font-size: 0.95rem;
     }
 }
+
+
+
+/* ================================
+   IMAGENS - Placeholder + anti-CLS + fade-in
+   ================================ */
+
+/* garante que o card reserve espaço ANTES da imagem carregar */
+.recipe-image-container{
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;         /* ajuste se seu layout for outro */
+  background: #f3f4f6;         /* cinza claro (placeholder) */
+  overflow: hidden;
+  border-radius: inherit;      /* respeita o arredondado do card se tiver */
+}
+
+/* imagem ocupa o container sem “pular” */
+.recipe-image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+/* quando carregar, aparece suavemente */
+.recipe-image.is-loaded{
+  opacity: 1;
+}
+
+
+/* ================================
+   LAZY IMAGE - fade-in suave (sem mexer no card)
+   ================================ */
+.recipe-image {
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.recipe-image.is-loaded {
+  opacity: 1;
+}
+
+
+
+
+/* ==============================
+   Image Loading UX (Skeleton + Spinner)
+   ============================== */
+
+.recipe-image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* camada do skeleton */
+.recipe-image-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    #eef2f7 0%,
+    #f7f9fc 35%,
+    #eef2f7 70%,
+    #eef2f7 100%
+  );
+  background-size: 200% 100%;
+  animation: rfShimmer 1.1s ease-in-out infinite;
+  opacity: 1;
+  transition: opacity .25s ease;
+  z-index: 1;
+}
+
+/* spinner por cima do skeleton */
+.recipe-image-container::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  margin-left: -11px;
+  margin-top: -11px;
+
+  border: 3px solid rgba(17, 24, 39, .18);
+  border-top-color: rgba(17, 24, 39, .55);
+  border-radius: 999px;
+
+  animation: rfSpin .85s linear infinite;
+  opacity: 1;
+  transition: opacity .2s ease;
+  z-index: 2;
+}
+
+/* imagem começa invisível e aparece quando carregada */
+.recipe-image {
+  opacity: 0;
+  transition: opacity .25s ease;
+  position: relative;
+  z-index: 3; /* acima do skeleton */
+}
+
+/* quando carregou: some skeleton e spinner e mostra imagem */
+.recipe-image-container.is-loaded::before,
+.recipe-image-container.is-loaded::after {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.recipe-image.is-loaded {
+  opacity: 1;
+}
+
+@keyframes rfShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@keyframes rfSpin {
+  to { transform: rotate(360deg); }
+}
+
+/* acessibilidade: reduz movimento */
+@media (prefers-reduced-motion: reduce) {
+  .recipe-image-container::before { animation: none; }
+  .recipe-image-container::after { animation: none; }
+}
