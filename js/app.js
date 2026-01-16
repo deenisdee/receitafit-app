@@ -924,7 +924,6 @@ function getIconFromIngredientName(name) {
 
 
 
-
 // ==============================
 // RENDER RECEITAS
 // ==============================
@@ -935,20 +934,31 @@ function renderRecipes() {
 
   if (searchTerm) {
     filtered = allRecipes.filter(recipe => {
-      return recipe.category === searchTerm ||
-        recipe.name.toLowerCase().includes(searchTerm.toLowerCase());
+      return (
+        recipe.category === searchTerm ||
+        recipe.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
     });
   }
 
   recipeGrid.innerHTML = filtered.map(recipe => {
     const isUnlocked = isPremium || unlockedRecipes.includes(recipe.id);
-    const showLock = !isUnlocked && credits === 0; // UX: só aparece quando zerou
+    const showLock = !isUnlocked && credits === 0;
 
     return `
       <div class="recipe-card" onclick="viewRecipe(${recipe.id})">
         <div class="recipe-image-container">
-          <img src="${recipe.image}" alt="${recipe.name}" class="recipe-image"
-               onerror="this.src='https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80'">
+
+          <img
+            src="${recipe.image}"
+            alt="${recipe.name}"
+            class="recipe-image"
+            loading="lazy"
+            decoding="async"
+            onload="this.classList.add('is-loaded')"
+            onerror="this.onerror=null; this.classList.add('is-loaded'); this.src='https://images.unsplash.com/photo-1490644659350-3f5777c715be?auto=format&fit=crop&w=1200&q=60';"
+          />
+
           <div class="recipe-category">${recipe.category}</div>
 
           ${showLock ? `
@@ -1006,7 +1016,6 @@ function renderRecipes() {
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
-
               <span class="btn-label btn-label-desktop">Desbloquear <small>(1 crédito)</small></span>
               <span class="btn-label btn-label-mobile">1 crédito</span>
             `}
@@ -1016,8 +1025,6 @@ function renderRecipes() {
     `;
   }).join('');
 }
-
-
 
 
 
@@ -3111,3 +3118,198 @@ window.addEventListener('DOMContentLoaded', function() {
   } catch (e) {}
 })();
 
+
+
+// =========================================================
+// INFINITE SCROLL (HOME) — Motor + Render (Micropasso 2)
+// =========================================================
+(function () {
+  const BATCH_SIZE = 24;
+
+  const state = {
+    list: null,
+    cursor: 0,
+    observing: false
+  };
+
+  // 🔧 Ajuste aqui se o seu grid tiver outro id/classe
+  function getGridEl() {
+    return document.getElementById('recipes-grid')
+      || document.querySelector('.recipes-grid')
+      || document.querySelector('#recipes-container')
+      || null;
+  }
+
+  function ensureSentinel(grid) {
+    if (!grid) return null;
+
+    let sentinel = document.getElementById('rf-load-more-sentinel');
+    if (!sentinel) {
+      sentinel = document.createElement('div');
+      sentinel.id = 'rf-load-more-sentinel';
+      sentinel.style.height = '1px';
+      sentinel.style.width = '100%';
+      sentinel.style.marginTop = '1px';
+      grid.appendChild(sentinel);
+    } else {
+      // garante que ele fica no final
+      grid.appendChild(sentinel);
+    }
+    return sentinel;
+  }
+
+  // Remove apenas os cards, mantendo o sentinela (ele será reanexado no final)
+  function clearGridKeepSentinel(grid) {
+    if (!grid) return;
+
+    const sentinel = document.getElementById('rf-load-more-sentinel');
+    // remove tudo
+    grid.innerHTML = '';
+    // recoloca sentinela
+    if (sentinel) grid.appendChild(sentinel);
+  }
+
+  // ---------------------------------------------------------
+  // Render dos cards (reaproveita o que já existe)
+  // ---------------------------------------------------------
+  function renderCardFromExistingRenderer(recipe) {
+    // 1) Se você tiver uma função pronta de "criar card", usamos ela
+    //    (muitos apps têm algo tipo createRecipeCard / renderRecipeCard etc.)
+    if (typeof window.createRecipeCard === 'function') {
+      return window.createRecipeCard(recipe);
+    }
+    if (typeof window.renderRecipeCard === 'function') {
+      return window.renderRecipeCard(recipe);
+    }
+
+    // 2) Fallback seguro: cria um card simples clicável (não quebra seu app)
+    const card = document.createElement('div');
+    card.className = 'recipe-card';
+
+    const img = recipe.images?.hero || recipe.image || '';
+    const name = recipe.name || recipe.title || 'Receita';
+    const cat = recipe.category || '';
+
+    card.innerHTML = `
+      <div class="recipe-image">
+        ${img ? `<img src="${img}" alt="${name}" loading="lazy" decoding="async">` : ''}
+      </div>
+      <div class="recipe-content">
+        ${cat ? `<div class="recipe-category">${cat}</div>` : ''}
+        <div class="recipe-title">${name}</div>
+      </div>
+    `;
+
+    // tenta abrir detalhe usando função existente
+    card.addEventListener('click', () => {
+      if (typeof window.showRecipeDetail === 'function') {
+        window.showRecipeDetail(recipe.id);
+      }
+    });
+
+    return card;
+  }
+
+  function appendBatch(items) {
+    const grid = getGridEl();
+    if (!grid) return;
+
+    // garante sentinela e insere cards antes dele
+    const sentinel = ensureSentinel(grid);
+
+    const frag = document.createDocumentFragment();
+    items.forEach((r) => {
+      const el = renderCardFromExistingRenderer(r);
+      if (el) frag.appendChild(el);
+    });
+
+    // insere antes do sentinela (pra ele continuar no final)
+    if (sentinel) {
+      grid.insertBefore(frag, sentinel);
+    } else {
+      grid.appendChild(frag);
+    }
+  }
+
+  function loadNextBatch() {
+    if (!Array.isArray(state.list)) return;
+
+    const start = state.cursor;
+    const end = Math.min(start + BATCH_SIZE, state.list.length);
+    if (start >= end) return;
+
+    const batch = state.list.slice(start, end);
+    state.cursor = end;
+
+    appendBatch(batch);
+
+    // acabou? para de observar
+    if (state.cursor >= state.list.length) {
+      window.__rfStopInfiniteScroll && window.__rfStopInfiniteScroll();
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries.some(e => e.isIntersecting)) loadNextBatch();
+  }, { root: null, rootMargin: '600px 0px', threshold: 0.01 });
+
+  function start(list) {
+    const grid = getGridEl();
+    if (!grid) {
+      console.warn('[InfiniteScroll] Grid nao encontrado');
+      return;
+    }
+
+    state.list = Array.isArray(list) ? list : [];
+    state.cursor = 0;
+
+    // limpa grid e reinicia
+    ensureSentinel(grid);
+    clearGridKeepSentinel(grid);
+
+    const sentinel = ensureSentinel(grid);
+
+    if (!state.observing && sentinel) {
+      observer.observe(sentinel);
+      state.observing = true;
+    }
+
+    loadNextBatch();
+  }
+
+  function stop() {
+    const sentinel = document.getElementById('rf-load-more-sentinel');
+    if (sentinel) observer.unobserve(sentinel);
+    state.observing = false;
+  }
+
+  // ---------------------------------------------------------
+  // Reset da Home (voltar do detalhe / trocar categoria)
+  // ---------------------------------------------------------
+  function homeReset(optionalList) {
+    // se passar lista, troca a lista atual
+    if (Array.isArray(optionalList)) state.list = optionalList;
+
+    // se não tiver lista ainda, tenta usar a global (compat)
+    if (!Array.isArray(state.list) || state.list.length === 0) {
+      state.list = (typeof window.allRecipes !== 'undefined' && Array.isArray(window.allRecipes))
+        ? window.allRecipes
+        : (typeof window.ALL_RECIPES !== 'undefined' && Array.isArray(window.ALL_RECIPES))
+          ? window.ALL_RECIPES
+          : (typeof window.RECIPES !== 'undefined' && Array.isArray(window.RECIPES))
+            ? window.RECIPES
+            : [];
+    }
+
+    // reinicia do zero
+    stop();
+    start(state.list);
+  }
+
+  // expõe
+  window.__rfStartInfiniteScroll = start;
+  window.__rfStopInfiniteScroll = stop;
+  window.__rfHomeReset = homeReset;
+
+  console.log('[InfiniteScroll] motor carregado (passo 2)');
+})();
