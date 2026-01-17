@@ -5,19 +5,3 @@ module.exports = async (req, res) => {
     timestamp: new Date().toISOString()
   });
 };
-```
-
----
-
-## 🔄 DEPOIS:
-
-1. **Salva**
-2. **Commit**
-3. **Push**
-4. **Aguarda deploy**
-
----
-
-## 🔍 TESTA:
-```
-https://receitafit-app.vercel.app/api/test
