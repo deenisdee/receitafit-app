@@ -146,14 +146,18 @@ RF.premium = {
     RF.premium.syncUI();
   },
 
-  syncUI: function () {
+ 
+
+ syncUI: function () {
     const active = RF.premium.isActive();
 
     // 1) Classe no body
     document.body.classList.toggle('premium-active', active);
 
+
     // 2) Header: botão "Ativar Premium" (verde)
     const headerBtn = document.getElementById('premium-btn');
+	
 
     // 2.1) Header: badge amarelo (se existir)
     const premiumBadge =
@@ -226,6 +230,10 @@ RF.premium = {
     );
   }
 };
+
+
+
+
 
 // Atalho opcional
 window.rfSyncPremiumUI = RF.premium.syncUI;
@@ -1004,28 +1012,27 @@ function renderRecipes() {
             </div>
           </div>
 
-
-
-
-          <button class="recipe-button ${isUnlocked || isPremium ? 'unlocked' : 'locked'}">
-  ${isUnlocked || isPremium ? `
-    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-      <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
-    </svg>
-    <span class="btn-label">${isPremium ? '✨ Ver Receita Premium' : 'Ver Receita'}</span>
-  ` : `
-    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-    </svg>
-    <span class="btn-label btn-label-desktop">Desbloquear <small>(1 crédito)</small></span>
-    <span class="btn-label btn-label-mobile">1 crédito</span>
-  `}
-</button>
-
-
-
+          <button class="recipe-button ${isUnlocked ? 'unlocked' : 'locked'}">
+            ${isUnlocked ? `
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 9.9-1"/>
+              </svg>
+              <span class="btn-label">Ver Receita</span>
+            ` : `
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+             
+			 <span class="btn-label btn-label-desktop">Desbloquear <small>(1 crédito)</small></span>
+             
+			 <span class="btn-label btn-label-mobile">1 crédito</span>
+            `}
+          </button>
+		  
+		  
+		  
         </div>
       </div>
     `;
@@ -3389,11 +3396,14 @@ async function validatePremiumCode() {
       localStorage.setItem('premiumExpires', result.expiresAt);
       localStorage.setItem('premiumPlan', result.plan);
       
-      alert('✅ Código ativado com sucesso! Recarregando página...');
-      location.reload();
-    } else {
-      alert('❌ ' + result.error);
-    }
+     alert('✅ Código ativado com sucesso! Recarregando página...');
+
+// Sincroniza UI antes de recarregar
+if (typeof RF !== 'undefined' && RF.premium && RF.premium.syncUI) {
+  RF.premium.syncUI();
+}
+
+location.reload();
 
   } catch (error) {
     console.error('Erro ao validar código:', error);
