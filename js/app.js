@@ -3373,6 +3373,7 @@ async function openPremiumCheckout(plan = 'premium-monthly') {
   }
 }
 
+// Função para validar código
 async function validatePremiumCode() {
   const code = prompt('Digite seu código premium:');
   
@@ -3394,23 +3395,26 @@ async function validatePremiumCode() {
       localStorage.setItem('premiumCode', code);
       localStorage.setItem('premiumExpires', result.expiresAt);
       localStorage.setItem('premiumPlan', result.plan);
-      
+  
+
+  
       alert('✅ Código ativado com sucesso! Recarregando página...');
-      
-      // Sincroniza UI antes de recarregar
-      if (typeof RF !== 'undefined' && RF.premium && RF.premium.syncUI) {
-        RF.premium.syncUI();
-      }
-      
       location.reload();
     } else {
       alert('❌ ' + result.error);
     }
+	
+	
+	
+	
+	
+
   } catch (error) {
     console.error('Erro ao validar código:', error);
     alert('Erro ao validar código. Tente novamente.');
   }
 }
+
 
 
 
@@ -3441,3 +3445,8 @@ function checkPremiumStatus() {
 // Executa ao carregar
 const isPremium = checkPremiumStatus();
 console.log('Status Premium:', isPremium);
+
+// Sincroniza UI com status premium
+if (typeof RF !== 'undefined' && RF.premium && RF.premium.syncUI) {
+  RF.premium.syncUI();
+}
