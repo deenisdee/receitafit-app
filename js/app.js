@@ -3405,20 +3405,12 @@ async function validatePremiumCode() {
     } else {
       alert('❌ ' + result.error);
     }
-	
-
-	
-	
 
   } catch (error) {
     console.error('Erro ao validar código:', error);
     alert('Erro ao validar código. Tente novamente.');
   }
 }
-
-
-
-
 
 
 // Verifica se usuário é premium ao carregar página
@@ -3443,8 +3435,14 @@ function checkPremiumStatus() {
   return false;
 }
 
+
 // Executa ao carregar
 const isPremium = checkPremiumStatus();
 console.log('Status Premium:', isPremium);
+
+// Sincroniza UI com status premium
+if (typeof RF !== 'undefined' && RF.premium && RF.premium.syncUI) {
+  RF.premium.syncUI();
+}
 
 
