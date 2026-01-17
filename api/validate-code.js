@@ -66,15 +66,4 @@ module.exports = async (req, res) => {
     });
   }
 };
-```
 
----
-
-## 🔐 PASSO 2.4 - Configurar variáveis de ambiente na Vercel
-
-1. **Acesse:** https://vercel.com/seu-usuario/receitafit
-2. **Settings** → **Environment Variables**
-3. **Adicione:**
-```
-MP_ACCESS_TOKEN = APP_USR-5895942600750387-011705-2e047434597f9d1fd7424b34e58ab3ea-3139065179
-MP_PUBLIC_KEY = APP_USR-e59fa87c-726c-4ca3-abe0-c61e62b28b39
