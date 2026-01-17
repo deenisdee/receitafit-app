@@ -4,9 +4,5 @@
       "memory": 1024,
       "maxDuration": 10
     }
-  },
-  "env": {
-    "MP_ACCESS_TOKEN": "@mp_access_token",
-    "MP_PUBLIC_KEY": "@mp_public_key"
   }
 }
