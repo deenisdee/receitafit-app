@@ -1,5 +1,5 @@
 const { codes } = require('./webhook');
-
+ 
 module.exports = async (req, res) => {
   // Permite CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
