@@ -3398,13 +3398,6 @@ async function validatePremiumCode() {
   
 
   
-alert('✅ Código ativado com sucesso! Recarregando página...');
-
-// Sincroniza UI antes de recarregar
-if (typeof RF !== 'undefined' && RF.premium && RF.premium.syncUI) {
-  RF.premium.syncUI();
-}
-
 location.reload();
 	
 	
