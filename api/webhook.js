@@ -1,5 +1,12 @@
 const admin = require('firebase-admin');
 
+// DEBUG - VAMOS VER O QUE TÁ CHEGANDO
+console.log('🔍 DEBUG ENV VARS:');
+console.log('FIREBASE_PROJECT_ID:', process.env.FIREBASE_PROJECT_ID);
+console.log('FIREBASE_CLIENT_EMAIL:', process.env.FIREBASE_CLIENT_EMAIL);
+console.log('FIREBASE_PRIVATE_KEY exists:', !!process.env.FIREBASE_PRIVATE_KEY);
+console.log('FIREBASE_PRIVATE_KEY length:', process.env.FIREBASE_PRIVATE_KEY?.length);
+
 // Inicializa Firebase Admin
 if (!admin.apps.length) {
   admin.initializeApp({
