@@ -1,3 +1,18 @@
+const admin = require('firebase-admin');
+
+// Inicializa Firebase Admin
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n')
+    })
+  });
+}
+
+const db = admin.firestore();
+
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -21,32 +36,20 @@ module.exports = async (req, res) => {
       });
     }
 
-    // CÓDIGOS HARDCODED PRA TESTE
-    const validCodes = {
-      'RFP-BLQS-ZDD8-GJA4': {
-        email: 'de_nisde@hotmail.com',
-        plan: 'premium-monthly',
-        status: 'active',
-        expiresAt: new Date('2026-02-16')
-      },
-      'TESTE-1234': {
-        email: 'teste@teste.com',
-        plan: 'premium-annual',
-        status: 'active',
-        expiresAt: new Date('2027-01-01')
-      }
-    };
+    // Busca código no Firestore
+    const docRef = db.collection('premium_codes').doc(code);
+    const doc = await docRef.get();
 
-    const subscription = validCodes[code];
-
-    if (!subscription) {
+    if (!doc.exists) {
       return res.status(200).json({ 
         valid: false, 
         error: 'Código inválido' 
       });
     }
 
-    if (new Date() > subscription.expiresAt) {
+    const subscription = doc.data();
+
+    if (new Date() > subscription.expiresAt.toDate()) {
       return res.status(200).json({ 
         valid: false, 
         error: 'Código expirado' 
@@ -63,7 +66,7 @@ module.exports = async (req, res) => {
     res.status(200).json({
       valid: true,
       plan: subscription.plan,
-      expiresAt: subscription.expiresAt,
+      expiresAt: subscription.expiresAt.toDate(),
       email: subscription.email
     });
 
