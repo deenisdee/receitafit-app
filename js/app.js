@@ -146,20 +146,14 @@ RF.premium = {
     RF.premium.syncUI();
   },
 
- 
-
- syncUI: function () {
+  syncUI: function () {
     const active = RF.premium.isActive();
 
     // 1) Classe no body
     document.body.classList.toggle('premium-active', active);
 
-
     // 2) Header: botão "Ativar Premium" (verde)
     const headerBtn = document.getElementById('premium-btn');
-	
-	
-	
 
     // 2.1) Header: badge amarelo (se existir)
     const premiumBadge =
@@ -233,10 +227,6 @@ RF.premium = {
   }
 };
 
-
-
-
-
 // Atalho opcional
 window.rfSyncPremiumUI = RF.premium.syncUI;
 
@@ -290,7 +280,7 @@ let credits = 3;
 let unlockedRecipes = [];
 
 
-
+let isPremium = false;
 let premiumToken = null;
 let premiumExpires = null;
 
@@ -1026,15 +1016,10 @@ function renderRecipes() {
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
-             
-			 <span class="btn-label btn-label-desktop">Desbloquear <small>(1 crédito)</small></span>
-             
-			 <span class="btn-label btn-label-mobile">1 crédito</span>
+              <span class="btn-label btn-label-desktop">Desbloquear <small>(1 crédito)</small></span>
+              <span class="btn-label btn-label-mobile">1 crédito</span>
             `}
           </button>
-		  
-		  
-		  
         </div>
       </div>
     `;
@@ -3328,121 +3313,3 @@ window.addEventListener('DOMContentLoaded', function() {
 
   console.log('[InfiniteScroll] motor carregado (passo 2)');
 })();
-
-
-
-// ===================================
-// SISTEMA DE PAGAMENTO MERCADO PAGO
-// ===================================
-
-// Inicializa Mercado Pago
-
-/* const mp = new MercadoPago('SUA_PUBLIC_KEY_AQUI'); // Troque pela sua  */
-const mp = new MercadoPago('APP_USR-9e097327-7e68-41b4-be4b-382b6921803f'); // Troque pela sua
-
-async function openPremiumCheckout(plan = 'premium-monthly') {
-  try {
-    // Pega email do usuário (ou pede)
-    const email = prompt('Digite seu email:');
-    
-    if (!email) return;
-
-    // Chama backend para criar preferência
-    const response = await fetch('/api/create-preference', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        plan: plan,
-        email: email
-      })
-    });
-
-    const { preferenceId } = await response.json();
-
-    // Abre checkout
-    mp.checkout({
-      preference: {
-        id: preferenceId
-      },
-      autoOpen: true
-    });
-
-  } catch (error) {
-    console.error('Erro ao abrir checkout:', error);
-    alert('Erro ao processar pagamento. Tente novamente.');
-  }
-}
-
-// Função para validar código
-async function validatePremiumCode() {
-  const code = prompt('Digite seu código premium:');
-  
-  if (!code) return;
-
-  try {
-    const response = await fetch('/api/validate-code', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ code: code })
-    });
-
-    const result = await response.json();
-
-    if (result.valid) {
-      // Salva no localStorage
-      localStorage.setItem('premiumCode', code);
-      localStorage.setItem('premiumExpires', result.expiresAt);
-      localStorage.setItem('premiumPlan', result.plan);
-  
-
-  
-      alert('✅ Código ativado com sucesso! Recarregando página...');
-      location.reload();
-    } else {
-      alert('❌ ' + result.error);
-    }
-
-  } catch (error) {
-    console.error('Erro ao validar código:', error);
-    alert('Erro ao validar código. Tente novamente.');
-  }
-}
-
-
-// Verifica se usuário é premium ao carregar página
-function checkPremiumStatus() {
-  const code = localStorage.getItem('premiumCode');
-  const expires = localStorage.getItem('premiumExpires');
-  
-  if (code && expires) {
-    const expiryDate = new Date(expires);
-    
-    if (new Date() < expiryDate) {
-      // Usuário é premium
-      return true;
-    } else {
-      // Expirou
-      localStorage.removeItem('premiumCode');
-      localStorage.removeItem('premiumExpires');
-      localStorage.removeItem('premiumPlan');
-    }
-  }
-  
-  return false;
-}
-
-
-// Executa ao carregar
-const isPremium = checkPremiumStatus();
-console.log('Status Premium:', isPremium);
-
-// Sincroniza UI com status premium
-if (typeof RF !== 'undefined' && RF.premium && RF.premium.syncUI) {
-  RF.premium.syncUI();
-}
-
-
