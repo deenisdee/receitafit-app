@@ -152,7 +152,7 @@ RF.premium = {
     // 1) Classe no body
     document.body.classList.toggle('premium-active', active);
 
-    // 2) Header: botão "Ativar Premium" (verde)
+    // 2) Header: botão "Denis Ativar Premium" (verde)
     const headerBtn = document.getElementById('premium-btn');
 
     // 2.1) Header: badge amarelo (se existir)
