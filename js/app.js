@@ -152,7 +152,7 @@ RF.premium = {
     // 1) Classe no body
     document.body.classList.toggle('premium-active', active);
 
-    // 2) Header: botão "Denis Ativar Premium" (verde)
+    // 2) Header: botão "Ativar Premium" (verde)
     const headerBtn = document.getElementById('premium-btn');
 
     // 2.1) Header: badge amarelo (se existir)
@@ -1853,65 +1853,64 @@ async function redeemPremiumCode(code) {
 
 
 
-
-
-
 async function activatePremium() {
   const input = document.getElementById('premium-code-input');
   const code = input ? input.value.trim().toUpperCase() : '';
-
+  
   if (!code) {
     showNotification('Aviso', 'Digite um código válido');
     return;
   }
 
   try {
-    const data = await redeemPremiumCode(code);
+    // ✅ CHAMA A API DO MERCADO PAGO
+    const response = await fetch('/api/validate-code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: code })
+    });
 
-    if (!data || !data.ok) {
-      showNotification('Código Inválido', data?.error || 'Código inválido ou expirado');
+    const data = await response.json();
+
+    if (!data.valid) {
+      showNotification('Código Inválido', data.error || 'Código inválido ou expirado');
       return;
     }
 
     // ✅ DEBUG - MOSTRA O QUE A API RETORNOU
     console.log('[ACTIVATE] API Response:', {
-      token: data.token,
+      plan: data.plan,
       expiresAt: data.expiresAt,
-      expiresInDays: data.expiresInDays,
-      expiresDate: new Date(data.expiresAt).toISOString(),
-      now: Date.now(),
-      diff: data.expiresAt - Date.now()
+      email: data.email
     });
 
     // ✅ ATIVA PREMIUM COM TOKEN (estado interno seu)
     isPremium = true;
-    premiumToken = data.token;
-    premiumExpires = data.expiresAt;
+    premiumToken = code;
+    premiumExpires = new Date(data.expiresAt).getTime();
 
     // ✅ 1) Persiste no storage (seu padrão)
     await storage.set('fit_premium', 'true');
-    await storage.set('fit_premium_token', data.token);
-    await storage.set('fit_premium_expires', data.expiresAt.toString());
+    await storage.set('fit_premium_token', code);
+    await storage.set('fit_premium_expires', premiumExpires.toString());
 
     // ✅ 2) Também persiste no localStorage (compatibilidade e UI instantânea no iPhone)
     try {
       localStorage.setItem('fit_premium', 'true');
-      localStorage.setItem('fit_premium_token', data.token);
-      localStorage.setItem('fit_premium_expires', data.expiresAt.toString());
+      localStorage.setItem('fit_premium_token', code);
+      localStorage.setItem('fit_premium_expires', premiumExpires.toString());
     } catch (e) {
-      // se localStorage falhar por algum motivo, não bloqueia a ativação
       console.warn('[PREMIUM] localStorage falhou:', e);
     }
 
     // ✅ 3) Dispara o pipeline oficial de UI (sem reload)
     if (window.RF && RF.premium && typeof RF.premium.setActive === 'function') {
-      RF.premium.setActive(true); // chama syncUI() dentro
+      RF.premium.setActive(true);
     } else if (window.RF && RF.premium && typeof RF.premium.syncUI === 'function') {
-      // fallback
       RF.premium.syncUI();
     }
 
-    // ✅ Mantém seu fluxo atual de UI (seu app pode depender disso)
+    // ✅ Mantém seu fluxo atual de UI
     updateUI();
 
     // ✅ Atualiza botões premium (tab bar + menu hambúrguer)
@@ -1921,9 +1920,10 @@ async function activatePremium() {
 
     _setupPremiumTimers();
 
-    const daysLeft = data.expiresInDays || 30;
+    // Calcula dias restantes
+    const daysLeft = Math.ceil((premiumExpires - Date.now()) / (1000 * 60 * 60 * 24));
 
-    // ✅ Fecha o modal ANTES de notificar (evita “modal por trás” visualmente)
+    // ✅ Fecha o modal ANTES de notificar
     if (typeof window.closePremiumModal === 'function') {
       window.closePremiumModal();
     }
@@ -1933,12 +1933,12 @@ async function activatePremium() {
       `Você tem acesso ilimitado por ${daysLeft} dias!`
     );
 
-    console.log('[PREMIUM] Ativado', { expires: new Date(data.expiresAt).toISOString() });
+    console.log('[PREMIUM] Ativado via Mercado Pago', { 
+      expires: new Date(premiumExpires).toISOString() 
+    });
 
   } catch (e) {
     console.error('Erro ao ativar premium:', e);
-
-    // ✅ MENSAGEM MAIS ESPECÍFICA
     if (String(e.message || '').includes('fetch')) {
       showNotification('Erro de Conexão', 'Verifique sua internet e tente novamente.');
     } else {
@@ -1946,8 +1946,6 @@ async function activatePremium() {
     }
   }
 }
-
-
 
 
 
@@ -2626,24 +2624,83 @@ window.openFAQModal = function() {
 
 
 
+
+
+
+// Inicializa Mercado Pago SDK
+const mp = new MercadoPago('APP_USR-9e097327-7e68-41b4-be4b-382b6921803f');
+
+// Função para validar código via API
+async function validatePremiumCodeAPI(code) {
+  try {
+    const response = await fetch('/api/validate-code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: code })
+    });
+
+    return await response.json();
+
+  } catch (error) {
+    console.error('Erro ao validar código:', error);
+    return { valid: false, error: 'Erro ao validar código' };
+  }
+}
+
+
+
+
+
+
+
 window.openPremiumModal = function(origin) {
   if (!origin) origin = 'tab';
-
   haptic(10);
   console.log('[Premium] Aberto por:', origin);
-
+  
   const premiumModal = document.getElementById('premium-modal');
   if (!premiumModal) return;
-
+  
   premiumModal.classList.remove('hidden');
   document.body.classList.add('modal-open');
-
+  
   // foco simples (sem firula)
   setTimeout(() => {
     const input = document.getElementById('premium-code-input');
     if (input) input.focus();
   }, 150);
 };
+
+// Função para processar pagamento via Mercado Pago
+window.openPremiumCheckout = async function(plan = 'premium-monthly') {
+  try {
+    const email = prompt('Digite seu email para continuar:');
+    if (!email) return;
+
+    const response = await fetch('/api/create-preference', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plan: plan, email: email })
+    });
+
+    const { preferenceId } = await response.json();
+
+    // Inicializa MP se ainda não foi
+    if (typeof mp === 'undefined') {
+      window.mp = new MercadoPago('APP_USR-9e097327-7e68-41b4-be4b-382b6921803f');
+    }
+
+    mp.checkout({
+      preference: { id: preferenceId },
+      autoOpen: true
+    });
+
+  } catch (error) {
+    console.error('Erro ao abrir checkout:', error);
+    alert('Erro ao processar pagamento. Tente novamente.');
+  }
+};
+
 
 
 
@@ -3313,3 +3370,62 @@ window.addEventListener('DOMContentLoaded', function() {
 
   console.log('[InfiniteScroll] motor carregado (passo 2)');
 })();
+
+
+
+
+
+// ===================================
+// INTEGRAÇÃO MERCADO PAGO
+// ===================================
+
+// Inicializa Mercado Pago SDK
+const mp = new MercadoPago('APP_USR-9e097327-7e68-41b4-be4b-382b6921803f');
+
+// Função para abrir checkout do Mercado Pago
+window.openPremiumCheckout = async function(plan = 'premium-monthly') {
+  try {
+    const email = prompt('Digite seu email para continuar:');
+    if (!email) return;
+
+    const response = await fetch('/api/create-preference', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ plan: plan, email: email })
+    });
+
+    const { preferenceId } = await response.json();
+
+    mp.checkout({
+      preference: { id: preferenceId },
+      autoOpen: true
+    });
+
+  } catch (error) {
+    console.error('Erro ao abrir checkout:', error);
+    alert('Erro ao processar pagamento. Tente novamente.');
+  }
+};
+
+
+
+
+
+
+// 3. Função para validar código premium via API
+async function validatePremiumCodeAPI(code) {
+  try {
+    const response = await fetch('/api/validate-code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: code })
+    });
+
+    const result = await response.json();
+    return result;
+
+  } catch (error) {
+    console.error('Erro ao validar código:', error);
+    return { valid: false, error: 'Erro ao validar código' };
+  }
+}
